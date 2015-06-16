@@ -1,3 +1,30 @@
-// Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#map {
+	width: 85%;
+	height: 600px;
+	// margin: 0 auto;
+}
+
+nav#main {
+	width: 65px;
+	height: 100%;
+	background: #dadce8;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	border-right: 2px solid #3f4150;
+	z-index: 1;
+}
+
+nav#main ul li {
+	height: 65px;
+	margin: 0;
+}
+
+div.bs-test {
+	background: #dadce8;
+	height: 200px;
+}
+
+
+

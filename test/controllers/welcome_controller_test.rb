@@ -1,9 +1,19 @@
 require 'test_helper'
 
 class WelcomeControllerTest < ActionController::TestCase
-	test "home page should respond & have proper title" do
+	test "Pages should respond & have proper title" do
 		get 'index'
-		assert_response :success
-		assert_select "title", "Home | myApp"
+			assert_response :success
+			assert_select "title", "home | driftingCoder"
+		get 'blog'
+			assert_response :success
+			assert_select "title", "blog | driftingCoder"
+		get 'code'
+			assert_response :success
+			assert_select "title", "code | driftingCoder"
+		get 'photo'
+			assert_response :success
+			assert_select "title", "photo | driftingCoder"
 	end
+
 end
