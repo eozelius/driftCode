@@ -10,8 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require leaflet-src.js
 //= require jquery
 //= require jquery_ujs
+//= require leaflet-src.js
+//= require bootstrap.min.js
 //= require turbolinks
 //= require_tree .
