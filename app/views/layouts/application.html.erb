@@ -18,21 +18,35 @@
     <!-- side Navigation -->
     <nav id="main">
       <ul>
-        <li><%= link_to '<i class="fa fa-cog"></i>'.html_safe, root_path %></li>
-        <li><%= link_to 'Blog', "/blog" %></li>
-        <li><%= link_to 'Code', "/code" %></li>
-        <li><%= link_to 'About', "/about" %></li>
-        <li><%= link_to 'Photos', "/photo" %></li>
+        <li>
+          <a href="/">
+            <i class="fa fa-3x fa-globe"></i>
+            <p class="nav-legend">Home</p>
+          </a>
+        </li>
+        <li>
+          <a href="/blog">
+            <i class="fa fa-3x fa-pencil"></i>
+            <p class="nav-legend">Blog</p>
+          </a>
+        </li>
+        <li>
+          <a href="/photo">
+            <i class="fa fa-3x fa-camera-retro"></i>
+            <p class="nav-legend">Photos</p>
+          </a>
+        </li>
+        <li>
+          <a href="/code">
+            <i class="fa fa-3x fa-code"></i>
+            <p class="nav-legend">Blog</p>
+          </a>
+        </li>
       </ul>
     </nav>
 
-    <div class="container">
+    <div class="container-fluid">
       <%= yield %>
     </div>  
-
-
-
-
-
   </body>
 </html>

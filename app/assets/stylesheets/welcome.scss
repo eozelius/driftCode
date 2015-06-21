@@ -1,7 +1,7 @@
 #map {
-	width: 85%;
+	width: 93%;
 	height: 600px;
-	// margin: 0 auto;
+	margin: 0 auto 20px 6%;
 }
 
 nav#main {
@@ -16,15 +16,24 @@ nav#main {
 	z-index: 1;
 }
 
+nav#main ul {
+	margin-top: 30px;
+}
+
 nav#main ul li {
+	width: 100%;
 	height: 65px;
-	margin: 0;
+	margin: 0 0 25px 0;
 }
 
-div.bs-test {
-	background: #dadce8;
-	height: 200px;
+nav#main ul li i {
+	width: 65px;
+	color: #06072E;
+	text-align: center
 }
 
-
-
+nav#main ul li p {
+	display: none;
+	text-align: center;
+	color: #06072E;
+}
