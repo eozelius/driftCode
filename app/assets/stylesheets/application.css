@@ -11,8 +11,7 @@
  * file per style scope.
  *
  *= require leaflet.css
- *= require bootstrap.min.css
- *= require font-awesome.min.css
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */

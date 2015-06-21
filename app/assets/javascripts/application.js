@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
+//= require bootstrap
 //= require leaflet-src.js
-//= require bootstrap.min.js
 //= require turbolinks
 //= require_tree .
