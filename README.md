@@ -1,33 +1,15 @@
-== README
+Hello, welcome to the driftingCoder.com website repository.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a ruby on rails web app written by Ethan Ozelius.
+	The point of this app is to be the personal website/blog.
 
-Things you may want to cover:
+Components:
+	Map: Where I've been and what I did
+	Blog: The crazy shit that happens on the road, and other general musing I feel belong on the internet.
+	photo: pretty self-explanatory
+	code: Not sure yet.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
-
-
-This is a rails manual scaffolding app comprised of	
-	MV: home, photo, blog, code
-	libraries: twitter Bootstrap, LeafletJS, Font-awesome
+libraries: 
+	twitter Bootstrap, 
+	Font-awesome
+	LeafletJS, 
