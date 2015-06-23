@@ -10,6 +10,7 @@ gem 'jbuilder',     '2.2.3'
 gem 'sdoc',         '0.4.0', group: :doc
 gem "font-awesome-rails"
 gem "twitter-bootstrap-rails"
+gem 'angularjs-rails', '~> 1.4.0'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
