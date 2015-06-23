@@ -1,8 +1,12 @@
 <%= provide :title, "blog" %>
 
 <header class="main-blog-post container-fluid">
-	<div class="main-title col-lg-3 col-md-3 col-sm-12 col-xs-12">
-		<h2>My title</h2>
+	<div class="main-bp-image-container">
+			<%= image_tag("nycUnionSquare.jpg", :class => 'bp-main-image') %>
+		</div>
+
+	<div class="main-title col-lg-4 col-md-4 col-sm-12 col-xs-12">
+		<h2>My main title</h2>
 	</div>
 
 	<div class="main-paragraph col-lg-6 col-lg-offset-1 col-md-offset-1 col-md-6 col-sm-12 col-xs-12">
@@ -11,39 +15,28 @@
 </header>
 
 <main class="rest-blog-posts-container container">
-	<div class="blog-preview bp-1">
-		<div class="bp-preview-image-container">
-				<%#= image_tag("sanFranBayPano.jpg", :class => 'bp-preview-image') %>
-			</div>
-
-		<div class="post-preview-title col-lg-3 col-md-3 col-sm-12 col-xs-12">
-			<h3>My title</h3>
+	<div class="blog-preview bp-1 container-fluid">
+		<div class="bp-preview-image">
+			<%= image_tag("sanFranBayPano.jpg", :class => 'bp-preview-image') %>
 		</div>
 
-		<div class="post-preview-paragraph col-lg-6 col-lg-offset-1 col-md-offset-1 col-md-6 col-sm-12 col-xs-12">
+		<div class="post-preview-title col-lg-4 col-md-4 col-sm-12 col-xs-12">
+			<h3>My child title</h3>
+		</div>
+		
+		<div class="post-preview-paragraph col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<h5>asdf asdf asdf asdf asdf asd fas dfasdfaasdf adfs adsf as df adsf as df ;askdj;f asdf askldfj</h5>
 		</div>
 	</div>
 
-	<div class="blog-preview bp-1">
-		<div class="post-preview-title col-lg-3 col-md-3 col-sm-12 col-xs-12">		
-			<h3>My title</h3>
-			<div></div>
-		</div>
 
-		<div class="post-preview-paragraph col-lg-6 col-lg-offset-1 col-md-offset-1 col-md-6 col-sm-12 col-xs-12">
-			<h6>asdf asdf asdf asdf asdf asd fas dfasdfaasdf adfs adsf as df adsf as df ;askdj;f asdf askldfj</h6>
-		</div>
+
+	<div class="blog-preview bp-2">
+		
 	</div>
 
-	<div class="blog-preview bp-1">
-		<div class="post-preview-title col-lg-3 col-md-3 col-sm-12 col-xs-12">		
-			<h3>My title</h3>
-		</div>
-
-		<div class="post-preview-paragraph col-lg-6 col-lg-offset-1 col-md-offset-1 col-md-6 col-sm-12 col-xs-12">
-			<h6>asdf asdf asdf asdf asdf asd fas dfasdfaasdf adfs adsf as df adsf as df ;askdj;f asdf askldfj</h6>
-		</div>
+	<div class="blog-preview bp-3">
+		
 	</div>
 
 </main>
