@@ -5,9 +5,6 @@ class WelcomeControllerTest < ActionController::TestCase
 		get 'index'
 			assert_response :success
 			assert_select "title", "home | driftingCoder"
-		get 'blog'
-			assert_response :success
-			assert_select "title", "blog | driftingCoder"
 		get 'code'
 			assert_response :success
 			assert_select "title", "code | driftingCoder"
