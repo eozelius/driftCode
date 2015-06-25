@@ -14,6 +14,15 @@
 
   </head>
   <body>
+    <div class="flash-messages col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <% flash.each do |name, msg| %>
+        <ul>
+          <li><%= content_tag :div, msg, class: "alert" %></li>
+        </ul>
+      <% end %>
+    </div>
+
+
 
     <!-- side Navigation -->
     <nav id="main">
