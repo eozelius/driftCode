@@ -12,4 +12,5 @@ Components:
 libraries: 
 	twitter Bootstrap, 
 	Font-awesome
-	LeafletJS, 
+	LeafletJS
+	AngularJS

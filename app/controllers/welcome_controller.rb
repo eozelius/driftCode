@@ -1,10 +1,7 @@
 class WelcomeController < ApplicationController
 	def index
 	end
-
-	def blog
-	end
-
+	
 	def code
 	end
 

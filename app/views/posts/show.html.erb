@@ -1,0 +1,9 @@
+<h5>Show.html.erb</h5>
+
+<p>title: <%= @post.title %><p>
+
+
+<p>Submitted<%= time_ago_in_words(@post.created_at) %> ago.</p>
+
+
+<p>Body: <%= @post.body %></p>

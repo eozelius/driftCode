@@ -12,7 +12,6 @@
  *
  *= require leaflet.css
  *= require font-awesome
- *= require blog.css.scss
  *= require_tree .
  *= require_self
  */

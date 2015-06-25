@@ -89,13 +89,17 @@ h6 {
 p {
 	font-size: 1em;
 	font-family: 'ubuntu', sans-serif;
-
 }
 
 a:hover,
 a:focus,
 a:active {
 	text-decoration: none;
+}
+
+label {
+	margin: 5px 0;
+	text-align: left;
 }
 
 div.application-container {
