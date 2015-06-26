@@ -1,4 +1,39 @@
-<% @posts.each do |post| %>
-	<h3><%= link_to post.title, post %></h3>
-	<p><%= post.created_at.strftime("%B, %d, %Y") %></p><br>
-<% end %>
+<header class="main-blog-post container-fluid">
+	<div class="main-bp-image-container">
+			<%= image_tag("nycUnionSquare.jpg", :class => 'bp-main-image') %>
+		</div>
+
+	<div class="main-title col-lg-4 col-md-4 col-sm-12 col-xs-12">
+		<h2><%= @top_post.title %></h2>
+	</div>
+
+	<div class="main-paragraph col-lg-6 col-lg-offset-1 col-md-offset-1 col-md-6 col-sm-12 col-xs-12">
+		<% top_post_preview = @top_post.body[0...225] %>
+		<h4><%= top_post_preview %></h4><br>	
+	</div>	
+</header>
+
+<main class="rest-blog-posts-container container">
+	<% @posts.each do |post| %>
+		<div class="blog-preview bp-1 container-fluid">
+			<div class="bp-preview-image">
+				<%= link_to(post) do %>
+					<%= image_tag("sanFranBayPano.jpg", :class => 'bp-preview-image') %>
+				<% end %>
+			</div>
+
+			<div class="post-preview-title col-lg-4 col-md-4 col-sm-12 col-xs-12">
+				<h3>
+					<%= link_to(post) do %>
+						<%= post.title %>
+					<% end %>
+				</h3>
+			</div>
+			
+			<div class="post-preview-paragraph col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<% preview = post.body[0...125] %>
+				<h5><%= preview %>...</h5>
+			</div>
+		</div>
+	<% end %>
+</main>

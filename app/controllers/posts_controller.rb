@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
 	def index
+		# TODO there might be a more efficient way to do this....
 		@posts = Post.all.order('created_at DESC')
+		@top_post = Post.last
+		@posts = @posts.offset(1)
 	end
 
 	def new
