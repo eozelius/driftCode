@@ -7,3 +7,13 @@
 
 
 <p>Body: <%= @post.body %></p>
+
+
+<div id="comments">
+	<h3><%= pluralize( @post.comments.count, 'comment') %></h3>
+
+	<p><%= render @post.comments %></p>
+
+	<p><%= render 'comments/form' %></p>
+
+</div>
