@@ -53,7 +53,7 @@ table {
 }
 
 /* Ethan's resetStyleSheet */
-h1,h2,h3,h4,h5,h5 {
+h1,h2,h3,h4,h5,h6 {
 	font-family: 'Roboto', sans-serif;
 	color: #552727;
 }
@@ -75,20 +75,20 @@ h4 {
 }
 
 h5 {
-	font-size: 1.3em;
+	font-size: 1.1em;
 	text-align: left;
 }
 
 h6 {
-	font-size: 1.1em;
+	font-size: .95em;
 	text-align: left;
-	font-family: 'ubuntu', sans-serif;
 	color: #353535;
 }
 
 p {
-	font-size: 1em;
+	font-size: 1.3em;
 	font-family: 'ubuntu', sans-serif;
+	text-align: left;
 }
 
 a:hover,
@@ -102,9 +102,51 @@ label {
 	text-align: left;
 }
 
+article {
+	margin-bottom: 10%;
+}
+
+span.ago {
+	font-size: .9em;
+	color: #777;
+}
+
+input, textarea {
+	margin-bottom: 4%;
+}
+
+input[type="text"] {
+	width: 300px;
+	display: block;
+}
+
+textarea {
+	width: 400px;
+	height: 150px;
+	display: block;
+}
+
 div.application-container {
 	width:97%;
 	display: block;
 	margin: 0 auto;
 	padding-left: 5%;
+}
+
+/* buttons */
+button.normal {
+	width: 150px;
+	height: 35px;
+	float: left;
+	margin: 0 10% 0 0;
+	background: #ADCDDB;
+	border: none;
+	border-radius: 4px;
+	font-family: 'Roboto', sans-serif;
+	border: 2px solid #fff;
+}
+
+button.normal:hover{
+	background: #fff;
+	border: 2px solid #ADCDDB;
 }

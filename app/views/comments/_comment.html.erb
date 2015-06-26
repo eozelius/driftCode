@@ -1,16 +1,5 @@
-<div class="comment-container">
-	<div class="comment_name">
-		<%= comment.name %>
-	</div>
-	<div class="comment_body">
-		<%= comment.body %><p> <%= time_ago_in_words(comment.created_at) %> ago.</p>
-	</div>
-
-	<p>
-		<%= link_to 'delete', 
-				[comment.post, comment], 
-				method: :delete,
-				class: 'button',
-				data: { confirm: 'Are you sure?' } %>
-	</p>
-</div>
+<h6 class="comment"><%= comment.name %>: <%= comment.body %> <br> <span class="ago"><%= time_ago_in_words(comment.created_at) %> ago | <%= link_to 'delete', 
+			[comment.post, comment], 
+			method: :delete,
+			class: 'button',
+			data: { confirm: 'Are you sure?' } %></span></h6>
