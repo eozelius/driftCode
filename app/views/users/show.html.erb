@@ -1,1 +1,28 @@
-<h1>Welcome to the page of <%= @user.name %></h1>
+<h3 class="page-title"><%= @user.name %></h3>
+
+<div id="profile-map"></div>
+
+	<script>
+		var map = L.map('profile-map').setView([40.73527, -73.89], 12);
+
+		// TODO make this API key a Server environment variable
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+	    maxZoom: 18,
+	    id: 'eozelius77.j4hekake',
+	    accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
+	}).addTo(map);
+</script>
+
+<div id="pro-parts-container">
+	<div class="pro-part profile-photos col-lg-7 col-md-7 col-sm-12 col-12">
+		<h4>Photos</h4>
+
+	</div>
+
+	<div class="pro-part profile-blog-titles col-lg-4 col-md-4 col-sm-12 col-xs-12 col-ls-offset-1 col-md-offset-1">
+		<h4>Stories</h4>
+
+	</div>
+
+</div>	

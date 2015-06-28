@@ -1,9 +1,21 @@
 <%= form_for @post do |f| %>
-	<%= f.label :title %><br>
-	<%= f.text_field :title %>
+	<p>
+		<%= f.label :title %>
+		<%= f.text_field :title %>	
+	</p>	
 
-	<%= f.label :body %><br>
-	<%= f.text_area :body %>
+	<p>
+		<%= f.label :body %>
+		<%= f.text_field :body, type: 'hidden' %>
+	</p>
+	
+	<div id="jqte-editor"></div>
 
-	<%= f.submit %>
+	<script type="text/javascript">
+		$("#jqte-editor").jqte();
+	</script>
+
+	<p>
+		<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">I said something</button>
+	</p>
 <% end %>

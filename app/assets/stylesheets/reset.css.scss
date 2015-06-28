@@ -1,6 +1,11 @@
 /* Fonts */
 @import url(http://fonts.googleapis.com/css?family=Ubuntu|Roboto);
 
+/* Color */
+$light-blue: #ADCDDB;
+$dark-maroon: #552727;
+$dark-grey: #353535;
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -55,7 +60,7 @@ table {
 /* Ethan's resetStyleSheet */
 h1,h2,h3,h4,h5,h6 {
 	font-family: 'Roboto', sans-serif;
-	color: #552727;
+	color: $dark-maroon;
 }
 
 h1 {
@@ -82,7 +87,17 @@ h5 {
 h6 {
 	font-size: .95em;
 	text-align: left;
-	color: #353535;
+	color: $dark-grey;
+}
+
+h3.page-title {
+	border-bottom: 2px solid $light-blue;
+	margin-bottom: 15px;
+	font-style: italic;
+}
+
+h3.post-title {
+
 }
 
 p {
@@ -133,20 +148,28 @@ div.application-container {
 	padding-left: 5%;
 }
 
+#page-wrapper {
+	min-height: 600px;
+	margin-bottom: 30px;
+}
+
 /* buttons */
 button.normal {
 	width: 150px;
 	height: 35px;
+	display: block;
 	float: left;
 	margin: 0 10% 0 0;
-	background: #ADCDDB;
+	background: $light-blue;
 	border: none;
 	border-radius: 4px;
+	font-size: .8em !important;
 	font-family: 'Roboto', sans-serif;
 	border: 2px solid #fff;
 }
 
 button.normal:hover{
 	background: #fff;
-	border: 2px solid #ADCDDB;
+	border: 2px solid $light-blue;
+	font-size: .8em !important;
 }

@@ -21,7 +21,7 @@
         <% end %>
       </div>
     <% end %>
-    
+      
     <!-- side Navigation -->
     <nav id="main">
       <ul>
@@ -53,7 +53,9 @@
     </nav>
 
     <div class="application-container">
-      <%= yield %>
-    </div>  
+      <div id="page-wrapper">
+        <%= yield %>
+      </div>  
+    </div>
   </body>
 </html>

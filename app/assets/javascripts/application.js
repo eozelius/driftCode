@@ -15,5 +15,7 @@
 //= require twitter/bootstrap
 //= require bootstrap
 //= require leaflet-src.js
+//= require EditCreatePost.js
+//= require jquery-te-1.4.0.min.js
 //= require turbolinks
 //= require_tree .
