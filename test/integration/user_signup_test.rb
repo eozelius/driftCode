@@ -11,6 +11,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   														 }
   		end
   	assert_template 'users/new'
+  	assert_select 'div.errors'
   end
 
   test "signup with valid data should pass" do

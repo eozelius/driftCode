@@ -1,11 +1,13 @@
 <h2>Welcome to the crew.</h2>
 
 <% if @user.errors.any? %>
-	<ul>
-		<% @user.errors.full_messages.each do |msg| %>
-			<li><p><%= msg %></p></li>
-		<% end %>
-	</ul>
+	<div class="errors">
+		<ul>
+			<% @user.errors.full_messages.each do |msg| %>
+				<li><p><%= msg %></p></li>
+			<% end %>
+		</ul>
+	</div>	
 <% end %>
 
 <%= form_for(@user) do |f| %>
