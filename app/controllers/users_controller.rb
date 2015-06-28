@@ -11,11 +11,11 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
 
   	if @user.save
+      flash[:success] = "welcome to your new chill spot."
   		redirect_to @user
   	else
   		render 'new'
   	end
-
     #debugger
   end
 
