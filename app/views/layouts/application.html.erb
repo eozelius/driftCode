@@ -49,6 +49,22 @@
             <p class="nav-legend">Code</p>
           </a>
         </li>
+
+        <% if logged_in? %>
+          <li>
+            <%= link_to(logout_path, method: :delete) do %>
+              <i class="fa fa-3x fa-sign-out"></i>
+              <p class="nav-legend">Log out</p>
+            <% end %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to(login_path) do %>
+              <i class="fa fa-3x fa-key fa-rotate-180"></i>
+              <p class="nav-legend">Log in</p>
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </nav>
 

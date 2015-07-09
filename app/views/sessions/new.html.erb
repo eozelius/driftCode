@@ -27,8 +27,12 @@
 	</p>	
 
 	<p>
-		<button class="normal" type="submit">sign me up</button>
+		<button class="normal" type="submit">log in</button>
 	</p>
 <% end %>
 
-<p>First time here?</p><%= link_to "sign me up", signup_path %></p>
+<p>First time here?</p>
+	<button class="normal" type="submit">
+		<%= link_to "sign me up", signup_path %>
+	</button>
+</p>
