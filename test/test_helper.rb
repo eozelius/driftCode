@@ -7,7 +7,11 @@ class ActiveSupport::TestCase
 
   # returns true is a test user is logged in
   def is_logged_in?
-    session[:user_id].nil? ? return false : return true
+    if session[:user_id].nil?
+      return false
+    else
+      return true
+    end
   end
 
   def log_in_as(user, options = {})
