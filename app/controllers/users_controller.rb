@@ -32,8 +32,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes( user_params )
-      #successful edit
-      @user.save
       flash[:success] = "Save successful."
       redirect_to @user
     else
