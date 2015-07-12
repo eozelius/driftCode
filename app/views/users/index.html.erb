@@ -1,1 +1,21 @@
-<h3 class="page-title">index</h3>
+<h3 class="page-title">contributors</h3>
+
+
+<div class="users">
+	<% @users.each do |u| %>
+		<p>
+			<%= u.name %>
+		</p>
+
+		<p>
+			<%= u.email %>
+		</p>
+
+		<% if current_user.admin? %>
+			<p>if current_user.admin? && !current_user?(u)</p>
+		<% end %>
+
+
+		<hr class="gray-spacer">
+	<% end %>
+</div>	
