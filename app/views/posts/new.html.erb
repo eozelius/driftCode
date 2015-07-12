@@ -2,7 +2,7 @@
 
 <% if @post.errors.any? %>
 	<div class="errors">
-		<h4>Whoops</h4>
+		<p class="p-title">Whoops</p>
 		<ul class="errors-list">
 			<% @post.errors.full_messages.each do |msg| %>
 				<li><p><%= msg %></p></li>

@@ -2,9 +2,12 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu|Roboto);
 
 /* Color */
-$light-blue: #ADCDDB;
+$light-blue: #C2D9EB;
 $dark-maroon: #552727;
 $dark-grey: #353535;
+$light-maroon: #A00505;
+$light-pink: #FCD1D8;
+$light-grey: #dadce8;
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -91,13 +94,10 @@ h6 {
 }
 
 h3.page-title {
-	border-bottom: 2px solid $light-blue;
 	margin-bottom: 15px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid $light-blue;
 	font-style: italic;
-}
-
-h3.post-title {
-
 }
 
 p {
@@ -140,7 +140,6 @@ textarea {
 	height: 150px;
 	display: block;
 }
-
 div.application-container {
 	width:97%;
 	display: block;
@@ -153,13 +152,50 @@ div.application-container {
 	margin-bottom: 30px;
 }
 
+/* forms */
+form {
+	min-height: 350px;
+}
+
+p.title{
+	margin-bottom: 10px;
+	font-size: 1.45em;
+	font-style: italic;
+	color: $light-maroon;
+}
+
+div.errors {
+	width: 40%;
+	height: 300px;
+	background-color: $light-grey;
+	padding: 2% 2% 2% 3%;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 15px;
+}
+
+ul.errors-list {
+	height: 84px;
+}
+
+ul.errors-list li {
+	list-style-type: initial;
+}
+
+ul.errors-list li p {
+	line-height: 35px;
+	color: $light-maroon;
+}
+
+
 /* buttons */
 button.normal {
 	width: 150px;
 	height: 35px;
 	display: block;
+	color: rgb(51, 51, 51);
 	float: left;
-	margin: 0 10% 0 0;
+	margin: 1% 10% 0 0;
 	background: $light-blue;
 	border: none;
 	border-radius: 4px;

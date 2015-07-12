@@ -3,16 +3,14 @@
 <h3 class="page-title">long time no see.</h3>
 
 <% if false %>
-	<% if @user.errors.any? %>
-		<div class="errors">
-			<h4>Whoops</h4>
-			<ul class="errors-list">
-				<% @user.errors.full_messages.each do |msg| %>
-					<li><p><%= msg %></p></li>
-				<% end %>
-			</ul>
-		</div>	
-	<% end %>
+	<div class="errors">
+		<p class="title">Whoops</p>
+		<ul class="errors-list">
+			<% @user.errors.full_messages.each do |msg| %>
+				<li><p><%= msg %></p></li>
+			<% end %>
+		</ul>
+	</div>	
 <% end %>
 
 <%= form_for(:session, url: login_path) do |f| %>
@@ -38,8 +36,12 @@
 	</p>
 <% end %>
 
-<p>First time here?</p>
-	<button class="normal" type="submit">
-		<%= link_to "sign me up", signup_path %>
-	</button>
-</p>
+<div>
+	<p class="title">First time here?</p>
+		<a href="/signup">
+			<p>
+				<button class="normal" type="submit">sign me up</button>
+			</p>
+		</a>
+	</p>
+</div>	
