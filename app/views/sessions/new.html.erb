@@ -24,6 +24,13 @@
 	<p>
 		<%= f.label :password %>
 		<%= f.text_field :password %>
+	</p>
+
+	<p>
+		<%= f.label :remember_me do %>
+			<%= f.check_box :remember_me %>
+			<span>remember me on this computer</span>
+		<% end %>
 	</p>	
 
 	<p>

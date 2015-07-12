@@ -16,6 +16,16 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   	assert flash.empty?		
   end
 
+  test "log in with remembering" do
+    log_in_as(@user, remember_me: '1')
+    assert_not cookies[:remember_token].nil?
+  end
+
+  test "log in without remembering" do
+    log_in_as(@user, remember_me: '0')
+    assert cookies[:remember_token].nil?
+  end
+
 =begin
   # something super fucky about testing redirects
   test "Successful login should render correct template" do
