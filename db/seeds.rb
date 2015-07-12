@@ -15,6 +15,9 @@
   end
 =end
 
-
-Post.create!( title: "New York City",
-              body: "Hipster Ipsum" )
+# Create Admin user for Production
+User.create!( name: "ethan",
+              email: "e.ozelius@gmail.com",
+              password: 'password',
+              password_confirmation: 'password',
+              admin: true )
