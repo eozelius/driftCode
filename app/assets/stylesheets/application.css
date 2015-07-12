@@ -10,7 +10,6 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require jquery-te-1.4.0.css.scss
  *= require users_index.css.scss
  *= require leaflet.css
  *= require font-awesome

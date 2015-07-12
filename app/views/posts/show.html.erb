@@ -5,7 +5,11 @@
 
 		<div class="post-container">
 			<p class="post-body"><%= @post.body %></p>
-			<h6>posted <%= time_ago_in_words(@post.created_at) %> ago. | <%= link_to 'edit', edit_post_path( @post ) %> | <%= link_to 'delete post', post_path( @post ), method: :delete, data: { confirm: 'Are you sure?' } %></h6>
+			<h6>posted <%= time_ago_in_words(@post.created_at) %> ago. 
+				<% if admin_user %>
+					| <%= link_to 'edit', edit_post_path( @post ) %> | <%= link_to 'delete post', post_path( @post ), method: :delete, data: { confirm: 'Are you sure?' } %>
+				<% end %>
+			</h6>
 		</div>
 
 		<div class="comments-container">	

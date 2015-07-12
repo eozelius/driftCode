@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+	before_action :admin_user, only: [:new, :create, :edit, :update, :destroy, ]
+
 	def index
 		# TODO there might be a more efficient way to do this....
 		@posts = Post.all.order('created_at DESC')
@@ -38,7 +40,6 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 	end
 
-
 	def destroy
 		@post = Post.find(params[:id])
 		@post.destroy
@@ -49,5 +50,15 @@ class PostsController < ApplicationController
 	private
 		def post_params
 			params.require(:post).permit(:title, :body)
+		end
+
+		# Returns true is current_user is an admin
+		def admin_user
+			if !current_user
+				redirect_to(root_url)
+				return false
+			elsif current_user.admin == true
+				return true
+			end
 		end
 end

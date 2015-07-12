@@ -11,7 +11,7 @@
 			<%= u.email %>
 		</p>
 
-		<% if current_user.admin? %>
+		<% if logged_in? && current_user.admin? %>
 			<p>if current_user.admin? && !current_user?(u)</p>
 		<% end %>
 
