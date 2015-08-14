@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :account_activations, only: [:edit]
+
   get 'code'  => 'welcome#code'
   get 'about' => 'welcome#about'
   get 'photo' => 'welcome#photo'

@@ -2,8 +2,12 @@ barack:
   name: Barack Obama
   email: bigOb@whitehouse.gov
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 irene:
   name: Grandma irene
   email: gma@gmail.com
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
