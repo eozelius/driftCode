@@ -15,14 +15,16 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
 
   	if @user.save
-      UserMailer.account_activation(@user).deliver_now
+      @user.send_activation_email
       flash[:info] = "An account activation email has been sent to your email to authenticate your account."
       redirect_to root_url
+
 =begin TODO not sure if i want to require this authorization.
       log_in @user
       flash[:success] = "welcome to your new chill spot."
   		redirect_to @user
 =end
+
   	else
   		render 'new'
   	end
