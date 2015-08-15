@@ -6,14 +6,14 @@ class UserMailer < ApplicationMailer
   #
   def account_activation( user )
     @user = user
-    @greeting = "Greetings,"
+    @greeting = "Greetings, "
 
     mail to: @user.email, subject: "driftCode account activation"
   end
 
-  def password_reset
-    @greeting = "Greetings,"
+  def password_reset( email )
+    @greeting = "Greetings, "
 
-    mail to: "to@example.org"
+    mail to: email, subject: "driftCode password reset"
   end
 end
