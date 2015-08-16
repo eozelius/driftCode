@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 	# Class Methods
 	def authenticated?(attribute, token)
 		digest = send("#{attribute}_digest")
+		# byebug
 		return false if digest.nil?
 		BCrypt::Password.new(digest).is_password?(token)
 	end
@@ -50,8 +51,8 @@ class User < ActiveRecord::Base
 		UserMailer.account_activation(self).deliver_now
 	end
 
-	def send_password_reset_email( email )
-		UserMailer.password_reset( email ).deliver_now
+	def send_password_reset_email
+		UserMailer.password_reset(self).deliver_now
 	end
 
 	def create_password_reset_digest
