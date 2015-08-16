@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
 		update_attribute(:password_reset_at, 		 Time.zone.now)
 	end
 
+	def password_reset_expired?
+		password_reset_at < 2.hours.ago
+	end
+
 	private
 		def downcase_email
 			self.email = email.downcase

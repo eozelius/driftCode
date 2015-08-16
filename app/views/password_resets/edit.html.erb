@@ -6,13 +6,13 @@
 	<%= hidden_field_tag :email, @user.email %>
 
 	<p>
-		New <%= f.label :password %>
-		<%= f.text_field :password %>
+		New <label for="user_password">Password</label>
+		<input type="text" name="user[password]" id="user_password">
 	</p>
 
 	<p>
-		New <%= f.label :password_confirmation %>
-		<%= f.text_field :password_confirmation %>
+		New <label for="user_password_confirmation">Password confirmation</label>
+		<input type="text" name="user[password_confirmation]" id="user_password_confirmation">
 	</p>	
 
 	<p>
