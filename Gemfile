@@ -12,6 +12,8 @@ gem "font-awesome-rails"
 gem "twitter-bootstrap-rails"
 gem 'angularjs-rails', '~> 1.4.0'
 gem 'bcrypt', '~> 3.1.10'
+gem 'therubyracer', '~> 0.12.2'
+gem 'libv8' # 3.16.14.11
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

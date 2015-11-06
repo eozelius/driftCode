@@ -1,6 +1,6 @@
 barack:
   name: Barack Obama
-  email: bigOb@whitehouse.gov
+  email: bigO@whitehouse.gov
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
