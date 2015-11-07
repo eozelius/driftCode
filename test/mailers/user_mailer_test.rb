@@ -17,7 +17,7 @@ class UserMailerTest < ActionMailer::TestCase
   test "password_reset" do
     user = users(:barack)
     user.password_reset_token = User.new_token
-    mail = UserMailer.password_reset( user )
+    mail = UserMailer.password_reset(user)
     
     assert_equal "driftCode password reset", mail.subject
     assert_equal [ user.email ], mail.to

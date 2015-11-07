@@ -43,8 +43,8 @@ class User < ActiveRecord::Base
 	end
 
 	def activate
-		update_attribute(:activated,			true)
-		update_attribute(:activated_at, 	Time.zone.now)
+		update_attribute(:activated,		true)
+		update_attribute(:activated_at,	Time.zone.now)
 	end
 
 	def send_activation_email
@@ -57,12 +57,12 @@ class User < ActiveRecord::Base
 
 	def create_password_reset_digest
 		self.password_reset_token = User.new_token
-		update_attribute(:password_reset_digest, User.digest(password_reset_token))
-		update_attribute(:password_reset_at, 		 Time.zone.now)
+		update_attribute(:reset_digest, User.digest(password_reset_token))
+		update_attribute(:reset_sent_at, 		 Time.zone.now)
 	end
 
 	def password_reset_expired?
-		password_reset_at < 2.hours.ago
+		reset_sent_at < 2.hours.ago
 	end
 
 	private
@@ -75,3 +75,20 @@ class User < ActiveRecord::Base
 			self.activation_digest = User.digest( activation_token )
 		end
 end
+
+
+
+	#2.2.2 :002 > user.inspect
+ 	# => id: 1,
+  # => name: \"Simon Heizen-1\", 
+  # => email: \"sheizen-1@gubenheimen.org\", 
+  # => created_at: \"2015-11-06 23:32:14\", 
+  # => updated_at: \"2015-11-06 23:32:14\", 
+  # => password_digest: \"$2a$10$.djfUI/GbqUwweEcxSIjyuSM2oVf5CXoVxxpPE2769W...\", 
+  # => remember_digest: nil, 
+  # => admin: nil, 
+  # => activated: true, 
+  # => activation_digest: \"$2a$10$Vqx7Z2L7y0F16s9i0hnxzOwz3YTBSu6g6rkrAnnTaTt...\", 
+  # => activated_at: \"2015-11-06 23:32:13\", 
+  # => reset_digest: nil, 
+  # => reset_sent_at: nil>"

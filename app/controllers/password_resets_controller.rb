@@ -11,8 +11,7 @@ class PasswordResetsController < ApplicationController
   	if @user
   		@user.create_password_reset_digest
   		@user.send_password_reset_email
-  		message = "A password reset email has been send to "
-  		message += @user.name
+  		message = "A password reset email has been send to #{@user.email}"
   		flash[:info] = message
   		redirect_to root_url
   	else
@@ -33,6 +32,7 @@ class PasswordResetsController < ApplicationController
       flash[:success] = "Password reset successfully"
       redirect_to @user
     else
+      flash.now[:danger] = "Whoops something went gone, please try again."
       render 'edit'
     end        
   end
@@ -48,9 +48,9 @@ class PasswordResetsController < ApplicationController
 
     def valid_user
       # if any of these fail, goto root
-      if !@user || !@user.activated? || !@user.authenticated?(:password_reset, params[:id])
-        redirect_to root_url
+      if !@user || !@user.activated? || !@user.authenticated?(:reset, params[:id])
         flash[:danger] = "Whoops something went wrong, please try again."
+        redirect_to root_url
       end
     end 
 

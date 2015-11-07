@@ -1,5 +1,5 @@
 # Create Pansy Accounts
-50.times do |n|
+76.times do |n|
   name  = "Simon Heizen-#{n+1}"
   email = "SHeizen-#{n+1}@gubenheimen.org"
   password = "japan123"
