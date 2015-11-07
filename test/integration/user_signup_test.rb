@@ -19,7 +19,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   	assert_select 'div.errors'
   end
 
-  test "signup with valid data & account activation should pass" do
+  test "valid; signup with valid data & account activation should pass" do
   	get signup_path
   	assert_difference 'User.count', 1 do
       post users_path, user: { name: "Miagi Proper",

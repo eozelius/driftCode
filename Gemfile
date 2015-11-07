@@ -20,6 +20,7 @@ group :development, :test do
   gem 'byebug',      '3.4.0'
   gem 'spring',      '1.1.3'
   gem 'tzinfo-data', platforms: [:mingw, :mswin]
+  gem 'letter_opener', '~> 1.4', '>= 1.4.1'
 end
 
 group :test do

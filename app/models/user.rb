@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 		BCrypt::Password.create(string, cost: cost)
 	end
 
-	# generates new token that can be used to auth. cookies & tokens.
+	# generates new token that can be used to. cookies & tokens.
 	def User.new_token
 		SecureRandom.urlsafe_base64
 	end
