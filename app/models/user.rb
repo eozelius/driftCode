@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	has_many :posts, dependent: :destroy
+
 	# Class properties
 	attr_accessor :remember_token, :activation_token, :password_reset_token
 	before_save 	:downcase_email

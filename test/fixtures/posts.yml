@@ -1,9 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  body: MyText
+first_post:
+  title: "Quien da su PBR aqui?"
+  body: "No se, pero yo soy el rey de maiz!!"
+  created_at: <%= Time.zone.now %>
 
-two:
-  title: MyString
-  body: MyText
+middle_post:
+  title: "No one drives on the 60 this late."
+  body: "I try to remember to write, take 2 falls out of 3"
+  created_at: <%= 5.minutes.ago %>
+
+last_post:
+  title: "Eso es mi title"
+  body: "Me gusta tu cada mucho!!"
+  created_at: <%= 10.hours.ago %>
