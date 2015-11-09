@@ -4,13 +4,24 @@ first_post:
   title: "Quien da su PBR aqui?"
   body: "No se, pero yo soy el rey de maiz!!"
   created_at: <%= Time.zone.now %>
+  user: irene
 
 middle_post:
   title: "No one drives on the 60 this late."
   body: "I try to remember to write, take 2 falls out of 3"
   created_at: <%= 5.minutes.ago %>
+  user: irene
 
 last_post:
   title: "Eso es mi title"
   body: "Me gusta tu cada mucho!!"
-  created_at: <%= 10.hours.ago %>
+  created_at: <%= 10.years.ago %>
+  user: irene
+
+<% 30.times do |n| %>
+post_<%= n %>:
+  title: "Title numero - <%= n %>"
+  body: "I am a broken machine"
+  created_at: <%= 25.days.ago %>
+  user: irene
+<% end %>
