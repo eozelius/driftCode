@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
-  resources :posts, only: [:create, :destroy, :index] do
+  resources :posts, only: [:create, :show, :edit, :destroy, :index] do
     resources :comments
   end
 

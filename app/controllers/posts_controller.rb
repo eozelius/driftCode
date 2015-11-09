@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-	before_action :admin_user, 			only: [:new, :create, :edit, :update, :destroy]
 	before_action :logged_in_user,	only: [:create, :destroy]
+	before_action :correct_user, 		only: :destroy
 
 	def index
 		# TODO there might be a more efficient way to do this....
@@ -9,10 +9,25 @@ class PostsController < ApplicationController
 		@posts = @posts.offset(1)
 	end
 
+=begin Only way to create new post is via @user's porfile page; we should improve this
 	def new
 		@post = Post.new
 	end
+=end
+	# ror_tut version
+	def create
+		@post = current_user.posts.build(post_params)
+		if @post.save
+			flash[:success] = "Post created successfully"
+			redirect_to current_user
+		else
+			flash[:danger] = "Post not created, please try again"
+			redirect_to current_user
+		end
+	end
 
+
+=begin Blog version
 	def create
 		@post = Post.new(post_params)
 		
@@ -22,10 +37,7 @@ class PostsController < ApplicationController
 			render 'new'
 		end
 	end
-
-	def edit
-		@post = Post.find(params[:id])
-	end
+=end
 
 	def update
 		@post = Post.find(params[:id])
@@ -45,7 +57,8 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 		@post.destroy
 
-		redirect_to root_path
+		flash[:info] = "Post deleted"
+		redirect_to current_user
 	end
 
 	private
@@ -53,6 +66,15 @@ class PostsController < ApplicationController
 			params.require(:post).permit(:title, :body)
 		end
 
+		def correct_user
+			@post = current_user.posts.find_by(id: params[:id])
+			flash[:danger] = "Whoops, something went wrong, please try again"
+			redirect_to root_url if @post.nil?
+		end
+
+
+
+=begin # dead code I want to keep 11/9/2015
 		# Returns true is current_user is an admin
 		def admin_user
 			if !current_user
@@ -62,4 +84,5 @@ class PostsController < ApplicationController
 				return true
 			end
 		end
+=end
 end

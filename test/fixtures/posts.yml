@@ -18,6 +18,16 @@ last_post:
   created_at: <%= 10.years.ago %>
   user: irene
 
+zooted:
+  title: "I'm zooted"
+  body: "the time is 5:21, and this has been the ABC nightly news with Richard Filmore"
+  created_at: <%= 10.minutes.ago %>
+  user: tex
+
+
+
+
+
 <% 30.times do |n| %>
 post_<%= n %>:
   title: "Title numero - <%= n %>"

@@ -11,6 +11,15 @@ module SessionsHelper
 		cookies.permanent[:remember_token] = user.remember_token
 	end
 
+	# Returns true is current_user is an admin
+	def admin_user
+		if !current_user
+			return false
+		elsif current_user.admin == true
+			return true
+		end
+	end
+
 	# Returns the current logged-in user (if any).
 	def current_user
 		if session[:user_id]

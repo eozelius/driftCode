@@ -1,28 +1,3 @@
-<h3 class="page-title">What I actually meant to say was...</h3>
+<% provide :title, 'edit ' + @post.title %>
 
-<% if @post.errors.any? %>
-	<div class="errors">
-		<p class="title">Whoops</p>
-		<ul class="errors-list">
-			<% @post.errors.full_messages.each do |msg| %>
-				<li><p><%= msg %></p></li>
-			<% end %>
-		</ul>
-	</div>	
-<% end %>
-
-<%= form_for @post do |f| %>
-	<p>
-		<%= f.label :title %>
-		<%= f.text_field :title %>	
-	</p>	
-
-	<p>
-		<%= f.label :body %>
-		<%= f.text_area :body %>
-	</p>
-
-	<p>
-		<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">I said something</button>
-	</p>
-<% end %>
+<%= render 'form' %>

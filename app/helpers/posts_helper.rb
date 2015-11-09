@@ -1,28 +1,23 @@
 module PostsHelper
-	# Returns the current logged-in user (if any).
-	def current_user
-		if session[:user_id]
-			# returns user or nil;
-			@current_user ||= User.find_by(id: session[:user_id])
-		elsif cookies.signed[:user_id]
-			user = User.find_by(id: cookies.signed[:user_id])
-			if user && user.authenticated?(:remember, cookies[:remember_token])
-				log_in user
-				@current_user = user
-			end
-		end							
-	end
+	def has_any_posts user
+		user_posts = []
 
-	# Returns true if the user is logged in, false otherwise.
-	def logged_in?
-		!current_user.nil?
-	end
-
-	# Returns true is current_user is an admin
-	def admin_user
-		if !current_user
+		if user.posts.length <= 1
 			return false
-		elsif current_user.admin == true
+		else
+			user.posts.each do |post|
+				# if any post attr is nil, do not return
+				user_posts.push(post) if !post.attributes.values.include?(nil)
+			end
+		end
+		return user_posts
+	end
+
+	def user_is_home user
+		# byebug
+		if !logged_in? || current_user.nil? || user.nil?
+			return false
+		elsif current_user.id == user.id
 			return true
 		end
 	end

@@ -11,3 +11,10 @@ irene:
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
+
+tex:
+  name: Confederate Tex
+  email: usa_all_the_way@aol.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
