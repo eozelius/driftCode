@@ -63,12 +63,11 @@ class PostsController < ApplicationController
 
 	private
 		def post_params
-			params.require(:post).permit(:title, :body)
+			params.require(:post).permit(:title, :body, :picture)
 		end
 
 		def correct_user
 			@post = current_user.posts.find_by(id: params[:id])
-			flash[:danger] = "Whoops, something went wrong, please try again"
 			redirect_to root_url if @post.nil?
 		end
 

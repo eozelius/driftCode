@@ -7,7 +7,10 @@ module PostsHelper
 		else
 			user.posts.each do |post|
 				# if any post attr is nil, do not return
-				user_posts.push(post) if !post.attributes.values.include?(nil)
+				# Post the post only if all attr are defined except picture
+				if !post.body.nil? || !post.title.nil? || !post.user_id.nil? || !post.id.nil? || !post.created_at.nil? || !post.updated_at.nil?
+					user_posts.push(post)
+				end
 			end
 		end
 		return user_posts

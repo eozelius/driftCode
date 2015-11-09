@@ -9,7 +9,12 @@
 	</div>	
 <% end %>
 
-<%= form_for @post do |f| %>
+<%= form_for @post, html: { multipart: true } do |f| %>
+	<p>
+		<%= f.label 'upload image' %>
+		<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
+	</p>
+
 	<p>
 		<%= f.label :title %>
 		<%= f.text_field :title %>	
@@ -23,4 +28,14 @@
 	<p>
 		<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">I said something</button>
 	</p>
+		
+	<script type="text/javascript">
+		$('#post_picture').on('change', function() {
+  		var size_in_megabytes = this.files[0].size/1024/1024;
+  		if (size_in_megabytes > 3) {
+    		alert('Maximum file size is 3MB. Please choose a smaller file.');
+  		}
+		});
+	</script>
+
 <% end %>

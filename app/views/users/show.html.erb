@@ -23,25 +23,8 @@
 			<%= render 'posts/form' %>
 		<% end %>
 
-		<% if user_posts = has_any_posts(@user) %>
-
-			<h4>Posts</h4>
-			<% user_posts.each do |post| %>
-				<div class="post-container" data-post-id="<%= post.id %>">
-					<li><p><%= post.title %></p></li>
-					<li><p><%= post.body %></p></li>
-					<li><p><%= post.user_id %></p></li>
-
-					<br>
-
-					<% if current_user?( User.find(post.user_id) ) || admin_user %>
-						<p>
-							<%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
-						</p>
-					<% end %>
-
-				</div>	
-			<% end %>
+		<% if @user_posts = has_any_posts(@user) %>
+			<%= render 'posts/posts' %>
 		<% else%>
 			<h5><%= @user.name %> doesn't have any posts yet.</h5>
 		<% end %>

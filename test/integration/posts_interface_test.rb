@@ -22,9 +22,9 @@ class PostsInterfaceTest < ActionDispatch::IntegrationTest
   	end
 		assert_redirected_to @user
 		follow_redirect!
+		assert_template 'users/show'
 
 		# Delete a Post
-		assert_select 'a', text: 'delete'
 		assert_difference 'Post.count', -1 do
 			delete post_path(@user.posts.first)
 		end  	
