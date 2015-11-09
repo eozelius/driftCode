@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-	before_action :admin_user, only: [:new, :create, :edit, :update, :destroy, ]
+	before_action :admin_user, 			only: [:new, :create, :edit, :update, :destroy]
+	before_action :logged_in_user,	only: [:create, :destroy]
 
 	def index
 		# TODO there might be a more efficient way to do this....
