@@ -11,12 +11,11 @@ gem 'sdoc',         '0.4.0', group: :doc
 gem 'carrierwave',  '0.10.0'
 gem 'mini_magick',  '3.8.0'
 gem 'fog',          '1.26.0'
-gem "font-awesome-rails"
-gem "twitter-bootstrap-rails"
 gem 'angularjs-rails', '~> 1.4.0'
 gem 'bcrypt', '~> 3.1.10'
 gem 'therubyracer', '~> 0.12.2'
 gem 'libv8' # 3.16.14.11
+gem 'net-ssh', '~> 3.0', '>= 3.0.1'
 
 
 group :development, :test do
@@ -34,7 +33,7 @@ group :test do
 end
 
 group :production do
-  gem 'puma', 		'2.11.1'
-  gem 'pg',             '0.17.1'
+#  gem 'puma', 		'2.11.1'
+#  gem 'pg',             '0.17.1'
   gem 'rails_12factor', '0.0.2'
 end
