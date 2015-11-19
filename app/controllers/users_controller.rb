@@ -16,19 +16,13 @@ class UsersController < ApplicationController
 
   	if @user.save
       @user.send_activation_email 
-      flash[:info] = "An account activation email has been sent to your email to authenticate your account."
-      redirect_to root_url
-
-=begin TODO not sure if i want to require this authorization.
+      flash[:info] = "welcome to driftCode"
+      # redirect_to root_url
       log_in @user
-      flash[:success] = "welcome to your new chill spot."
   		redirect_to @user
-=end
-
   	else
   		render 'new'
   	end
-    #debugger
   end
 
   def show
@@ -47,7 +41,7 @@ class UsersController < ApplicationController
       flash[:success] = "Save successful."
       redirect_to @user
     else
-      flash.now[:danger] = "Whoops try again."
+      flash.now[:danger] = "Whoops! something went wrong, please try again."
       render 'edit'
     end
   end
