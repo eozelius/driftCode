@@ -31,21 +31,20 @@ div.profile-photos {
 /* posts */
 div.post-container {
 	width: 95%;
-	height: 400px; 
+	height: 650px; 
 	background-color: #E9EEF0;
-	border: 1px solid #E9EEF0;
-	margin: 5% auto 4%;
+	margin: 5% auto 0;
 	padding: 2% 1%;
-	border-right: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #8C565B;
 }
 
 div.post-container:first-child {
 	margin-top: 5px;
 }
 
-div.post-container img {
-	max-width: 56%;
+div.post-container img, 
+.alter-post-container img {
+	max-width: 370px;
 	max-height: 232px;
 	margin-right: 1%;
 	float: left;
@@ -57,7 +56,7 @@ p.post-body {
 }
 
 .post-text-container {
-	height: 350px;
+	height: 600px;
 }
 
 div.post-container p.alter-post{
@@ -83,6 +82,28 @@ h6.comment {
 form.new_comment {
 	margin-top: 9%;
 }
+
+/* Alter existing Blib form */
+.alter-post-container {
+	width: 95%;
+	height: 650px;
+	background-color: #C2D9EB;
+	margin: 0 auto;
+	padding: 2% 1%;
+	
+	#post_title,
+	#post_body {
+	width: 40%;
+	float: right;
+	}
+	#post_picture {
+		position: relative;
+		bottom: 35px;
+		left: 6px;
+		color: #C2D9EB;
+	}
+}
+
 
 /* Aside */
 #postMap {

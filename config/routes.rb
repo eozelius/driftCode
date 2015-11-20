@@ -2,14 +2,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users
-  resources :posts do
-    resources :comments
-  end
-=begin
   resources :posts, only: [:create, :update, :destroy] do
     resources :comments
   end
-=end
 
   get    'signup' => 'users#new'
   get    'login'  => 'sessions#new'

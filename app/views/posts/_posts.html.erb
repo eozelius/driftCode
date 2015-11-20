@@ -1,43 +1,45 @@
 <h4 class="page-title" style="border:none;">Where I've been</h4>
 <div class="total-posts-container">
 	<% @user_posts.each do |post| %>		
-		<div class="post-container" data-post-id="<%= post.id %>">
-			<%= image_tag post.picture.url if post.picture? %>
-			<div class="post-text-container">
-				<p class="page-title"><%= post.title %></h6>
-				<p><%= post.body %></p>
+		<div class="this-post-container">
+			<div class="post-container" data-post-id="<%= post.id %>">
+				<%= image_tag post.picture.url if post.picture? %>
+				<div class="post-text-container">
+					<p class="page-title"><%= post.title %></h6>
+					<p><%= post.body %></p>
+				</div>
+
+
+				<% if current_user?( User.find(post.user_id) ) || admin_user %>
+					<p class="alter-post">
+						<a>edit</a><a> | </a><%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
+					</p>
+				<% end %>
+			</div>	
+
+			<div class="alter-post-container">
+				<%= form_for post, action: 'posts/#{post.id}', method: :patch do |f| %>
+					<%= image_tag post.picture.url if post.picture? %>
+					<p>
+						<%= f.label :title, :class => 'page-title' %>
+						<%= f.text_field :title %>	
+					</p>
+
+					<p>
+						<%= f.label :body %>
+						<%= f.text_area :body %>
+					</p>
+
+					<p>
+						<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
+					</p>
+
+					<p>
+						<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">done</button>
+					</p>
+
+				<% end %>
 			</div>
-
-
-			<% if current_user?( User.find(post.user_id) ) || admin_user %>
-				<p class="alter-post">
-					<a>edit</a><a> | </a><%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
-				</p>
-			<% end %>
-		</div>	
-
-		<div class="alter-post-container">
-			<%= form_for post, action: 'posts/#{post.id}', method: :patch do |f| %>
-				<p>
-					<%= f.label :title, :class => 'page-title' %>
-					<%= f.text_field :title %>	
-				</p>	
-
-				<p>
-					<%= f.label :body %>
-					<%= f.text_area :body %>
-				</p>
-
-				<p>
-					<%= f.label 'upload image' %>
-					<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
-				</p>
-
-				<p>
-					<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">done</button>
-				</p>
-
-			<% end %>
 		</div>
 	<% end %>
 </div>

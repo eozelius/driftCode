@@ -7,7 +7,7 @@ development
 
 
 production
-	- Setup email sending in production
+	- Setup email sending in production - done
 	- Setup s3 bucket to serve user.posts.images
 	- setup assert server to serve static assets 
 	- setup Postgres on 3rd server
