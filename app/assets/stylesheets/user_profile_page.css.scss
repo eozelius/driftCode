@@ -1,0 +1,106 @@
+div.map-container {
+	padding-bottom: 15px;
+	border-bottom: 2px solid #C2D9EB;
+}
+
+#profile-map {
+	width: 92%;
+	height: 455px;
+	margin: 0 auto;
+	padding-bottom: 3%;
+}
+
+div.pro-part {
+	min-height: 400px;
+	margin-bottom: 55px;
+	margin-top: 20px;
+	padding-top: 10px;
+}
+
+div.total-posts-container {
+	background-color: #8C565B;
+	padding-top: 2%;
+	border-bottom: 2px solid #C2D9EB;
+}
+
+/* profile-photos */
+div.profile-photos {
+
+}
+
+/* posts */
+div.post-container {
+	width: 95%;
+	height: 400px; 
+	background-color: #E9EEF0;
+	border: 1px solid #E9EEF0;
+	margin: 5% auto 4%;
+	padding: 2% 1%;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+div.post-container img {
+	max-width: 56%;
+	max-height: 232px;
+	margin-right: 1%;
+	float: left;
+}
+
+p.post-body {
+	text-align: left;
+	margin: -9% 0 20px 0;
+}
+
+/* comments */
+div.comments-container {
+	width: 85%;
+	max-height: 375px;
+	float: right;
+	margin: 0 0 15% 0;
+	padding: 3% 0 0 0;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+h6.comment {
+	margin: 3% 0;
+	text-align: left;
+}
+
+form.new_comment {
+	margin-top: 9%;
+}
+
+/* Aside */
+#postMap {
+	width: 100%;
+	height: 300px;
+	margin: 20% 0 0 0;
+}
+
+/* New Blib */
+div.profile-blog-titles {
+	width: 37%;
+	float: right;
+	margin-left: 4%;
+}
+
+div.new-blib-container {
+	width: 92%;
+	padding: 2%;
+	background-color: #C2D9EB;
+}
+
+/* New Blib Form */
+#new_post {
+	min-height: 400px;
+}
+
+/* Color 
+$light-blue: #ADCDDB;
+$dark-maroon: #552727;
+$light-maroon: #8C565B;
+$dark-grey: #353535;
+$white-grey: #E9EEF0;
+*/

@@ -1,8 +1,8 @@
 <% provide(:title, @user.name) %>
 
 <h3 class="page-title"><%= @user.name %></h3>
-
-<div id="profile-map"></div>
+<div class="map-container">
+	<div id="profile-map"></div>
 
 	<script>
 		var map = L.map('profile-map').setView([40.73527, -73.89], 12);
@@ -13,24 +13,25 @@
 	    maxZoom: 18,
 	    id: 'eozelius77.j4hekake',
 	    accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
-	}).addTo(map);
-</script>
+		}).addTo(map);
+	</script>
+</div><!-- End Map -->
 
 <div id="pro-parts-container">
 	<div class="pro-part profile-photos col-lg-7 col-md-7 col-sm-12 col-12">
-		<% if user_is_home(@user) %>
-			<h4>Create a new Post</h4>
-			<%= render 'posts/form' %>
-		<% end %>
-
 		<% if @user_posts = has_any_posts(@user) %>
 			<%= render 'posts/posts' %>
 		<% else%>
-			<h5><%= @user.name %> doesn't have any posts yet.</h5>
+			<h5><%= @user.name %> hasn't been anywhere yet.</h5>
 		<% end %>
 	</div>
 
-	<div class="pro-part profile-blog-titles col-lg-4 col-md-4 col-sm-12 col-xs-12 col-ls-offset-1 col-md-offset-1">
-		<h4>Stories</h4>
+	<div class="pro-part profile-blog-titles">
+		<% if user_is_home(@user) %>
+			<h4 class="page-title" style="border:none;">new blib</h4>
+			<div class="new-blib-container">
+				<%= render 'posts/form' %>
+			</div>
+		<% end %>
 	</div>
 </div>	

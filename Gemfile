@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails',        '4.2.0'
+gem 'rails',        '4.2.4'
 gem 'sass-rails',   '5.0.2'
 gem 'uglifier',     '2.5.3'
 gem 'coffee-rails', '4.1.0'
@@ -18,7 +18,8 @@ gem 'libv8' # 3.16.14.11
 gem 'net-ssh', '~> 3.0', '>= 3.0.1'
 
 
-group :development, :test do
+group :development do
+  gem 'puma', 		'2.11.1'
   gem 'sqlite3',     '1.3.9'
   gem 'byebug',      '3.4.0'
   gem 'spring',      '1.1.3'
@@ -33,7 +34,7 @@ group :test do
 end
 
 group :production do
-#  gem 'puma', 		'2.11.1'
+  gem 'puma', 		'2.11.1'
 #  gem 'pg',             '0.17.1'
   gem 'rails_12factor', '0.0.2'
 end

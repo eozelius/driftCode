@@ -61,6 +61,10 @@ table {
 }
 
 /* Ethan's resetStyleSheet */
+li {
+	list-style-type: none;
+}
+
 h1,h2,h3,h4,h5,h6 {
 	font-family: 'Roboto', sans-serif;
 	color: $dark-maroon;
@@ -98,6 +102,24 @@ h3.page-title {
 	padding-bottom: 10px;
 	border-bottom: 2px solid $light-blue;
 	font-style: italic;
+}
+
+h4.page-title {
+	margin-bottom: 8px;
+	border-bottom: 2px solid $light-blue;
+	padding-bottom: 5px;
+	font-style: italic;
+}
+
+p.page-title,
+label.page-title {
+	font-size: 24px;
+	font-style: italic;	
+	border-bottom: 2px solid $dark-maroon;
+	display: inline-block;
+	font-family: 'Roboto', sans-serif;
+	color: $dark-maroon;
+	margin-bottom: 4%;
 }
 
 p {

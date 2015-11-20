@@ -11,17 +11,10 @@ class Post < ActiveRecord::Base
 	validates :user_id, :presence => true
 	validate	:picture_size
 
-
-
-
 	private
 		def picture_size
 			if picture.size > 3.megabytes
 				errors.add(:picture, "Photo must be less than 5MB.")
 			end
 		end
-
-
-
-
 end

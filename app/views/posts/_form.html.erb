@@ -11,18 +11,18 @@
 
 <%= form_for @post, html: { multipart: true } do |f| %>
 	<p>
-		<%= f.label 'upload image' %>
-		<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
-	</p>
-
-	<p>
-		<%= f.label :title %>
+		<%= f.label :title, :class => 'page-title' %>
 		<%= f.text_field :title %>	
 	</p>	
 
 	<p>
 		<%= f.label :body %>
 		<%= f.text_area :body %>
+	</p>
+
+	<p>
+		<%= f.label 'upload image' %>
+		<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
 	</p>
 
 	<p>
