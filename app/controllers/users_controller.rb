@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   	if @user.save
       @user.send_activation_email 
       flash[:info] = "welcome to driftCode"
-      # redirect_to root_url
       log_in @user
   		redirect_to @user
   	else

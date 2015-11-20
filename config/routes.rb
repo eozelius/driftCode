@@ -2,20 +2,20 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users
-  resources :account_activations, only: [:edit]
-  resources :password_resets,     only: [:new, :create, :edit, :update]
-
+  resources :posts do
+    resources :comments
+  end
+=begin
   resources :posts, only: [:create, :update, :destroy] do
     resources :comments
   end
+=end
 
-  # TODO figure out what I want my index to be
-  # => posts/
-  # => users/
-  # => cool-ass-map/
-  
   get    'signup' => 'users#new'
   get    'login'  => 'sessions#new'
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+
+  resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 end

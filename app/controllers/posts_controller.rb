@@ -16,11 +16,13 @@ class PostsController < ApplicationController
 
 	def update
 		@post = Post.find(params[:id])
-
-		if @post.update(params[:post].permit(:title, :body))
-			redirect_to @post
+		@user = User.find(@post.user_id)
+		if @post.update(post_params)
+			flash[:success] = "blib successfully updated"
+			redirect_to @user
 		else
-			render 'edit'
+			flash[:danger] = "Whoops! Something went wrong, please try again"
+			redirect_to @user
 		end
 	end
 

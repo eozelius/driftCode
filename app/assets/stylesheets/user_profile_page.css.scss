@@ -40,6 +40,10 @@ div.post-container {
 	border-bottom: 1px solid #ccc;
 }
 
+div.post-container:first-child {
+	margin-top: 5px;
+}
+
 div.post-container img {
 	max-width: 56%;
 	max-height: 232px;
@@ -50,6 +54,14 @@ div.post-container img {
 p.post-body {
 	text-align: left;
 	margin: -9% 0 20px 0;
+}
+
+.post-text-container {
+	height: 350px;
+}
+
+div.post-container p.alter-post{
+	text-align: right; 
 }
 
 /* comments */
