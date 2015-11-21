@@ -3,12 +3,15 @@
 class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   process resize_to_limit: [400, 400]
+  storage :file
 
+=begin # using ubuntu local disk because I can't get s3 bucket to work.
   if Rails.env.production?
     storage :fog
   else
     storage :file
   end
+=end
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
