@@ -17,13 +17,13 @@
 
 				<% if current_user?(User.find(post.user_id)) %>
 					<p class="alter-post">
-						<a>edit</a><a> | </a><%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
+						<a class="edit-anchor">edit</a><a> | </a><%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
 					</p>
 				<% end %>
 			</div>	
 
 			<% if current_user?(User.find(post.user_id)) %>
-				<div class="alter-post-container">
+				<div class="alter-post-container" style="display:none;" >
 					<%= form_for post, action: 'posts/#{post.id}', html: { multipart: true }, method: :patch do |f| %>
 						<%= image_tag post.picture.url if post.picture? %>
 						<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
@@ -39,6 +39,10 @@
 
 						<p>
 							<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">done</button>
+						</p>
+
+						<p>
+							<span class="cancel-edit-post normal" style="float:right">cancel</span>
 						</p>
 
 					<% end %>

@@ -110,6 +110,11 @@ form.new_comment {
 	}
 }
 
+#post_body,
+#post_title {
+	width: 100%;
+}
+
 
 /* Aside */
 #postMap {
@@ -134,6 +139,10 @@ div.new-blib-container {
 /* New Blib Form */
 #new_post {
 	min-height: 415px;
+}
+
+a.edit-anchor {
+	cursor: pointer;
 }
 
 /* Color 

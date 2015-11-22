@@ -246,7 +246,9 @@ ul.errors-list li p {
 
 
 /* buttons */
+span.normal,
 button.normal {
+	line-height: 35px;
 	width: 150px;
 	height: 35px;
 	display: block;
@@ -261,6 +263,7 @@ button.normal {
 	border: 2px solid #fff;
 }
 
+span.normal:hover,
 button.normal:hover{
 	background: #fff;
 	border: 2px solid $light-blue;
