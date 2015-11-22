@@ -90,20 +90,21 @@ h3 {
 }
 
 h4 {
-	font-size: 1.5em;
+	font-size: 2em;
 }
 
 h5 {
-	font-size: 1.1em;
+	font-size: 1.75em;
 	text-align: left;
 }
 
 h6 {
-	font-size: .95em;
+	font-size: 1.5em;
 	text-align: left;
 	color: $dark-grey;
 }
 
+h2.page-title,
 h3.page-title {
 	margin-bottom: 15px;
 	padding-bottom: 10px;
@@ -244,11 +245,10 @@ ul.errors-list li p {
 	color: $light-maroon;
 }
 
-
 /* buttons */
 span.normal,
 button.normal {
-	line-height: 35px;
+	line-height: 30px;
 	width: 150px;
 	height: 35px;
 	display: block;

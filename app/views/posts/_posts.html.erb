@@ -1,53 +1,54 @@
-<h4 class="page-title" style="border:none;">Where I've been</h4>
 <div class="total-posts-container">
-	<% @user_posts.each do |post| %>		
-		<div class="this-post-container">
-			<div class="post-container" data-post-id="<%= post.id %>">
-				<%= image_tag post.picture.url if post.picture? %>
-				<div class="post-text-container">
-					<p class="page-title"><%= post.title %></h6>
-					<p><%= post.body %></p>
-				</div>
+	<% @user.posts.each do |post| %>		
+		<% if post.id %>
+			<div class="this-post-container">
+				<div class="post-container" data-post-id="<%= post.id %>">
+					<%= image_tag post.picture.url if post.picture? %>
+					<div class="post-text-container">
+						<p class="page-title"><%= post.title %></h6>
+						<p><%= post.body %></p>
+					</div>
 
-				<% if admin_user && !current_user?(User.find(post.user_id)) %>
-					<p class="alter-post">
-						<%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
-					</p>
-				<% end %>
+					<% if admin_user && !current_user?(User.find(post.user_id)) %>
+						<p class="alter-post">
+							<%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
+						</p>
+					<% end %>
+
+					<% if current_user?(User.find(post.user_id)) %>
+						<p class="alter-post">
+							<a class="edit-anchor">edit</a><a> | </a><%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
+						</p>
+					<% end %>
+				</div>	
 
 				<% if current_user?(User.find(post.user_id)) %>
-					<p class="alter-post">
-						<a class="edit-anchor">edit</a><a> | </a><%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
-					</p>
+					<div class="alter-post-container" style="display:none;" >
+						<%= form_for post, action: 'posts/#{post.id}', html: { multipart: true }, method: :patch do |f| %>
+							<%= image_tag post.picture.url if post.picture? %>
+							<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
+							<p>
+								<%= f.label :title, :class => 'page-title' %>
+								<%= f.text_field :title %>	
+							</p><div class="clear-fix"></div>
+
+							<p>
+								<%= f.label :body %>
+								<%= f.text_area :body %>
+							</p>
+
+							<p>
+								<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">done</button>
+							</p>
+
+							<p>
+								<span class="cancel-edit-post normal" style="float:right">cancel</span>
+							</p>
+
+						<% end %>
+					</div>
 				<% end %>
-			</div>	
-
-			<% if current_user?(User.find(post.user_id)) %>
-				<div class="alter-post-container" style="display:none;" >
-					<%= form_for post, action: 'posts/#{post.id}', html: { multipart: true }, method: :patch do |f| %>
-						<%= image_tag post.picture.url if post.picture? %>
-						<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
-						<p>
-							<%= f.label :title, :class => 'page-title' %>
-							<%= f.text_field :title %>	
-						</p><div class="clear-fix"></div>
-
-						<p>
-							<%= f.label :body %>
-							<%= f.text_area :body %>
-						</p>
-
-						<p>
-							<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">done</button>
-						</p>
-
-						<p>
-							<span class="cancel-edit-post normal" style="float:right">cancel</span>
-						</p>
-
-					<% end %>
-				</div>
-			<% end %>
-		</div>
+			</div>
+		<% end %>
 	<% end %>
 </div>

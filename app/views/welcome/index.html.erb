@@ -1,3 +1,5 @@
+<h2 class="page-title">driftCode</h2>
+
 <div class="map-container">
 	<div id='map'></div>
 		<script>
@@ -14,25 +16,41 @@
 </div><!-- End Map -->
 
 <div id="dash-container">
+	<h3 class="page-title">driftCities</h3>
 	<div class="total-posts-container">
-		<% if !@posts.nil? %>
-			<%= @posts.each do |post| %>
+		
+		<% if Post.any? %>
+			<% posts = Post.all.limit(10) %>
+			<% posts.each do |post| %>
+				<% user = User.find(post.user_id) %>
 				<div class="post-container" data-post-id="<%= post.id %>">
-					<%= image_tag post.picture.url if post.picture? %>
+					<div class="img-user-container container">
+						<div class="post-img-container col-lg-7 col-md-7 col-sm-12 col-xs-12">
+							<%= image_tag post.picture.url if post.picture? %>
+						</div>
+						<div class="post-user-container">
+							<%= link_to user do %>
+								<h4><%= user.name %></h4>
+							<% end %>
+							<h4><%= post.title %></h4>
+						</div>
+					</div>					
+
+
 					<div class="post-text-container">
-						<p class="page-title"><%= post.title %></h6>
 						<p><%= post.body %></p>
 					</div>
 
-					<% if current_user?( User.find(post.user_id) ) || admin_user %>
-						<p class="alter-post">
-							<a>edit</a><a> | </a><%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
-						</p>
+					<% if admin_user %>
+						<p>
+							</a><%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
+						</p>	
 					<% end %>
 				</div>
 			<% end %>
 		<% else %>
 			<h3 class="page-title">Nobody has been anywhere</h3>
 		<% end %>
+
 	</div>
 </div>

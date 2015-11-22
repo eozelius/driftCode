@@ -39,6 +39,56 @@ nav#main ul li p {
 	color: #06072E;
 }
 
-div.dash-container {
-	
+#dash-container {
+	h3.page-title {
+		padding: 1%;
+	}
+
+	h4 {
+		text-align: left;
+	}
+
+	.total-posts-container {
+		width: 90%;
+		margin: 4px auto; 
+		padding: 5px 20px;
+		background-color: #dadce8;
+	}
+
+	.post-container {
+		width: 99%;
+		border-top: 1px solid #552727;
+		border-left: 1px solid #552727;
+		border-right: none;
+		border-bottom: none;
+	}
+
+	.img-user-container {
+		height: 315px;
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	.post-img-container {
+		padding: 0;
+	}
+
+	.post-img-container img {
+		width: 80%;
+		height: 300px;
+	}	
 }
+
+/* Color 
+$light-blue: #C2D9EB;
+$dark-maroon: #552727;
+$dark-grey: #353535;
+$light-maroon: #A00505;
+$light-pink: #FCD1D8;
+$light-grey: #dadce8;
+*/
+
+
+
+
+
