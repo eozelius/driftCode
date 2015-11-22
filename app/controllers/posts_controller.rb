@@ -40,8 +40,13 @@ class PostsController < ApplicationController
 		end
 
 		def correct_user
+			return true if current_user.admin?
+
 			@post = current_user.posts.find_by(id: params[:id])
-			redirect_to root_url if @post.nil?
+			if @post.nil?
+				flash.now[:danger] = "you do not have permission do that.  wwjd?"
+				redirect_to root_url				
+			end
 		end
 
 =begin # dead code I want to keep 11/9/2015
