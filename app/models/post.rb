@@ -9,7 +9,7 @@ class Post < ActiveRecord::Base
 	validates :title, 	:presence => true, :length => { minimum: 4, maximum: 40 }
 	validates :body, 		:presence => true, :length => { maximum: 5000 }
 	validates :user_id, :presence => true
-	validate	:picture_size
+	validate  :picture_size
 
 	private
 		def picture_size
