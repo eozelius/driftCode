@@ -179,6 +179,29 @@ hr.gray-spacer {
 	margin: 20px 0;
 }
 
+/* flash messages */
+div.flash-messages {
+	width: 93%;
+	height: 55px;
+	margin: 0 0 1% 6%;	
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+div.flash-danger {
+	//background-color: $light-pink;
+	background-color: #FCD1D8;
+}
+
+div.flash-success {
+	//background-color: $success-light-blue;
+	background-color: #C2D9EB;
+}
+
+p.flash {
+	line-height: 50px;
+}
+
 /* forms */
 form {
 	min-height: 350px;
@@ -235,4 +258,12 @@ button.normal:hover{
 	background: #fff;
 	border: 2px solid $light-blue;
 	font-size: .8em !important;
+}
+
+/* Mapz */
+#profile-map {
+	width: 92%;
+	height: 455px;
+	margin: 0 auto;
+	padding-bottom: 3%;
 }
