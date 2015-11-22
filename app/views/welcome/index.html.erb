@@ -15,20 +15,24 @@
 
 <div id="dash-container">
 	<div class="total-posts-container">
-		<%= @posts.each do |post| %>
-			<div class="post-container" data-post-id="<%= post.id %>">
-				<%= image_tag post.picture.url if post.picture? %>
-				<div class="post-text-container">
-					<p class="page-title"><%= post.title %></h6>
-					<p><%= post.body %></p>
-				</div>
+		<% if !@posts.nil? %>
+			<%= @posts.each do |post| %>
+				<div class="post-container" data-post-id="<%= post.id %>">
+					<%= image_tag post.picture.url if post.picture? %>
+					<div class="post-text-container">
+						<p class="page-title"><%= post.title %></h6>
+						<p><%= post.body %></p>
+					</div>
 
-				<% if current_user?( User.find(post.user_id) ) || admin_user %>
-					<p class="alter-post">
-						<a>edit</a><a> | </a><%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
-					</p>
-				<% end %>
-			</div>
+					<% if current_user?( User.find(post.user_id) ) || admin_user %>
+						<p class="alter-post">
+							<a>edit</a><a> | </a><%= link_to 'delete', post, method: :delete, data: { confirm: "Are you sure?" } %>
+						</p>
+					<% end %>
+				</div>
+			<% end %>
+		<% else %>
+			<h3 class="page-title">Nobody has been anywhere</h3>
 		<% end %>
 	</div>
 </div>

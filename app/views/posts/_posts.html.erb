@@ -19,18 +19,15 @@
 			<div class="alter-post-container">
 				<%= form_for post, action: 'posts/#{post.id}', html: { multipart: true }, method: :patch do |f| %>
 					<%= image_tag post.picture.url if post.picture? %>
+					<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
 					<p>
 						<%= f.label :title, :class => 'page-title' %>
 						<%= f.text_field :title %>	
-					</p>
+					</p><div class="clear-fix"></div>
 
 					<p>
 						<%= f.label :body %>
 						<%= f.text_area :body %>
-					</p>
-
-					<p>
-						<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
 					</p>
 
 					<p>

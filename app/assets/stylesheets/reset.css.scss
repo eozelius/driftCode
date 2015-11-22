@@ -61,6 +61,13 @@ table {
 }
 
 /* Ethan's resetStyleSheet */
+.clear-fix {
+	width: 100%;
+	height: 4px;
+	display: inline-block;
+	float: none;
+}
+
 li {
 	list-style-type: none;
 }
