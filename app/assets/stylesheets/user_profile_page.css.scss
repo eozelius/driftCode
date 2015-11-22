@@ -124,7 +124,7 @@ form.new_comment {
 }
 
 /* New Blib */
-div.profile-blog-titles {
+div.profile {
 	width: 37%;
 	float: right;
 	margin-left: 4%;
@@ -134,7 +134,23 @@ div.new-blib-container {
 	width: 92%;
 	padding: 2%;
 	background-color: #C2D9EB;
+	margin-bottom: 20px;
 }
+/* Edit User Profile */
+.profile-details-container {
+	width: 80%;
+	height: 400px;
+	border-top: 1px solid #552727;
+	border-left: 1px solid #552727;
+	padding: 3%;
+}
+
+.profile h4 {
+	width: 80%;
+}
+
+
+
 
 /* New Blib Form */
 #new_post {

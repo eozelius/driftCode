@@ -16,6 +16,10 @@
 
   </head>
   <body>
+    <% if Rails.env.development? && current_user %>
+      <p style="text-align:center">Logged in as: <%= current_user.email %></p>
+    <% end %>
+
     <% if flash.any? %>
       <% flash.each do |msgtype, msg| %>
         <div class="flash-messages flash-<%= msgtype %> col-lg-12 col-md-12 col-sm-12 col-xs-12">

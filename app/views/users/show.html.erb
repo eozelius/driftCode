@@ -25,14 +25,29 @@
 		<% else%>
 			<p style="text-align:center"><%= @user.name %> hasn't been anywhere yet.</p>
 		<% end %>
-	</div>
+	</div><!-- end where I've been -->
 
-	<div class="pro-part profile-blog-titles">
+	<div class="pro-part profile">
 		<% if user_is_home(@user) %>
 			<h4 class="page-title" style="border:none;">new blib</h4>
 			<div class="new-blib-container">
 				<%= render 'posts/form' %>
 			</div>
-		<% end %>
+		<% end %><!-- end create blib -->
+
+		<h4 class="page-title" style="border:none;"><%= @user.name %></h4>
+		<div class="profile-details-container">
+			<div class="profile-details">
+				<p><%= @user.name %></p>
+				<p>from: United States<%#= @user.from %></p>
+				<p>gps: Medellin, Colombia<%#= @user.gps %></p>
+
+				<% if user_is_home(@user) || admin_user %>
+					<p><%= @user.email %></p>
+					<a class="edit-anchor">edit</a><a> | </a><%= link_to 'delete', @user, method: :delete, data: { confirm: "Are you sure?" } %>
+				<% end %>
+			</div>
+		</div><!-- end profile info -->
+
 	</div>
 </div>	
