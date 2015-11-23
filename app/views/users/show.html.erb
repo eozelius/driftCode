@@ -38,16 +38,53 @@
 		<h4 class="page-title" style="border:none;"><%= @user.name %></h4>
 		<div class="profile-details-container">
 			<div class="profile-details">
-				<p><%= @user.name %></p>
-				<p>from: United States<%#= @user.from %></p>
-				<p>gps: Medellin, Colombia<%#= @user.gps %></p>
+				<%= image_tag @user.profile_pic, :class => 'pp' if @user.profile_pic %>
+				<div class="user-info">
+					<p><%= @user.name %></p>
+					<p>from: United States<%#= @user.from %></p>
+					<p>gps coordinates: Medellin, Colombia<%#= @user.gps %></p>
+					<% if user_is_home(@user) || admin_user %>
+						<p><%= @user.email %></p>
+						<p><a class="edit-user-anchor">edit</a><a> | </a><%= link_to 'delete', @user, method: :delete, data: { confirm: "Are you sure?" } %></p>
+					<% end %>
+				</div><div class="clear-fix"></div>
 
 				<% if user_is_home(@user) || admin_user %>
-					<p><%= @user.email %></p>
-					<a class="edit-anchor">edit</a><a> | </a><%= link_to 'delete', @user, method: :delete, data: { confirm: "Are you sure?" } %>
+					<div class="alter-user-container" style="display:none;">
+						<%= form_for @user, html: { multipart: true } do |f| %>
+							<p>
+								<%= f.label 'profile picture' %>
+								<%= f.file_field :profile_pic, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
+							</p>
+							<p>
+								<%= f.label :name %>
+								<%= f.text_field :name %>
+							</p>
+
+							<p>
+								<%= f.label :email %>
+								<%= f.text_field :email %>
+							</p>							
+
+							<p>
+								<%= f.label :password %>
+								<%= f.text_field :password %>
+							</p>
+
+							<p>
+								<%= f.label :password_confirmation %>
+								<%= f.text_field :password_confirmation %>
+							</p>
+
+
+							<p>
+								<span class="cancel-edit-user normal" style="float:right">cancel</span>
+								<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">done</button>
+							</p>
+						<% end %>
+					</div>
 				<% end %>
 			</div>
 		</div><!-- end profile info -->
-
 	</div>
 </div>	

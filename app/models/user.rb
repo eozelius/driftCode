@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 	has_many :posts, dependent: :destroy
 
 	# Class properties
+	mount_uploader :profile_pic, PictureUploader
 	attr_accessor :remember_token, :activation_token, :password_reset_token
 	before_save 	:downcase_email
 	before_create :create_activation_digest
@@ -14,6 +15,7 @@ class User < ActiveRecord::Base
 
 	has_secure_password
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+	validate  :picture_size
 
 	# Class Methods
 	def authenticated?(attribute, token)
@@ -24,6 +26,7 @@ class User < ActiveRecord::Base
 	end
 
 	# digests a password
+
 	def User.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
 																									BCrypt::Engine.cost
@@ -75,6 +78,12 @@ class User < ActiveRecord::Base
 		def create_activation_digest
 			self.activation_token  = User.new_token
 			self.activation_digest = User.digest( activation_token )
+		end
+
+		def picture_size
+			if profile_pic.size > 3.megabytes
+				errors.add(:picture, "Photo must be less than 5MB.")
+			end
 		end
 end
 

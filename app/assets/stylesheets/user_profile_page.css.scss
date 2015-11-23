@@ -138,15 +138,35 @@ div.new-blib-container {
 }
 /* Edit User Profile */
 .profile-details-container {
-	width: 80%;
-	height: 400px;
+	width: 95%;
+	height: 325px;
 	border-top: 1px solid #552727;
 	border-left: 1px solid #552727;
-	padding: 3%;
+	padding: 3% 0 3% 3%;
+	margin-right: 0;
+
+	.profile h4 {
+		width: 95%;
+	}
+
+	img.pp {
+		width: 200px;
+		height: 225px;
+		float: left;
+		margin-right: 5px;
+	}
+
+	.user-info p {
+		line-height: 30px;
+		&:first-child {
+			border-bottom: 1px solid #ADCDDB;
+			font-style: italic;
+		}
+	}
 }
 
-.profile h4 {
-	width: 80%;
+.form-open {
+	height: 620px;
 }
 
 
