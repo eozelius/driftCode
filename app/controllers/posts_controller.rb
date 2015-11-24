@@ -21,7 +21,7 @@ class PostsController < ApplicationController
 			flash[:success] = "blib successfully updated"
 			redirect_to @user
 		else
-			flash[:danger] = "Whoops! Something went wrong, please try again"
+			flash[:danger] = "whoops! Something went wrong, please try again"
 			redirect_to @user
 		end
 	end

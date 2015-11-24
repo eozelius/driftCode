@@ -32,7 +32,7 @@ class PasswordResetsController < ApplicationController
       flash[:success] = "Password reset successfully"
       redirect_to @user
     else
-      flash.now[:danger] = "Whoops something went gone, please try again."
+      flash.now[:danger] = "whoops, something went gone, please try again."
       render 'edit'
     end        
   end
@@ -49,7 +49,7 @@ class PasswordResetsController < ApplicationController
     def valid_user
       # if any of these fail, goto root
       if !@user || !@user.activated? || !@user.authenticated?(:reset, params[:id])
-        flash[:danger] = "Whoops something went wrong, please try again."
+        flash[:danger] = "whoops something went wrong, please try again."
         redirect_to root_url
       end
     end 

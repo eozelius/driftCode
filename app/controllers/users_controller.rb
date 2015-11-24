@@ -24,8 +24,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @post = @user.posts.build()
+    begin
+      @user = User.find(params[:id])
+      @post = @user.posts.build()
+    rescue
+      flash[:danger] = 'that user does not exist.'
+      redirect_to root_url
+    end
   end
 
   def edit
@@ -39,7 +44,7 @@ class UsersController < ApplicationController
       flash[:success] = "Save successful."
       redirect_to @user
     else
-      flash.now[:danger] = "Whoops! something went wrong, please try again."
+      flash.now[:danger] = "whoops! something went wrong, please try again."
       render 'edit'
     end
   end

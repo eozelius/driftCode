@@ -1,5 +1,5 @@
 /* Fonts */
-@import url(http://fonts.googleapis.com/css?family=Ubuntu|Roboto);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu|Roboto|Raleway);
 
 /* Color */
 $light-blue: #C2D9EB;
@@ -73,7 +73,7 @@ li {
 }
 
 h1,h2,h3,h4,h5,h6 {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Raleway', sans-serif;
 	color: $dark-maroon;
 }
 
@@ -109,7 +109,7 @@ h3.page-title {
 	margin-bottom: 15px;
 	padding-bottom: 10px;
 	border-bottom: 2px solid $light-blue;
-	font-style: italic;
+	text-align: left;
 }
 
 h4.page-title {

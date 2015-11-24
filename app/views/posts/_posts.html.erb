@@ -5,8 +5,8 @@
 				<div class="post-container" data-post-id="<%= post.id %>">
 					<%= image_tag post.picture.url if post.picture? %>
 					<div class="post-text-container">
-						<p class="page-title"><%= post.title %></h6>
-						<p><%= post.body %></p>
+						<p class="page-title"><%= post.title %></p>
+						<p class="page-body"><%= post.body %></p>
 					</div>
 
 					<% if admin_user && !current_user?(User.find(post.user_id)) %>

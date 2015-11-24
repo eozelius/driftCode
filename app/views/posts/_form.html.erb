@@ -1,6 +1,6 @@
 <% if @post.errors.any? %>
 	<div class="errors">
-		<p class="title">Whoops</p>
+		<p class="title">whoops</p>
 		<ul class="errors-list">
 			<% @post.errors.full_messages.each do |msg| %>
 				<li><p><%= msg %></p></li>

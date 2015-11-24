@@ -41,8 +41,8 @@
 				<%= image_tag @user.profile_pic, :class => 'pp' if @user.profile_pic %>
 				<div class="user-info">
 					<p><%= @user.name %></p>
-					<p>from: United States<%#= @user.from %></p>
-					<p>gps coordinates: Medellin, Colombia<%#= @user.gps %></p>
+					<p>from: <%= @user.from %></p>
+					<p>gps coordinates: <%= @user.gps %></p>
 					<% if user_is_home(@user) || admin_user %>
 						<p><%= @user.email %></p>
 						<p><a class="edit-user-anchor">edit</a><a> | </a><%= link_to 'delete', @user, method: :delete, data: { confirm: "Are you sure?" } %></p>
@@ -67,6 +67,16 @@
 							</p>							
 
 							<p>
+								<%= f.label :from, 'Where are you from?' %>
+								<%= f.text_field :from %>
+							</p>
+
+							<p>
+								<%= f.label :gps, 'Where are you currently?' %>
+								<%= f.text_field :gps %>
+							</p>
+						
+							<p>
 								<%= f.label :password %>
 								<%= f.text_field :password %>
 							</p>
@@ -76,10 +86,9 @@
 								<%= f.text_field :password_confirmation %>
 							</p>
 
-
 							<p>
-								<span class="cancel-edit-user normal" style="float:right">cancel</span>
 								<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">done</button>
+								<span class="cancel-edit-user normal" style="float:right">cancel</span>
 							</p>
 						<% end %>
 					</div>
