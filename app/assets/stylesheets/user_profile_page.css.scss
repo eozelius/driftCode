@@ -55,7 +55,7 @@ p.post-body {
 }
 
 .post-text-container {
-	min-height: 175px;
+	min-height: 250px;
 }
 
 div.post-container p.alter-post{
@@ -141,6 +141,11 @@ div.new-blib-container {
 			border-bottom: 1px solid #ADCDDB;
 			font-style: italic;
 		}
+	}
+
+	p.user-from,
+	p.user-gps {
+		color: #ccc;
 	}
 }
 

@@ -3,6 +3,7 @@ class PasswordResetsController < ApplicationController
   before_action	:valid_user,        only: [:edit, :update]
   before_action :check_expiration,  only: [:edit, :update]
   
+  # /forgot_password
   def new
   end
 
@@ -11,15 +12,15 @@ class PasswordResetsController < ApplicationController
   	if @user
   		@user.create_password_reset_digest
   		@user.send_password_reset_email
-  		message = "A password reset email has been send to #{@user.email}"
-  		flash[:info] = message
+  		flash[:info] = "A password reset email has been send to #{@user.email}"
   		redirect_to root_url
   	else
-  		flash[:danger] = "Email does not exist in database."
+  		flash[:danger] = "Email does not exist"
   		render 'new'
   	end
   end
 
+  # /reset_password
   def edit
   end
 
@@ -48,7 +49,7 @@ class PasswordResetsController < ApplicationController
 
     def valid_user
       # if any of these fail, goto root
-      if !@user || !@user.activated? || !@user.authenticated?(:reset, params[:id])
+      if !@user || !@user.authenticated?(:reset, params[:id])
         flash[:danger] = "whoops something went wrong, please try again."
         redirect_to root_url
       end

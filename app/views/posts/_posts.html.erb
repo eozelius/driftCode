@@ -25,8 +25,11 @@
 				<% if current_user?(User.find(post.user_id)) %>
 					<div class="alter-post-container" style="display:none;" >
 						<%= form_for post, action: 'posts/#{post.id}', html: { multipart: true }, method: :patch do |f| %>
-							<%= image_tag post.picture.url if post.picture? %>
-							<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
+							<% if post.picture? %>
+								<%= image_tag post.picture.url %>
+								<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
+							<% end %>
+
 							<p>
 								<%= f.label :title, :class => 'page-title' %>
 								<%= f.text_field :title %>	
@@ -36,6 +39,13 @@
 								<%= f.label :body %>
 								<%= f.text_area :body %>
 							</p>
+
+							<% if !post.picture? %>
+								<p>
+									<%= f.label :picture, 'upload image' %>
+									<%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png, image/jpg', :style => 'position:inherit' %>
+								</p>
+							<% end %>
 
 							<p>
 								<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">done</button>
