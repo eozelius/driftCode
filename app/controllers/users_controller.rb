@@ -2,10 +2,6 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update, :destroy]
 
-  def index
-    @users = User.all
-  end
-
   def new
   	@user = User.new
   end
@@ -31,10 +27,6 @@ class UsersController < ApplicationController
       flash[:danger] = 'that user does not exist.'
       redirect_to root_url
     end
-  end
-
-  def edit
-    @user = User.find(params[:id])
   end
 
   def update
@@ -63,16 +55,12 @@ class UsersController < ApplicationController
     # Confirms the correct user.
     def correct_user
       @user = User.find(params[:id])
+
       if current_user?(@user) || current_user.admin?
         return true
-      else 
+      else
         flash[:danger] = "You do not have permission to do that. wwjd?"
         redirect_to(root_path)
       end
-    end
-
-    # Confirms an admin user.
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
     end
 end
