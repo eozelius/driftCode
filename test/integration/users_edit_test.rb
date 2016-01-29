@@ -25,18 +25,33 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 	test "admins should be able to edit own info and user's info" do
 		get user_path(@admin)
 		assert_template 'users/show'
-		new_name   = 'new_ethan'
-		new_email = 'newe.ozelius@gmail.com'
+		new_admin_name 	=  'new_admin_ethan'
+		new_admin_email = 'new_admine.ozelius@gmail.com'
+		new_user_name   = 'new_user_ethan'
+		new_user_email = 'new_user_e.ozelius@gmail.com'
 
+		log_in_as(@admin)
 		patch user_path(@admin), user: {
-			name: new_name,
-			email: new_email,
+			name: new_admin_name,
+			email: new_admin_email,
 			password: '',
 			password_confirmation: ''
 		}
 
 		@admin.reload
-		assert_equal new_name, 	@admin.name
-		assert_equal new_email, @admin.email
+		assert_equal new_admin_name, 	@admin.name
+		assert_equal new_admin_email, @admin.email
+
+		patch user_path(@user), user: {
+			name: new_user_name,
+			email: new_user_email,
+			password: '',
+			password_confirmation: ''
+		}
+
+		@user.reload
+		assert_equal new_user_name,  @user.name
+		assert_equal new_user_email, @user.email
+	
 	end
 end

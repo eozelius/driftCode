@@ -3,6 +3,7 @@ require 'test_helper'
 class PostsControllerTest < ActionController::TestCase
  	def setup
     @post = posts(:middle_post)
+    @user = users(:irene)
   end
 
   test "should redirect create when not logged in" do
