@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-	has_many :posts, dependent: :destroy
+	has_many :posts, 		dependent: :destroy
+	has_many :drift_maps, dependent: :destroy
 
 	# Class properties
 	mount_uploader :profile_pic, PictureUploader
