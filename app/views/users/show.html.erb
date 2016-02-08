@@ -41,10 +41,17 @@
 				<%= image_tag @user.profile_pic, :class => 'pp' if @user.profile_pic %>
 				<div class="user-info">
 					<p><%= @user.name %></p>
-					<p class="user-from">from: </p>
-					<p><%= @user.from %></p>
-					<p class="user-gps">gps coordinates: </p>
-					<p><%= @user.gps %></p>
+					
+					<% if @user.from %>
+						<p class="user-from">from: </p>
+						<p><%= @user.from %></p>
+					<% end %>			
+
+					<% if @user.gps %>
+						<p class="user-gps">gps coordinates: </p>
+						<p><%= @user.gps %></p>
+					<% end %>
+					
 					<% if user_is_home(@user) || admin_user %>
 						<p><%= @user.email %></p>
 						<p><a class="edit-user-anchor">edit</a><a> | </a><%= link_to 'delete', @user, method: :delete, data: { confirm: "Are you sure?" } %></p>

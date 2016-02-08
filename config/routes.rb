@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
-  # todo 
-=begin
-  resources :users do 
-    resources :posts, only: [:create, :update, :destroy]
+  resources :users do
+    resources :driftmap
   end
-=end
-  resources :users
+
+
   resources :posts, only: [:create, :update, :destroy]
 
   get    'signup' => 'users#new'

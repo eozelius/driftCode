@@ -15,7 +15,5 @@
 //= require leaflet-src.js
 //= require leaflet-routing-machine.min.js
 //= require bootstrap.min.js
-//= require EditCreatePost.js
-//= require user_profile_page.js
 //= require turbolinks
 //= require_tree .
