@@ -5,9 +5,17 @@ class DriftmapController < ApplicationController
 	before_action :logged_in_user
 
 	def new
+		@user = current_user
+		@driftmap = Map.new
 	end
 
 	def create
+		user = current_user
+		redirect_to user
+
+
+
+
 	end
 
 	def edit
