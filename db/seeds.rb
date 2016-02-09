@@ -9,7 +9,7 @@ if Rails.env.production?
               admin: true )
 end
 
-if Rails.env.development?
+if Rails.env.development? || Rails.env.test?
   76.times do |n|
     name  = "Simon Heizen-#{n+1}"
     email = "SHeizen-#{n+1}@gubenheimen.org"

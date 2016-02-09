@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	before_action :logged_in_user,	only: [:create,  :destroy]
+	before_action :logged_in_user,	only: [:create,  :update, :destroy]
 	before_action :correct_user, 		only: [:destroy, :update]
 
 	# ror_tut version
@@ -48,16 +48,4 @@ class PostsController < ApplicationController
 				redirect_to root_url				
 			end
 		end
-
-=begin # dead code I want to keep 11/9/2015
-		# Returns true is current_user is an admin
-		def admin_user
-			if !current_user
-				redirect_to(root_url)
-				return false
-			elsif current_user.admin == true
-				return true
-			end
-		end
-=end
 end

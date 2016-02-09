@@ -2,19 +2,34 @@
 
 <h3 class="page-title"><%= @user.name %></h3>
 <div class="map-container">
-	<div id="profile-map"></div>
+	<% if @user.map.nil? %>
+		<div class="starter-globe">
+			<%= image_tag('globe_' + rand(4).to_s + '.jpg') %>
+		</div>
 
-	<script>
-		var map = L.map('profile-map').setView([40.73527, -73.89], 12);
+		<div class="start-journey-container">
+			<%= link_to new_user_driftmap_path(@user) do %>
+				<button class="normal start-journey"><p>start journey</p></button>
+			<% end %>
+		</div>
 
-		// TODO make this API key a Server environment variable
-		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-	    maxZoom: 18,
-	    id: 'eozelius77.j4hekake',
-	    accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
-		}).addTo(map);
-	</script>
+
+
+	<% else %>
+		<div id="profile-map"></div>
+
+		<script>
+			var map = L.map('profile-map').setView([40.73527, -73.89], 12);
+
+			// TODO make this API key a Server environment variable
+			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		    maxZoom: 18,
+		    id: 'eozelius77.j4hekake',
+		    accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
+			}).addTo(map);
+		</script>
+	<% end %>
 </div><!-- End Map -->
 
 <div id="pro-parts-container">

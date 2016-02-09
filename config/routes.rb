@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users do
-    resources :driftmap
+    resources :driftmap, only: [:new, :create, :edit, :update, :destroy]
   end
 
 

@@ -1,15 +1,3 @@
-div.map-container {
-	padding-bottom: 15px;
-	border-bottom: 2px solid #C2D9EB;
-}
-
-#profile-map {
-	width: 92%;
-	height: 455px;
-	margin: 0 auto;
-	padding-bottom: 3%;
-}
-
 div.pro-part {
 	min-height: 400px;
 	margin-bottom: 55px;
@@ -27,6 +15,67 @@ div.total-posts-container {
 div.profile-photos {
 
 }
+
+/* Maps */
+div.map-container {
+	padding-bottom: 15px;
+	border-bottom: 2px solid #C2D9EB;
+	height: 400px;
+}
+
+#profile-map {
+	width: 92%;
+	height: 455px;
+	margin: 0 auto;
+	padding-bottom: 3%;
+}
+
+div.starter-globe {
+	margin-left: -2%;
+}
+
+.starter-globe img {
+	width: 97%;
+	height: 600px;
+	z-index: -1;
+	position: absolute;
+	top: 25%;
+	left: 3%;
+}
+
+.start-journey-container {
+	width: 100%;
+	display: block;
+	margin-top: 20%;
+}
+
+.start-journey-container button.start-journey {
+	display: block;
+	float: none;
+	margin: 0 auto;
+	width: 250px;
+	height: 50px;
+	border: 4px solid #C2D9EB;
+}
+
+.start-journey-container button.start-journey:hover {
+	background: none;
+}
+
+.start-journey p {
+	font-size: 2em;
+	font-weight: bold;
+	color: #552727;
+	text-align: center;
+}
+
+.start-journey p:hover {
+	color: #fff;
+
+}
+
+
+
 
 /* posts */
 div.post-container {
