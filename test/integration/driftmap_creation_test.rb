@@ -7,7 +7,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
 		barack = users(:barack)
 		irene  = users(:irene)
 		get user_path(barack)
-		assert_select 'div#profile-map'
+		assert_response :success		
 
 		# Not logged in, no privledges
 		get new_user_driftmap_path(barack)
