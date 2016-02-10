@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   def show
     begin
       @user = User.find(params[:id])
+      @driftmap = @user.map
       @post = @user.posts.build()
     rescue
       flash[:danger] = 'that user does not exist.'

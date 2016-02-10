@@ -3,7 +3,6 @@
 <h3 class="page-title">create new driftMap</h3>
 
 <div class="create-map-container">
-	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 		<div id='map'></div>
 			<script type="text/javascript">
 				var x = 40.735;
@@ -35,20 +34,6 @@
 
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 	<div class="create-map-container">
-		<%= form_for [@user, @driftmap], url: user_driftmap_index_path do |f| %>
-			<p>
-				<%= f.label 'map title', :class => 'page-title' %>
-				<%= f.text_field :title %>
-			</p>	
-
-			<p>
-				<%= f.label 'map description', :class => 'page-title' %>
-				<%= f.text_area :body %>					
-			</p>
-
-			<p>
-				<button type ="submit" class="normal">create map</button>
-			</p>
-		<% end %>
+		<%= render 'form' %>
 	</div>
 </div>

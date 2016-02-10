@@ -3,6 +3,7 @@ include ApplicationHelper
 class DriftmapController < ApplicationController
 	before_action :driftmap_correct_user
 	before_action :logged_in_user
+	before_action :has_map, only: :new
 
 	def new
 		@user = current_user
@@ -10,15 +11,20 @@ class DriftmapController < ApplicationController
 	end
 
 	def create
-		user = current_user
-		redirect_to user
-
-
-
-
+		@driftmap = Map.create(map_params)
+		@driftmap.user_id = current_user.id
+		if @driftmap.valid?
+			current_user.map = @driftmap
+			flash[:success]  = "driftMap successfully created"
+			redirect_to current_user
+		else
+			flash[:danger] = "whoops, something went gone, please try again."
+			render 'new'
+		end
 	end
 
 	def edit
+		@driftmap = current_user.map
 	end
 
 	def update
@@ -28,8 +34,15 @@ class DriftmapController < ApplicationController
 	end
 
 	private
-		def post_params
-			params.require(:driftmap).permmit(:title, :body, :driftmapjson)
+		def map_params
+			params.require(:map).permit(:title, :body, :driftmapjson)
+		end
+
+		def has_map
+			unless current_user.map.nil?
+				flash[:info] = "You are allowed only one driftMap"
+				redirect_to current_user
+			end
 		end
 
 		def driftmap_correct_user
@@ -40,8 +53,8 @@ class DriftmapController < ApplicationController
 			if user && user == current_user
 				return true
 			else
+				flash[:danger] = "you do not have permission do that.  wwjd?"
 				redirect_to root_url
-				flash.now[:danger] = "you do not have permission do that.  wwjd?"
 			end
 		end
 end
