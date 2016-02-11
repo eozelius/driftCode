@@ -8,49 +8,50 @@
 		</ul>
 	</div>	
 <% end %>
-<div class="container">
-	<p class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<label class="page-title">Title</label>
-		<input type="text" for="driftmap-title">
-	</p>
 
-	<p class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<label class="page-title">Description</label>
-		<input type="text" for="driftmap-description">
-	</p>
-	<button type ="submit" class="normal">create map</button>
+<div class="instructions-container container">
+	<p class="instructions">give your map a beautiful new name</p>
+		<button type ="next" class="next-step normal">next</button>
+
+	<div class="current-step col-lg-5 col-md-5 col-sm-12 col-xs-12">
+		<p class="create-map-title">
+			<label>Title</label>
+			<input type="text" for="driftmap-title" />
+		</p>
+	</div>
 </div>
 
-<div class="map-container">
+
+<div class="create-map-container">
 	<div id='map'></div>
-		<script type="text/javascript">
-			var x = 40.735;
-			var y = -73.890;
-			var map;
 
-			if(navigator.geolocation){
-				navigator.geolocation.getCurrentPosition(function(pos){
-					x = pos.coords.latitude.toFixed(3);
-					y = pos.coords.longitude.toFixed(3);
-					map = L.map('map').setView([x, y], 14);
-					// TODO make this API key a Server environment variable
-					L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
-						{
-				    	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-				    	maxZoom: 18,
-				    	id: 'eozelius77.j4hekake',
-				    	accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
-						}).addTo(map);
+	<script type="text/javascript">
+		var x = 40.735;
+		var y = -73.890;
+		var map;
 
-					L.marker([x, y]).addTo(map);
-				});
-			} else {
-				map = initMap(x, y, 12, false);
-			}
+		if(navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(function(pos){
+				x = pos.coords.latitude.toFixed(3);
+				y = pos.coords.longitude.toFixed(3);
+				map = L.map('map').setView([x, y], 14);
+				// TODO make this API key a Server environment variable
+				L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
+					{
+			    	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			    	maxZoom: 18,
+			    	id: 'eozelius77.j4hekake',
+			    	accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
+					}).addTo(map);
+
+				L.marker([x, y]).addTo(map);
+			});
+		} else {
+			map = initMap(x, y, 12, false);
+		}
 	</script>
-</div><!-- End Map -->
 
-<p>end map</p>
+</div><!-- End Map -->
 
 
 <% if false %>

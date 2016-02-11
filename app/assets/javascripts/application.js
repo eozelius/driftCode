@@ -15,5 +15,6 @@
 //= require leaflet-src.js
 //= require leaflet-routing-machine.min.js
 //= require bootstrap.min.js
+//= require driftmap.js
 //= require turbolinks
 //= require_tree .
