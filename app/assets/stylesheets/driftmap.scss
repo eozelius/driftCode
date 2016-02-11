@@ -19,12 +19,14 @@
 .create-map-container button.next-step {
 	display: inline;
 	font-size: 1.1em !important;
-	margin-top: 20px;
+	position: relative;
+	top: 53px;
+	float: left;
+	margin: 0;
 }
 
 /* instructions */
 div.instructions-container {
-	height: 100px;
 	margin: 1% 1% 1% 3%;
 }
 
@@ -33,7 +35,15 @@ p.instructions {
 	color: #ADCDDB;
 }
 
-.current-step {
-	margin: 10px 0;
+#driftmap-body {
+	height: 60px;
+}
+
+.step {
+	height: 100px;
+}
+
+.create-step-2 {
+	height: 130px;
 }
 
