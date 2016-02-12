@@ -42,17 +42,37 @@ var next_step = function(step) {
     	console.log("zoom: " + zoom)
     	driftMapForm.initPt = initCenter;
     	driftMapForm.initZoom = zoom;
+
+    	createDriftMapjson(driftMapForm);
+
+
     	$('.create-step-3').remove();
     	$('.create-step-4').slideDown();
     	break;
 
-    case 4:
-    	
-
-
-
-
     default:
     	return;
 	}
+}
+
+var createDriftMapjson = function(form){
+	// error checking
+
+	$.ajax({
+		type: 'post',
+		url: '/api/create_driftmap',
+		dataType: 'json',
+		data: {
+			user_id: $('#user_id').val(),
+			map: JSON.stringify(driftMapForm)
+		},
+		complete: function(response){
+			console.log(JSON.stringify(response));
+		}
+	});
+
+
+
+
+
 }

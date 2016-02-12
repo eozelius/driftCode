@@ -47,10 +47,10 @@ class DriftmapController < ApplicationController
 
 		def driftmap_correct_user
 			return false if current_user.nil?
-			return true if current_user.admin?
+			return true  if current_user.admin?
 
 			user = User.find(params[:user_id])
-			if user && user == current_user
+			if user.valid? && user == current_user
 				return true
 			else
 				flash[:danger] = "you do not have permission do that.  wwjd?"
