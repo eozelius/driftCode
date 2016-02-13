@@ -12,10 +12,6 @@ Rails.application.routes.draw do
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  # API requests
-  post 'api/create_driftmap' => 'api#create_driftmap'
-
-
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
 end
