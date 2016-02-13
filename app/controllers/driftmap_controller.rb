@@ -10,17 +10,58 @@ class DriftmapController < ApplicationController
 		@driftmap = Map.new
 	end
 
+=begin
+	{
+		"form"=>"{
+			\"user_id\":\"77\",
+			\"map_title\":\"asdafasdff\",
+			\"map_description\":\"asdfa\",
+
+			\"driftmapjson=>{
+				\"initZoom\":14
+		
+				\"initPt\":{
+					\"lat\":6.245,
+					\"lng\":-75.592
+				},
+			},
+		}", 
+		"controller"=>"driftmap", 
+		"action"=>"create", 
+		"user_id"=>"77"
+	}
+=end
+
+
 	def create
-		@driftmap = Map.create(map_params)
-		@driftmap.user_id = current_user.id
-		if @driftmap.valid?
-			current_user.map = @driftmap
+		form = JSON.parse(params[:form])
+		driftmap = Map.create(title:   form["map_title"], 
+										 			body:    form["map_description"],
+													user_id: form["user_id"],
+										 			map: 		 form["driftmapjson"] )
+		if driftmap.valid?
+			current_user.map = driftmap
 			flash[:success]  = "driftMap successfully created"
-			redirect_to current_user
+
+			respond_to do |format|
+			  format.json do
+			    render json: {
+			      status: 'success',
+			      redirct_url: user_path(current_user)
+			    }.to_json
+			  end
+			end
 		else
-			flash[:danger] = "whoops, something went gone, please try again."
-			render 'new'
-		end
+			flash.now[:danger] = "Whoops, something went wrong, please try again"
+			respond_to do |format|
+			  format.json do
+			    render json: {
+			      status: 'fail',
+			      errors: driftmap.errors.full_messages.to_json
+			    }.to_json
+			  end
+			end
+		end			
 	end
 
 	def edit

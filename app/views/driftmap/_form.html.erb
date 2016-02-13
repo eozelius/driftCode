@@ -88,22 +88,3 @@
 	</script>
 
 </div><!-- End Map -->
-
-
-<% if false %>
-	<%= form_for [@user, @driftmap], url: user_driftmap_index_path do |f| %>
-		<p>
-			<%= f.label 'map title', :class => 'page-title' %>
-			<%= f.text_field :title %>
-		</p>	
-
-		<p>
-			<%= f.label 'map description', :class => 'page-title' %>
-			<%= f.text_area :body %>					
-		</p>
-
-		<p>
-			<button type ="submit" class="normal">create map</button>
-		</p>
-	<% end %>
-<% end %>

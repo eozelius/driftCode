@@ -3,7 +3,7 @@ class CreateMaps < ActiveRecord::Migration
     create_table :maps do |t|
       t.string :title
       t.text :body
-      t.text :map
+      #t.text :driftmapjson
       t.references :user, index: true, foreign_key: true
 
       t.timestamps null: false

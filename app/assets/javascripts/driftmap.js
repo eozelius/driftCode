@@ -8,7 +8,14 @@ $(document).ready(function(){
 	});
 });
 
-var driftMapForm = {}
+var driftMapForm = {
+    title: undefined,
+    body: undefined,
+    driftmapjson: {
+        initPt: [0,0],
+        initZoom: 12
+    }
+}
 
 /*
 	todo: turn all the hiding/showing into a function;
@@ -17,19 +24,17 @@ var driftMapForm = {}
 var next_step = function(step) {
 	switch(step) {
     case 1:
+        driftMapForm.user_id = $('#user_id').val()
     	// Set form properties
     	var title = $('#driftmap-title').val();
-    	console.log("title: " + title);
     	driftMapForm.map_title = title;
-    	// remove instructions
+    	// remove and show instructions
     	$('.create-step-1').remove();
-    	// add next instructions
     	$('.create-step-2').slideDown();
     	break;
     
     case 2:
     	var description = $('#driftmap-body').val();
-    	console.log("description: " + description)
     	driftMapForm.map_description = description;
     	$('.create-step-2').remove();
     	$('.create-step-3').slideDown();
@@ -38,13 +43,10 @@ var next_step = function(step) {
     case 3:
     	var zoom = map.getZoom();
     	var initCenter = map.getCenter();
-    	console.log("init: " + JSON.stringify(initCenter));
-    	console.log("zoom: " + zoom)
-    	driftMapForm.initPt = initCenter;
-    	driftMapForm.initZoom = zoom;
+    	driftMapForm.driftmapjson.initPt = initCenter;
+    	driftMapForm.driftmapjson.initZoom = zoom;
 
     	createDriftMapjson(driftMapForm);
-
 
     	$('.create-step-3').remove();
     	$('.create-step-4').slideDown();
@@ -57,22 +59,51 @@ var next_step = function(step) {
 
 var createDriftMapjson = function(form){
 	// error checking
+    var url = '/users/'+ form.user_id +'/driftmap'
 
 	$.ajax({
 		type: 'post',
-		url: '/api/create_driftmap',
+		url: url,
 		dataType: 'json',
 		data: {
-			user_id: $('#user_id').val(),
-			map: JSON.stringify(driftMapForm)
+			form: JSON.stringify(driftMapForm)
 		},
-		complete: function(response){
-			console.log(JSON.stringify(response));
+    complete: function(response){
+      // Success
+      if(response.responseJSON.status == 'success'){
+        location.href = response.responseJSON.redirct_url;
+      }
+      
+      // Error
+      if(response.responseJSON.status == 'fail'){
+
+      }
 		}
 	});
-
-
-
-
-
 }
+
+
+/*driftMapForm = {
+    user_id: 77,
+    title: 'asdf',
+    body: 'asdfasdafasdfasd',
+    initPt: [22, 53.212],
+    initZoom: 14
+}*/
+
+/* response = {
+        "readyState":4,
+        "statusText":"OK"
+        "status":200,
+      
+        "responseText":"{
+          \"status\":\"success\",
+          \"redirct_url\":\"/users/77\"
+        }",
+      
+        "responseJSON":{
+          "status":"success",
+          "redirct_url":"/users/77"
+        },
+      }
+      */
