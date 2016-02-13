@@ -10,35 +10,11 @@ class DriftmapController < ApplicationController
 		@driftmap = Map.new
 	end
 
-=begin
-	{
-		"form"=>"{
-			\"user_id\":\"77\",
-			\"map_title\":\"asdafasdff\",
-			\"map_description\":\"asdfa\",
-
-			\"driftmapjson=>{
-				\"initZoom\":14
-		
-				\"initPt\":{
-					\"lat\":6.245,
-					\"lng\":-75.592
-				},
-			},
-		}", 
-		"controller"=>"driftmap", 
-		"action"=>"create", 
-		"user_id"=>"77"
-	}
-=end
-
-
 	def create
-		form = JSON.parse(params[:form])
-		driftmap = Map.create(title:   form["map_title"], 
-										 			body:    form["map_description"],
-													user_id: form["user_id"],
-										 			map: 		 form["driftmapjson"] )
+		driftmap = Map.create(title: 	 			params[:title], 
+							  					body:  	 			params[:body],
+													user_id: 			params[:user_id],
+										 			driftmapjson: params[:geojson] )
 		if driftmap.valid?
 			current_user.map = driftmap
 			flash[:success]  = "driftMap successfully created"

@@ -20,14 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    begin
-      @user = User.find(params[:id])
-      @driftmap = @user.map
-      @post = @user.posts.build()
-    rescue
-      flash[:danger] = 'that user does not exist.'
-      redirect_to root_url
-    end
+    @user = User.find(params[:id])
   end
 
   def update

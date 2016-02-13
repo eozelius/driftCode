@@ -14,16 +14,65 @@
 		</div>
 
 	<% else %>
-		<div id="profile-map"></div>
-		<h5>User map goes here.</h5>
+		<div id="profile-map">
+
+		<p><%= @user.map.driftmapjson %></p>
+
+		<input type="hidden" id="driftmapjson" value="<%= @user.map.driftmapjson %>"></input>
+
+
+		<script type="text/javascript">
+			var myJson = JSON.parse( $('#driftmapjson').val());
+
+			console.log("parse: " + JSON.stringify(myJson));
+
+			console.log("zoom: " + myJson.initZoom);
+			console.log("x: " + myJson.initPt.lat);
+			console.log("y: " + myJson.initPt.lng);
+
+
+			// {"initPt":{"lat":6.245,"lng":-75.592},"initZoom":14}
+
+			var x = 0;// = <#%= @driftmap.driftmap.initPt[0] %>;
+			var y = 0;// = <#%= @driftmap.driftmap.initPt[1] %>;
+			var map;
+
+			if(navigator.geolocation){
+				navigator.geolocation.getCurrentPosition(function(pos){
+					x = pos.coords.latitude.toFixed(3);
+					y = pos.coords.longitude.toFixed(3);
+					map = L.map('map').setView([x, y], 14);
+					// TODO make this API key a Server environment variable
+					L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
+						{
+				    	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+				    	maxZoom: 18,
+				    	id: 'eozelius77.j4hekake',
+				    	accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
+						}).addTo(map);
+
+					L.marker([x, y]).addTo(map);
+				});
+			} else {
+				map = initMap(x, y, 12, false);
+			}
+		</script>
+
+
+
+
+
+			
+			
+		</div>
 		
 	<% end %>
 </div><!-- End Map -->
 
 <% if @user.map != nil %>
-	<%= link_to edit_user_driftmap_path(@user, @driftmap) do %>
+	<%#= link_to edit_user_driftmap_path(@user, @driftmap) do %>
 		<p>Edit map</p>
-	<% end %>		
+	<%# end %>		
 <% end %>
 
 <div id="pro-parts-container">

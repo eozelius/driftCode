@@ -24,7 +24,6 @@ var driftMapForm = {
 var next_step = function(step) {
 	switch(step) {
     case 1:
-        driftMapForm.user_id = $('#user_id').val()
     	// Set form properties
     	var title = $('#driftmap-title').val();
     	driftMapForm.map_title = title;
@@ -57,16 +56,25 @@ var next_step = function(step) {
 	}
 }
 
-var createDriftMapjson = function(form){
+var createDriftMapjson = function(myDriftMapForm){
+  var user_id = $('#user_id').val();
+
 	// error checking
-    var url = '/users/'+ form.user_id +'/driftmap'
+  var url = '/users/'+ user_id +'/driftmap';
+  console.log("myDriftMapForm: " + JSON.stringify(myDriftMapForm));
+
+  geojson_string = JSON.stringify(myDriftMapForm.driftmapjson);
+  window.geojson_string = geojson_string;
 
 	$.ajax({
 		type: 'post',
 		url: url,
 		dataType: 'json',
 		data: {
-			form: JSON.stringify(driftMapForm)
+      user_id: user_id,
+      title:   myDriftMapForm.map_title,
+      body:    myDriftMapForm.map_description,
+			geojson: geojson_string
 		},
     complete: function(response){
       // Success
