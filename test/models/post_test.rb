@@ -32,13 +32,4 @@ class PostTest < ActiveSupport::TestCase
 			@user.destroy
 		end
 	end
-
-	test "Maps should be destroyed when user who created post is destoryed" do
-    @user.save
-    myMap = Map.create(title: 'title', body: 'body', user_id: @user.id)
-    @user.map = myMap
-    assert_difference 'Map.count', -1 do
-    	@user.destroy
-    end
-  end
 end

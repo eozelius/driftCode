@@ -2,7 +2,7 @@
 
 <h3 class="page-title"><%= @user.name %></h3>
 <div class="map-container">
-	<% if @user.map.nil? %>
+	<% if @user.driftmap? %>
 		<div class="starter-globe">
 			<%= image_tag('globe_' + rand(4).to_s + '.jpg') %>
 		</div>
@@ -16,13 +16,8 @@
 	<% else %>
 		<div id="profile-map">
 
-		<p><%= @user.map.driftmapjson %></p>
-
-		<input type="hidden" id="driftmapjson" value="<%= @user.map.driftmapjson %>"></input>
-
-
 		<script type="text/javascript">
-			var myJson = JSON.parse( $('#driftmapjson').val());
+/*			var myJson = JSON.parse( $('#driftmapjson').val());
 
 			console.log("parse: " + JSON.stringify(myJson));
 
@@ -55,7 +50,7 @@
 				});
 			} else {
 				map = initMap(x, y, 12, false);
-			}
+			}*/
 		</script>
 
 
@@ -69,7 +64,7 @@
 	<% end %>
 </div><!-- End Map -->
 
-<% if @user.map != nil %>
+<% if @user.driftmap != nil && false %>
 	<%#= link_to edit_user_driftmap_path(@user, @driftmap) do %>
 		<p>Edit map</p>
 	<%# end %>		
