@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 	before_save 	:downcase_email
 	before_create :create_activation_digest
 
+	validates :driftmap, :length => { maximum: 999999999 } # max number chars in sqlite3 DB
 	validates :name, :presence => true, :length => { minimum: 2, maximum: 55 }
 	
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -106,3 +107,40 @@ end
   # => activated_at: \"2015-11-06 23:32:13\", 
   # => reset_digest: nil, 
   # => reset_sent_at: nil>"
+
+
+=begin
+  driftmapjson: {
+		name: 'my drift map',
+		init: [40.735, -73.890],
+		zoom: 18,
+
+		markers: [
+			{
+				title: 'medelling colombia',
+				body: 'This place is dope',
+				pictures: [img1.jpg, img2.jpg],
+			},
+			{
+				title: 'new york, new york',
+				body: 'This place is home',
+				pictures: [img3.jpg, img4.jpg]
+			}
+		],
+
+		routes: [
+			{
+				title: 'New york to colombia',
+				type: 'plane',
+				start: [xx.xx, xx.xx],
+				finish: [xx.xx, xx.xx]
+			},
+			{
+				title: 'Colombia to london',
+				type: 'boat',
+				start: [xx.xx, xx.xx],
+				finish: [xx.xx, xx.xx]
+			}
+		]
+	}
+=end
