@@ -20,7 +20,7 @@ div.profile-photos {
 div.map-container {
 	padding-bottom: 15px;
 	border-bottom: 2px solid #C2D9EB;
-	height: 435px;
+	height: 500px;
 }
 
 #profile-map {
@@ -111,38 +111,23 @@ div.post-container p.alter-post{
 	text-align: right; 
 }
 
-/* Alter existing Blib form */
-.alter-post-container {
-	width: 95%;
+/* :new */
+.create-map-container {
 	height: 650px;
-	background-color: #C2D9EB;
-	margin: 0 auto;
-	padding: 2% 1%;
-
-	#post_title {
-		width: 40%;
-		float: right;
-	}
-
-	#post_body {
-		width: 100%;
-		height: 271px;
-		overflow-y: scroll;
-	}
-	
-	#post_picture {
-		position: relative;
-		top: 200px;
-		right: 371px;
-		color: #C2D9EB;
-	}
 }
 
-#post_body,
-#post_title {
-	width: 100%;
+.create-map-container .create-map-title {
+	margin: 10px 0 15px 0;
 }
 
+.create-map-container .create-map-title input {
+	margin: 0 0 5px 0;
+}
+
+.next-container {
+	width: 250px;
+	margin: 4%;
+}
 
 /* Aside */
 #postMap {
@@ -202,6 +187,15 @@ div.new-blib-container {
 	height: 620px;
 }
 
+/* Signup form */
+/* now/later buttons */
+.step-2-slide span {
+	margin: 20% 0;
+}
+
+#now-later-container {
+	margin-left: 0; 
+}
 
 
 
@@ -212,6 +206,9 @@ div.new-blib-container {
 
 a.edit-anchor {
 	cursor: pointer;
+
+
+
 }
 
 /* Color 

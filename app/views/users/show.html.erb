@@ -8,7 +8,7 @@
 		</div>
 
 		<div class="start-journey-container">
-			<%= link_to new_user_driftmap_path(@user) do %>
+			<%= link_to '/driftmap/new' do %>
 				<button class="normal start-journey"><p>start journey</p></button>
 			<% end %>
 		</div>
@@ -22,6 +22,10 @@
 			init_driftmap('profile-map', driftmap);
 
 		</script>
+
+		<%= link_to '/driftmap/edit' do %>
+			<button class="normal start-journey"><p>start journey</p></button>
+		<% end %>
 
 		</div>
 		

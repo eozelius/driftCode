@@ -1,135 +1,106 @@
 <div class="flash-container hidden"></div>
 
-<h3 class="page-title">Welcome to the crew</h3>
+<h3 class="page-title">welcome to the driftCode</h3>
 
 <div class="signup-container">
 	<%= form_for(@user) do |f| %>
-		<div class="signup-text">
-			<% if @user.errors.any? %>
-				<div class="errors">
-					<p class="title">whoops</p>
-					<ul class="errors-list">
-						<% @user.errors.full_messages.each do |msg| %>
-							<li><p><%= msg %></p></li>
-						<% end %>
-					</ul>
-				</div>	
-			<% end %>			
-			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-				<p>
-					<label for="user_name">Name</label>
-					<input type="text" name="user[name]" id="user_name">
-				</p>	
+		<!-- STEP 1 -->
+	  <div class="step-1-slide signup-text">
+	    <% if @user.errors.any? %>
+	      <div class="errors">
+	        <p class="title">whoops</p>
+	        <ul class="errors-list">
+	          <% @user.errors.full_messages.each do |msg| %>
+	            <li><p><%= msg %></p></li>
+	          <% end %>
+	        </ul>
+	      </div>  
+	    <% end %>
+	    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+	      <p>
+	        <label for="user_name">Name</label>
+	        <input type="text" name="user[name]" id="user_name">
+	      </p>  
 
-				<p>
-					<label for="user_email">Email</label>
-					<input type="text" name="user[email]" id="user_email">
-				</p>
+	      <p>
+	        <label for="user_email">Email</label>
+	        <input type="text" name="user[email]" id="user_email">
+	      </p>
 
-				<p>
-					<label for="user_password">Password</label>
-					<input type="text" name="user[password]" id="user_password">
-				</p>
+	      <p>
+	        <label for="user_password">Password</label>
+	        <input type="text" name="user[password]" id="user_password">
+	      </p>
 
-				<p>
-					<label for="user_password_confirmation">Password confirmation</label>
-					<input type="text" name="user[password_confirmation]" id="user_password_confirmation">
-				</p>
-			</div><!-- end left-hand text -->
+	      <p>
+	        <label for="user_password_confirmation">Password confirmation</label>
+	        <input type="text" name="user[password_confirmation]" id="user_password_confirmation">
+	      </p>
+	    </div><!-- end left-hand text -->
 
-			<div class="col-lg-5 col-md-5">
-				<p>
-					<%= f.label :from, 'Where are you from?' %>
-					<%= f.text_field :from %>
-				</p>
+	    <div class="col-lg-5 col-md-5">
+	      <p>
+	        <%= f.label :from, 'Where are you from?' %>
+	        <%= f.text_field :from %>
+	      </p>
 
-				<p>
-					<%= f.label :gps, 'Where are you currently?' %>
-					<%= f.text_field :gps %>
-				</p>
+	      <p>
+	        <%= f.label :gps, 'Where are you currently?' %>
+	        <%= f.text_field :gps %>
+	      </p>
 
-				<p>
-					<%= f.label 'profile picture' %>
-					<%= f.file_field :profile_pic, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
-				</p>
-				
-				<p>
-					<span class="normal submit-signup-text" >submit</span>
-				</p>
-			</div>
-		</div>
+	      <p>
+	        <%= f.label 'profile picture' %>
+	        <%= f.file_field :profile_pic, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
+	      </p>
+	      
+	    </div>
+	    <p class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+	      <span class="normal next-signup-text" >next</span>
+	    </p>
+	  </div>
 
-		<div class="signup-driftmap" style="display: none;">
-			<input type="hidden" id="driftmap" name="user[driftmap]" />
+	  <!-- STEP 2 -->
+	  <div class="step-2-slide hidden container" id="now-later-container">
+	  	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">	
+	    	<span class="now normal">let's go</span>
+	    </div>
+	    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+	    	<span class="later normal">later</span>
+    	</div>
+	  </div>
 
-			<div class="instructions-container container">
-				<!-- Step 1 Title -->
-				<div class="step create-step-1 col-lg-7 col-md-7 col-sm-12 col-xs-12">
-					<p class="instructions">give your map a beautiful new name</p>
-					<p class="instructions-title">
-						<input type="text" id="driftmap-title" />
-					</p>
-				</div>
+	  <!-- create map NOW -->
+	  <div class="step-3-slide hidden" id="now-map-container">
+		  <div class="drift-map-instructions">
+		    <input type="hidden" id="driftmap" name="user[driftmap]" />
 
-				<!-- Step 2 descriptioin -->
-				<div class="step create-step-2 col-lg-7 col-md-7 col-sm-12 col-xs-12" style="display:none">
-					<p class="instructions">write a description for your driftMap</p>
-					<p class="instructions-title">
-						<textarea id="driftmap-body"></textarea>
-					</p>
-				</div>
+		    <div class="instructions-container container">
+		      <!-- Create-Step 1 Title -->
+		      <div class="step create-step-1 col-lg-7 col-md-7 col-sm-12 col-xs-12">
+		        <input type="text" id="driftmap-title" />
+		      </div>
 
-				<!-- Step 3 Init -->
-				<div class="step create-step-3 col-lg-7 col-md-7 col-sm-12 col-xs-12" style="display:none">
-					<h4 class="page-title instructions" style="text-align:left;border:none">starting location</h4>
-					<p class="instructions-title">Drag your map to where you would like to like to begin - click next when satisfied
-					</p>
-				</div>
+		      <!-- Create-Step 2 descriptioin -->
+		      <div class="create-step-2 hidden col-lg-7 col-md-7 col-sm-12 col-xs-12">
+		        <textarea id="driftmap-body"></textarea>
+		      </div>
 
-				<!-- Step 4 Markers -->
-			<!-- 	<div class="step create-step-3 col-lg-7 col-md-7 col-sm-12 col-xs-12" style="display:none">
-					<h4 class="page-title instructions" style="text-align:left;border:none">starting location</h4>
-					<p class="instructions-title">Drag your map to where you would like to like to begin - click next when satisfied
-					</p>
-				</div>
-			 -->
+		      <!-- Create-Step 3 Init -->
+		      <div class="create-step-3 hidden col-lg-7 col-md-7 col-sm-12 col-xs-12">
+		        <p class="instructions-title">Drag your map to where you would like to like to begin - click next when satisfied
+		        </p>
+		      </div>
 
-				<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-					<span type ="next" class="next-step normal">next</span>
-				</div>
-			</div>
+		      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+		        <span type ="next" class="create-next-step normal">next</span>
+		      </div>
+		    </div>
+		  </div>
 
-			<div class="create-map-container">
-				<div id='map'></div>
-
-				<script type="text/javascript">
-					var x = 40.735;
-					var y = -73.890;
-					var map;
-
-					if(navigator.geolocation){
-						navigator.geolocation.getCurrentPosition(function(pos){
-							x = pos.coords.latitude.toFixed(3);
-							y = pos.coords.longitude.toFixed(3);
-							map = L.map('map').setView([x, y], 14);
-							// TODO make this API key a Server environment variable
-							L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
-								{
-						    	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-						    	maxZoom: 18,
-						    	id: 'eozelius77.j4hekake',
-						    	accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
-								}).addTo(map);
-
-							L.marker([x, y]).addTo(map);
-						});
-					} else {
-						map = initMap(x, y, 12, false);
-					}
-				</script>
-
-			</div><!-- End Map -->
-
-		</div>
+		  <!-- MAP!!! -->
+	    <div id="signup-map"></div>
+	    <!-- !!!END MAP -->
+	  </div>
 	<% end %>
 </div>
