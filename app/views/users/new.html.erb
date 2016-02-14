@@ -70,37 +70,7 @@
     	</div>
 	  </div>
 
-	  <!-- create map NOW -->
-	  <div class="step-3-slide hidden" id="now-map-container">
-		  <div class="drift-map-instructions">
-		    <input type="hidden" id="driftmap-json" name="user[driftmap]" />
+	  <%= render 'driftmaps/driftmapWiz' %>
 
-		    <div class="instructions-container container">
-		      <!-- Create-Step 1 Title -->
-		      <div class="step create-step-1 col-lg-7 col-md-7 col-sm-12 col-xs-12">
-		        <input type="text" id="driftmap-title" />
-		      </div>
-
-		      <!-- Create-Step 2 descriptioin -->
-		      <div class="create-step-2 hidden col-lg-7 col-md-7 col-sm-12 col-xs-12">
-		        <textarea id="driftmap-body"></textarea>
-		      </div>
-
-		      <!-- Create-Step 3 Init -->
-		      <div class="create-step-3 hidden col-lg-7 col-md-7 col-sm-12 col-xs-12">
-		        <p class="instructions-title">Drag your map to where you would like to like to begin - click next when satisfied
-		        </p>
-		      </div>
-
-		      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-		        <span type ="next" class="create-next-step normal">next</span>
-		      </div>
-		    </div>
-		  </div>
-
-		  <!-- MAP!!! -->
-	    <div id="signup-map"></div>
-	    <!-- !!!END MAP -->
-	  </div>
 	<% end %>
 </div>

@@ -13,7 +13,9 @@
 			<% end %>
 		</div>
 	<% else %>
-		<div id="profile-map">
+		<div class="profile-map-container">
+			<div id="profile-map"></div>
+
 			<input type="hidden" id="driftmap" value="<%= @user.driftmap %>" />
 
 			<script type="text/javascript">
@@ -21,33 +23,17 @@
 				DriftMap.initDriftMap(driftmap, 'profile-map');
 			</script>
 
-		<%#= link_to root_url do %>
-			<!-- <button class="normal start-journey"><p>start journey</p></button> -->
-		<%# end %>
-
-		</div>
-		
+			<% if user_is_home(@user) || admin_user %>
+				<%= link_to '/driftmap/edit' do %>
+					<p style="margin-top:10px;">edit driftMap</p>
+				<% end %>
+			<% end %>
+		</div>		
 	<% end %>
 </div><!-- End Map -->
 
 <div id="pro-parts-container">
-	<div class="pro-part profile-photos col-lg-7 col-md-7 col-sm-12 col-12">
-		<h4 class="page-title" style="border:none;">blibs</h4>
-		<% if @user.posts.count >= 1 %>
-			<%= render 'posts/posts' %>
-		<% else%>
-			<p style="text-align:center"><%= @user.name %> hasn't been anywhere yet.</p>
-		<% end %>
-	</div><!-- end where I've been -->
-
 	<div class="pro-part profile">
-		<% if user_is_home(@user) && false %>
-			<h4 class="page-title" style="border:none;">new blib</h4>
-			<div class="new-blib-container">
-				<%= render 'posts/form' %>
-			</div>
-		<% end %><!-- end create blib -->
-
 		<h4 class="page-title" style="border:none;"><%= @user.name %></h4>
 		<div class="profile-details-container">
 			<div class="profile-details">

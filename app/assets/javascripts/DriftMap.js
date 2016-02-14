@@ -40,9 +40,7 @@ var DriftMap = function(){
 
           $('#new_user input[type="text"]').each(function(){
             $(this).val(xss_trim($(this).val()));
-            console.log($(this).val());
           });
-
           $('#new_user').submit();
 
         default:

@@ -11,7 +11,7 @@ $(document).ready(function(){
     $('.step-2-slide').fadeOut();
     $('#now-map-container').slideDown().removeClass('hidden');
     $('h3.page-title').text('give your map a beautiful new name');
-    DriftMap.initDriftMap(null, 'signup-map');
+    DriftMap.initDriftMap(null, 'map');
   });
 
   // Initialize driftMap LATER
