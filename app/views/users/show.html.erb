@@ -14,18 +14,16 @@
 		</div>
 	<% else %>
 		<div id="profile-map">
+			<input type="hidden" id="driftmap" value="<%= @user.driftmap %>" />
 
-		<input type="hidden" id="driftmap" value="<%= @user.driftmap %>" />
+			<script type="text/javascript">
+				var driftmap = JSON.parse($('#driftmap').val());
+				DriftMap.initDriftMap(driftmap, 'profile-map');
+			</script>
 
-		<script type="text/javascript">
-			var driftmap = JSON.parse($('#driftmap').val());
-			init_driftmap('profile-map', driftmap);
-
-		</script>
-
-		<%= link_to '/driftmap/edit' do %>
-			<button class="normal start-journey"><p>start journey</p></button>
-		<% end %>
+		<%#= link_to root_url do %>
+			<!-- <button class="normal start-journey"><p>start journey</p></button> -->
+		<%# end %>
 
 		</div>
 		

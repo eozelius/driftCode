@@ -18,7 +18,6 @@ var DriftMap = function(){
     $('.create-next-step').on('click',function(){
       var prev = createStep;
       var next = createStep + 1;
-      console.log( prev + " -> " + next )
       $('.create-step-'+prev).fadeOut();
       $('.create-step-'+next).slideDown().removeClass('hidden');
         
@@ -39,8 +38,6 @@ var DriftMap = function(){
           driftMapForm.layer.initZoom = map.getZoom(); 
           $('#driftmap-json').val(JSON.stringify(driftMapForm))
 
-          // $('h3.page-title').text('give your driftMap a route')
-          console.log('submit form: ' + $('#driftmap-json').val());
           $('#new_user input[type="text"]').each(function(){
             $(this).val(xss_trim($(this).val()));
             console.log($(this).val());
