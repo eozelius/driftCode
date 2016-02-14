@@ -25,30 +25,31 @@ var DriftMap = function(){
       switch(prev) {
         case 1:
           driftMapForm.title = $('#driftmap-title').val();
-          console.log('title: ' + driftMapForm.title);
-          console.log('case 1: ' + JSON.stringify(driftMapForm));
           $('h3.page-title').text('give your driftMap a description')
           break;
 
         case 2:
           driftMapForm.body = $('#driftmap-body').val();
-          console.log('body: ' + driftMapForm.body);
-          console.log('case 2: ' + JSON.stringify(driftMapForm));
           $('h3.page-title').text('driftMap starting location')
           break;
 
         case 3:
+          $('.create-next-step').addClass('hidden');
           driftMapForm.layer.initPt   = map.getCenter();
           driftMapForm.layer.initZoom = map.getZoom(); 
-          console.log('case 3: ' + JSON.stringify(driftMapForm));
-          $('h3.page-title').text('give your driftMap a route')
-          break;
+          $('#driftmap-json').val(JSON.stringify(driftMapForm))
 
-        case 4:
-          console.log('case 4: ' + JSON.stringify(driftMapForm));
+          // $('h3.page-title').text('give your driftMap a route')
+          console.log('submit form: ' + $('#driftmap-json').val());
+          $('#new_user input[type="text"]').each(function(){
+            $(this).val(xss_trim($(this).val()));
+            console.log($(this).val());
+          });
+
+          $('#new_user').submit();
 
         default:
-          console.log(JSON.stringify(driftMapForm));
+          console.log("Something went wrong. form: " + JSON.stringify(driftMapForm));
           break;
       }
 
