@@ -16,7 +16,7 @@
 	margin: 4%;
 }
 
-.create-map-container button.next-step {
+.create-map-container span.next-step {
 	display: inline;
 	font-size: 1.1em !important;
 	position: relative;
@@ -33,6 +33,7 @@ div.instructions-container {
 p.instructions {
 	font-size: 1.75em;
 	color: #ADCDDB;
+	margin-bottom: 10px;
 }
 
 #driftmap-body {
