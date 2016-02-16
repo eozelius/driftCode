@@ -6,27 +6,70 @@
 
 /* map attributes */
 ul.instructions-container{
-  min-height: 500px;
-  background-color: #E9EEF0;
+  height: 50px;
 }
 
+
+
 li.wizard-step {
+  background-color: #E9EEF0;
   cursor: pointer;
-  min-height: 100px;
-  border: 1px solid #552727;  
-  border-bottom: none;
+  height: 50px;
+  border: 1px solid #552727; 
+  border-bottom: none; 
+  display: inline-block;
+  width: 105px;
+  margin: 0%;
+  border-radius: 5px 5px 0 0;
+}
+
+li.wizard-step p {
+  font-size: 1em;
+  line-height: 50px;
+  text-align: center; 
 }
 
 p.wizard-step-title {
-  margin: 20px 0 0 20px;
+  margin: 20px 0 18px 10px;
   color: #552727;
 }
 
-li[data-action="routes"] {
-  border-bottom: 1px solid #552727;
+li.open {
+  border: 2px solid #552727;
+  position: relative;
+  top: 1px;
+}
+
+li.open {
+  font-weight: bold;
 }
 
 li.wizard-step div {
   padding: 0 4%;
   height: 100px;
+}
+
+.action-container {
+  width: 545px;
+  display: block;
+  margin: 1px auto 100px auto; 
+  height: 495px;
+  background-color: #E9EEF0;
+  border-top: 1px solid #552727;
+}
+
+.wizard-step {
+  display: none;
+}
+
+.wizard-step.open-action {
+  display: block;
+  width: 90%;
+  height: 424px;
+  margin: 5% auto 0 auto;
+
+}
+
+.action-footer button {
+  margin: -20px 0 0 27px;
 }

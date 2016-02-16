@@ -9,58 +9,68 @@
   </div><!-- !!!END MAP -->
 
   <div class="drift-map-instructions col-lg-5 col-md-5 col-sm-12 col-xs-12">
+    <div class="tabs-container">
+      <ul class="instructions-container ">
+        <li data-action="title" class="wizard-step open"><p>title</p></li>
+        <li data-action="body" class="wizard-step"><p>description</p></li>
+        <li data-action="init" class="wizard-step"><p>initialize</p></li>
+        <li data-action="markers" class="wizard-step"><p>radar</p></li>
+        <li data-action="routes" class="wizard-step"><p>routes</p></li>
+      </ul>
+    </div>
 
-    <ul class="instructions-container ">
-      <!-- Create-Step 1 Title -->
-      <li data-action="title" class="wizard-step open-step">
-        <p class="wizard-step-title">Title</p>
+    <div class="action-container">
+      <!-- Step 1 Title -->
+      <div data-action="title" class="wizard-step open-action">
+        <p class="instructions-title">give your driftMap a catchy name</p>
         <div class="action-title details-open" >
           <input type="text" id="driftmap-title"/>
         </div>
-      </li>
+      </div>
 
-      <!-- Create-Step 2 description -->
-      <li data-action="body" class="wizard-step">
-        <p class="wizard-step-title">Description</p>
-        <div class="action-body" style="display:none;">
+      <!-- Step 2 description -->
+      <div data-action="body" class="wizard-step" >
+        <p class="instructions-title">sum up your driftMap in 10 words</p>
+        <div class="action-body">
           <textarea id="driftmap-body"></textarea>
         </div>
-      </li>
+      </div>
 
-      <!-- Create-Step 3 Init -->
-      <li data-action="init" class="wizard-step">
-        <p class="wizard-step-title">Initialize</p>
-        <div class="action-init" style="display:none;">
-          <p class="instructions-title">Drag your map to where you would like to like to begin - click next when satisfied
-          </p>
-        </div>
-      </li>
+      <!-- Step 3 Init -->
+      <div data-action="init" class="wizard-step" >
+        <p class="instructions-title">drag and zoom your map to the location and zoom level you would like</p>
 
-      <!-- Create-Step 4 Markers -->
-      <li data-action="markers" class="wizard-step">
+      </div>
+
+      <!-- Step 4 Markers -->
+      <div data-action="markers" class="wizard-step" >
         <p class="wizard-step-title">radar</p>
-        <div class="action-markers wizard-action" style="display:none;">
-          <p class="instructions-title">Markers</p>
+        <div class="action-markers wizard-action">
+          <p class="instructions-title">your radar is your all of your adventures, backpacking trips, people you met, 'a zip-lining accident', whatever you want.</p>
+
+          <button class="normal">new blib</button>
         </div>
-      </li>
+      </div>
 
       <!-- Create-Step 5 Routes -->
-      <li data-action="routes" class="wizard-step">
-        <p class="wizard-step-title">Routes</p>
-        <div class="action-routes" style="display:none;">
-          <p class="instructions-title">routes</p>
+      <div data-action="routes" class="wizard-step">
+        <p class="wizard-step-title">routes</p>
+        <div class="action-routes">
+          <p class="instructions-title">plane, hitch-hiking, boat, train-hopping</p>
+          <button class="normal">new route</button>
         </div>
-      </li>
-
-      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-        <span class="save-wizard normal">save</span>
       </div>
-    </ul>
+
+      <div class="action-footer">
+        <button class="save-wizard normal">save</button>
+      </div>
+        
+    </div>
   </div>
 </div>
 
 <script type="text/javascript">
-  var driftmap = JSON.parse($('#driftmap-json').val());
+  /*var driftmap = JSON.parse($('#driftmap-json').val());
 
   if(driftmap == ''){
     DriftMap.createDriftmap(null, 'wizard-map')
@@ -68,5 +78,5 @@
     DriftMap.createDriftmap(driftmap, 'wizard-map')
     $('#driftmap-title').val(driftmap.title);
     $('#driftmap-body').val(driftmap.body);
-  }
+  }*/
 </script>

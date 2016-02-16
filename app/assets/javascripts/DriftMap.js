@@ -7,7 +7,18 @@ var DriftMap = function(){
     /* wizard - steps */
     $('li.wizard-step').on('click',function(){
       var action = $(this).attr('data-action');
-      var open;
+      console.log('action: ' + action);
+      $('li').removeClass('open');
+      $(this).addClass('open');
+
+      $('.open-action').removeClass('open-action');
+      $('div[data-action="'+action+'"]').addClass('open-action');
+
+
+
+
+
+      /*var open;
       $(this).hasClass('step-open') ? open = true : open = false;
 
       if(open){
@@ -19,7 +30,7 @@ var DriftMap = function(){
         $(this).addClass('step-open');
         $('.action-'+action).slideDown().addClass('details-open');
         $('.action-'+action + ' input, textarea').focus();
-      }
+      }*/
     });
 
     // wizard - save
