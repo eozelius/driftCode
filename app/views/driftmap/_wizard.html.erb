@@ -1,0 +1,72 @@
+<h3 class="page-title">driftMap</h3>
+
+<input type="hidden" id="driftmap-json" name="user[driftmap]" value="<%= @user.driftmap ||= '' %>" />
+
+<div class="step-3-slide" id="now-map-container">
+  <!-- MAP!!! -->
+  <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+    <div id="wizard-map"></div>
+  </div><!-- !!!END MAP -->
+
+  <div class="drift-map-instructions col-lg-5 col-md-5 col-sm-12 col-xs-12">
+
+    <ul class="instructions-container ">
+      <!-- Create-Step 1 Title -->
+      <li data-action="title" class="wizard-step open-step">
+        <p class="wizard-step-title">Title</p>
+        <div class="action-title details-open" >
+          <input type="text" id="driftmap-title"/>
+        </div>
+      </li>
+
+      <!-- Create-Step 2 description -->
+      <li data-action="body" class="wizard-step">
+        <p class="wizard-step-title">Description</p>
+        <div class="action-body" style="display:none;">
+          <textarea id="driftmap-body"></textarea>
+        </div>
+      </li>
+
+      <!-- Create-Step 3 Init -->
+      <li data-action="init" class="wizard-step">
+        <p class="wizard-step-title">Initialize</p>
+        <div class="action-init" style="display:none;">
+          <p class="instructions-title">Drag your map to where you would like to like to begin - click next when satisfied
+          </p>
+        </div>
+      </li>
+
+      <!-- Create-Step 4 Markers -->
+      <li data-action="markers" class="wizard-step">
+        <p class="wizard-step-title">radar</p>
+        <div class="action-markers wizard-action" style="display:none;">
+          <p class="instructions-title">Markers</p>
+        </div>
+      </li>
+
+      <!-- Create-Step 5 Routes -->
+      <li data-action="routes" class="wizard-step">
+        <p class="wizard-step-title">Routes</p>
+        <div class="action-routes" style="display:none;">
+          <p class="instructions-title">routes</p>
+        </div>
+      </li>
+
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+        <span class="save-wizard normal">save</span>
+      </div>
+    </ul>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var driftmap = JSON.parse($('#driftmap-json').val());
+
+  if(driftmap == ''){
+    DriftMap.createDriftmap(null, 'wizard-map')
+  } else{
+    DriftMap.createDriftmap(driftmap, 'wizard-map')
+    $('#driftmap-title').val(driftmap.title);
+    $('#driftmap-body').val(driftmap.body);
+  }
+</script>

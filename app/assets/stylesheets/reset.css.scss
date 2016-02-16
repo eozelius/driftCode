@@ -235,16 +235,12 @@ p.title{
 
 div.errors {
 	width: 40%;
-	height: 300px;
+	min-height: 200px;
 	background-color: $light-grey;
 	padding: 2% 2% 2% 3%;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	margin-bottom: 15px;
-}
-
-ul.errors-list {
-	height: 84px;
 }
 
 ul.errors-list li {
@@ -286,4 +282,8 @@ button.normal:hover{
 	height: 455px;
 	margin: 0 auto;
 	padding-bottom: 3%;
+}
+
+.leaflet-container {
+	height: 500px;
 }

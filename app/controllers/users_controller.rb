@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       @user.send_activation_email 
       flash[:info] = "welcome to driftCode"
       log_in @user
-  		redirect_to @user
+      render 'driftmap/_wizard'
   	else
   		render 'new'
   	end

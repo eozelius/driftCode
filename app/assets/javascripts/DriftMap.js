@@ -1,62 +1,65 @@
 var DriftMap = function(){
   // Private Attributes
-  var driftMapForm = {
-    title: undefined,
-    body: undefined,
-    layer: {
-      initPt: [0,0],
-      initZoom: 12
-    },
-    markers: undefined,
-    route: undefined
-  }
-  var createStep = 1;
 
   // DriftMap event Listeners
-  /* Edit/New Form */
   $(document).ready(function(){
-    $('.create-next-step').on('click',function(){
-      var prev = createStep;
-      var next = createStep + 1;
-      $('.create-step-'+prev).fadeOut();
-      $('.create-step-'+next).slideDown().removeClass('hidden');
-        
-      switch(prev) {
-        case 1:
-          driftMapForm.title = $('#driftmap-title').val();
-          $('h3.page-title').text('give your driftMap a description')
-          break;
+    /* Wizard */
+    /* wizard - steps */
+    $('li.wizard-step').on('click',function(){
+      var action = $(this).attr('data-action');
+      var open;
+      $(this).hasClass('step-open') ? open = true : open = false;
 
-        case 2:
-          driftMapForm.body = $('#driftmap-body').val();
-          $('h3.page-title').text('driftMap starting location')
-          break;
-
-        case 3:
-          $('.create-next-step').addClass('hidden');
-          driftMapForm.layer.initPt   = map.getCenter();
-          driftMapForm.layer.initZoom = map.getZoom(); 
-          $('#driftmap-json').val(JSON.stringify(driftMapForm))
-
-          $('#new_user input[type="text"]').each(function(){
-            $(this).val(xss_trim($(this).val()));
-          });
-          $('#new_user').submit();
-
-        default:
-          console.log("Something went wrong. form: " + JSON.stringify(driftMapForm));
-          break;
+      if(open){
+        $(this).removeClass('step-open');
+        $('.action-'+action).fadeOut();
+      } else {
+        $('.step-open').removeClass('step-open');
+        $('.details-open').fadeOut(1).removeClass('details-open');
+        $(this).addClass('step-open');
+        $('.action-'+action).slideDown().addClass('details-open');
+        $('.action-'+action + ' input, textarea').focus();
       }
-
-      createStep++;
     });
+
+    // wizard - save
+    $('.save-wizard').on('click', function(){
+      var driftMapForm = {
+        title: $('#driftmap-title').val(),
+        body: $('#driftmap-body').val(),
+        layer: {
+          initPt: window.map.getCenter(),
+          initZoom: window.map.getZoom()
+        },
+        markers: undefined,
+        route: undefined
+      };
+
+      $.ajax({
+        url: '/driftmap',
+        type: 'post',
+        dataType: 'json',
+        timeout: 4000,
+        data: {
+          driftmap: JSON.stringify(driftMapForm)
+        },
+
+        beforeSend: function(){
+          // DriftMap.valid_form(driftMapForm)
+        },
+        complete: function(r){
+          if(r.responseJSON.status == 'success')
+            window.location.href = r.responseJSON.redirect_url
+        }
+      });
+    });   
   });
 
   // private variables
 
   // public methods
   return {
-    initDriftMap: function(driftMap, dom){
+    createDriftmap: function(driftMap, dom){
       var init_x = 40.735;
       var init_y = -73.890;
       var zoom   = 13;
@@ -75,7 +78,6 @@ var DriftMap = function(){
         id: 'eozelius77.j4hekake',
         accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
       }).addTo(window.map);
-      L.marker([init_x, init_y]).addTo(window.map);
     },
 
     init_markers: function(driftMap, markers, dom){

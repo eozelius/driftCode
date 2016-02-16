@@ -1,6 +1,6 @@
 <div class="flash-container hidden"></div>
 
-<h3 class="page-title">welcome to the driftCode</h3>
+<h3 class="page-title">welcome to driftCode</h3>
 
 <div class="signup-container">
 	<%= form_for(@user) do |f| %>
@@ -56,21 +56,8 @@
 	      
 	    </div>
 	    <p class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-	      <span class="normal next-signup-text" >next</span>
+	      <span class="normal signup" >next</button>
 	    </p>
 	  </div>
-
-	  <!-- STEP 2 -->
-	  <div class="step-2-slide hidden container" id="now-later-container">
-	  	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">	
-	    	<span class="now normal">let's go</span>
-	    </div>
-	    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-	    	<span class="later normal">later</span>
-    	</div>
-	  </div>
-
-	  <%= render 'driftmaps/driftmapWiz' %>
-
 	<% end %>
 </div>
