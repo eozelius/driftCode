@@ -18,7 +18,7 @@ gem 'net-ssh', '~> 3.0', '>= 3.0.1'
 gem 'puma', 	    '2.11.1'
 gem 'byebug',      '3.4.0'
 gem 'json', '~> 1.8', '>= 1.8.3'
-
+gem 'pg', '~> 0.18.4'
 
 group :development do
   gem 'web-console', '~> 3.0'
