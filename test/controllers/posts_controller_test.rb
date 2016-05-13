@@ -2,8 +2,8 @@ require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
  	def setup
-    @post = posts(:middle_post)
     @user = users(:irene)
+    @post = posts(:irenes_post)
   end
 
   test "should redirect create when not logged in" do
@@ -21,10 +21,12 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   test "should redirect destroy for wrong post" do
-    log_in_as(users(:barack))
-    post = posts(:middle_post)
+    # log in as barack and try to delete Irene's shit
+    @barack = users(:barack)
+    log_in_as(@barack)
+
     assert_no_difference 'Post.count' do
-      delete :destroy, id: post
+      delete :destroy, id: @post
     end
     assert_redirected_to root_url
   end

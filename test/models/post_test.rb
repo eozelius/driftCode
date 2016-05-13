@@ -5,29 +5,62 @@ class PostTest < ActiveSupport::TestCase
 		@user = users(:barack)
 	end
 
-	test "Post should have valid Body and Title " do
+	test "Post should have all required properties " do
 		# empty body
-		post = @user.posts.create(body: '', title: 'valid title')
+		post = Post.create(title: 'valid title',
+											 body: 	'',
+											 user_id: @user.id,
+											 init_x: 43,
+											 init_y: -73,
+											 init_zoom: 13)
 		assert_not post.valid? 
 		# empty title
-		post = @user.posts.create(body: 'Hipsum ipsum, toss me a pbr Domino!!!', title: '')
+		post = Post.create(title: '',
+											 body: 	'valid_body',
+											 user_id: @user.id,
+											 init_x: 43,
+											 init_y: -73,
+											 init_zoom: 13)
 		assert_not post.valid?
-	end
 
-	test "Post must have user_id" do
-		post = @user.posts.create(body: 'valid hipster ipsum, rad flannel tex!!!', title: 'valid title & stuff')
-		post.user_id = nil
+		# empty user_id
+		post = Post.create(title: 'valid_title',
+											 body: 	'valid_body',
+											 user_id: nil,
+											 init_x: 43,
+											 init_y: -73,
+											 init_zoom: 13)
 		assert_not post.valid?
-	end
 
-	test "Posts should be in created_first order" do
-		assert_equal posts(:first_post), Post.first
-		assert_equal posts(:last_post), Post.last
+		# empty init_x
+		post = Post.create(title: 'valid_title',
+											 body: 	'valid_body',
+											 user_id: @user.id,
+											 init_x: nil,
+											 init_y: -73,
+											 init_zoom: 13)
+		assert_not post.valid?
+
+		# Valid Post
+		post = Post.create(title: 'valid',
+											 body: 'valid',
+											 user_id: @user.id,
+											 init_x: 43,
+											 init_y: -73,
+											 init_zoom: 13)
+		assert post.valid?
 	end
 
 	test "Post should be destroyed when user who created post is destoryed" do
 		@user.save
-		@user.posts.create!(body: 'valid Body', title: 'valid title')
+		post = Post.create(title: 'valid',
+											 body: 'valid',
+											 user_id: @user.id,
+											 init_x: 43,
+											 init_y: -73,
+											 init_zoom: 13)
+
+		@user.post = post
 		assert_difference 'Post.count', -1 do
 			@user.destroy
 		end

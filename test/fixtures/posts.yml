@@ -1,0 +1,15 @@
+baracks_post:
+  title: Sure is nice to be potis
+  body: I think I will start a war today
+#  user_id: 205461692
+  init_x: 43
+  init_y: -73
+  init_zoom: 13
+
+irenes_post:
+  title: Can I get you a cookie
+  body: Can I get you a cookie
+#  user_id: 462180355
+  init_x: 43
+  init_y: -73
+  init_zoom: 13

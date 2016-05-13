@@ -12,7 +12,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   													 		password: 'invalid as texas' }
   	assert_template 'sessions/new'
   	assert_not flash.empty?
-  	get root_path
+  	get signup_path
   	assert flash.empty?		
   end
 
@@ -20,19 +20,4 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     log_in_as(@user, remember_me: '0')
     assert_nil cookies['remember_token']
   end
-
-=begin
-  # something super fucky about testing redirects
-  test "Successful login should render correct template" do
-    get login_path
-    post login_path, session: { email: @user.email,
-                                password: 'password' }
-    assert_redirected_to @user
-    follow_redirect!
-    assert is_logged_in?
-    assert_template 'users/show'
-    assert_select "a[href=?]", logout_path, count: 0
-  end
-=end
-
 end
