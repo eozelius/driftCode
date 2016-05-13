@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :posts, 		dependent: :destroy
+	has_one :post, dependent: :destroy
 
 	# Class properties
 	mount_uploader :profile_pic, PictureUploader
@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
 	before_save 	:downcase_email
 	before_create :create_activation_digest
 
-	validates :driftmap, uniqueness: true, allow_nil: true, :length => { maximum: 999999999 } # max number chars in sqlite3 DB
 	validates :name, :presence => true, :length => { minimum: 2, maximum: 55 }
 	
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -13,6 +13,7 @@
  *= require bootstrap.min.css
  *= require leaflet.css
  *= require leaflet-routing-machine.css
+ *= require post.css.scss
  *= require_tree .
  *= require_self
  */

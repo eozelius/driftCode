@@ -2,12 +2,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users
+  resources :posts
 
-  resources :posts, only: [:create, :update, :destroy]
-
-
-  get  'driftmap' => 'driftmap#wizard'
-  post 'driftmap' => 'driftmap#update'
   get    'signup' => 'users#new'
   get    'login'  => 'sessions#new'
   post   'login'  => 'sessions#create'

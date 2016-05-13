@@ -10,6 +10,12 @@ class Post < ActiveRecord::Base
 	validates :user_id, :presence => true
 	validate  :picture_size
 
+	# driftmap properties
+	validates :init_x,		:presence => true, :length => { maximum: 99999, minimum: 0 } 
+	validates :init_y,		:presence => true, :length => { maximum: 99999, minimum: 0 } 
+	validates :init_zoom,	:presence => true, :length => { maximum: 99999, minimum: 0 }
+
+
 	private
 		def picture_size
 			if picture.size > 3.megabytes

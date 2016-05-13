@@ -3,29 +3,29 @@
 <h3 class="page-title"><%= @user.name %></h3>
 <div class="map-container">
 
-	<% if @user.driftmap.nil? %>
+	<% if @user.post.nil? %>
 		<div class="starter-globe">
 			<%= image_tag('globe_' + rand(4).to_s + '.jpg') %>
 		</div>
 
 		<div class="start-journey-container">
-			<%= link_to '/driftmap/new' do %>
+			<%= link_to :new_post do %>
 				<button class="normal start-journey"><p>start journey</p></button>
 			<% end %>
 		</div>
 	<% else %>
 		<div class="profile-map-container">
+		<h1>map goes here</h1>
+			<p>title: <%= @user.post.title %></p>
+			<p>body: <%= @user.post.body %></p>
+			<p>init x: <%= @user.post.init_x %></p>
+			<p>init y: <%= @user.post.init_y %></p>
+
+
 			<div id="profile-map"></div>
 
-			<input type="hidden" id="driftmap" value="<%= @user.driftmap %>" />
-
-			<script type="text/javascript">
-				var driftmap = JSON.parse($('#driftmap').val());
-				DriftMap.createDriftmap(driftmap, 'profile-map');
-			</script>
-
 			<% if user_is_home(@user) || admin_user %>
-				<%= link_to '/driftmap' do %>
+				<%= link_to edit_post_path(@post) do %>
 					<p style="margin-top:10px;">edit driftMap</p>
 				<% end %>
 			<% end %>

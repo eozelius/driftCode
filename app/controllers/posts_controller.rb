@@ -2,16 +2,26 @@ class PostsController < ApplicationController
 	before_action :logged_in_user,	only: [:create,  :update, :destroy]
 	before_action :correct_user, 		only: [:destroy, :update]
 
-	# ror_tut version
+	def new
+		@post = Post.new
+	end
+
 	def create
-		@post = current_user.posts.build(post_params)
-		if @post.save
+		user = current_user
+		p = Post.create(post_params)
+
+		if user.valid && new_post
+			user.post = p
 			flash[:success] = "Post created successfully"
-			redirect_to current_user
+			redirect_to user
 		else
 			flash[:danger] = "Post not created, please try again"
-			redirect_to current_user
+			render 'new'
 		end
+	end
+
+	def edit
+		@post = current_user.post
 	end
 
 	def update
@@ -36,7 +46,7 @@ class PostsController < ApplicationController
 
 	private
 		def post_params
-			params.require(:post).permit(:title, :body, :picture)
+			params.require(:post).permit(:title, :body, :picture, :init_x, :init_y, :init_zoom)
 		end
 
 		def correct_user
