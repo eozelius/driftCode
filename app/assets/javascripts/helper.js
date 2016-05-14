@@ -3,23 +3,6 @@ function flash_now(type, message, dom){
 	$(dom).append(flash_msg).removeClass('hidden');
 }
 
-/*
-function valid_map(driftMap){
-	if(typeof driftMap  		    !==         ||
-	   typeof driftMap.layer.initPt.lat === 'undefined' ||
-	   typeof driftMap.layer.initPt.lng === 'undefined' ||
-	   typeof driftMap.layer	    === 'undefined' ||
-	   typeof driftmap.title 	    === 'undefined' ||
-	   typeof driftmap.body 	    === 'undefined' ||
-	   typeof driftmap.layer.initZoom   === 'undefined' )
-		{
-			console.log("driftmap cannot be undefined");
-			return false;
-		}
-	return true;
-}
-*/
-
 function xss_trim(str){
 	return String(str)
 	.replace(/&/g, '&amp;')

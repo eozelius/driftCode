@@ -10,10 +10,10 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
 
   	if @user.save
-      @user.send_activation_email 
+      @user.send_activation_email
       flash[:info] = "welcome to driftCode"
       log_in @user
-      render 'driftmap/_wizard'
+      redirect_to @user
   	else
   		render 'new'
   	end
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   private
   	def user_params
   		params.require(:user).permit(:name, :email, :password, :password_confirmation, 
-                                   :profile_pic, :from, :gps, :driftmap)
+                                   :profile_pic, :from, :gps)
   	end
 
     # Confirms the correct user.

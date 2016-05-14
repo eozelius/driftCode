@@ -25,8 +25,6 @@ class User < ActiveRecord::Base
 		BCrypt::Password.new(digest).is_password?(token)
 	end
 
-	# digests a password
-
 	def User.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
 																									BCrypt::Engine.cost
