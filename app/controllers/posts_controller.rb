@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 		user = current_user
 		p = Post.create(post_params)
 
-		if user.valid && new_post
+		if user.valid? && p.valid?
 			user.post = p
 			flash[:success] = "Post created successfully"
 			redirect_to user
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 
 	private
 		def post_params
-			params.require(:post).permit(:title, :body, :picture, :init_x, :init_y, :init_zoom)
+			params.require(:post).permit(:title, :body, :user_id, :picture, :init_x, :init_y, :init_zoom)
 		end
 
 		def correct_user
