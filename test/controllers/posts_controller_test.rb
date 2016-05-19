@@ -86,8 +86,6 @@ class PostsControllerTest < ActionController::TestCase
 
     @user.reload
     assert_equal @user.post.title, old_title
-
-
   end
 
 

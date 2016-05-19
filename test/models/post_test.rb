@@ -53,14 +53,7 @@ class PostTest < ActiveSupport::TestCase
 
 	test "Post should be destroyed when user who created post is destoryed" do
 		@user.save
-		post = Post.create(title: 'valid',
-											 body: 'valid',
-											 user_id: @user.id,
-											 init_x: 43,
-											 init_y: -73,
-											 init_zoom: 13)
-
-		@user.post = post
+		
 		assert_difference 'Post.count', -1 do
 			@user.destroy
 		end
