@@ -52,8 +52,9 @@ class PostsController < ApplicationController
 		def correct_user
 			return true if current_user.admin?
 
-			@post = current_user.post;
-			if @post.nil?
+			post = Post.find(params[:id])
+
+			if post.nil? || post.user_id != current_user.id
 				flash.now[:danger] = "you do not have permission do that.  wwjd?"
 				redirect_to root_url				
 			end

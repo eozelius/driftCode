@@ -4,7 +4,6 @@ class PostsControllerTest < ActionController::TestCase
  	def setup
     @user = users(:irene)
     @post = posts(:irenes_post)
-    @post.user_id = @user.id
   end
 
   test "Valid Post should be created" do
@@ -61,6 +60,7 @@ class PostsControllerTest < ActionController::TestCase
     assert_no_difference 'Post.count' do
       delete :destroy, id: @post
     end
+
     assert_redirected_to root_url
   end
 
@@ -68,4 +68,34 @@ class PostsControllerTest < ActionController::TestCase
     get :edit, id: @post
     assert_response :success
   end
+
+  test "bullshit update should fail" do
+    log_in_as(@user)
+    old_title = @post.title
+    old_body  = @post.body
+
+    get :edit, id: @post
+    assert_template 'edit'
+
+    patch :update, id: @post, post: {
+      title: '',
+      body:  '',
+      init_x: nil,
+      init_y: nil
+    }
+
+    @user.reload
+    assert_equal @user.post.title, old_title
+
+
+  end
+
+
+
+  #test "valid update should update post" do
+
+
+
+
+  #end
 end
