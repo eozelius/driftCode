@@ -90,10 +90,28 @@ class PostsControllerTest < ActionController::TestCase
 
 
 
-  #test "valid update should update post" do
+  test "valid update should update post" do
+    log_in_as(@user)
+    new_title = 'new fucking title'
+    new_body  = 'new fucking body'
+    new_init_x= 15
+
+    patch :update, id: @post, post: {
+      title: new_title,
+      body:  new_body,
+      init_x: new_init_x
+    }
+
+    assert_redirected_to @user
+    @user.reload
+
+    assert_equal @user.post.title,  new_title
+    assert_equal @user.post.body,   new_body
+    assert_equal @user.post.init_x, new_init_x
 
 
 
 
-  #end
+
+  end
 end
