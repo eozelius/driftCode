@@ -7,11 +7,6 @@ class PostsControllerTest < ActionController::TestCase
     @post.user_id = @user.id
   end
 
-  test "new_post_path should respond correctly" do
-    #get :new
-    #assert_response :success
-  end
-
   test "Valid Post should be created" do
     log_in_as(@user)
 
@@ -67,5 +62,10 @@ class PostsControllerTest < ActionController::TestCase
       delete :destroy, id: @post
     end
     assert_redirected_to root_url
+  end
+
+  test "get :edit action should respond" do
+    get :edit, id: @post
+    assert_response :success
   end
 end
