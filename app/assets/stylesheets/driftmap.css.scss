@@ -9,6 +9,19 @@
   margin: 0;
 }
 
+#new_post .active-step {
+  display: block;
+}
+
+.wizard-step {
+  display: none;
+}
+
+#new_post p {
+  margin: 25px 0;
+  text-align: left;
+}
+
 /* instructions */
 div.instructions-container {
   margin: 1% 1% 1% 3%;

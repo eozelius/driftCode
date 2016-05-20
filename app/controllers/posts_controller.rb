@@ -7,15 +7,17 @@ class PostsController < ApplicationController
 	end
 
 	def create
+		byebug
 		user = current_user
 		p = Post.create(post_params)
+		p.user_id = user.id
 
 		if user.valid? && p.valid?
 			user.post = p
-			flash[:success] = "Post created successfully"
+			flash[:success] = "Driftmap created successfully"
 			redirect_to user
 		else
-			flash[:danger] = "Post not created, please try again"
+			flash[:danger] = "Whoops something went wrong, please try again"
 			render 'new'
 		end
 	end
@@ -46,7 +48,7 @@ class PostsController < ApplicationController
 
 	private
 		def post_params
-			params.require(:post).permit(:title, :body, :user_id, :picture, :init_x, :init_y, :init_zoom)
+			params.require(:post).permit(:title, :body, :picture, :init_x, :init_y, :init_zoom)
 		end
 
 		def correct_user
