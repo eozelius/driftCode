@@ -20,7 +20,7 @@ div.profile-photos {
 div.map-container {
 	padding-bottom: 15px;
 	border-bottom: 2px solid #C2D9EB;
-	height: 500px;
+	height: 650px;
 }
 
 #profile-map {
@@ -34,7 +34,8 @@ div.starter-globe {
 	margin-left: -2%;
 }
 
-.starter-globe img {
+.starter-globe img,
+img.error-map {
 	width: 97%;
 	height: 600px;
 	z-index: -1;
@@ -112,10 +113,6 @@ div.post-container p.alter-post{
 }
 
 /* :new */
-.create-map-container {
-	height: 650px;
-}
-
 .create-map-container .create-map-title {
 	margin: 10px 0 15px 0;
 }
