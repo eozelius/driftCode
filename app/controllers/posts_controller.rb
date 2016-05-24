@@ -7,7 +7,6 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		byebug
 		user = current_user
 		p = Post.create(post_params)
 		p.user_id = user.id
