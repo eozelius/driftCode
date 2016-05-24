@@ -1,34 +1,4 @@
 $(document).ready(function(){
-  // Initialize Driftmap TODO move this into a map initialization function
-  try {
-    var init_x = 40.735;
-    var init_y = -73.890;
-    var zoom   = 13;
-    var map;
-
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(function(pos){
-        x = pos.coords.latitude.toFixed(3);
-        y = pos.coords.longitude.toFixed(3);
-        map = L.map('post-map').setView([x, y], 12);
-        // TODO make this API key a Server environment variable
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
-          {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 18,
-            id: 'eozelius77.j4hekake',
-            accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
-          }).addTo(map);
-      });
-    } else {
-      map = initMap(x, y, 12, false);
-    }
-  } catch(e){
-    var msg = e.message;
-    console.log('error: ' + msg);
-    flash_now('danger', 'Whoops, something went wrong.  Please try again.');
-  }
-
   // Click next step
   $('.next-step').on('click', function(){
     var next = $('.active-step').data('next');

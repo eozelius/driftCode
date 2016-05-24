@@ -1,12 +1,22 @@
 # Create Pansy Accounts
 if Rails.env.production?
-  User.create!( name:     'ethan',
+  u = User.create!( name:     'ethan',
                 email:    'e.ozelius@gmail.com',
                 password: 'password',
                 password_confirmation: 'password',
                 activated: true,
                 activated_at: Time.zone.now,
                 admin: true )
+
+  p = Post.create(
+    title:  "cout << driftmap",
+    body:   "Another computer hacker trying to get some sunshine",
+    init_x: -73,
+    init_y: 42,
+    init_zoom: 13
+  )
+
+  u.post = p
 end
 
 if Rails.env.development? || Rails.env.test?

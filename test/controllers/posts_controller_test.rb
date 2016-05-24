@@ -9,6 +9,13 @@ class PostsControllerTest < ActionController::TestCase
   test "Valid Post should be created" do
     log_in_as(@user)
 
+    # first delete post
+    assert_difference 'Post.count', -1 do
+      delete :destroy, id: @post
+    end
+
+
+    # create new post
     assert_difference 'Post.count', 1 do
       post :create, post: {
         title: @post.title,
@@ -88,8 +95,6 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal @user.post.title, old_title
   end
 
-
-
   test "valid update should update post" do
     log_in_as(@user)
     new_title = 'new fucking title'
@@ -108,10 +113,5 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal @user.post.title,  new_title
     assert_equal @user.post.body,   new_body
     assert_equal @user.post.init_x, new_init_x
-
-
-
-
-
   end
 end

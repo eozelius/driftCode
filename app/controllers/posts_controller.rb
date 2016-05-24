@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
 		if user.valid? && p.valid?
 			user.post = p
-			flash[:success] = "Driftmap created successfully"
+			flash[:success] = "driftmap created successfully"
 			redirect_to user
 		else
 			flash[:danger] = "Whoops something went wrong, please try again"
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 		@user = User.find(@post.user_id)
 		if @post.update(post_params)
-			flash[:success] = "blib successfully updated"
+			flash[:success] = "driftmap successfully updated"
 			redirect_to @user
 		else
 			flash[:danger] = "whoops! Something went wrong, please try again"

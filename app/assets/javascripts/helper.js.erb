@@ -1,0 +1,41 @@
+function init_map(dom){
+	try {
+		ethan.init();
+		var x = 40.735;
+		var y = -73.890;
+		var m = L.map(dom).setView([x, y], 12);
+
+		// TODO make this API key a Server environment variable
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
+			{	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+	    	maxZoom: 18,
+	    	id: 'eozelius77.j4hekake',
+	    	accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
+			}).addTo(m);
+		return;
+	} catch(e) {
+		console.log('error: ' + e)
+
+		var imgSrc = "<%= asset_path('globe_0.jpg') %>"
+		var errorMap = '<img class="error-map" src="'+ imgSrc +'">';
+		$('body').prepend(errorMap);
+	}	
+}
+
+function flash_now(type, message){
+	console.log("type: " + type + "\n message: " + message);
+
+	var flash_msg = '<div style="margin:0; width:100%" class="flash-messages flash-'+ type +' col-lg-12 col-md-12 col-sm-12 col-xs-12"><p class="flash">'+ message +'</p></div>';
+	$('.application-container').prepend(flash_msg).removeClass('hidden');
+}
+
+function xss_trim(str){
+	return String(str)
+	.replace(/&/g, '&amp;')
+	.replace(/"/g, '&quot;')
+	.replace(/'/g, '&#39;')
+	.replace(/</g, '&lt;')
+	.replace(/>/g, '&gt;')
+	.replace('/', '&#x2F')
+	.trim();
+}
