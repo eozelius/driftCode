@@ -14,9 +14,9 @@
 			<% end %>
 		</div>
 	<% else %>
-		<div class="profile-map-container">
-		<h1><%= @post.title %></h1>
+		<div class="profile-map-container col-lg-7 col-md-7 col-sm-12 col-xs-12">
 			<div id="profile-map"></div>
+	
 			<script type="text/javascript">
 				var driftmap = {
 					init_x: '<%= @post.init_x %>',
@@ -24,7 +24,6 @@
 					init_zoom: '<%= @post.init_zoom %>'
 				}
 				init_map('profile-map', driftmap)
-
 			</script>
 
 			<% if user_is_home(@user) || admin_user %>
@@ -36,7 +35,7 @@
 				</p>
 			<% end %>
 
-		</div>		
+		</div>
 	<% end %>
 </div><!-- End Map -->
 
