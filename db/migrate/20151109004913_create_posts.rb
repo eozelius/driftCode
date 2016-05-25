@@ -4,8 +4,8 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.text :body
       t.references :user, index: true, foreign_key: true
-      t.integer :init_x
-      t.integer :init_y
+      t.float :init_x
+      t.float :init_y
       t.integer :init_zoom
       
       t.timestamps null: false
