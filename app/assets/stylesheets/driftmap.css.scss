@@ -9,17 +9,22 @@
   margin: 0;
 }
 
-#new_post .active-step {
-  display: block;
-}
-
 .wizard-step {
   display: none;
 }
 
-#new_post p {
+.active-step {
+  display: block;
+}
+
+.post-form p {
   margin: 25px 0;
   text-align: left;
+}
+
+span.save-wizard,
+span.next-step {
+  cursor: pointer;
 }
 
 /* instructions */

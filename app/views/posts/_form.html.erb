@@ -18,10 +18,16 @@
   </div>
 
   <script type="text/javascript">
-    init_map('post-map');
+    var driftmap = {
+      init_x: '<%= @post.init_x %>',
+      init_y: '<%= @post.init_y %>',
+      init_zoom: '<%= @post.init_zoom %>',
+    }
+
+    init_map('post-map', driftmap);
   </script>
 
-  <div class="drift-map-instructions col-lg-5 col-md-5 col-sm-12 col-xs-12">
+  <div id="post-form-container" class="drift-map-instructions col-lg-5 col-md-5 col-sm-12 col-xs-12">
     <%= form_for @post, html: { multipart: true } do |f| %>
       <!-- Step 1 Title -->
       <div data-next="body" class="wizard-title wizard-step active-step">

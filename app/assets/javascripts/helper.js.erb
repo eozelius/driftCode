@@ -1,8 +1,9 @@
-function init_map(dom){
+function init_map(dom, driftmap){
 	try {
-		var x = 40.735;
-		var y = -73.890;
-		var m = L.map(dom).setView([x, y], 12);
+		var x = driftmap.init_x || 40.735;
+		var y = driftmap.init_y || -73.890;
+		var z = driftmap.init_zoom || 12;
+		var m = window.m = L.map(dom).setView([x, y], z);
 
 		// TODO make this API key a Server environment variable
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
@@ -11,13 +12,12 @@ function init_map(dom){
 	    	id: 'eozelius77.j4hekake',
 	    	accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
 			}).addTo(m);
-		return;
 	} catch(e) {
-		console.log('error: ' + e)
+		console.log('error: ' + e);
 
 		var imgSrc = "<%= asset_path('globe_0.jpg') %>"
 		var errorMap = '<img class="error-map" src="'+ imgSrc +'">';
-		$('body').prepend(errorMap);
+		$(dom).prepend(errorMap);
 	}	
 }
 

@@ -13,14 +13,16 @@ $(document).ready(function(){
 
   // Submit form
   $('span.save-wizard').on('click', function(){
-    var init_x = map.getCenter().lat.toFixed(4);
-    var init_y = map.getCenter().lng.toFixed(4);
-    var zoom   = map.getZoom();
+    var init_x = window.m.getCenter().lat;
+    var init_y = window.m.getCenter().lng;
+    var zoom   = window.m.getZoom();
+
+    console.log("clicked\n" + 'x: ' + init_x + '\ny: ' + init_y + '\nz: ' + zoom);
 
     $('#post_init_x').val(init_x);
     $('#post_init_y').val(init_y);
     $('#post_init_zoom').val(zoom);
-    $('#new_post').submit();
+    $('#post-form-container form').submit();
   });
 
   // Cannot upload images larger than 3M
