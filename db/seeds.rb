@@ -50,10 +50,10 @@ if Rails.env.development? || Rails.env.test?
                         activated_at: Time.zone.now,
                         admin: true )
 
-  p = Post.create(title: 'Bogota Colombia',
-                  body:  'They dance really quite well here',
-                  init_x: 42,
-                  init_y: -73,
+  p = Post.create(title: 'medellin, Colombia',
+                  body:  'home of paisas',
+                  init_x: 6.24004981715641,
+                  init_y: -75.5632781982422,
                   init_zoom: 13 )
   ethan.post = p
 end

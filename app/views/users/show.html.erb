@@ -15,20 +15,27 @@
 		</div>
 	<% else %>
 		<div class="profile-map-container">
-		<h1>map goes here</h1>
-			<p>title: <%= @user.post.title %></p>
-			<p>body: <%= @user.post.body %></p>
-			<p>init x: <%= @user.post.init_x %></p>
-			<p>init y: <%= @user.post.init_y %></p>
-
-
+		<h1><%= @post.title %></h1>
 			<div id="profile-map"></div>
+			<script type="text/javascript">
+				var driftmap = {
+					init_x: '<%= @post.init_x %>',
+					init_y: '<%= @post.init_y %>',
+					init_zoom: '<%= @post.init_zoom %>'
+				}
+				init_map('profile-map', driftmap)
+
+			</script>
 
 			<% if user_is_home(@user) || admin_user %>
-				<%= link_to edit_post_path(@post) do %>
-					<p style="margin-top:10px;">edit driftMap</p>
-				<% end %>
+				<p style="margin-top:10px;">
+					<a>
+					<%= link_to 'edit driftmap | ', edit_post_path(@post) %>
+					<%= link_to 'delete driftmap', @post, method: :delete, data: { confirm: "Are you sure?" } %>
+					</a>
+				</p>
 			<% end %>
+
 		</div>		
 	<% end %>
 </div><!-- End Map -->
