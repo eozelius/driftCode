@@ -28,7 +28,10 @@ class PostsController < ApplicationController
 	def update
 		@post = Post.find(params[:id])
 		@user = User.find(@post.user_id)
-		if @post.update(post_params)
+		@blip = @post.blips.create(blip_params)
+		# todo, a user should be able to edit these one at a time.
+
+		if @post.update(post_params) && @blip.valid?
 			flash[:success] = "driftmap successfully updated"
 			redirect_to @user
 		else
@@ -48,6 +51,10 @@ class PostsController < ApplicationController
 	private
 		def post_params
 			params.require(:post).permit(:title, :body, :picture, :init_x, :init_y, :init_zoom)
+		end
+
+		def blip_params
+			params.require(:blip).permit(:title, :body, :x, :y)
 		end
 
 		def correct_user

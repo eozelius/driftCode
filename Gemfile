@@ -19,6 +19,7 @@ gem 'puma', 	    '2.11.1'
 gem 'byebug',      '3.4.0'
 gem 'json', '~> 1.8', '>= 1.8.3'
 gem 'pg', '~> 0.18.4'
+gem 'sprockets', '3.6.3'
 
 group :development do
   gem 'web-console', '~> 3.0'

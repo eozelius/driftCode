@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  body: MyText
+  x: 1.5
+  'y': 1.5
+  post_id: 
+
+two:
+  title: MyString
+  body: MyText
+  x: 1.5
+  'y': 1.5
+  post_id: 
