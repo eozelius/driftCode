@@ -13,7 +13,16 @@ $(document).ready(function(){
   window.map.on('click', function(e){
     var lat = e.latlng.lat.toFixed(3);
     var lng = e.latlng.lng.toFixed(3);
+
     L.marker([lat, lng]).addTo(window.map);
+
+    var options = {
+      className: 'marker-box',
+      offset: [500, 0]
+    }
+
+    var popup = L.popup(options).setLatLng([lat, lng]).setContent('<p>Hello world!<br />This is a nice popup.</p>').openOn(window.map);
+
   });
 
   // Submit form
