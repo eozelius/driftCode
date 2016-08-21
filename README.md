@@ -13,4 +13,3 @@ libraries:
 	twitter Bootstrap, 
 	Font-awesome
 	LeafletJS
-	AngularJS
