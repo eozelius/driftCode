@@ -1,14 +1,12 @@
 $(document).ready(function(){
   // Click next step
-  $('.next-step').on('click', function(){
-    var next = $('.active-step').data('next');
-    $('.active-step').slideUp().removeClass('active-step');
-    $('.wizard-' + next).addClass('active-step').slideDown();
+  $('.tabs-menu li').on('click', function(){
+    $('.active-tab').removeClass('active-tab');
+    var tab = $(this).data('step');
+    $(this).addClass('active-tab');
 
-    if(next == 'init'){
-      $('.next-step').slideUp();
-      $('.save-wizard').removeClass('hidden').slideDown();
-    }
+    $('.wizard-step').addClass('hidden');
+    $('.wizard-'+tab).removeClass('hidden');    
   });
 
   // Submit form

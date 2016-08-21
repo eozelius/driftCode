@@ -29,34 +29,57 @@
 
   <div id="post-form-container" class="drift-map-instructions col-lg-5 col-md-5 col-sm-12 col-xs-12">
     <%= form_for @post, html: { multipart: true } do |f| %>
-      <!-- Step 1 Title -->
-      <div data-next="body" class="wizard-title wizard-step active-step">
-        <p class="instructions">give your driftMap a catchy title</p>
-        <div class="action-title details-open" >
-          <p>Title</p>
-          <%= f.text_field :title %>
+      <%= f.hidden_field :init_x %>
+      <%= f.hidden_field :init_y %>
+      <%= f.hidden_field :init_zoom %>
+
+      <div id="menu-container">
+        <!-- tabs -->
+        <div class="tabs-container ">
+          <ul class="tabs-menu">
+            <li data-step="title" class="active-tab col-md-3 wizard-table">title</li>
+            <li data-step="body" class="col-md-3 wizard-table">body</li>
+            <li data-step="markers" class="col-md-3 wizard-table">markers</li>
+            <li data-step="routes" class="col-md-3 wizard-table">routes</li>
+          </ul>
+        </div>
+
+        <!-- menu-body -->
+        <div class="menu-body-container">
+          <!-- Step 1 Title -->
+          <div class="title-container">
+            <div class="wizard-title wizard-step">
+              <p class="instructions">give your driftMap a catchy title</p>
+              <%= f.text_field :title %>
+            </div>
+          </div>
+
+          <!-- Step 2 description -->
+          <div class="body-container">
+            <div class="wizard-body wizard-step hidden" >
+              <p class="instructions">sum up your driftMap in 10 words</p>
+              <div class="action-body">
+                <%= f.text_area :body, id: 'driftmap-body' %>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 Markers -->
+          <div class="markers-container">
+            <div class="wizard-markers wizard-step hidden">
+              <p class="instructions-title">Markers</p>
+            </div>
+          </div>
+
+          <!-- Step 4 Markers -->
+          <div class="routes-container">
+            <div class="wizard-routes wizard-step hidden">
+              <p class="instructions-title">Routes</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Step 2 description -->
-      <div data-next="init" class="wizard-body wizard-step" >
-        <p class="instructions">sum up your driftMap in 10 words</p>
-        <div class="action-body">
-          <p>description</p>
-          <%= f.text_area :body, id: 'driftmap-body' %>
-        </div>
-      </div>
-
-      <!-- Step 3 Init -->
-      <div data-next="markers" class="wizard-init wizard-step" >
-        <p class="instructions-title">drag and zoom your map to the location and zoom level you would like</p>
-        <%= f.hidden_field :init_x %>
-        <%= f.hidden_field :init_y %>
-        <%= f.hidden_field :init_zoom %>
-      </div>
-
-      <div class="action-footer">
-        <span class="next-step normal">next</span>
-        <span type="submit" class="hidden normal save-wizard">save</span>
-      </div>
+      <span type="submit" class="normal save-wizard">save</span>
     <% end %>
+  </div>

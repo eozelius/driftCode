@@ -9,14 +9,6 @@
   margin: 0;
 }
 
-.wizard-step {
-  display: none;
-}
-
-.active-step {
-  display: block;
-}
-
 .post-form p {
   margin: 25px 0;
   text-align: left;
@@ -40,6 +32,7 @@ p.instructions {
 
 #driftmap-body {
   height: 60px;
+  width: 100%;
 }
 
 .step {
