@@ -1,4 +1,4 @@
-function init_map(dom, driftmap){
+function init_map(dom, driftmap, markers){
 	try {
 		var x = driftmap.init_x || 40.735;
 		var y = driftmap.init_y || -73.890;
@@ -12,8 +12,32 @@ function init_map(dom, driftmap){
 	    	id: 'eozelius77.j4hekake',
 	    	accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
 			}).addTo(m);
+	
+		// Add Markers to Map
+		var markerOptions = {
+			offset: [210, -30],
+			className: 'marker-box'
+		}
+		var markerLat = xss_trim(markers[0].marker_x);
+		var markerLng = xss_trim(markers[0].marker_y);
+		var markerTitle = xss_trim(markers[0].marker_title);
+		var markerBody = xss_trim(markers[0].marker_body);
+
+		console.log("x: " + markerLat + '\ny: ' + markerLng + '\ntitle: ' + markerTitle + '\nbody: ' + markerBody);
+
+		// todo xss protect
+		var markerContent = '<div class="marker-content-wrapper">' + 
+													'<p class="instructions">'+ markerTitle +'</p>' + 
+													'<p>'+ markerBody +'</p>' + 
+												'</div>';
+
+		L.marker([markerLat, markerLng]).addTo(m);
+		L.popup(markerOptions).setLatLng([markerLat, markerLng]).setContent(markerContent).openOn(m);
+
+
 	} catch(e) {
 		console.log('error: ' + e);
+		window.ethanerror = e;
 
 		var imgSrc = "<%= asset_path('globe_0.jpg') %>"
 		var errorMap = '<img class="error-map" src="'+ imgSrc +'">';

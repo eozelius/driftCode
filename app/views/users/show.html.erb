@@ -16,14 +16,22 @@
 	<% else %>
 		<div class="profile-map-container col-lg-7 col-md-7 col-sm-12 col-xs-12">
 			<div id="profile-map"></div>
-	
+
 			<script type="text/javascript">
 				var driftmap = {
 					init_x: '<%= @post.init_x %>',
 					init_y: '<%= @post.init_y %>',
-					init_zoom: '<%= @post.init_zoom %>'
+					init_zoom: '<%= @post.init_zoom %>',
 				}
-				init_map('profile-map', driftmap)
+
+				var markers = [{
+					marker_x: '<%= @blips.first.x %>',
+					marker_y: '<%= @blips.first.y %>',
+					marker_title: '<%= @blips.first.title %>',
+					marker_body: '<%= @blips.first.body %>'
+				}]
+
+				init_map('profile-map', driftmap, markers)
 			</script>
 
 			<% if user_is_home(@user) || admin_user %>
