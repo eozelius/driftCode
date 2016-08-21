@@ -3,7 +3,7 @@ function init_map(dom, driftmap){
 		var x = driftmap.init_x || 40.735;
 		var y = driftmap.init_y || -73.890;
 		var z = driftmap.init_zoom || 12;
-		var m = window.m = L.map(dom).setView([x, y], z);
+		var m = window.map = L.map(dom).setView([x, y], z);
 
 		// TODO make this API key a Server environment variable
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
