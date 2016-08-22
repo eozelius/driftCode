@@ -1,4 +1,4 @@
-function init_map(dom, driftmap, markers){
+function init_map(dom, driftmap, blips){
 	try {
 		var x = driftmap.init_x || 40.735;
 		var y = driftmap.init_y || -73.890;
@@ -14,30 +14,31 @@ function init_map(dom, driftmap, markers){
 			}).addTo(m);
 	
 		// Add Markers to Map
-		for(var i in markers){
-			console.log('\nmarkers[i]: ' + markers[i])
+		for(var i in blips){
+			console.log('\nblips[i]: ' + blips[i])
 
-			var markerOptions = {
+			var popupOptions = {
 				offset: [210, -30],
 				className: 'marker-box'
 			}
 
-			var markerLat = xss_trim(markers[i].marker_x);
-			var markerLng = xss_trim(markers[i].marker_y);
-			var markerTitle = xss_trim(markers[i].marker_title);
-			var markerBody = xss_trim(markers[i].marker_body);
+			var lat = xss_trim(blips[i].x);
+			var lng = xss_trim(blips[i].y);
+			var title = xss_trim(blips[i].title);
+			var body = xss_trim(blips[i].body);
 
-			console.log("x: " + markerLat + '\ny: ' + markerLng + '\ntitle: ' + markerTitle + '\nbody: ' + markerBody);
+			console.log("x: " + lat + '\ny: ' + lng + '\ntitle: ' + title + '\nbody: ' + body);
 
 			// todo xss protect
-			var markerContent = '<div class="marker-content-wrapper">' + 
-														'<p class="instructions">'+ markerTitle +'</p>' + 
-														'<p>'+ markerBody +'</p>' + 
+			var popupContent = '<div class="marker-content-wrapper">' + 
+														'<p class="instructions">'+ title +'</p>' + 
+														'<p>'+ body +'</p>' + 
 													'</div>';
 
-			L.marker([markerLat, markerLng]).addTo(m);
-			L.popup(markerOptions).setLatLng([markerLat, markerLng]).setContent(markerContent).openOn(m);
+			var marker = L.marker([lat, lng]).addTo(m);
+			marker.bindPopup(popupContent).openPopup();
 
+			L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
 		}
 
 	} catch(e) {
