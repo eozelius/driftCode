@@ -14,26 +14,31 @@ function init_map(dom, driftmap, markers){
 			}).addTo(m);
 	
 		// Add Markers to Map
-		var markerOptions = {
-			offset: [210, -30],
-			className: 'marker-box'
+		for(var i in markers){
+			console.log('\nmarkers[i]: ' + markers[i])
+
+			var markerOptions = {
+				offset: [210, -30],
+				className: 'marker-box'
+			}
+
+			var markerLat = xss_trim(markers[i].marker_x);
+			var markerLng = xss_trim(markers[i].marker_y);
+			var markerTitle = xss_trim(markers[i].marker_title);
+			var markerBody = xss_trim(markers[i].marker_body);
+
+			console.log("x: " + markerLat + '\ny: ' + markerLng + '\ntitle: ' + markerTitle + '\nbody: ' + markerBody);
+
+			// todo xss protect
+			var markerContent = '<div class="marker-content-wrapper">' + 
+														'<p class="instructions">'+ markerTitle +'</p>' + 
+														'<p>'+ markerBody +'</p>' + 
+													'</div>';
+
+			L.marker([markerLat, markerLng]).addTo(m);
+			L.popup(markerOptions).setLatLng([markerLat, markerLng]).setContent(markerContent).openOn(m);
+
 		}
-		var markerLat = xss_trim(markers[0].marker_x);
-		var markerLng = xss_trim(markers[0].marker_y);
-		var markerTitle = xss_trim(markers[0].marker_title);
-		var markerBody = xss_trim(markers[0].marker_body);
-
-		console.log("x: " + markerLat + '\ny: ' + markerLng + '\ntitle: ' + markerTitle + '\nbody: ' + markerBody);
-
-		// todo xss protect
-		var markerContent = '<div class="marker-content-wrapper">' + 
-													'<p class="instructions">'+ markerTitle +'</p>' + 
-													'<p>'+ markerBody +'</p>' + 
-												'</div>';
-
-		L.marker([markerLat, markerLng]).addTo(m);
-		L.popup(markerOptions).setLatLng([markerLat, markerLng]).setContent(markerContent).openOn(m);
-
 
 	} catch(e) {
 		console.log('error: ' + e);

@@ -1,4 +1,3 @@
-# Create Pansy Accounts
 if Rails.env.production?
   u = User.create!( name:     'ethan',
                 email:    'e.ozelius@gmail.com',

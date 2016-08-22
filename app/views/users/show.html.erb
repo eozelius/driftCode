@@ -14,9 +14,9 @@
 			<% end %>
 		</div>
 	<% else %>
-		<div class="profile-map-container col-lg-7 col-md-7 col-sm-12 col-xs-12">
+		<div class="profile-map-container">
 			<div id="profile-map"></div>
-
+			
 			<script type="text/javascript">
 				var driftmap = {
 					init_x: '<%= @post.init_x %>',
@@ -24,12 +24,16 @@
 					init_zoom: '<%= @post.init_zoom %>',
 				}
 
-				var markers = [{
-					marker_x: '<%= @blips.first.x %>',
-					marker_y: '<%= @blips.first.y %>',
-					marker_title: '<%= @blips.first.title %>',
-					marker_body: '<%= @blips.first.body %>'
-				}]
+				var markers = [];
+
+				<% @post.blips.each do |b| %>
+					markers.push({
+						marker_x: '<%= b.x %>',
+						marker_y: '<%= b.y %>',
+						marker_title: '<%= b.title %>',
+						marker_body: '<%= b.body %>'
+					});
+				<% end %>
 
 				init_map('profile-map', driftmap, markers)
 			</script>
