@@ -1,58 +1,73 @@
-if Rails.env.production?
-  u = User.create!( name:     'ethan',
-                email:    'e.ozelius@gmail.com',
-                password: 'password',
-                password_confirmation: 'password',
-                activated: true,
-                activated_at: Time.zone.now,
-                admin: true )
+# Seeds for all Environments
+ethan = User.create!( 
+  name:     'ethan',
+  email:    'e.ozelius@gmail.com',
+  password: 'password',
+  password_confirmation: 'password',
+  activated: true,
+  activated_at: Time.zone.now,
+  admin: true 
+)
 
-  p = Post.create(
-    title:  "cout << driftmap",
-    body:   "Another computer hacker trying to get some sunshine",
-    init_x: -73,
-    init_y: 42,
-    init_zoom: 13
-  )
+# Create driftmap for ethan
+ethan.post = Post.create(
+  title:  "./driftmap",
+  body:   "just a computer hacker trying to get some fresh air",
+  init_x: 26.549222577692,
+  init_y: -83.0126953125,
+  init_zoom: 4
+)
 
-  u.post = p
-end
+# Build my 4 Posts to be site default
+ethan.post.blips.create!(
+  title: 'Sunnyside Queens',
+  body: '7 train',
+  x: 40.743,
+  y: -73.922
+)
+
+ethan.post.blips.create!(
+  x: 43.206,
+  y: -71.547,
+  title: 'Concord NH',
+  body: 'born and raised.',
+)
+
+ethan.post.blips.create!(
+  title: 'Medellin Colombia',
+  body: 'asdf',
+  x: 6.242,
+  y: -75.59,
+)
+
+ethan.post.blips.create!(
+  title: 'Bogota Colombia',
+  body: 'fdsa',
+  x: 4.642,
+  y: -74.082
+)
 
 if Rails.env.development? || Rails.env.test?
   # Create Dummy Users
-  76.times do |n|
-    name  = "Simon Heizen-#{n+1}"
-    email = "SHeizen-#{n+1}@gubenheimen.org"
+  10.times do |n|
+    name  = "Owen-#{n+1}"
+    email = "owen-#{n+1}@coen.org"
     password = "japan123"
-    new_user = User.create!(name:  name,
-                            email: email,
-                            password:              password,
-                            password_confirmation: password,
-                            activated: true,
-                            activated_at: Time.zone.now)
+    owen = User.create!(
+      name:  name,
+      email: email,
+      password: password,
+      password_confirmation: password,
+      activated: true,
+      activated_at: Time.zone.now
+    )
 
-    p = Post.create(title:  "Title #{n+1}",
-                    body:   "Body #{n+1}",
-                    init_x: -73,
-                    init_y: 42,
-                    init_zoom: 13 )
-
-    new_user.post = p
+    owen.post = Post.create(
+      title:  "hello there, im Owen-#{n+1}",
+      body:   "cout driftmap-#{n+1}",
+      init_x: 26.549222577692,
+      init_y: -83.0126953125,
+      init_zoom: 4
+    )
   end
-
-  # Create Admin user for Production
-  ethan = User.create!( name:     'ethan',
-                        email:    'e.ozelius@gmail.com',
-                        password: 'password',
-                        password_confirmation: 'password',
-                        activated: true,
-                        activated_at: Time.zone.now,
-                        admin: true )
-
-  p = Post.create(title: 'medellin, Colombia',
-                  body:  'home of paisas',
-                  init_x: 6.24004981715641,
-                  init_y: -75.5632781982422,
-                  init_zoom: 13 )
-  ethan.post = p
 end
