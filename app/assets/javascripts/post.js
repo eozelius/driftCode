@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  var addedBlib = false;
+
   // Click next step
   $('.tabs-menu li').on('click', function(){
     $('.active-tab').removeClass('active-tab');
@@ -11,6 +13,7 @@ $(document).ready(function(){
 
   // Markers
   window.map.on('click', function(e){
+    addedBlib = true;
     var lat = e.latlng.lat.toFixed(3);
     var lng = e.latlng.lng.toFixed(3);
     var popupOptions = {
@@ -19,16 +22,17 @@ $(document).ready(function(){
     }
     var postId = $('#post_user_id').val();
 
-    var postForm ='<div class="blip-wrapper">' +
-                    '<p class="instructions">Title</p>' +
-                    '<input id="blip-title" name="blip[title]" type="text" />' +
-                    '<p class="instructions">Description</p>' +
-                    '<textarea id="blip-body" name="blip[body]"></textarea>' +
-                    '<span class="normal">cancel</span>' +
-                  '</div>';
+    var blipForm = '<div class="blip-wrapper">' +
+                        '<p class="instructions">Title</p>' +
+                        '<input id="blip-title" name="blip[title]" type="text" />' +
+                        '<p class="instructions">Description</p>' +
+                        '<textarea id="blip-body" name="blip[body]"></textarea>' +
+                        '<span class="normal">cancel</span>' +
+                      '</div>';
 
-    L.marker([lat, lng]).addTo(window.map);
-    L.popup(popupOptions).setLatLng([lat, lng]).setContent(postForm);
+    var blipMarker = L.marker([lat, lng]).addTo(window.map);
+    var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(blipForm).openOn(window.map);
+    blipMarker.bindPopup(blipPopup);
 
     // Update Post Form
     var hiddenInputs = '<input type="hidden" name="blip[x]" value="'+ lat +'">' + 
@@ -41,6 +45,8 @@ $(document).ready(function(){
     var init_x = window.map.getCenter().lat;
     var init_y = window.map.getCenter().lng;
     var zoom   = window.map.getZoom();
+    var blipTitle;
+    var blipBody;
  
     // Post attrs
     $('#post_init_x').val(init_x);
@@ -48,9 +54,12 @@ $(document).ready(function(){
     $('#post_init_zoom').val(zoom);
 
     // Blib attrs
-    var blipTitle = '<input type="hidden" name="blip[title]" value="'+ $('#blip-title').val() +'">';
-    var blipBody  = '<input type="hidden" name="blip[body]"  value="'+ $('#blip-body').val()  +'">';
-
+    if(addedBlib){
+      blipTitle = '<input type="hidden" name="blip[title]" value="'+ $('#blip-title').val() +'">';
+      blipBody  = '<input type="hidden" name="blip[body]"  value="'+ $('#blip-body').val()  +'">';
+    } else {
+      blipBody = blipTitle = '';
+    }
     $('#post-form-container form').append(blipTitle, blipBody).submit();
   });
 

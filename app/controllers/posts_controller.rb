@@ -26,23 +26,29 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		@post = Post.find(params[:id])
-		@user = User.find(@post.user_id)
-		@blip = @post.blips.create(blip_params)
-		# todo, a user should be able to edit these one at a time.
+		post = Post.find(params[:id])
+		user = User.find(post.user_id)
 
-		if @post.update(post_params) && @blip.valid?
+		if params[:blip].present?
+			blip = post.blips.create(blip_params)
+			if !blip.valid?
+				flash[:danger] = "whoops! Something went wrong, please try again"
+				render 'edit'
+			end
+		end
+
+		if post.update_attributes(post_params)
 			flash[:success] = "driftmap successfully updated"
-			redirect_to @user
+			redirect_to user
 		else
 			flash[:danger] = "whoops! Something went wrong, please try again"
-			redirect_to @user
+			render 'edit'
 		end
 	end
 
 	def destroy
-		@post = Post.find(params[:id])
-		@post.destroy
+		post = Post.find(params[:id])
+		post.destroy
 
 		flash[:info] = "Post deleted"
 		redirect_to current_user
