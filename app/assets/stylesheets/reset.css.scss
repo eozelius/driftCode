@@ -277,6 +277,13 @@ button.normal:hover{
 	font-size: .8em;
 }
 
+/* Leaflet generic components */
 .leaflet-container {
 	height: 500px;
+}
+
+.blip-popup,
+.new-blip-popup {
+	//width: 400px;
+//	height: 300px;
 }

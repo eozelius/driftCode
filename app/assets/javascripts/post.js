@@ -13,8 +13,8 @@ $(document).ready(function(){
   window.map.on('click', function(e){
     var lat = e.latlng.lat.toFixed(3);
     var lng = e.latlng.lng.toFixed(3);
-    var options = {
-      className: 'marker-box',
+    var popupOptions = {
+      className: 'new-blip-box',
       offset: [500, 0]
     }
     var postId = $('#post_user_id').val();
@@ -28,11 +28,11 @@ $(document).ready(function(){
                   '</div>';
 
     L.marker([lat, lng]).addTo(window.map);
-    L.popup(options).setLatLng([lat, lng]).setContent(postForm).openOn(window.map);
+    L.popup(popupOptions).setLatLng([lat, lng]).setContent(postForm);
 
     // Update Post Form
     var hiddenInputs = '<input type="hidden" name="blip[x]" value="'+ lat +'">' + 
-                   '<input type="hidden" name="blip[y]" value="'+ lng +'">'; 
+                       '<input type="hidden" name="blip[y]" value="'+ lng +'">'; 
     $('.edit_post').append(hiddenInputs);
   });
 
@@ -49,7 +49,7 @@ $(document).ready(function(){
 
     // Blib attrs
     var blipTitle = '<input type="hidden" name="blip[title]" value="'+ $('#blip-title').val() +'">';
-    var blipBody  = '<input type="hidden" name="blip[body]" value="'+ $('#blip-body').val() +'">';
+    var blipBody  = '<input type="hidden" name="blip[body]"  value="'+ $('#blip-body').val()  +'">';
 
     $('#post-form-container form').append(blipTitle, blipBody).submit();
   });
