@@ -3,11 +3,11 @@ class BlipsController < ApplicationController
 	before_action :correct_user
 
 	def destroy
-		byebug
 		blip = Blip.find(params[:id])
 		user = User.find(Post.find(blip.post_id).user_id)
 
 		blip.destroy
+		user.reload
 		flash[:success] = "Blip deleted"
 		redirect_to user
 	end
@@ -24,5 +24,4 @@ class BlipsController < ApplicationController
 		    redirect_to(root_path)
 		  end
 		end
-
 end
