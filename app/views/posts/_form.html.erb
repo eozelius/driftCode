@@ -11,9 +11,9 @@
 
 <h3 class="page-title">driftMap</h3>
 
-<div class="step-3-slide" id="now-map-container">
+<div id="edit-driftmap-container">
   <!-- driftmap -->
-  <div id="post-map"></div>
+  <div id="edit-driftmap"></div>
 
   <script type="text/javascript">
     var driftmap = {
@@ -26,6 +26,7 @@
 
     <% @post.blips.each do |b| %>
       blips.push({
+        id: '<%= b.id %>',
         x: '<%= b.x %>',
         y: '<%= b.y %>',
         title: '<%= b.title %>',
@@ -33,64 +34,141 @@
       });
     <% end %>
 
-    init_map('post-map', driftmap, blips);
+    init_map('edit-driftmap', driftmap, blips);
   </script>
+</div>
 
-  <div id="post-form-container" class="drift-map-instructions col-lg-5 col-md-5 col-sm-12 col-xs-12">
-    <%= form_for @post, html: { multipart: true } do |f| %>
-      <%= f.hidden_field :init_x %>
-      <%= f.hidden_field :init_y %>
-      <%= f.hidden_field :init_zoom %>
+<div id="post-form-container" class="drift-map-instructions">
+  <%= form_for @post, html: { multipart: true } do |f| %>
+    <%= f.hidden_field :init_x %>
+    <%= f.hidden_field :init_y %>
+    <%= f.hidden_field :init_zoom %>
 
-      <div id="menu-container">
-        <!-- tabs -->
-        <div class="tabs-container ">
-          <ul class="tabs-menu">
-            <li data-step="title" class="active-tab col-md-3 wizard-table">title</li>
-            <li data-step="body" class="col-md-3 wizard-table">body</li>
-            <li data-step="markers" class="col-md-3 wizard-table">markers</li>
-            <li data-step="routes" class="col-md-3 wizard-table">routes</li>
-          </ul>
-        </div>
-
-        <!-- menu-body -->
-        <div class="menu-body-container">
-          <!-- Step 1 Title -->
-          <div class="title-container">
-            <div class="wizard-title wizard-step">
-              <p class="instructions">give your driftMap a catchy title</p>
-              <%= f.text_field :title %>
-            </div>
-          </div>
-
-          <!-- Step 2 description -->
-          <div class="body-container">
-            <div class="wizard-body wizard-step hidden" >
-              <p class="instructions">sum up your driftMap in 10 words</p>
-              <div class="action-body">
-                <%= f.text_area :body, id: 'driftmap-body' %>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3 Markers -->
-          <div class="markers-container">
-            <div class="wizard-markers wizard-step hidden">
-              <p class="instructions-title">Markers</p>
-            </div>
-          </div>
-
-          <!-- Step 4 Markers -->
-          <div class="routes-container">
-            <div class="wizard-routes wizard-step hidden">
-              <p class="instructions-title">Routes</p>
-            </div>
-          </div>
-
-          <span type="submit" class="normal save-wizard">save</span>
-          
-        </div>
+    <div id="menu-container">
+      <!-- tabs -->
+      <div class="tabs-container ">
+        <ul class="tabs-menu">
+          <li data-step="title" class="active-tab col-md-3 wizard-table">title</li>
+          <li data-step="body" class="col-md-3 wizard-table">body</li>
+          <li data-step="markers" class="col-md-3 wizard-table">markers</li>
+          <li data-step="routes" class="col-md-3 wizard-table">routes</li>
+        </ul>
       </div>
 
-    <% end %>
-  </div>
+      <!-- menu-body -->
+      <div class="menu-body-container">
+        <!-- Step 1 Title -->
+        <div class="title-container">
+          <div class="wizard-title wizard-step">
+            <p class="instructions">give your driftMap a catchy title</p>
+            <%= f.text_field :title %>
+          </div>
+        </div>
+
+        <!-- Step 2 description -->
+        <div class="body-container">
+          <div class="wizard-body wizard-step hidden" >
+            <p class="instructions">sum up your driftMap in 10 words</p>
+            <div class="action-body">
+              <%= f.text_area :body, id: 'driftmap-body' %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 Markers -->
+        <div class="markers-container">
+          <div class="wizard-markers wizard-step hidden">
+            <p class="instructions-title">Markers</p>
+          </div>
+        </div>
+
+        <!-- Step 4 Markers -->
+        <div class="routes-container">
+          <div class="wizard-routes wizard-step hidden">
+            <p class="instructions-title">Routes</p>
+          </div>
+        </div>
+
+        <span type="submit" class="normal save-wizard">save</span>
+        
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var addedBlib = false;
+
+    // Click next step
+    $('.tabs-menu li').on('click', function(){
+      $('.active-tab').removeClass('active-tab');
+      var tab = $(this).data('step');
+      $(this).addClass('active-tab');
+
+      $('.wizard-step').addClass('hidden');
+      $('.wizard-'+tab).removeClass('hidden');    
+    });
+
+    // Markers
+    window.map.on('click', function(e){
+      addedBlib = true;
+      var lat = e.latlng.lat.toFixed(3);
+      var lng = e.latlng.lng.toFixed(3);
+      var popupOptions = { 
+        className: 'new-blip-box',
+        offset: [100, -40]
+      }
+      var postId = $('#post_user_id').val();
+
+      var blipForm = '<div class="blip-wrapper">' +
+                          '<p class="instructions">Title</p>' +
+                          '<input id="blip-title" name="blip[title]" type="text" />' +
+                          '<p class="instructions">Description</p>' +
+                          '<textarea id="blip-body" name="blip[body]"></textarea>' +
+                          '<span class="normal">cancel</span>' +
+                        '</div>';
+
+      var blipMarker = L.marker([lat, lng]).addTo(window.map);
+      var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(blipForm).openOn(window.map);
+      blipMarker.bindPopup(blipPopup);
+
+      // Update Post Form
+      var hiddenInputs = '<input type="hidden" name="blip[x]" value="'+ lat +'">' + 
+                         '<input type="hidden" name="blip[y]" value="'+ lng +'">'; 
+      $('.edit_post').append(hiddenInputs);
+    });
+
+    // Submit form
+    $('span.save-wizard').on('click', function(){
+      var init_x = window.map.getCenter().lat;
+      var init_y = window.map.getCenter().lng;
+      var zoom   = window.map.getZoom();
+      var blipTitle;
+      var blipBody;
+   
+      // Post attrs
+      $('#post_init_x').val(init_x);
+      $('#post_init_y').val(init_y);
+      $('#post_init_zoom').val(zoom);
+
+      // Blib attrs
+      if(addedBlib){
+        blipTitle = '<input type="hidden" name="blip[title]" value="'+ $('#blip-title').val() +'">';
+        blipBody  = '<input type="hidden" name="blip[body]"  value="'+ $('#blip-body').val()  +'">';
+      } else {
+        blipBody = blipTitle = '';
+      }
+      $('#post-form-container form').append(blipTitle, blipBody).submit();
+    });
+
+    // Cannot upload images larger than 3M
+    $('#post_picture').on('change', function() {
+      var size_in_megabytes = this.files[0].size/1024/1024;
+      if (size_in_megabytes > 3){
+        alert('Maximum file size is 3MB. Please choose a smaller file.');
+        return false;
+      }
+    });
+  });
+</script>

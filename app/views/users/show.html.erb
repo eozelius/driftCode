@@ -28,6 +28,7 @@
 
 				<% @post.blips.each do |b| %>
 					blips.push({
+						id: '<%= b.id %>',
 						x: '<%= b.x %>',
 						y: '<%= b.y %>',
 						title: '<%= b.title %>',
@@ -40,10 +41,8 @@
 
 			<% if user_is_home(@user) || admin_user %>
 				<p style="margin-top:10px;">
-					<a>
 					<%= link_to 'edit driftmap | ', edit_post_path(@post) %>
 					<%= link_to 'delete driftmap', @post, method: :delete, data: { confirm: "Are you sure?" } %>
-					</a>
 				</p>
 			<% end %>
 
@@ -52,8 +51,6 @@
 		<div class="map-details col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<h3 class="page-title post-title"><%= @post.title %></h3>
 			<p class="post-title"><%= @post.body %></p>
-			
-
 		</div>
 
 	<% end %>

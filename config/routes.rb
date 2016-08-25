@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
+  resources :blips, only: :destroy
 
   get    'signup' => 'users#new'
   get    'login'  => 'sessions#new'

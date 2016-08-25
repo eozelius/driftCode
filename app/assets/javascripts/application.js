@@ -16,6 +16,5 @@
 //= require bootstrap.min.js
 //= require helper.js.erb
 //= require user.js
-//= require post.js
 //= require turbolinks
 //= require_tree .
