@@ -6,7 +6,9 @@ ethan = User.create!(
   password_confirmation: 'password',
   activated: true,
   activated_at: Time.zone.now,
-  admin: true 
+  admin: true,
+  from: 'concord nh',
+  gps: 'Sunnyside ny'
 )
 
 # Create driftmap for ethan

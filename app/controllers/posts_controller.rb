@@ -7,14 +7,14 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		user = current_user
-		p = Post.create(post_params)
-		p.user_id = user.id
+		@user = current_user
+		@post = Post.create(post_params)
+		@post.user_id = @user.id
 
-		if user.valid? && p.valid?
-			user.post = p
+		if @user.valid? && @post.valid?
+			@user.post = @post
 			flash[:success] = "driftmap created successfully"
-			redirect_to user
+			redirect_to @user
 		else
 			flash[:danger] = "Whoops something went wrong, please try again"
 			render 'new'
@@ -26,20 +26,20 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		post = Post.find(params[:id])
-		user = User.find(post.user_id)
+		@post = Post.find(params[:id])
+		@user = User.find(@post.user_id)
 
 		if params[:blip].present?
-			blip = post.blips.create(blip_params)
+			@blip = @post.blips.create(blip_params)	
 			if !blip.valid?
 				flash[:danger] = "whoops! Something went wrong, please try again"
 				render 'edit'
 			end
 		end
 
-		if post.update_attributes(post_params)
+		if @post.update_attributes(post_params)
 			flash[:success] = "driftmap successfully updated"
-			redirect_to user
+			redirect_to @user
 		else
 			flash[:danger] = "whoops! Something went wrong, please try again"
 			render 'edit'
@@ -47,8 +47,8 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
-		post = Post.find(params[:id])
-		post.destroy
+		@post = Post.find(params[:id])
+		@post.destroy
 
 		flash[:info] = "Post deleted"
 		redirect_to current_user

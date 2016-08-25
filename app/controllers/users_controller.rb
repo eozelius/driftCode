@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       @user.send_activation_email
       flash[:info] = "welcome to driftCode"
       log_in @user
-      redirect_to @user
+      redirect_to new_post_path
   	else
   		render 'new'
   	end
@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @post = @user.post
-    @blips = @post.blips
   end
 
   def update
@@ -45,8 +44,14 @@ class UsersController < ApplicationController
 
   private
   	def user_params
-  		params.require(:user).permit(:name, :email, :password, :password_confirmation, 
-                                   :profile_pic, :from, :gps)
+  		params.require(:user).permit(
+        :name, 
+        :email, 
+        :password, 
+        :password_confirmation,
+        :from, 
+        :gps
+      )
   	end
 
     # Confirms the correct user.

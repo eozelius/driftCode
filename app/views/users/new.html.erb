@@ -56,8 +56,22 @@
 	      
 	    </div>
 	    <p class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-	      <span class="normal signup" >next</button>
+	      <span class="normal signup" type="submit">next</button>
 	    </p>
+
+	    <script type="text/javascript">
+	    	// Cannot upload images larger than 3M
+	    	$('#user_profile_pic').on('change', function() {
+	    		alert('validation of photo')
+	    	  var size_in_megabytes = this.files[0].size/1024/1024;
+	    	  if (size_in_megabytes > 3){
+	    	    alert('Maximum file size is 3MB. Please choose a smaller file.');
+	    	    return false;
+	    	  }
+	    	});
+	    </script>
+
+
 	  </div>
 	<% end %>
 </div>
