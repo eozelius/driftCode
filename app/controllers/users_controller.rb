@@ -29,11 +29,11 @@ class UsersController < ApplicationController
 
     if @user.update_attributes(user_params)
       flash[:success] = "Save successful."
-      redirect_to @user
     else
-      flash.now[:danger] = "whoops! something went wrong, please try again."
-      render 'edit'
+      flash[:danger] = "whoops! something went wrong, please try again."
     end
+
+    redirect_to @user
   end
 
   def destroy
@@ -49,6 +49,7 @@ class UsersController < ApplicationController
         :email, 
         :password, 
         :password_confirmation,
+        :profile_pic,
         :from, 
         :gps
       )

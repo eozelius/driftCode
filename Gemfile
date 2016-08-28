@@ -8,9 +8,9 @@ gem 'jquery-rails', '4.0.3'
 gem 'turbolinks',   '2.3.0'
 gem 'jbuilder',     '2.2.3'
 gem 'sdoc',         '0.4.0', group: :doc
-gem 'carrierwave',  '0.10.0'
-gem 'mini_magick',  '3.8.0'
-gem 'fog',          '1.26.0'
+gem 'carrierwave', '~> 0.11.2'
+gem 'mini_magick', '~> 4.5', '>= 4.5.1'
+gem 'fog', '~> 1.38'
 gem 'bcrypt', '~> 3.1.10'
 gem 'therubyracer', '~> 0.12.2'
 gem 'libv8' # 3.16.14.11
