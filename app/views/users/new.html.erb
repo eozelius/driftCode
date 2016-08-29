@@ -18,23 +18,23 @@
 	    <% end %>
 	    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 	      <p>
-	        <label for="user_name">Name</label>
-	        <input type="text" name="user[name]" id="user_name">
+	      	<%= f.label :name %>
+	      	<%= f.text_field :name %>
 	      </p>  
 
 	      <p>
-	        <label for="user_email">Email</label>
-	        <input type="text" name="user[email]" id="user_email">
+	      	<%= f.label :email %>
+	      	<%= f.text_field :email %>
 	      </p>
 
 	      <p>
-	        <label for="user_password">Password</label>
-	        <input type="text" name="user[password]" id="user_password">
+	        <%= f.label :password %>
+	      	<%= f.password_field :password %>
 	      </p>
 
 	      <p>
-	        <label for="user_password_confirmation">Password confirmation</label>
-	        <input type="text" name="user[password_confirmation]" id="user_password_confirmation">
+	        <%= f.label :password_confirmation %>
+	      	<%= f.password_field :password_confirmation %>
 	      </p>
 	    </div><!-- end left-hand text -->
 
@@ -61,8 +61,15 @@
 
 	    <script type="text/javascript">
 	    	// Cannot upload images larger than 3M
+    	  $('.signup').on('click', function(){
+    	    $('#new_user input[type="text"]').each(function(){
+    	      $(this).val(xss_trim($(this).val()));
+    	    });
+
+    	    $('#new_user').submit();
+    	  });
+
 	    	$('#user_profile_pic').on('change', function() {
-	    		alert('validation of photo')
 	    	  var size_in_megabytes = this.files[0].size/1024/1024;
 	    	  if (size_in_megabytes > 3){
 	    	    alert('Maximum file size is 3MB. Please choose a smaller file.');
@@ -70,8 +77,6 @@
 	    	  }
 	    	});
 	    </script>
-
-
 	  </div>
 	<% end %>
 </div>

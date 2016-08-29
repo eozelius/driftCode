@@ -2,8 +2,6 @@ class Post < ActiveRecord::Base
 	belongs_to 	:user
 	has_many :blips, dependent: :destroy
 
-	default_scope -> { order(created_at: :desc) }
-
 	mount_uploader :picture, PictureUploader
 
 	validates :title, 	:presence => true, :length => { minimum: 4, maximum: 40 }

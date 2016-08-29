@@ -146,6 +146,10 @@ p {
 	text-align: left;
 }
 
+a {
+	cursor: pointer;
+}
+
 a:hover,
 a:focus,
 a:active {
@@ -171,9 +175,11 @@ input, textarea {
 	margin-bottom: 4%;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
 	width: 80%;
 	display: block;
+	max-width: 215px;
 }
 
 textarea {
