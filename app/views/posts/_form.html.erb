@@ -72,8 +72,6 @@
   <% end %>
 </div>
 
-
-
 <div id="edit-driftmap-container">
   <!-- driftmap -->
   <div id="edit-driftmap"></div>
@@ -124,12 +122,12 @@
       var postId = $('#post_user_id').val();
 
       var blipForm = '<div class="blip-wrapper">' +
-                          '<p class="instructions">Title</p>' +
-                          '<input id="blip-title" name="blip[title]" type="text" />' +
-                          '<p class="instructions">Description</p>' +
-                          '<textarea id="blip-body" name="blip[body]"></textarea>' +
-                          '<span class="normal">cancel</span>' +
-                        '</div>';
+                        '<p class="instructions">Title</p>' +
+                        '<input id="blip-title" name="blip[title]" type="text" />' +
+                        '<p class="instructions">Description</p>' +
+                        '<textarea id="blip-body" name="blip[body]"></textarea>' +
+                        '<span class="normal">cancel</span>' +
+                      '</div>';
 
       var blipMarker = L.marker([lat, lng]).addTo(window.map);
       var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(blipForm).openOn(window.map);
@@ -138,7 +136,7 @@
       // Update Post Form
       var hiddenInputs = '<input type="hidden" name="blip[x]" value="'+ lat +'">' + 
                          '<input type="hidden" name="blip[y]" value="'+ lng +'">'; 
-      $('.edit_post').append(hiddenInputs);
+      $('#post-form-container form').append(hiddenInputs);
     });
 
     // Submit form

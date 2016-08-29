@@ -44,11 +44,7 @@ function init_map(dom, driftmap, blips){
 	} catch(e) {
 		console.log('error: ' + e);
 		flash_now('danger', 'whoops, something went wrong.  Please try again.')
-		window.ethanerror = e;
-
-		var imgSrc = "<%= asset_path('globe_0.jpg') %>"
-		var errorMap = '<img class="error-map" src="'+ imgSrc +'">';
-		$(dom).prepend(errorMap);
+		window.DMIniterror = e;
 	}	
 }
 

@@ -16,7 +16,12 @@ class PostsController < ApplicationController
 
 		if @user.valid? && @post.valid?
 			@user.post = @post
+			@post.save
+			@user.save
 			flash[:success] = "driftmap created successfully"
+
+			# create Blips if user added any.
+			create_blip
 			redirect_to @user
 		else
 			flash[:danger] = "Whoops something went wrong, please try again"
@@ -32,13 +37,7 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 		@user = User.find(@post.user_id)
 
-		if params[:blip].present?
-			@blip = @post.blips.create(blip_params)	
-			if !blip.valid?
-				flash[:danger] = "whoops! Something went wrong, please try again"
-				render 'edit'
-			end
-		end
+		create_blip
 
 		if @post.update_attributes(post_params)
 			flash[:success] = "driftmap successfully updated"
@@ -58,6 +57,17 @@ class PostsController < ApplicationController
 	end
 
 	private
+		def create_blip
+			if params[:blip].present?
+				@blip = @post.blips.create(blip_params)
+				if @blip.valid?
+					flash[:success] = "blip created successfully"
+				else
+					flash[:danger] = "Whoops something went wrong creating the blip, please try	again"
+				end
+			end
+		end
+
 		def post_params
 			params.require(:post).permit(:title, :body, :picture, :init_x, :init_y, :init_zoom)
 		end
