@@ -59,21 +59,25 @@ class PostsController < ApplicationController
 	private
 		def create_blip
 			if params[:blip].present?
-				@blip = @post.blips.create(blip_params)
-				if @blip.valid?
-					flash[:success] = "blip created successfully"
-				else
-					flash[:danger] = "Whoops something went wrong creating the blip, please try	again"
+				params[:blip].each do |b|
+					@blip = @post.blips.create(
+						x: b[1]["x"],
+						y: b[1]["y"],
+						title: b[1]["title"],
+						body:  b[1]["body"]
+					)
+
+					if @blip.valid?
+						flash[:success] = "blip created successfully"
+					else
+						flash[:danger] = "Whoops something went wrong creating the blip, please try	again"
+					end
 				end
 			end
 		end
 
 		def post_params
 			params.require(:post).permit(:title, :body, :picture, :init_x, :init_y, :init_zoom)
-		end
-
-		def blip_params
-			params.require(:blip).permit(:title, :body, :x, :y, {photos: []} )
 		end
 
 		def correct_user

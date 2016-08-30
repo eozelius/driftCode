@@ -27,7 +27,6 @@ function init_map(dom, driftmap, blips){
 			var title = xss_trim(blips[i].title);
 			var body = xss_trim(blips[i].body);
 
-			console.log("x: " + lat + '\ny: ' + lng + '\ntitle: ' + title + '\nbody: ' + body);
 			// todo xss protect
 			var popupContent =  '<div class="marker-content-wrapper">' + 
 														'<p class="instructions">'+ title +'</p>' + 
@@ -48,6 +47,60 @@ function init_map(dom, driftmap, blips){
 	}	
 }
 
+function add_blip(driftmap, e, blipIndex){
+	var lat = e.latlng.lat.toFixed(3);
+  var lng = e.latlng.lng.toFixed(3);
+
+  var popupOptions = { 
+    className: 'new-blip-box blip-box-' + blipIndex,
+    offset: [100, -40]
+  }
+
+  var blipContent = '<div class="blip-wrapper-'+ blipIndex +'">' +
+	                    '<p class="instructions">Title</p>' +
+	                    '<input id="blip-title-'+ blipIndex +'" class="blip-title" name="blip['+ blipIndex +'][title]" data-blip="'+ blipIndex +'" type="text" />' +
+	                    '<p class="instructions">Description</p>' +
+	                    '<textarea id="blip-body-'+ blipIndex +'" class="blip-body" name="blip['+ blipIndex +'][body]" data-blip="'+ blipIndex +'"></textarea>' +
+	                    '<input accept="image/jpeg, image/gif, image/png, image/jpg" class="blip-file" name="blip['+ blipIndex +'][photos][0]" id="blip_'+ blipIndex +'_photos_0" data-blip="'+ blipIndex +'" type="file">' +
+	                    '<span class="normal" id="add-new-blip" data-photo="0" data-blip="'+ blipIndex +'"><i class="fa fa-plus"></i> photo</span>' +
+	                    '<span class="normal">cancel</span>' +
+	                  '</div>';
+
+  var blipMarker = L.marker([lat, lng]).addTo(driftmap);
+  var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(blipContent).openOn(driftmap);
+  blipMarker.bindPopup(blipPopup);
+
+  var blipInputs = '<input type="hidden" name="blip['+ blipIndex +'][x]" value="'+ lat +'">' + 
+                   '<input type="hidden" name="blip['+ blipIndex +'][y]" value="'+ lng +'">' + 
+                   '<input type="hidden" name="blip['+ blipIndex +'][title]" class="blip-title">' + 
+                   '<input type="hidden" name="blip['+ blipIndex +'][body]"  class="blip-body" >';
+
+  $('#post-form-container form').append(blipInputs);
+
+  $('.blip-wrapper-'+ blipIndex + ' input, .blip-wrapper-'+ blipIndex + ' textarea').on('input', function(){
+  	var blipIndex = $(this).data('blip');
+  	var field;
+
+  	if($(this).hasClass('blip-title'))
+  		field = 'title';
+  	else if($(this).hasClass('blip-body'))
+  		field = 'body';
+  	else
+  		field = 'file';
+
+  	$('.blip-'+field+'[name="blip['+blipIndex+']['+field+']"]').val(xss_trim($(this).val()));
+  });
+
+  // Add event listener for 'add another photo button'
+  $('#add-new-blip[data-blip="'+ blipIndex +'"]').on('click' , function(){
+  	var blipIndex = $(this).data('blip');
+  	var photoIndex = $(this).data('photo') + 1;
+    var addPhoto = '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip['+ blipIndex +'][photos]['+ photoIndex +']" id="blip_'+ blipIndex +'_photos_'+ photoIndex +'" type="file">'
+
+    $(this).before(addPhoto).data('photo', photoIndex);
+  });
+} // end add_blip
+
 function flash_now(type, message){
 	console.log("type: " + type + "\n message: " + message);
 
@@ -62,6 +115,5 @@ function xss_trim(str){
 	.replace(/'/g, '&#39;')
 	.replace(/</g, '&lt;')
 	.replace(/>/g, '&gt;')
-	.replace('/', '&#x2F')
-	.trim();
+	.replace('/', '&#x2F');
 }
