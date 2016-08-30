@@ -73,7 +73,7 @@ class PostsController < ApplicationController
 		end
 
 		def blip_params
-			params.require(:blip).permit(:title, :body, :x, :y)
+			params.require(:blip).permit(:title, :body, :x, :y, {photos: []} )
 		end
 
 		def correct_user

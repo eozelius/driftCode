@@ -126,6 +126,8 @@
                         '<input id="blip-title" name="blip[title]" type="text" />' +
                         '<p class="instructions">Description</p>' +
                         '<textarea id="blip-body" name="blip[body]"></textarea>' +
+                        '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip[photos][0]" id="blip_photos_0" type="file">' +
+                        '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip[photos][1]" id="blip_photos_1" type="file">' +
                         '<span class="normal">cancel</span>' +
                       '</div>';
 
@@ -154,12 +156,14 @@
 
       // Blib attrs
       if(addedBlib){
-        blipTitle = '<input type="hidden" name="blip[title]" value="'+ $('#blip-title').val() +'">';
-        blipBody  = '<input type="hidden" name="blip[body]"  value="'+ $('#blip-body').val()  +'">';
+        blipInputs = '<input type="hidden" name="blip[title]" value="'+ $('#blip-title').val() +'">' + 
+                     '<input type="hidden" name="blip[body]"  value="'+ $('#blip-body').val()  +'">' + 
+                     '<input type="hidden" name="blip[photos][0]" value="'+ $('#blip_photos_0').val() +'">' + 
+                     '<input type="hidden" name="blip[photos][1]" value="'+ $('#blip_photos_1').val() +'">';
       } else {
         blipBody = blipTitle = '';
       }
-      $('#post-form-container form').append(blipTitle, blipBody).submit();
+      $('#post-form-container form').append(blipInputs).submit();
     });
 
     // Cannot upload images larger than 3M
