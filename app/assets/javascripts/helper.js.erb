@@ -61,7 +61,7 @@ function add_blip(driftmap, e, blipIndex){
 	                    '<input id="blip-title-'+ blipIndex +'" class="blip-title" name="blip['+ blipIndex +'][title]" data-blip="'+ blipIndex +'" type="text" />' +
 	                    '<p class="instructions">Description</p>' +
 	                    '<textarea id="blip-body-'+ blipIndex +'" class="blip-body" name="blip['+ blipIndex +'][body]" data-blip="'+ blipIndex +'"></textarea>' +
-	                    '<input accept="image/jpeg, image/gif, image/png, image/jpg" class="blip-file" name="blip['+ blipIndex +'][photos][0]" id="blip_'+ blipIndex +'_photos_0" data-blip="'+ blipIndex +'" type="file">' +
+	                    '<input class="blip-file" name="blip['+ blipIndex +'][photos][0]" id="blip_'+ blipIndex +'_photos_0" data-blip="'+ blipIndex +'" accept="image/jpeg, image/gif, image/png, image/jpg" type="file">' +
 	                    '<span class="normal" id="add-new-blip" data-photo="0" data-blip="'+ blipIndex +'"><i class="fa fa-plus"></i> photo</span>' +
 	                    '<span class="normal">cancel</span>' +
 	                  '</div>';
@@ -71,14 +71,16 @@ function add_blip(driftmap, e, blipIndex){
   blipMarker.bindPopup(blipPopup);
 
   var blipInputs = '<input type="hidden" name="blip['+ blipIndex +'][x]" value="'+ lat +'">' + 
-                   '<input type="hidden" name="blip['+ blipIndex +'][y]" value="'+ lng +'">' + 
-                   '<input type="hidden" name="blip['+ blipIndex +'][title]" class="blip-title">' + 
-                   '<input type="hidden" name="blip['+ blipIndex +'][body]"  class="blip-body" >';
+                   '<input type="hidden" name="blip['+ blipIndex +'][y]" value="'+ lng +'">';
 
-  $('#post-form-container form').append(blipInputs);
+  $('#post-form-container form').prepend(blipInputs);
 
-  $('.blip-wrapper-'+ blipIndex + ' input, .blip-wrapper-'+ blipIndex + ' textarea').on('input', function(){
-  	var blipIndex = $(this).data('blip');
+  $('.blip-wrapper-'+ blipIndex + ' input, .blip-wrapper-'+ blipIndex + ' textarea').on('change', function(){
+  	console.log("adding: " + $(this) + " to the form");
+  	$('#post-form-container form').prepend($(this).clone().addClass('hidden'));
+  	
+  	
+  	/*var blipIndex = $(this).data('blip');
   	var field;
 
   	if($(this).hasClass('blip-title'))
@@ -86,18 +88,28 @@ function add_blip(driftmap, e, blipIndex){
   	else if($(this).hasClass('blip-body'))
   		field = 'body';
   	else
-  		field = 'file';
+  		field = 'file';*/
 
-  	$('.blip-'+field+'[name="blip['+blipIndex+']['+field+']"]').val(xss_trim($(this).val()));
+/*  	if(field == 'title' || field == 'body'){
+  		$('.blip-'+field+'[name="blip['+blipIndex+']['+field+']"]').val(xss_trim($(this).val()));
+  	}*/
   });
 
   // Add event listener for 'add another photo button'
   $('#add-new-blip[data-blip="'+ blipIndex +'"]').on('click' , function(){
+  	console.log("adding a new file input");
   	var blipIndex = $(this).data('blip');
   	var photoIndex = $(this).data('photo') + 1;
-    var addPhoto = '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip['+ blipIndex +'][photos]['+ photoIndex +']" id="blip_'+ blipIndex +'_photos_'+ photoIndex +'" type="file">'
+    var addPhoto = '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip['+ blipIndex +'][photos]['+ photoIndex +']" id="blip_'+ blipIndex +'_photos_'+ photoIndex +'" type="file">';
 
     $(this).before(addPhoto).data('photo', photoIndex);
+
+    $('#blip_'+ blipIndex +'_photos_'+ photoIndex).on('change', function(){
+  		console.log("adding: " + $(this) + " to the form");
+    	$('#post-form-container form').prepend($(this).clone().addClass('hidden'));
+    });
+
+
   });
 } // end add_blip
 

@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20160829235957) do
     t.float    "x"
     t.float    "y"
     t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.json     "photos"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "photos",     default: [],              array: true
   end
 
   add_index "blips", ["post_id"], name: "index_blips_on_post_id", using: :btree
