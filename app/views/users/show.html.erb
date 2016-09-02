@@ -13,15 +13,26 @@
 			}
 
 			var blips = [];
+			
+			<% @post.blips.each do |blip| %>
+				var newBlip = {
+					id: 		'<%= blip.id %>',
+					x: 			'<%= blip.x %>',
+					y: 			'<%= blip.y %>',
+					title: 	'<%= blip.title %>',
+					body: 	'<%= blip.body %>',
+				}
 
-			<% @post.blips.each do |b| %>
-				blips.push({
-					id: '<%= b.id %>',
-					x: '<%= b.x %>',
-					y: '<%= b.y %>',
-					title: '<%= b.title %>',
-					body: '<%= b.body %>'
-				});
+				var blipImages = [];
+
+				<% blip.blip_images.each do |blip_image| %>
+					blipImages.push( '<%= image_tag blip_image.image %>' );
+				<% end %>
+
+				newBlip.images = blipImages;
+
+				blips.push(newBlip)
+
 			<% end %>
 
 			init_map('profile-map', driftmap, blips)

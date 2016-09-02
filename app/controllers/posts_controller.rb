@@ -80,7 +80,7 @@ class PostsController < ApplicationController
 
 		def create_blip_images
 			params[:blip]["0"]["photos"].each do |photo|
-				@image = @blip.blip_images.build( image: photo[1] )
+				@blip_img = @blip.blip_images.build( image: photo[1] )
 			end
 		end
 

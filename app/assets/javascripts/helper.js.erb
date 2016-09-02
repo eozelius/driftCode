@@ -37,7 +37,6 @@ function init_map(dom, driftmap, blips){
 			var blipMarker = L.marker([lat, lng]).addTo(m);
 			var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
 			blipMarker.bindPopup(blipPopup);
-
 		}
 
 	} catch(e) {
@@ -75,29 +74,18 @@ function add_blip(driftmap, e, blipIndex){
 
   $('#post-form-container form').prepend(blipInputs);
 
-  $('.blip-wrapper-'+ blipIndex + ' input, .blip-wrapper-'+ blipIndex + ' textarea').on('change', function(){
-  	console.log("adding: " + $(this) + " to the form");
+  $('.blip-wrapper-'+ blipIndex + ' input').on('change', function(){
   	$('#post-form-container form').prepend($(this).clone().addClass('hidden'));
-  	
-  	
-  	/*var blipIndex = $(this).data('blip');
-  	var field;
-
-  	if($(this).hasClass('blip-title'))
-  		field = 'title';
-  	else if($(this).hasClass('blip-body'))
-  		field = 'body';
-  	else
-  		field = 'file';*/
-
-/*  	if(field == 'title' || field == 'body'){
-  		$('.blip-'+field+'[name="blip['+blipIndex+']['+field+']"]').val(xss_trim($(this).val()));
-  	}*/
   });
+
+  $('.blip-wrapper-'+ blipIndex + ' textarea').on('change', function(){
+  	var blipIndex = $(this).data('blip');
+  	var blipBodyInput = '<input type="hidden" name="blip['+ blipIndex +'][body]" value="'+ $(this).val() +'" class="blip-body" data-blip="'+ blipIndex +'"/>';
+  	$('#post-form-container form').prepend(blipBodyInput);
+  })
 
   // Add event listener for 'add another photo button'
   $('#add-new-blip[data-blip="'+ blipIndex +'"]').on('click' , function(){
-  	console.log("adding a new file input");
   	var blipIndex = $(this).data('blip');
   	var photoIndex = $(this).data('photo') + 1;
     var addPhoto = '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip['+ blipIndex +'][photos]['+ photoIndex +']" id="blip_'+ blipIndex +'_photos_'+ photoIndex +'" type="file">';
@@ -105,7 +93,6 @@ function add_blip(driftmap, e, blipIndex){
     $(this).before(addPhoto).data('photo', photoIndex);
 
     $('#blip_'+ blipIndex +'_photos_'+ photoIndex).on('change', function(){
-  		console.log("adding: " + $(this) + " to the form");
     	$('#post-form-container form').prepend($(this).clone().addClass('hidden'));
     });
 
