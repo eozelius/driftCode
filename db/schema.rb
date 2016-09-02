@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829235957) do
+ActiveRecord::Schema.define(version: 20160902125452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blip_images", force: :cascade do |t|
+    t.string   "image"
+    t.integer  "blip_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "blip_images", ["blip_id"], name: "index_blip_images_on_blip_id", using: :btree
 
   create_table "blips", force: :cascade do |t|
     t.string   "title"
@@ -22,9 +31,8 @@ ActiveRecord::Schema.define(version: 20160829235957) do
     t.float    "x"
     t.float    "y"
     t.integer  "post_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "photos",     default: [],              array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "blips", ["post_id"], name: "index_blips_on_post_id", using: :btree
@@ -38,7 +46,6 @@ ActiveRecord::Schema.define(version: 20160829235957) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "picture"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
@@ -63,5 +70,6 @@ ActiveRecord::Schema.define(version: 20160829235957) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "blip_images", "blips"
   add_foreign_key "blips", "posts"
 end
