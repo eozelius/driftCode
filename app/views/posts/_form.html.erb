@@ -84,15 +84,23 @@
     }
 
     var blips = [];
+      
+    <% @post.blips.each do |blip| %>
 
-    <% @post.blips.each do |b| %>
+      var blipImages = [];
+      <% blip.blip_images.each do |blip_image| %>
+        blipImages.push('<%= image_tag blip_image.image.html_safe %>');
+      <% end %>
+
       blips.push({
-        id: '<%= b.id %>',
-        x: '<%= b.x %>',
-        y: '<%= b.y %>',
-        title: '<%= b.title %>',
-        body: '<%= b.body %>'
-      });
+        id:     '<%= blip.id %>',
+        x:      '<%= blip.x %>',
+        y:      '<%= blip.y %>',
+        title:  '<%= blip.title %>',
+        body:   '<%= blip.body %>',
+        images: blipImages
+      })
+
     <% end %>
 
     init_map('edit-driftmap', driftmap, blips);

@@ -21,33 +21,39 @@ ethan.post = Post.create(
 )
 
 # Build my 4 Posts to be site default
-ethan.post.blips.create!(
+queens = ethan.post.blips.create!(
   title: 'Sunnyside Queens',
   body: '7 train',
   x: 40.743,
   y: -73.922
 )
 
-ethan.post.blips.create!(
+concord = ethan.post.blips.create!(
   x: 43.206,
   y: -71.547,
   title: 'Concord NH',
   body: 'born and raised.',
 )
 
-ethan.post.blips.create!(
+medellin = ethan.post.blips.create!(
   title: 'Medellin Colombia',
   body: 'asdf',
   x: 6.242,
   y: -75.59,
 )
 
-ethan.post.blips.create!(
+# Bogota
+bogota = ethan.post.blips.create!(
   title: 'Bogota Colombia',
   body: 'fdsa',
   x: 4.642,
   y: -74.082
 )
+
+bogota_blip_image = BlipImage.new
+bogota_blip_image.image = File.open("#{Rails.root}/app/assets/images/blip_images/bogota.jpg")
+bogota_blip_image.blip_id = bogota.id
+bogota_blip_image.save!
 
 if Rails.env.development? || Rails.env.test?
   # Create Dummy Users

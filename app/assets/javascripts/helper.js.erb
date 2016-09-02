@@ -14,6 +14,9 @@ function init_map(dom, driftmap, blips){
 	    	accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
 			}).addTo(m);
 	
+
+		window.ethan = blips
+
 		// Add Markers to Map
 		for(var i in blips){
 			var popupOptions = {
@@ -22,10 +25,11 @@ function init_map(dom, driftmap, blips){
 				className: 'blip-popup'
 			}
 
-			var lat = xss_trim(blips[i].x);
-			var lng = xss_trim(blips[i].y);
+			var id 		= xss_trim(blips[i].id); 
+			var lat 	= xss_trim(blips[i].x);
+			var lng 	= xss_trim(blips[i].y);
+			var body 	= xss_trim(blips[i].body);
 			var title = xss_trim(blips[i].title);
-			var body = xss_trim(blips[i].body);
 
 			// todo xss protect
 			var popupContent =  '<div class="marker-content-wrapper">' + 
@@ -95,8 +99,6 @@ function add_blip(driftmap, e, blipIndex){
     $('#blip_'+ blipIndex +'_photos_'+ photoIndex).on('change', function(){
     	$('#post-form-container form').prepend($(this).clone().addClass('hidden'));
     });
-
-
   });
 } // end add_blip
 
