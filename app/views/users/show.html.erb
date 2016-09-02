@@ -18,7 +18,7 @@
 
 				var blipImages = [];
 				<% blip.blip_images.each do |blip_image| %>
-					blipImages.push('<%= image_tag blip_image.image.html_safe %>');
+					blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
 				<% end %>
 
 				blips.push({

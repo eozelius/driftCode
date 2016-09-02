@@ -55,6 +55,14 @@ bogota_blip_image.image = File.open("#{Rails.root}/app/assets/images/blip_images
 bogota_blip_image.blip_id = bogota.id
 bogota_blip_image.save!
 
+bogota_blip_image = BlipImage.new
+bogota_blip_image.image = File.open("#{Rails.root}/app/assets/images/blip_images/medellin.jpg")
+bogota_blip_image.blip_id = bogota.id
+bogota_blip_image.save!
+
+
+
+
 if Rails.env.development? || Rails.env.test?
   # Create Dummy Users
   10.times do |n|
