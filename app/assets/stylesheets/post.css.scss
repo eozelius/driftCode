@@ -119,10 +119,37 @@ li.wizard-step div {
 
 /* popups */
 .leaflet-popup-content{
-  //min-width: 400px;
+  min-width: 600px;
 }
 
 /* Blips */
 div.blip-popup {
-  
+  width: 710px;
+  max-height: 400px;
+}
+
+.blip-images {
+  display: inline-block;
+  width: 400px;
+  height: 285px;
+}
+
+
+.blip-text {
+  display: inline-block;
+  width: 240px;
+  float: left;
+}
+
+/* unslider */
+.unslider {
+  overflow: hidden; 
+}
+
+.unslider-arrow {
+  position: relative;
+}
+
+.unslider-arrow.prev {
+  left: -85px;
 }
