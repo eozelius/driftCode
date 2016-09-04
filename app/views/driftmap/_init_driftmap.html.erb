@@ -1,0 +1,29 @@
+<script type="text/javascript">
+	var driftmap = {
+		init_x: '<%= @post.init_x %>',
+		init_y: '<%= @post.init_y %>',
+		init_zoom: '<%= @post.init_zoom %>',
+	}
+
+	var blips = [];
+	
+	<% @post.blips.each do |blip| %>
+
+		var blipImages = [];
+		<% blip.blip_images.each do |blip_image| %>
+			blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
+		<% end %>
+
+		blips.push({
+			id: 		'<%= blip.id %>',
+			x: 			'<%= blip.x %>',
+			y: 			'<%= blip.y %>',
+			title: 	'<%= blip.title %>',
+			body: 	'<%= blip.body %>',
+			images: blipImages
+		})
+
+	<% end %>
+
+	init_map('map', driftmap, blips)
+</script>

@@ -2,52 +2,22 @@
 
 <h3 class="page-title"><%= @user.name %></h3>
 <div class="map-container">
-	<div class="profile-map-container">
-		<div id="profile-map"></div>
+	<div id="map"></div>
 
-		<script type="text/javascript">
-			var driftmap = {
-				init_x: '<%= @post.init_x %>',
-				init_y: '<%= @post.init_y %>',
-				init_zoom: '<%= @post.init_zoom %>',
-			}
+	<%= render 'driftmap/init_driftmap' %>
 
-			var blips = [];
-			
-			<% @post.blips.each do |blip| %>
+	<% if user_is_home(@user) || admin_user %>
+		<p style="margin-top:10px;">
+			<%= link_to 'edit driftmap | ', edit_post_path(@post) %>
+			<%= link_to 'delete driftmap', @post, method: :delete, data: { confirm: "Are you sure?" } %>
+		</p>
+	<% end %>
 
-				var blipImages = [];
-				<% blip.blip_images.each do |blip_image| %>
-					blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
-				<% end %>
+</div><!-- End Driftmap -->
 
-				blips.push({
-					id: 		'<%= blip.id %>',
-					x: 			'<%= blip.x %>',
-					y: 			'<%= blip.y %>',
-					title: 	'<%= blip.title %>',
-					body: 	'<%= blip.body %>',
-					images: blipImages
-				})
-
-			<% end %>
-
-			init_map('profile-map', driftmap, blips)
-		</script>
-
-		<% if user_is_home(@user) || admin_user %>
-			<p style="margin-top:10px;">
-				<%= link_to 'edit driftmap | ', edit_post_path(@post) %>
-				<%= link_to 'delete driftmap', @post, method: :delete, data: { confirm: "Are you sure?" } %>
-			</p>
-		<% end %>
-
-	</div><!-- End Driftmap -->
-
-	<div class="map-details col-lg-4 col-md-4 col-sm-12 col-xs-12">
-		<h3 class="page-title post-title"><%= @post.title %></h3>
-		<p class="post-title"><%= @post.body %></p>
-	</div>
+<div class="map-details col-lg-4 col-md-4 col-sm-12 col-xs-12">
+	<h3 class="page-title post-title"><%= @post.title %></h3>
+	<p class="post-title"><%= @post.body %></p>
 </div>
 
 <div id="pro-parts-container">

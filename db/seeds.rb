@@ -23,7 +23,7 @@ ethan.post = Post.create(
 
 queens = ethan.post.blips.create!(
   title: 'Sunnyside Queens',
-  body: 'Queens NY.  From Flushing to Astoria to Jamaica, for centuries the world has landed in Queens to embark on a new life in the United States.  The culture, diversity and unforgettable food has made Queens one of the greatest places in the world to live, and a must-see for US and World citizens alike.',
+  body: 'Queens NY.  From Flushing to Astoria to Jamaica, for centuries the world has landed in Queens to embark on a new life in the United States.  The culture, diversity and unforgettable food has made Queens one of the greatest places in the world to live, and a must-see for US and World citizens alike.'.html_safe,
   x: 40.743,
   y: -73.922
 )
@@ -37,7 +37,7 @@ concord = ethan.post.blips.create!(
   x: 43.206,
   y: -71.547,
   title: 'Concord NH',
-  body: 'A subtle, yet fantastic town in the heart of NH.  NH is flat out best at being NH.  And it doens\'t need to be anything else.  NH is a blethera of kind people, scenic nature, and classic New England Culture, and my personal haven when the concrete jungle becomes oppressive.'
+  body: 'A subtle, yet fantastic town in the heart of NH.  NH is flat out best at being NH.  And it doens\'t need to be anything else.  NH is a blethera of kind people, scenic nature, and classic New England Culture, and my personal haven when the concrete jungle becomes oppressive.'.html_safe
 )
 
 concord.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/concord/concord.jpg"))
@@ -46,7 +46,7 @@ concord.save!
 
 medellin = ethan.post.blips.create!(
   title: 'Medellin Colombia',
-  body: 'Without a question, Paisas, (the inhabitants of Medellin) are the friendliest people I\'ve come across in all my travels.  In Christmas this wonderland takes on a purple tint, and the entire city lights up as every home dons lights.  Built in the bottom of a valley, every view is spectacular, the city runs up from the river into the walls of the valley that is not to be missed.',
+  body: 'Without a question, Paisas, (the inhabitants of Medellin) are the friendliest people I\'ve come across in all my travels.  In Christmas this wonderland takes on a purple tint, and the entire city lights up as every home dons lights.  Built in the bottom of a valley, every view is spectacular, the city runs up from the river into the walls of the valley that is not to be missed.'.html_safe,
   x: 6.242,
   y: -75.59,
 )
@@ -59,7 +59,7 @@ medellin.save!
 
 bogota = ethan.post.blips.create!(
   title: 'Bogota Colombia',
-  body: 'The Capital and heart of business in Colombia, Bogoat boasts a massive sprawling population of over 9 million inhabitants.  Bogota is a great window into the lives of everyday Colombians, their joy, dance, activism and struggle.',
+  body: 'The Capital and heart of business in Colombia, Bogoat boasts a massive sprawling population of over 9 million inhabitants.  Bogota is a great window into the lives of everyday Colombians, their joy, dance, activism and struggle.'.html_safe,
   x: 4.642,
   y: -74.082
 )
