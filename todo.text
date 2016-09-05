@@ -7,20 +7,12 @@ development
 
 
 production
-	- Setup email sending in production - done
 	- Setup s3 bucket to serve user.posts.images
-	- setup assert server to serve static assets 
-	- setup Postgres on 3rd server
 	- verify secret_keys are not in production
 	- delete non-production files/things off of production server.
 	- check out DB config see if you want to subtract users
-	- buy and setup domain name
 	- enable ssl
 
 Front end & Design
 	- fix stupid nav bar
-	- add edit post
-	- make user edit page - done
 	- make 404, 503 etc pages
-	- add delete user option for admin
-	- build a mapping blog site.  fuck bro.
