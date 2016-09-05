@@ -41,7 +41,7 @@
         <li>
           <%= link_to root_url do %>
             <i class="fa fa-3x fa-globe"></i>
-            <p class="nav-legend">Home</p>
+            <p class="nav-legend">home</p>
           <% end %>
         </li>
        
@@ -55,14 +55,14 @@
           <li>
             <%= link_to(logout_path, method: :delete) do %>
               <i class="fa fa-3x fa-sign-out"></i>
-              <p class="nav-legend">Log out</p>
+              <p class="nav-legend">logout</p>
             <% end %>
           </li>
         <% else %>
           <li>
             <%= link_to(login_path) do %>
               <i class="fa fa-3x fa-key fa-rotate-180"></i>
-              <p class="nav-legend">Log in</p>
+              <p class="nav-legend">login</p>
             <% end %>
           </li>
         <% end %>
