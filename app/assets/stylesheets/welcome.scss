@@ -105,16 +105,24 @@ div.readme-container {
 div.fake-header {
 	margin: 0 auto 15px;
 	border-bottom: 2px solid #C2D9EB;
+	height: 66px;
 
+	.login-btns-container {
+		width: 30%;
+		display: inline-block;
+		float: right;
+	}
 
 
 	button {
-		float: right;
-		margin: 10px;
+		margin: 20px 0 0;
+		display: inline;
+		float:right;
 	}
 	h2 {
 		display: inline-block;
-		width: 75%;
+		float: left;
+		width: 60%;
 	}
 }
 
