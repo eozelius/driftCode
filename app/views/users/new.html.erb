@@ -1,3 +1,6 @@
+<% provide(:title, 'sign up') %>
+
+
 <div class="flash-container hidden"></div>
 
 <h3 class="page-title">welcome to driftMap</h3>
@@ -37,8 +40,8 @@
 	      	<%= f.password_field :password_confirmation %>
 	      </p>
 
-	      <p style="margin-bottom: 50px;">
-	      	<%= link_to 'log in', login_path %>
+	      <p style="margin: 50px 0; color: #C2D9EB">
+	      	already have an account? | <%= link_to 'log in', login_path %>
 	      </p>
 	    </div><!-- end left-hand text -->
 

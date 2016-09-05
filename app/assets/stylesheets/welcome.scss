@@ -88,6 +88,23 @@ $light-pink: #FCD1D8;
 $light-grey: #dadce8;
 */
 
+div.readme-container {
+	height: 200px;
+	width: 80%;
+	margin: 0 auto;
+	display: block;
+
+	p {
+		margin: 10px;
+		color: #C2D9EB;
+	}
+
+	button {
+		display: inline-block;
+		margin: 20px 5px;
+	}
+}
+
 
 
 

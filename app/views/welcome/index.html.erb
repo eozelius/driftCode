@@ -1,5 +1,19 @@
 <h2 class="page-title">driftMap</h2>
 
+<% if !logged_in? %>
+  <div class="readme-container">
+    <h4>Welcome to driftmap</h4>
+    <p>driftMap is a platform that allows you to create and customize a map of where in the world you have been, and what was great about those places.</p>
+    <%= link_to signup_path do %>
+    	<button class="normal">Sign up</button>
+    <% end %>
+
+    <%= link_to login_path do %>
+    	<button class="normal">Log in</button>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="map-container">
 	<div id='map'></div>
 	
