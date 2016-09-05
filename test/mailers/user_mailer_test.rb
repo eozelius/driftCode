@@ -5,9 +5,9 @@ class UserMailerTest < ActionMailer::TestCase
     user = users(:irene)
     user.activation_token = User.new_token
     mail = UserMailer.account_activation( user )
-    assert_equal "driftCode account activation", mail.subject
+    assert_equal "driftMap account activation", mail.subject
     assert_equal [ user.email ], mail.to
-    assert_equal ["noReply@driftCode.com"], mail.from
+    assert_equal ["ethan@driftMap.com"], mail.from
 
     assert_match user.name,                 mail.body.encoded
     assert_match user.activation_token,     mail.body.encoded
@@ -19,9 +19,9 @@ class UserMailerTest < ActionMailer::TestCase
     user.password_reset_token = User.new_token
     mail = UserMailer.password_reset(user)
     
-    assert_equal "driftCode password reset", mail.subject
+    assert_equal "driftMap password reset", mail.subject
     assert_equal [ user.email ], mail.to
-    assert_equal ["noReply@driftCode.com"], mail.from
+    assert_equal ["ethan@driftMap.com"], mail.from
 
     assert_match user.password_reset_token, mail.body.encoded
     assert_match CGI::escape(user.email),   mail.body.encoded

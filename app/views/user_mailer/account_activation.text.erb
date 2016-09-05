@@ -1,7 +1,5 @@
-Welcome to driftCode.
+Welcome to driftMap.
 
-account activation
+<%= @greeting %><%= @user.name %> thanks for creating your driftMap account.
 
-<%= @greeting %><%= @user.name %> thank you for your interest in driftCode.
-
-click <%= link_to "here", edit_account_activation_url( @user.activation_token, email: @user.email) %> to activate your account.
+Click <%= link_to "here", edit_account_activation_url( @user.activation_token, email: @user.email) %> to activate your account.

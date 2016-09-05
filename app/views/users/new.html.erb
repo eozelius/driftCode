@@ -1,6 +1,6 @@
 <div class="flash-container hidden"></div>
 
-<h3 class="page-title">welcome to driftCode</h3>
+<h3 class="page-title">welcome to driftMap</h3>
 
 <div class="signup-container">
 	<%= form_for(@user) do |f| %>
@@ -35,6 +35,10 @@
 	      <p>
 	        <%= f.label :password_confirmation %>
 	      	<%= f.password_field :password_confirmation %>
+	      </p>
+
+	      <p style="margin-bottom: 50px;">
+	      	<%= link_to 'log in', login_path %>
 	      </p>
 	    </div><!-- end left-hand text -->
 

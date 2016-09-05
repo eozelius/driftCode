@@ -8,13 +8,13 @@ class UserMailer < ApplicationMailer
     @user = user
     @greeting = "Greetings, "
 
-    mail to: @user.email, subject: "driftCode account activation"
+    mail to: @user.email, subject: "driftMap account activation"
   end
 
   def password_reset( user )
     @user = user
     @greeting = "Greetings, "
 
-    mail to: @user.email, subject: "driftCode password reset"
+    mail to: @user.email, subject: "driftMap password reset"
   end
 end

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   	if @user.save
       @user.send_activation_email
-      flash[:info] = "welcome to driftCode"
+      flash[:info] = "welcome to driftMap"
       log_in @user
       redirect_to new_post_path
   	else

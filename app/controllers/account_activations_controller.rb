@@ -4,7 +4,7 @@ class AccountActivationsController < ApplicationController
 		if user && !user.activated? && user.authenticated?(:activation, params[:id])
 			user.activate
 			log_in user
-			flash[:success] = "driftCode account activated"
+			flash[:success] = "driftMap account activated"
 			redirect_to user
 		else
 			flash[:danger] = "Invalid activation link"

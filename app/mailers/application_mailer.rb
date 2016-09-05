@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "noReply@driftCode.com"
+  default from: "ethan@driftMap.com"
   layout 'mailer'
 end
