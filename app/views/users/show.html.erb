@@ -2,15 +2,16 @@
 
 <div class="fake-header">
 	<h2 class="page-title" style="border:none;"><%= @user.name %></h2>
-	<%= link_to signup_path do %>
-		<button class="normal">Sign up</button>
-	<% end %>
+	<% if !logged_in? %>
+		<%= liank_to signup_path do %>
+			<button class="normal">Sign up</button>
+		<% end %>
 
-	<%= link_to login_path do %>
-		<button class="normal">Log in</button>
+		<%= link_to login_path do %>
+			<button class="normal">Log in</button>
+		<% end %>
 	<% end %>
 </div>
-
 
 <div class="map-container">
 	<div id="map"></div>
