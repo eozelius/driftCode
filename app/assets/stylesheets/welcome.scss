@@ -6,7 +6,8 @@
 }
 
 nav#main {
-	width: 65px;
+	width: 4%;
+	max-width: 75px;
 	height: 100%;
 	background: #dadce8; // $light-grey;
 	position: fixed;
@@ -108,7 +109,7 @@ div.fake-header {
 	height: 66px;
 
 	.login-btns-container {
-		width: 30%;
+		width: 30%; 
 		display: inline-block;
 		float: right;
 	}
