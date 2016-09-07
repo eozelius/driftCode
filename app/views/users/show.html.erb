@@ -3,12 +3,12 @@
 <div class="fake-header">
 	<h2 class="page-title" style="border:none;"><%= @user.name %></h2>
 	<% if !logged_in? %>
-		<%= liank_to signup_path do %>
-			<button class="normal">Sign up</button>
-		<% end %>
-
 		<%= link_to login_path do %>
 			<button class="normal">Log in</button>
+		<% end %>
+
+		<%= link_to signup_path do %>
+			<button class="normal">Sign up</button>
 		<% end %>
 	<% end %>
 </div>
@@ -46,7 +46,7 @@
 					<% end %>			
 
 					<% if @user.gps %>
-						<p class="user-gps">gps coordinates: </p>
+						<p class="user-gps">current location: </p>
 						<p><%= @user.gps %></p>
 					<% end %>
 					
