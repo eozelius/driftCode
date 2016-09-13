@@ -81,31 +81,19 @@
 
   <script type="text/javascript">
     var blipIndex = -1;
+    var routeIndex = -1;
     var activeAction;
     
     // Add blip or route to map
     $('.create-route').on('click', function(){
-      console.log('adding route')
-
-      $(this).after("<em>click anywhere on the map to get started.</em>");
-
-      // Add Specific event listener for 'create routes' behavior 
-      window.map.on('click', function(e){
-        console.log('I have clicked my map, and i want to craete a route.');
+      window.map.off('click').on('click', function(e){
         add_route(window.map, e, ++routeIndex);
       });
-
     });
 
-
     $('.create-blip').on('click', function(){
-      console.log("adding blip")
-      $(this).after("<em>click anywhere on the map to create a blip.</em>");
-
-      window.map.on('click', function(e){
-        console.log('I have clicked my map, and i want to craete a blip.');
-
-        add_blip(window.map, e, ++blipIndex)
+      window.map.off('click').on('click', function(e){
+        add_blip(window.map, e, ++blipIndex);
       });
     });
 
