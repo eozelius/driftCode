@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902125452) do
+ActiveRecord::Schema.define(version: 20160913014706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,26 @@ ActiveRecord::Schema.define(version: 20160902125452) do
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
+  create_table "route_points", force: :cascade do |t|
+    t.float    "x"
+    t.float    "y"
+    t.integer  "order"
+    t.integer  "route_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "route_points", ["route_id"], name: "index_route_points_on_route_id", using: :btree
+
+  create_table "routes", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "post_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "routes", ["post_id"], name: "index_routes_on_post_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -72,4 +92,6 @@ ActiveRecord::Schema.define(version: 20160902125452) do
 
   add_foreign_key "blip_images", "blips"
   add_foreign_key "blips", "posts"
+  add_foreign_key "route_points", "routes"
+  add_foreign_key "routes", "posts"
 end
