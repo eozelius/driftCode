@@ -40,9 +40,9 @@
 	      	<%= f.password_field :password_confirmation %>
 	      </p>
 
-	      <p style="margin: 50px 0; color: #C2D9EB">
-	      	already have an account? | <%= link_to 'log in', login_path %>
-	      </p>
+	      <%= link_to login_path do %>
+	      	<p style="margin: 50px 0">already have an account? | log in</p>
+	      <% end %>
 	    </div><!-- end left-hand text -->
 
 	    <div class="col-lg-5 col-md-5">

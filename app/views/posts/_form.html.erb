@@ -82,15 +82,21 @@
   <script type="text/javascript">
     var blipIndex = -1;
     var routeIndex = -1;
-    var activeAction;
+    var routePoints = [];
     
-    // Add blip or route to map
+    // Add route to map
     $('.create-route').on('click', function(){
       window.map.off('click').on('click', function(e){
-        add_route(window.map, e, ++routeIndex);
+        var lat = e.latlng.lat.toFixed(3);
+        var lng = e.latlng.lng.toFixed(3);
+        var newPoint = L.latLng(lat, lng)
+
+        routePoints.push(newPoint);
+        add_route(window.map, ++routeIndex, routePoints);
       });
     });
 
+    // Add blip to map
     $('.create-blip').on('click', function(){
       window.map.off('click').on('click', function(e){
         add_blip(window.map, e, ++blipIndex);

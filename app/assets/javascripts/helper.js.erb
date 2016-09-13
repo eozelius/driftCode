@@ -15,70 +15,68 @@ function init_map(dom, driftmap, blips){
 			}).addTo(m);
 
 		// Add Markers to Map
-		window.ethan = blips;
-
-		for(var i in blips){
-			var popupOptions = {
-				offset: [210, 30],
-				className: 'blip-popup'
-			}
-
-			var id 		= xss_trim(blips[i].id); 
-			var lat 	= xss_trim(blips[i].x);
-			var lng 	= xss_trim(blips[i].y);
-			var body 	= xss_trim(blips[i].body);
-			var title = xss_trim(blips[i].title);
-
-			/*
-				blip[0] { 
-					id: "1", 
-					x: "40.743", 
-					y: "-73.922",
-					title: "Sunnyside Queens", 
-					body: "7 train", 
-					images: [
-						"<img src="/uploads/blip_image/image/1/bogota.jpg" alt="Bogota" />",
-						"<img src="/uploads/blip_image/image/1/bogota.jpg" alt="Bogota" />"
-					] 
+		if(blips.length > 0){
+			for(var i in blips){
+				var popupOptions = {
+					offset: [210, 30],
+					className: 'blip-popup'
 				}
-			*/
 
-			var blip_images_tags = '';
+				var id 		= xss_trim(blips[i].id); 
+				var lat 	= xss_trim(blips[i].x);
+				var lng 	= xss_trim(blips[i].y);
+				var body 	= xss_trim(blips[i].body);
+				var title = xss_trim(blips[i].title);
 
-			if(blips[i].images.length > 0) {
-				blip_images_tags += '<div class="blip-images"><ul>';
+				/*
+					blip[0] { 
+						id: "1", 
+						x: "40.743", 
+						y: "-73.922",
+						title: "Sunnyside Queens", 
+						body: "7 train", 
+						images: [
+							"<img src="/uploads/blip_image/image/1/bogota.jpg" alt="Bogota" />",
+							"<img src="/uploads/blip_image/image/1/bogota.jpg" alt="Bogota" />"
+						] 
+					}
+				*/
 
-				for(var x in blips[i].images)
-					blip_images_tags += '<li>' + blips[i].images[x] + '</li>';
+				var blip_images_tags = '';
 
-				blip_images_tags += '</ul></div>';
-			}
+				if(blips[i].images.length > 0) {
+					blip_images_tags += '<div class="blip-images"><ul>';
 
+					for(var x in blips[i].images)
+						blip_images_tags += '<li>' + blips[i].images[x] + '</li>';
 
-			var popupContent =  '<div class="blip-popup" data-blip="'+ id +'">' + 
-														'<div class="blip-text">' +
-															'<p class="instructions">'+ title +'</p>' + 
-															'<p>'+ body +'</p>' + 
-														'</div>' +
-														blip_images_tags +
-														// '<p><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/blips/'+ blips[i].id +'">delete</a></p>' +
-													'</div>';
-
-			var blipMarker = L.marker([lat, lng]).addTo(m);
-			var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
-			blipMarker.bindPopup(blipPopup);
-
-
-			// Map Event Listeners ////
-			blipMarker.on('click', function(){
-				$('.blip-images').unslider();
-			})
-		} // end adding markers to map
-
-		blipPopup.openOn(m);
-		$('.blip-images').unslider();
+					blip_images_tags += '</ul></div>';
+				}
 
 
+				var popupContent =  '<div class="blip-popup" data-blip="'+ id +'">' + 
+															'<div class="blip-text">' +
+																'<p class="instructions">'+ title +'</p>' + 
+																'<p>'+ body +'</p>' + 
+															'</div>' +
+															blip_images_tags +
+															// '<p><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/blips/'+ blips[i].id +'">delete</a></p>' +
+														'</div>';
+
+				var blipMarker = L.marker([lat, lng]).addTo(m);
+				var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
+				blipMarker.bindPopup(blipPopup);
+
+
+				// Map Event Listeners ////
+				blipMarker.on('click', function(){
+					$('.blip-images').unslider();
+				})
+			} // end adding markers to map
+
+			blipPopup.openOn(m);
+			$('.blip-images').unslider();
+		}
 	} catch(e) {
 		console.log('error: ' + e);
 		flash_now('danger', 'whoops, something went wrong.  Please try again.')
@@ -139,8 +137,14 @@ function add_blip(driftmap, e, blipIndex){
   });
 } // end add_blip
 
-function add_route(driftmap, e, routeIndex){
-	console.log("adding a route")
+function add_route(driftmap, routeIndex, routePoints){
+	var toPoint = routePoints[routeIndex];
+	var fromPoint = routePoints[routeIndex - 1];
+  var routeMarker = L.marker(routePoints[routeIndex]).addTo(driftmap)
+
+  if(routeIndex > 0){
+  	var line = L.polyline([fromPoint, toPoint]).addTo(driftmap);
+  }
 }
 
 function flash_now(type, message){
