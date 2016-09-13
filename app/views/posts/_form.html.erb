@@ -22,9 +22,9 @@
       <div class="tabs-container ">
         <ul class="tabs-menu">
           <li data-step="title" class="active-tab col-md-3 wizard-table">title</li>
-          <li data-step="body" class="col-md-3 wizard-table">body</li>
+          <li data-step="body" class="col-md-3 wizard-table">description</li>
           <li data-step="markers" class="col-md-3 wizard-table">blips</li>
-          <li data-step="routes" class="col-md-3 wizard-table">routes</li>
+          <li data-step="routes" class="col-md-3 wizard-table">journeys</li>
         </ul>
       </div>
 
@@ -51,15 +51,14 @@
         <!-- Step 3 blips -->
         <div class="markers-container">
           <div class="wizard-markers wizard-step hidden">
-            <p class="instructions-title">click anywhere on the map to add a blip.</p>
-            <p></p>
+            <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
           </div>
         </div>
 
         <!-- Step 4 routes -->
         <div class="routes-container">
           <div class="wizard-routes wizard-step hidden">
-            <p class="instructions-title">Routes</p>
+            <p class="instructions-title">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
           </div>
         </div>        
       </div>
@@ -79,10 +78,16 @@
   <%= render 'driftmap/init_driftmap' %>
 
   <script type="text/javascript">
+    // Add blip to map
     var blipIndex = -1;
     window.map.on('click', function(e){
       add_blip(window.map, e, ++blipIndex)
     });
+
+    // Add Route to Map
+
+
+
 
     // Change menu tab
     $('.tabs-menu li').on('click', function(){
@@ -100,7 +105,7 @@
       var init_y = window.map.getCenter().lng;
       var zoom   = window.map.getZoom();
     
-      // Post attrs
+      // Post/DriftMap attrs
       $('#post_init_x').val(init_x);
       $('#post_init_y').val(init_y);
       $('#post_init_zoom').val(zoom);
