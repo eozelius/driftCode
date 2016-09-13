@@ -22,6 +22,7 @@ class PostsController < ApplicationController
 
 			# create Blips if user added any.
 			create_blip if params[:blip].present?
+			create_routes if params[:route].present?
 			redirect_to @user
 		else
 			flash[:danger] = "Whoops something went wrong, please try again"
@@ -38,6 +39,7 @@ class PostsController < ApplicationController
 		@user = User.find(@post.user_id)
 
 		create_blip if params[:blip].present?
+		create_routes if params[:route].present?
 
 		if @post.update_attributes(post_params)
 			flash[:success] = "driftmap successfully updated"
@@ -81,6 +83,31 @@ class PostsController < ApplicationController
 		def create_blip_images
 			params[:blip]["0"]["photos"].each do |photo|
 				@blip_img = @blip.blip_images.build( image: photo[1] )
+			end
+		end
+
+		def create_routes
+			params[:route].each do |route|
+				@route = @post.routes.build( description: route[1]["description"]	)
+				@post.save
+
+				create_route_points if params[:route]["0"]["points"].present?
+
+				if @route.save
+					flash[:success] = "route created successfully"
+				else
+					flash[:danger]  = "Whoops something went wrong creating this route, please try again"
+				end
+			end
+		end
+
+		def create_route_points
+			params[:route]["0"]["points"].each do |point|
+				@rp = @route.route_points.build(
+					x: point["x"],
+					y: point["y"],
+					order: point["order"]
+				)
 			end
 		end
 
