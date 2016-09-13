@@ -85,7 +85,6 @@ function init_map(dom, driftmap, blips){
 }
 
 function add_blip(driftmap, e, blipIndex){
-	console.log('addding blip')
 	var lat = e.latlng.lat.toFixed(3);
   var lng = e.latlng.lng.toFixed(3);
 
@@ -137,12 +136,26 @@ function add_blip(driftmap, e, blipIndex){
   });
 } // end add_blip
 
-function add_route(driftmap, routeIndex, routePoints){
-	var toPoint = routePoints[routeIndex];
-	var fromPoint = routePoints[routeIndex - 1];
-  var routeMarker = L.marker(routePoints[routeIndex]).addTo(driftmap)
+function add_route(driftmap, routeIndex, routePointIndex, routePoints){
+	var toPoint = 	routePoints[routePoints.length - 1];
+	var fromPoint = routePoints[routePoints.length - 2];
+  var routeMarker = L.marker(toPoint).addTo(driftmap);
 
-  if(routeIndex > 0){
+  // todo add a popup that allows user to delete that routePoint
+
+  var routeInputs = '<input type="hidden"' +
+  												 'name="route['+ routeIndex +'][routePoint]['+ routePointIndex +'][x]" '+
+  												 'value="'+ toPoint.lat +'"/>' + 
+  									'<input type="hidden"' + 
+  												 'name="route['+ routeIndex +'][routePoint]['+ routePointIndex +'][y]"' +
+  												 'value="'+ toPoint.lng +'"/>' + 
+  									'<input type="hidden"' + 
+  												 'name="route['+ routeIndex +'][routePoint]['+ routePointIndex +'][order]"' +
+  												 'value="'+ routePointIndex +'"/>';
+
+	$('#post-form-container form').prepend(routeInputs);
+
+  if(routePointIndex > 0){
   	var line = L.polyline([fromPoint, toPoint]).addTo(driftmap);
   }
 }

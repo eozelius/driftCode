@@ -91,7 +91,7 @@ class PostsController < ApplicationController
 				@route = @post.routes.build( description: route[1]["description"]	)
 				@post.save
 
-				create_route_points if params[:route]["0"]["points"].present?
+				create_route_points if params[:route]["0"]["routePoint"].present?
 
 				if @route.save
 					flash[:success] = "route created successfully"
@@ -102,11 +102,11 @@ class PostsController < ApplicationController
 		end
 
 		def create_route_points
-			params[:route]["0"]["points"].each do |point|
+			params[:route]["0"]["routePoint"].each do |point|
 				@rp = @route.route_points.build(
-					x: point["x"],
-					y: point["y"],
-					order: point["order"]
+					x: point[1]["x"],
+					y: point[1]["y"],
+					order: point[1]["order"]
 				)
 			end
 		end

@@ -51,8 +51,8 @@
         <!-- Step 3 blips -->
         <div class="markers-container">
           <div class="wizard-markers wizard-step hidden">
-            <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
             <span class="normal create-blip">create blip</span>
+            <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
           </div>
         </div>
 
@@ -61,6 +61,7 @@
           <div class="wizard-routes wizard-step hidden">
             <p class="instructions-title">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
             <span class="normal create-route">create route</span>
+            <textarea id="route_0_description" class="route-description" name="route[0][description]"></textarea>
           </div>
         </div>        
       </div>
@@ -82,17 +83,19 @@
   <script type="text/javascript">
     var blipIndex = -1;
     var routeIndex = -1;
+    var routePointIndex = -1;
     var routePoints = [];
     
     // Add route to map
     $('.create-route').on('click', function(){
+      routeIndex++;
       window.map.off('click').on('click', function(e){
         var lat = e.latlng.lat.toFixed(3);
         var lng = e.latlng.lng.toFixed(3);
         var newPoint = L.latLng(lat, lng)
-
         routePoints.push(newPoint);
-        add_route(window.map, ++routeIndex, routePoints);
+
+        add_route(window.map, routeIndex, ++routePointIndex, routePoints);
       });
     });
 
