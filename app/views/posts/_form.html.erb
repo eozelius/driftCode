@@ -23,7 +23,7 @@
         <ul class="tabs-menu">
           <li data-step="title" class="active-tab col-md-3 wizard-table">title</li>
           <li data-step="body" class="col-md-3 wizard-table">description</li>
-          <li data-step="markers" class="col-md-3 wizard-table">blips</li>
+          <li data-step="markers" class="col-md-3 wizard-table"><i class="fa fa-map-maker"></i>blips</li>
           <li data-step="routes" class="col-md-3 wizard-table">journeys</li>
         </ul>
       </div>
@@ -52,6 +52,7 @@
         <div class="markers-container">
           <div class="wizard-markers wizard-step hidden">
             <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
+            <span class="normal create-blip">create blip</span>
           </div>
         </div>
 
@@ -59,12 +60,13 @@
         <div class="routes-container">
           <div class="wizard-routes wizard-step hidden">
             <p class="instructions-title">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
+            <span class="normal create-route">create route</span>
           </div>
         </div>        
       </div>
 
       <div class="submit-span col-lg-4">
-        <span type="submit" class="normal save-wizard">save</span>
+        <span type="submit" class="normal save-wizard">save &amp; finish</span>
       </div>
 
     </div>
@@ -78,16 +80,34 @@
   <%= render 'driftmap/init_driftmap' %>
 
   <script type="text/javascript">
-    // Add blip to map
     var blipIndex = -1;
-    window.map.on('click', function(e){
-      add_blip(window.map, e, ++blipIndex)
+    var activeAction;
+    
+    // Add blip or route to map
+    $('.create-route').on('click', function(){
+      console.log('adding route')
+
+      $(this).after("<em>click anywhere on the map to get started.</em>");
+
+      // Add Specific event listener for 'create routes' behavior 
+      window.map.on('click', function(e){
+        console.log('I have clicked my map, and i want to craete a route.');
+        add_route(window.map, e, ++routeIndex);
+      });
+
     });
 
-    // Add Route to Map
 
+    $('.create-blip').on('click', function(){
+      console.log("adding blip")
+      $(this).after("<em>click anywhere on the map to create a blip.</em>");
 
+      window.map.on('click', function(e){
+        console.log('I have clicked my map, and i want to craete a blip.');
 
+        add_blip(window.map, e, ++blipIndex)
+      });
+    });
 
     // Change menu tab
     $('.tabs-menu li').on('click', function(){

@@ -1,5 +1,4 @@
-/* Driftmap */
-/* forms */
+/* Driftmap form */
 .create-map-container span.next-step {
   display: inline;
   font-size: 1.1em !important;
@@ -46,4 +45,12 @@ p.instructions {
 p.instructions-title {
   margin-bottom: 7px;
   color: #ADCDDB;
+  font-size: 17px !important;  
+}
+
+.wizard-step {
+  span.normal {
+    margin: 4%;
+  }
+
 }
