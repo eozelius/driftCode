@@ -1,9 +1,10 @@
 class Post < ActiveRecord::Base
-	belongs_to 	:user
+	belongs_to :user
 	has_many :blips, dependent: :destroy
+	has_many :routes, dependent: :destroy
 
 	validates :title, 	:presence => true, :length => { minimum: 4, maximum: 40 }
-	validates :body, 		:presence => true, :length => { maximum: 5000 }
+	validates :body, 	:presence => true, :length => { maximum: 5000 }
 	validates :user_id, :presence => true
 
 	# driftmap properties
