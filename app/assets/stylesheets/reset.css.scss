@@ -140,6 +140,15 @@ label.page-title {
 	margin-bottom: 4%;
 }
 
+span.tag-line {
+	font-size: .5em;
+	color: $light-blue;
+	margin-left: 4%;
+	font-style: italic;
+	position: relative;
+	top: -4%;
+}
+
 p {
 	font-size: 1.3em;
 	font-family: 'ubuntu', sans-serif;
