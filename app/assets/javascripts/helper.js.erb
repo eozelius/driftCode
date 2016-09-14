@@ -1,4 +1,4 @@
-function init_map(dom, driftmap, blips){
+function init_map(dom, driftmap, blips, routes){
 	L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
 	try {
 		var x = driftmap.init_x || 40.735;
@@ -14,7 +14,7 @@ function init_map(dom, driftmap, blips){
 	    	accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
 			}).addTo(m);
 
-		// Add Markers to Map
+		// Add blips to Map
 		if(blips.length > 0){
 			for(var i in blips){
 				var popupOptions = {
@@ -77,10 +77,38 @@ function init_map(dom, driftmap, blips){
 			blipPopup.openOn(m);
 			$('.blip-images').unslider();
 		}
+
+		// Add routes to Map
+		if(routes.length > 0){
+			for(var i in routes){
+				var description = xss_trim(routes[i].description);
+
+				if(routes[i].routePoints.length > 0){
+
+					var prevLat = xss_trim(routes[0].routePoints[0].x);
+					var prevLng = xss_trim(routes[0].routePoints[0].y);
+					var prevPt = L.latLng(prevLat, prevLng);
+
+					for(var j in routes[i].routePoints){
+						var lat 			= xss_trim(routes[i].routePoints[j].x);
+						var lng 			= xss_trim(routes[i].routePoints[j].y);
+						var order 		= xss_trim(routes[i].routePoints[j].order);
+						var currentPt = L.latLng(lat, lng);
+						var routeMarker = L.marker([lat, lng]).addTo(m);
+
+						if(j > 0){
+							var routeLine  = L.polyline([prevPt, currentPt]).addTo(m);
+							prevPt = currentPt;							
+						}
+					}					
+				}
+			}
+		}
+
 	} catch(e) {
 		console.log('error: ' + e);
 		flash_now('danger', 'whoops, something went wrong.  Please try again.')
-		window.DMIniterror = e;
+		window.DMInitError = e;
 	}	
 }
 

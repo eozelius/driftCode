@@ -27,5 +27,26 @@
 		<% end %>
 	<% end %>
 
-	init_map('map', driftmap, blips)
+	var routes = [];
+
+	<% if @post.routes.any? %>
+		<% @post.routes.each do |route| %>
+
+			var routePoints = [];
+			<% route.route_points.each do |route_point| %>
+				routePoints.push({
+					x: '<%= route_point.x %>',
+					y: '<%= route_point.y %>',
+					order: '<%= route_point.order %>'
+				});
+			<% end %>
+
+			routes.push({
+				description: '<%= route.description.html_safe %>',
+				routePoints: routePoints
+			});
+		<% end %>
+	<% end %>
+
+	init_map('map', driftmap, blips, routes)
 </script>
