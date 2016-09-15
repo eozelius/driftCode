@@ -127,7 +127,23 @@ div.fake-header {
 	}
 }
 
+@media (max-width: 767px){
+	p.tag-line {
+		line-height: 24px;
+		display: block;
+	}
+	div.fake-header .login-btns-container {
+		display: none;
+	}
+	div.readme-container {
+		margin:15px;
+		height: auto;
 
+		button {
+			margin: 10px 5px;
+		}
+	}
+}
 
 
 

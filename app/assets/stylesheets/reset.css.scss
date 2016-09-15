@@ -198,7 +198,7 @@ textarea {
 	height: 150px;
 	display: block;
 }
-div.application-container {
+.application-container {
 	width:97%;
 	display: block;
 	margin: 0 auto;
@@ -225,12 +225,10 @@ div.flash-messages {
 }
 
 div.flash-danger {
-	//background-color: $light-pink;
 	background-color: #FCD1D8;
 }
 
 div.flash-success {
-	//background-color: $success-light-blue;
 	background-color: #C2D9EB;
 }
 
@@ -299,8 +297,22 @@ button.normal:hover{
 	height: 500px;
 }
 
-.blip-popup,
-.new-blip-popup {
-	//width: 400px;
-//	height: 300px;
+@media (max-width: 767px){
+	#main {
+		display: none;
+	}
+	#page-wrapper div.fake-header h2 {
+		width: 100%;
+		font-size: 2.5em;
+	}
+	.application-container {
+		width: 100%;
+		padding: 0 3%;
+	}
+}
+
+@media (max-width: 480px){
+	#page-wrapper div.fake-header h2 {
+		font-size: 1.9em;
+	}
 }

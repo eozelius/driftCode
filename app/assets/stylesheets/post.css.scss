@@ -153,3 +153,46 @@ div.blip-popup {
 .unslider-arrow.prev {
   left: -85px;
 }
+
+@media (max-width: 767px){
+  .application-container {
+    padding: 0 3%;
+  }
+
+  .map-container #map {
+    width: 100%;
+  }
+
+  .leaflet-popup-content-wrapper {
+    min-width: 0;
+    width: 239px;
+  }
+  .leaflet-popup-content {
+    width: 229px !important;
+    min-width: 0;
+    margin: 0 5px;
+  }
+  div.blip-popup {
+    width: 229px;
+  }
+  .blip-text{
+    width: 220px;
+    height: 200px;
+    overflow: scroll;
+    display: block;
+    float: none;
+  }
+  .blip-images {
+    width:230px; 
+    height: auto;
+  }
+  .unslider img {
+    width: 390px;
+    height: 140px;
+    margin: 0 auto;
+
+
+
+    display: block;
+  }
+}
