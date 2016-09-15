@@ -53,7 +53,6 @@ function init_map(dom, driftmap, blips, routes){
 					blip_images_tags += '</ul></div>';
 				}
 
-
 				var popupContent =  '<div class="blip-popup" data-blip="'+ id +'">' + 
 															'<div class="blip-text">' +
 																'<p class="instructions">'+ title +'</p>' + 
@@ -112,8 +111,8 @@ function init_map(dom, driftmap, blips, routes){
 }
 
 function add_blip(driftmap, e, blipIndex){
-	var lat = e.latlng.lat.toFixed(3);
-  var lng = e.latlng.lng.toFixed(3);
+	var lat = e.latlng.lat.toFixed(7);
+  var lng = e.latlng.lng.toFixed(7);
 
   var popupOptions = { 
     className: 'new-blip-box blip-box-' + blipIndex,
