@@ -125,6 +125,14 @@ div.new-blip-container {
 	}
 }
 
+.edit-delete-map {
+	margin-top: 10px;
+
+	span {
+		display: inline;
+	}
+}
+
 
 
 /* Color 
@@ -150,5 +158,13 @@ $white-grey: #E9EEF0;
 @media (max-width: 767px){
 	.profile-details {
 		margin-bottom: 30px;
+	}
+	.edit-delete-map a {
+		display: block;
+		margin: 10px 0;
+		text-align: left;
+	}
+	.edit-delete-map span {
+		display: none;
 	}
 }

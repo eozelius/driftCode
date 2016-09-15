@@ -21,8 +21,8 @@
 	<%= render 'driftmap/init_driftmap' %>
 
 	<% if user_is_home(@user) || admin_user %>
-		<p style="margin-top:10px;">
-			<%= link_to 'edit driftmap | ', edit_post_path(@post) %>
+		<p class="edit-delete-map">
+			<%= link_to 'edit driftmap', edit_post_path(@post) %><a><span> | </span><a>
 			<%= link_to 'delete driftmap', @post, method: :delete, data: { confirm: "Are you sure?" } %>
 		</p>
 	<% end %>
