@@ -15,6 +15,7 @@
  *= require unslider-dots.css
  *= require leaflet.css
  *= require post.css.scss
+ *= require login.css.scss
  *= require_tree .
  *= require_self
  */
