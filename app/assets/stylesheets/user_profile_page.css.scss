@@ -20,6 +20,9 @@ div.map-container {
 
 /* map details */
 div.map-details {
+	p {
+		color: #C2D9EB;
+	}
 	h3 {
 		
 	}
@@ -131,3 +134,21 @@ $light-maroon: #8C565B;
 $dark-grey: #353535;
 $white-grey: #E9EEF0;
 */
+
+@media (max-width: 480px){
+	div.profile {
+		width: 100%;
+	}
+	img.pp {
+		margin: 20px 0 20px;
+	}
+}
+
+@media (min-width: 480px) and (max-width: 767px){
+}
+
+@media (max-width: 767px){
+	.profile-details {
+		margin-bottom: 30px;
+	}
+}
