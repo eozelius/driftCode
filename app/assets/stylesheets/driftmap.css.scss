@@ -12,6 +12,7 @@
   textarea {
     height: 130px;
     position: relative;
+    padding: 3%;
     bottom: 0;
   }
 }
@@ -33,7 +34,6 @@ p.instructions-title {
   margin-bottom: 7px;
   color: #ADCDDB;
   font-size: 17px;
-  height:30px;
 }
 
 #edit-driftmap {
@@ -101,13 +101,17 @@ ul li.active-tab {
 }
 
 .wizard-step {
+  height: 230px;
+  overflow-y: scroll; 
+
   p {
     font-size: 1em;
   }
   /* title */
   .update-zoom {
     position: relative;
-    top: 48px;
+    top: 20px;
+    left: 6px;
   }
 
 
