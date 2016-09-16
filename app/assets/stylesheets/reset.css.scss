@@ -235,6 +235,10 @@ div.fake-header {
 	}
 }
 
+button.toggle-sidenav.normal {
+	display: none;
+}
+
 /* flash messages */
 div.flash-messages {
 	width: 93%;
@@ -325,6 +329,13 @@ button.normal:hover{
 		width: 100%;
 		padding: 0 3%;
 	}
+	button.toggle-sidenav.normal {
+		display: inline;
+		width: 47px;
+		float: right;
+		height: 40px;
+		margin: 0 5px 0 0;
+	}
 }
 
 /* Header - don't fucking touch this */
@@ -352,17 +363,21 @@ button.normal:hover{
 }
 
 @media (max-width: 480px){
-	p.tag-line {
+	div.fake-header p.tag-line {
 		line-height: 24px;
 		display: block;
-		left: -46%;
-		width: 155%
+		width: 100%;
+		left: 0;
+		top: 0;
+		float: left;
 	}	
 	div.fake-header .login-btns-container {
 		display: none;
 	}
-	#page-wrapper div.fake-header h2 {
-		width: 100%;
-		font-size: 2.5em;
+	div.fake-header {
+		h2 {
+			margin-bottom: 0;
+		padding-bottom: 5px;
+		}
 	}
 }
