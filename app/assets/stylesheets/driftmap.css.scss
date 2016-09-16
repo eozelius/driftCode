@@ -54,6 +54,16 @@ p.instructions-title {
   border-radius: 3px;
   bottom: -7%;
   left: 10%;
+
+}
+
+#edit-driftmap-container .toggle-wizard {
+  width: 47px;
+  height: 40px;
+  position: absolute;
+  z-index: 1; 
+  right: 0;
+  top: 139px;
 }
 
 ul.tabs-menu {

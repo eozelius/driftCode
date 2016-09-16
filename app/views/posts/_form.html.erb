@@ -9,74 +9,14 @@
   </div>  
 <% end %>
 
-<div id="post-form-container" class="drift-map-instructions">
-    <% if false %>
-
-      <div id="menu-container">
-        <!-- tabs -->
-        <div class="tabs-container ">
-          <ul class="tabs-menu">
-            <li data-step="title" class="active-tab col-md-3 wizard-table">title</li>
-            <li data-step="body" class="col-md-3 wizard-table">description</li>
-            <li data-step="markers" class="col-md-3 wizard-table"><i class="fa fa-map-maker"></i>blips</li>
-            <li data-step="routes" class="col-md-3 wizard-table">journeys</li>
-          </ul>
-        </div>
-
-        <!-- menu-body -->
-        <div class="menu-body-container col-lg-8">
-          <!-- Step 1 Title -->
-          <div class="title-container">
-            <div class="wizard-title wizard-step">
-              <p class="instructions">give your driftMap a catchy title</p>
-              <%#= f.text_field :title %>
-            </div>
-          </div>
-
-          <!-- Step 2 description -->
-          <div class="body-container">
-            <div class="wizard-body wizard-step hidden" >
-              <p class="instructions">sum up your driftMap in 10 words</p>
-              <div class="action-body">
-                <%#= f.text_area :body, id: 'driftmap-body' %>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3 blips -->
-          <div class="markers-container">
-            <div class="wizard-markers wizard-step hidden">
-              <span class="normal create-blip">create blip</span>
-              <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
-            </div>
-          </div>
-
-          <!-- Step 4 routes -->
-          <div class="routes-container">
-            <div class="wizard-routes wizard-step hidden">
-              <p class="instructions-title">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
-              <span class="normal create-route">create route</span>
-              <textarea id="route_0_description" class="route-description" name="route[0][description]"></textarea>
-            </div>
-          </div>        
-        </div>
-
-        <div class="submit-span col-lg-4">
-          <span type="submit" class="normal save-wizard">save &amp; finish</span>
-        </div>
-
-      </div>
-
-    <% end %>
-  <%# end %>
-</div>
-
 <div id="edit-driftmap-container">
-  <div class="wizard-container">
+  <button class="toggle-wizard normal"><i class="fa fa-reorder"></i></button>
+
+  <div class="wizard-container hidden">
     <ul class="tabs-menu">
       <li data-step="title" class="active-tab wizard-table">title</li>
-      <li data-step="body" class="wizard-table" style="font-size:1em;line-height: 10px;">descrip- tion</li>
-      <li data-step="routes" class="wizard-table">journeys</li>
+      <li data-step="body" class="wizard-table" style="font-size:.88em;line-height: 26px;">descrip- tion</li>
+      <li data-step="routes" class="wizard-table" style="font-size:.88em;">journeys</li>
       <li data-step="markers" class="wizard-table"></i>blips</li>
     </ul>
 
@@ -154,6 +94,11 @@
       window.map.off('click').on('click', function(e){
         add_blip(window.map, e, ++blipIndex);
       });
+    });
+
+    // toggle wizard
+    $('.toggle-wizard').on('click', function(){
+      $('.wizard-container').toggleClass('hidden');
     });
 
     // Change menu tab
