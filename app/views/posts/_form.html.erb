@@ -10,11 +10,6 @@
 <% end %>
 
 <div id="post-form-container" class="drift-map-instructions">
-  <%#= form_for @post, html: { multipart: true } do |f| %>
-    <%#= f.hidden_field :init_x %>
-    <%#= f.hidden_field :init_y %>
-    <%#= f.hidden_field :init_zoom %>
-
     <% if false %>
 
       <div id="menu-container">
@@ -78,14 +73,14 @@
 
 <div id="edit-driftmap-container">
   <div class="wizard-container">
-    <div class="tab-container">
-      <ul class="tabs-menu">
-        <li data-step="title" class="active-tab wizard-table">title</li>
-        <li data-step="body" class="wizard-table">description</li>
-        <li data-step="routes" class="wizard-table">journeys</li>
-        <li data-step="markers" class="wizard-table"></i>blips</li>
-      </ul>
+    <ul class="tabs-menu">
+      <li data-step="title" class="active-tab wizard-table">title</li>
+      <li data-step="body" class="wizard-table" style="font-size:1em;line-height: 10px;">descrip- tion</li>
+      <li data-step="routes" class="wizard-table">journeys</li>
+      <li data-step="markers" class="wizard-table"></i>blips</li>
+    </ul>
 
+    <div class="driftmap-form-container">
       <%= form_for @post, html: { multipart: true } do |f| %>
         <%= f.hidden_field :init_x %>
         <%= f.hidden_field :init_y %>
