@@ -1,20 +1,4 @@
 <% provide(:title, @user.name) %>
-
-<div class="fake-header">
-	<h2 class="page-title" style="border:none;"><%= @user.name %><p class="tag-line">- the journey of your exploration</p></h2>
-	<% if !logged_in? %>
-		<div class="login-btns-container">
-			<%= link_to login_path do %>
-				<button class="normal">Log in</button>
-			<% end %>
-
-			<%= link_to signup_path do %>
-				<button class="normal">Sign up</button>
-			<% end %>
-		</div>
-	<% end %>
-</div>
-
 <div class="map-container">
 	<div id="map"></div>
 

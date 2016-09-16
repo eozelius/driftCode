@@ -1,21 +1,5 @@
 <% provide(:title, 'sign up') %>
 <div class="signup-container">
-	<div class="fake-header">
-		<h2 class="page-title" style="border:none;">sign up<p class="tag-line">- the journey of your exploration</p></h2>
-		<% if !logged_in? %>
-			<div class="login-btns-container">
-				<%= link_to login_path do %>
-					<button class="normal">Log in</button>
-				<% end %>
-
-				<%= link_to signup_path do %>
-					<button class="normal">Sign up</button>
-				<% end %>
-			</div>
-		<% end %>
-	</div>
-
-
 	<%= form_for(@user) do |f| %>
 		<!-- STEP 1 -->
 	  <div class="step-1-slide signup-text">

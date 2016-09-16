@@ -90,7 +90,6 @@ $light-grey: #dadce8;
 */
 
 div.readme-container {
-	height: 200px;
 	width: 80%;
 	margin: 0 auto;
 	display: block;
@@ -106,38 +105,7 @@ div.readme-container {
 	}
 }
 
-div.fake-header {
-	margin: 0 auto 15px;
-	border-bottom: 2px solid #C2D9EB;
-	height: 66px;
-
-	.login-btns-container {
-		width: 30%; 
-		display: inline-block;
-		float: right;
-	}
-
-
-	button {
-		margin: 20px 0 0;
-		display: inline;
-		float:right;
-	}
-	h2 {
-		display: inline-block;
-		float: left;
-		width: 60%;
-	}
-}
-
 @media (max-width: 480px){
-	p.tag-line {
-		line-height: 24px;
-		display: block;
-	}
-	div.fake-header .login-btns-container {
-		display: none;
-	}
 	div.readme-container {
 		margin:15px;
 		height: auto;
@@ -147,6 +115,3 @@ div.fake-header {
 		}
 	}
 }
-
-
-

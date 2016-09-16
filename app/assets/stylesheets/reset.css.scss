@@ -141,13 +141,12 @@ label.page-title {
 }
 
 p.tag-line {
-	font-size: .5em;
+	font-size: 1em;
 	color: $light-blue;
-	display: inline;
-	margin-left: 2%;
 	font-style: italic;
 	position: relative;
-	top: -4%;
+	top: 28px;
+	left: 20px;
 }
 
 p {
@@ -199,10 +198,11 @@ textarea {
 	display: block;
 }
 .application-container {
-	width:97%;
+	width:100%;
 	display: block;
 	margin: 0 auto;
-	padding-left: 5%;
+	padding: 0 10px 0 65px;
+
 }
 
 #page-wrapper {
@@ -213,6 +213,26 @@ textarea {
 hr.gray-spacer {
 	width: 90%;
 	margin: 20px 0;
+}
+
+/* Fake Header */
+div.fake-header {
+	margin: 0 auto 15px;
+	border-bottom: 2px solid #C2D9EB;
+	height: 66px;
+
+	.login-btns-container {
+		float: right;
+	}
+	button {
+		margin: 0 5px 0;
+		display: inline;
+		float:right;
+	}
+	h2 {
+		display: inline;
+		float: left;
+	}
 }
 
 /* flash messages */
@@ -301,18 +321,48 @@ button.normal:hover{
 	#main {
 		display: none;
 	}
-	#page-wrapper div.fake-header h2 {
-		width: 100%;
-		font-size: 2.5em;
-	}
 	.application-container {
 		width: 100%;
 		padding: 0 3%;
 	}
 }
 
+/* Header - don't fucking touch this */
+@media (max-width: 821px){
+	p.tag-line {
+		top: 60px;
+		left: -26%;
+	}
+	.application-container div.fake-header {
+		height: 90px;
+	}
+}
+
+@media (max-width: 615px){
+	div.fake-header {
+		height: 55px;
+
+		.login-btns-container {
+			display: none;
+		}
+		p {
+			left: -38%;
+		}
+	}
+}
+
 @media (max-width: 480px){
+	p.tag-line {
+		line-height: 24px;
+		display: block;
+		left: -46%;
+		width: 155%
+	}	
+	div.fake-header .login-btns-container {
+		display: none;
+	}
 	#page-wrapper div.fake-header h2 {
-		font-size: 1.9em;
+		width: 100%;
+		font-size: 2.5em;
 	}
 }

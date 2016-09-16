@@ -1,9 +1,5 @@
 <% provide(:title, "log in") %>
 <div class="login-wrapper">
-	<div class="fake-header">
-		<h2 class="page-title" style="border:none;">log in<p class="tag-line">- the journey of your exploration</p></h2>
-	</div>
-
 	<%= form_for :session, url: login_path do |f| %>
 		<p>
 			<%= f.label :email %>
