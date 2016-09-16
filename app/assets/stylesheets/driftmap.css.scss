@@ -1,9 +1,19 @@
 /* Driftmap form */
-#post-form-container input[type="text"],
-#post-form-container textarea {
-  background-color: #fff;
-  border-radius: 2px;
-  border: 1px solid #ccc;
+#post-form-container,
+.edit_post,
+.new_post {
+  input[type="text"],
+  textarea {
+    background-color: #fff;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    width: 96%;
+  }
+  textarea {
+    height: 130px;
+    position: relative;
+    bottom: 0;
+  }
 }
 
 .create-map-container span.next-step {
@@ -36,17 +46,6 @@ p.instructions {
   margin-bottom: 10px;
 }
 
-#driftmap-body {
-  height: 60px;
-  width: 100%;
-  display: inline-block;
-}
-
-.route-description {
-  height: 60px;
-  width: 50%;
-}
-
 span.create-route,
 span.create-blip {
   float: right;
@@ -73,4 +72,8 @@ p.instructions-title {
   span.normal {
     margin: 4%;
   }
+}
+
+.wizard-body {
+  
 }

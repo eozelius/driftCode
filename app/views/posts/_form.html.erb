@@ -164,18 +164,10 @@
     $('.tabs-menu li').on('click', function(){
       $('.active-tab').removeClass('active-tab');
       var tab = $(this).data('step');
-      console.log(tab)
       $(this).addClass('active-tab');
 
       $('.wizard-step').addClass('hidden');
-      $('.wizard-'+tab).removeClass('hidden');    
-
-      /*
-      title
-      body
-      routes
-      markers
-      */
+      $('.'+ tab + '-container').removeClass('hidden');    
     });
 
     // Submit form
