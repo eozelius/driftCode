@@ -32,7 +32,7 @@
             <p class="instructions-title">driftMap title</p>
             <%= f.text_field :title %>
             <p class="instructions-title" style="margin-top:15px;">you can also adjust the default location and zoom of your driftMap</p>
-            <span class="normal set-zoom">set location</span>
+            <span class="normal update-zoom">set location</span>
           </div>
         </div>
 
@@ -63,6 +63,8 @@
           </div>
         </div>
 
+        <span class="save-wizard normal">save driftMap</span>
+
       <% end %>
     </div>
   </div>
@@ -71,6 +73,9 @@
   <div id="map"></div>
 
   <%= render 'driftmap/init_driftmap' %>
+
+  <span class="save-zoom normal hidden">save default view</span>
+  <span class="save-wizard normal bottom">save driftMap</span>
 
   <script type="text/javascript">
     var blipIndex = -1;
@@ -114,7 +119,19 @@
     });
 
     // Submit form
-    $('span.save-wizard').on('click', function(){
+    $('.save-wizard').on('click', function(){
+      $('.driftmap-form-container form').submit();
+    });
+
+    // user wants to update location
+    $('.update-zoom').on('click', function(){
+      $('.wizard-container, .save-zoom').toggleClass('hidden');
+    });
+
+    // save location/zoom
+    $('.save-zoom').on('click', function(){
+      $('.wizard-container, .save-zoom').toggleClass('hidden');
+      alert('location and zoom saved.')
       var init_x = window.map.getCenter().lat;
       var init_y = window.map.getCenter().lng;
       var zoom   = window.map.getZoom();
@@ -123,8 +140,6 @@
       $('#post_init_x').val(init_x);
       $('#post_init_y').val(init_y);
       $('#post_init_zoom').val(zoom);
-
-      $('#post-form-container form').submit();
     });
 
     // Cannot upload images larger than 3M

@@ -16,26 +16,27 @@
   }
 }
 
-span.save-wizard,
-span.next-step {
+span.save-wizard.bottom {
+  float: right;
+  margin: 45px 10px;
+}
+
+.driftmap-form-container span.save-wizard{
   cursor: pointer;
+  position: absolute;
+  top: 255px;
+  right: 38px;
+
 }
 
 p.instructions-title {
   margin-bottom: 7px;
   color: #ADCDDB;
-  font-size: 17px !important;
+  font-size: 17px;
   height:30px;
 }
 
-.wizard-step {
-  span.normal {
-    margin: 4%;
-  }
-}
-
-#edit-driftmap,
-#profile-map {
+#edit-driftmap {
   width: 90%;
   display: block;
   margin: 0 auto 30px;
@@ -45,7 +46,7 @@ p.instructions-title {
 /* new menu */
 .wizard-container {
   width: 260px;
-  height: 333px;
+  height: 310px;
   position: absolute;
   z-index: 999;
   background-color: #EFEFEF;
@@ -104,9 +105,9 @@ ul li.active-tab {
     font-size: 1em;
   }
   /* title */
-  .set-zoom {
+  .update-zoom {
     position: relative;
-    top: 73px;
+    top: 48px;
   }
 
 
@@ -118,6 +119,13 @@ ul li.active-tab {
   
 
 
+}
+
+.save-zoom {
+  position: absolute;
+  bottom: 1px;
+  right: 38px;
+  opacity: .8;
 }
 
 /* map attributes */
