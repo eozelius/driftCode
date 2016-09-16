@@ -113,10 +113,21 @@ ul li.active-tab {
     top: 20px;
     left: 6px;
   }
-
-
-
   /* description */
+  .wizard-routes {
+    text-align: right;
+    ul {
+      padding: 3% 0;
+    }
+
+    li {
+      border-bottom: 1px solid #ccc;
+      padding: 3% 5%;
+      text-align: left;
+      cursor: pointer;
+    }
+  }
+
 
   /* routes */
   

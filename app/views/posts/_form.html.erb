@@ -14,9 +14,9 @@
 
   <div class="wizard-container">
     <ul class="tabs-menu">
-      <li data-step="title" class="active-tab wizard-table">title</li>
+      <li data-step="title" class="wizard-table">title</li>
       <li data-step="body" class="wizard-table" style="font-size:.88em;line-height: 26px;">descrip- tion</li>
-      <li data-step="routes" class="wizard-table" style="font-size:.88em;">journeys</li>
+      <li data-step="routes" class="active-tab wizard-table" style="font-size:.88em;">journeys</li>
       <li data-step="markers" class="wizard-table"></i>blips</li>
     </ul>
 
@@ -27,7 +27,7 @@
         <%= f.hidden_field :init_zoom %>
 
         <!-- Step 1 Title -->
-        <div class="title-container wizard-step">
+        <div class="title-container wizard-step hidden">
           <div class="wizard-title">
             <p class="instructions-title">driftMap title</p>
             <%= f.text_field :title %>
@@ -47,11 +47,17 @@
         </div>
 
         <!-- Step 4 routes -->
-        <div class="routes-container wizard-step hidden">
+        <div class="routes-container wizard-step">
           <div class="wizard-routes">
-            <span class="normal create-route">create route</span>
-            <p class="instructions-title">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
-            <textarea id="route_0_description" class="route-description" name="route[0][description]"></textarea>
+            <a class="reveal-route-info">readme</a>
+            <p class="instructions-title hidden">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
+            <!-- <textarea id="route_0_description" class="route-description" name="route[0][description]"></textarea> -->
+            
+            <ul>
+              <% @post.routes.each do |route| %>
+                <li><%= route.title %></li>
+              <% end %>
+            </ul>
           </div>
         </div>
         
@@ -140,6 +146,10 @@
       $('#post_init_x').val(init_x);
       $('#post_init_y').val(init_y);
       $('#post_init_zoom').val(zoom);
+    });
+
+    $('.reveal-route-info').on('click', function(){
+      $('.routes-container p').toggleClass('hidden');
     });
 
     // Cannot upload images larger than 3M
