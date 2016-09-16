@@ -109,6 +109,15 @@
           </div>
         </div>
 
+        <!-- Step 4 routes -->
+        <div class="routes-container wizard-step hidden">
+          <div class="wizard-routes">
+            <span class="normal create-route">create route</span>
+            <p class="instructions-title">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
+            <textarea id="route_0_description" class="route-description" name="route[0][description]"></textarea>
+          </div>
+        </div>
+        
         <!-- Step 3 blips -->
         <div class="markers-container wizard-step hidden">
           <div class="wizard-markers">
@@ -117,14 +126,6 @@
           </div>
         </div>
 
-        <!-- Step 4 routes -->
-        <div class="routes-container wizard-step hidden">
-          <div class="wizard-routes">
-            <p class="instructions-title">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
-            <span class="normal create-route">create route</span>
-            <textarea id="route_0_description" class="route-description" name="route[0][description]"></textarea>
-          </div>
-        </div>
       <% end %>
     </div>
   </div>
