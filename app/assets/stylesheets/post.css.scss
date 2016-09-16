@@ -10,23 +10,31 @@
 .wizard-container {
   width: 40%;
   height: 240px;
-
-  margin-left:4%;
+  position: absolute;
+  z-index: 999;
   background-color: #EFEFEF;
   padding-bottom: 3%;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  bottom: 8%;
+  left: 12%;
+}
+
+.tab-container {
 }
 
 .tabs-menu {
-  width: 100px;
+  width: 20%;
+  min-width: 100px;
   height: 240px;
-  padding-bottom: 3%;
   background-color: #EFEFEF;
   border-right: 3px solid #ADCDDB;
 }
 
 ul.tabs-menu li {
   height: 60px;
-  width:  100px;
+  width: 20%;
+  min-width: 100px;
   line-height: 60px;
   cursor: pointer;
   display: inline-block;
@@ -41,6 +49,13 @@ ul li.active-tab {
   background-color: #f5f5f5;
   border: 3px solid #ADCDDB;
   line-height: 58px;
+}
+
+.tab-container form {
+  width: 75%;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 

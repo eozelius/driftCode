@@ -10,10 +10,10 @@
 <% end %>
 
 <div id="post-form-container" class="drift-map-instructions">
-  <%= form_for @post, html: { multipart: true } do |f| %>
-    <%= f.hidden_field :init_x %>
-    <%= f.hidden_field :init_y %>
-    <%= f.hidden_field :init_zoom %>
+  <%#= form_for @post, html: { multipart: true } do |f| %>
+    <%#= f.hidden_field :init_x %>
+    <%#= f.hidden_field :init_y %>
+    <%#= f.hidden_field :init_zoom %>
 
     <% if false %>
 
@@ -34,7 +34,7 @@
           <div class="title-container">
             <div class="wizard-title wizard-step">
               <p class="instructions">give your driftMap a catchy title</p>
-              <%= f.text_field :title %>
+              <%#= f.text_field :title %>
             </div>
           </div>
 
@@ -43,7 +43,7 @@
             <div class="wizard-body wizard-step hidden" >
               <p class="instructions">sum up your driftMap in 10 words</p>
               <div class="action-body">
-                <%= f.text_area :body, id: 'driftmap-body' %>
+                <%#= f.text_area :body, id: 'driftmap-body' %>
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@
       </div>
 
     <% end %>
-  <% end %>
+  <%# end %>
 </div>
 
 <div id="edit-driftmap-container">
@@ -84,11 +84,49 @@
         <li data-step="body" class="wizard-table">description</li>
         <li data-step="routes" class="wizard-table">journeys</li>
         <li data-step="markers" class="wizard-table"></i>blips</li>
-
       </ul>
 
-    </div>
+      <%= form_for @post, html: { multipart: true } do |f| %>
+        <%= f.hidden_field :init_x %>
+        <%= f.hidden_field :init_y %>
+        <%= f.hidden_field :init_zoom %>
 
+        <!-- Step 1 Title -->
+        <div class="title-container wizard-step">
+          <div class="wizard-title">
+            <p class="instructions">give your driftMap a catchy title</p>
+            <%= f.text_field :title %>
+          </div>
+        </div>
+
+        <!-- Step 2 description -->
+        <div class="body-container wizard-step hidden">
+          <div class="wizard-body" >
+            <p class="instructions">sum up your driftMap in 10 words</p>
+            <div class="action-body">
+              <%= f.text_area :body, id: 'driftmap-body' %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 blips -->
+        <div class="markers-container wizard-step hidden">
+          <div class="wizard-markers">
+            <span class="normal create-blip">create blip</span>
+            <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 routes -->
+        <div class="routes-container wizard-step hidden">
+          <div class="wizard-routes">
+            <p class="instructions-title">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
+            <span class="normal create-route">create route</span>
+            <textarea id="route_0_description" class="route-description" name="route[0][description]"></textarea>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <!-- driftmap -->
@@ -126,10 +164,18 @@
     $('.tabs-menu li').on('click', function(){
       $('.active-tab').removeClass('active-tab');
       var tab = $(this).data('step');
+      console.log(tab)
       $(this).addClass('active-tab');
 
       $('.wizard-step').addClass('hidden');
       $('.wizard-'+tab).removeClass('hidden');    
+
+      /*
+      title
+      body
+      routes
+      markers
+      */
     });
 
     // Submit form

@@ -317,6 +317,13 @@ button.normal:hover{
 }
 
 /* Leaflet generic components */
+#map {
+	width: 92%;
+	height: 555px;
+	margin: 0 auto;
+	padding-bottom: 3%;
+}
+
 .leaflet-container {
 	height: 500px;
 }
