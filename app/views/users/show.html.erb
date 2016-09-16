@@ -38,7 +38,7 @@
 					
 					<% if user_is_home(@user) || admin_user %>
 						<p><%= @user.email %></p>
-						<p><a class="edit-user-anchor">edit</a><a> | </a><%= link_to 'delete', @user, method: :delete, data: { confirm: "Are you sure?" } %></p>
+						<p><a class="edit-user-anchor">edit</a></p>
 					<% end %>
 				</div><div class="clear-fix"></div>
 
