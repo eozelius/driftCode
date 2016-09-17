@@ -51,13 +51,26 @@
           <div class="wizard-routes">
             <a class="reveal-route-info">readme</a>
             <p class="instructions-title hidden">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
-            <!-- <textarea id="route_0_description" class="route-description" name="route[0][description]"></textarea> -->
-            
+
             <ul>
-              <% @post.routes.each do |route| %>
-                <li><%= route.title %></li>
+              <% @post.routes.each_with_index do |route, i| %>
+                <li class="route">
+                  <p class="route-title" data-route="<%= route.id %>">
+                    <%= route.title %>
+                  </p>
+
+                  <div class="route-info" data-route="<%= route.id %>" style="display:none;">
+                    <p class="route-body" data-route="<%= route.id %>">
+                      <%= route.description %>
+                    </p>
+                  </div>
+                </li>
               <% end %>
             </ul>
+
+            <div class="create-new-route">
+              <span class="normal">create new route</span>
+            </div>
           </div>
         </div>
         
@@ -81,6 +94,7 @@
   <%= render 'driftmap/init_driftmap' %>
 
   <span class="save-zoom normal hidden">save default view</span>
+  <span class="save-route normal hidden">save route</span>
   <span class="save-wizard normal bottom">save driftMap</span>
 
   <script type="text/javascript">
@@ -89,17 +103,78 @@
     var routePointIndex = -1;
     var routePoints = [];
     
-    // Add route to map
-    $('.create-route').on('click', function(){
+    // Routes
+    // Step 1 - user clicks 'create new route' button
+    $('.create-new-route span').on('click', function(){
       routeIndex++;
-      window.map.off('click').on('click', function(e){
-        var lat = e.latlng.lat.toFixed(7);
-        var lng = e.latlng.lng.toFixed(7);
-        var newPoint = L.latLng(lat, lng)
-        routePoints.push(newPoint);
+      $(this).addClass('hidden');
+      route_inputs =  '<div class="new-route-inputs">' +
+                        '<p class="route-title-edit" data-route="'+ routeIndex +'">' + 
+                          '<input type="text" name="route['+ routeIndex +'][title]" value="my journey title" />' + 
+                          '</p>' +
+                          '<p class="route-body-edit" data-route="'+ routeIndex +'">' + 
+                            '<textarea name="route['+ routeIndex +'][description]">my journey description</textarea>' +
+                          '</p>' +
+                          '<p>' +
+                            '<span style="margin: 10px 0" class="plot-route normal">plot on map</span>' +
+                          '</p>' +
+                        '</div>';
 
-        add_route(window.map, routeIndex, ++routePointIndex, routePoints);
+      $(this).before(route_inputs);
+
+      // Step 2 - User clicks 'plot of map'
+      $('.plot-route.normal').on('click', function(){
+        $(this).remove()
+        $('.wizard-container, .save-route').toggleClass('hidden');
+        routePoints = [];
+        routePointIndex = -1;
+
+        window.map.off('click').on('click', function(e){
+          var lat = e.latlng.lat.toFixed(7);
+          var lng = e.latlng.lng.toFixed(7);
+          var newPoint = L.latLng(lat, lng);
+          routePoints.push(newPoint);
+
+          add_route(window.map, routeIndex, ++routePointIndex, routePoints);
+        });
       });
+
+      // Step 3 - User has written title/desc and plotted points on map, finally clicks save
+      // Save route
+      $('.save-route').on('click', function(){
+        window.map.off('click');
+        $('.wizard-container, .save-route').toggleClass('hidden');
+        var new_route = '<li class="route">' + 
+                          '<p class="route-title" data-route="'+ routeIndex +'">' + 
+                            $('.route-title-edit[data-route="'+ routeIndex +'"] input').val() + 
+                          '</p>' +
+                          '<div class="route-info" data-route="'+ routeIndex +'" style="display:none;">' + 
+                            '<p class="route-body" data-route="'+ routeIndex +'">' + 
+                              $('.route-body-edit[data-route="'+ routeIndex +'"] textarea').val() +
+                            '</p>' + 
+                          '</div>' +
+                        '</li>';
+        $('.wizard-routes ul').append(new_route);
+        $('.wizard-routes input, .wizard-routes textarea').addClass('hidden');
+        alert("journey has been created and saved");
+        $('.create-new-route span').removeClass('hidden');
+
+        // todo dry this:
+        // reveal Route info
+        $('p.route-title').on('click', function(){
+          active = $(this).hasClass('active');
+          route_index = $(this).data('route');
+
+          if(active){
+            $('.route-info[data-route="'+ route_index +'"]').slideUp(700);
+            $(this).removeClass('active');
+          } else {
+            $('.route-info[data-route="'+ route_index +'"]').slideDown(700);
+            $(this).addClass('active');
+          }     
+        });
+      });
+
     });
 
     // Add blip to map
@@ -137,7 +212,7 @@
     // save location/zoom
     $('.save-zoom').on('click', function(){
       $('.wizard-container, .save-zoom').toggleClass('hidden');
-      alert('location and zoom saved.')
+      alert('location and zoom saved.');
       var init_x = window.map.getCenter().lat;
       var init_y = window.map.getCenter().lng;
       var zoom   = window.map.getZoom();
@@ -148,6 +223,21 @@
       $('#post_init_zoom').val(zoom);
     });
 
+    // reveal Route info
+    $('p.route-title').on('click', function(){
+      active = $(this).hasClass('active');
+      route_index = $(this).data('route');
+
+      if(active){
+        $('.route-info[data-route="'+ route_index +'"]').slideUp(700);
+        $(this).removeClass('active');
+      } else {
+        $('.route-info[data-route="'+ route_index +'"]').slideDown(700);
+        $(this).addClass('active');
+      }
+    });
+
+    // reveal route readme infomation - this script will never run.  todo, setup an email notification if anyone ever clicks this
     $('.reveal-route-info').on('click', function(){
       $('.routes-container p').toggleClass('hidden');
     });

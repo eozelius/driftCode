@@ -125,6 +125,16 @@ ul li.active-tab {
       padding: 3% 5%;
       text-align: left;
       cursor: pointer;
+
+      .route-body {
+        color: #552727;
+        cursor: initial;
+        padding: 3%;
+      }
+
+      .new-route-inputs {
+        margin-top: 10px;
+      }
     }
   }
 
@@ -136,7 +146,8 @@ ul li.active-tab {
 
 }
 
-.save-zoom {
+.save-zoom,
+.save-route    {
   position: absolute;
   bottom: 1px;
   right: 38px;

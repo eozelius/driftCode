@@ -88,7 +88,7 @@ class PostsController < ApplicationController
 
 		def create_routes
 			params[:route].each do |route|
-				@route = @post.routes.build( description: route[1]["description"]	)
+				@route = @post.routes.build( title: route[1]["title"], description: route[1]["description"]	)
 				@post.save
 
 				create_route_points if params[:route]["0"]["routePoint"].present?

@@ -73,8 +73,8 @@ function init_map(dom, driftmap, blips, routes){
 				})
 			} // end adding markers to map
 
-			blipPopup.openOn(m);
-			$('.blip-images').unslider();
+			//blipPopup.openOn(m);
+			//$('.blip-images').unslider();
 		}
 
 		// Add routes to Map
@@ -179,7 +179,7 @@ function add_route(driftmap, routeIndex, routePointIndex, routePoints){
   												 'name="route['+ routeIndex +'][routePoint]['+ routePointIndex +'][order]"' +
   												 'value="'+ routePointIndex +'"/>';
 
-	$('#post-form-container form').prepend(routeInputs);
+	$('.driftmap-form-container form').prepend(routeInputs);
 
   if(routePointIndex > 0){
   	var line = L.polyline([fromPoint, toPoint]).addTo(driftmap);
