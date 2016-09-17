@@ -346,6 +346,12 @@ button.normal:hover{
 }
 
 /* Header - don't fucking touch this */
+@media (min-width: 821px){
+	.login-btns-container {
+		margin-top: -24px;
+	}
+}
+
 @media (max-width: 821px){
 	p.tag-line {
 		top: 60px;
