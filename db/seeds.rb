@@ -70,6 +70,38 @@ bogota.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_
 bogota.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/bogota/bogota_fut.jpg"))
 bogota.save!
 
+# Routes
+colombia = ethan.post.routes.create!(
+  title: '2015 - Colombia',
+  description: 'A gonzo style adventure into the heart and fringes of this South American Gem.'
+)
+
+colombia.route_points.build( x: 4.6077624, y: -74.0745113, order: 0 )
+colombia.route_points.build( x: 6.2807872, y: -75.5511055, order: 1 )
+colombia.route_points.build( x: 5.1073584, y: -75.5126810, order: 2 )
+colombia.route_points.build( x: 4.8564869, y: -75.6857157, order: 3 )
+colombia.route_points.build( x: 4.6671150, y: -75.5951801, order: 4 )
+colombia.route_points.build( x: 3.5644319, y: -76.5052577, order: 5 )
+colombia.route_points.build( x: 3.7782255, y: -77.1864100, order: 6 )
+colombia.route_points.build( x: 4.4904739, y: -74.1196424, order: 7 )
+colombia.save!
+
+europe = ethan.post.routes.create!(
+  title: '2016 - Europe',
+  description: 'Backpacking across the pond'
+)
+
+europe.route_points.build( x: 55.6895847, y: 12.5706253, order: 0 )
+europe.route_points.build( x: 53.552139, y: 9.9933014, order: 1 )
+europe.route_points.build( x: 52.5216526, y: 13.3855019, order: 2 )
+europe.route_points.build( x: 52.3786382, y: 4.9043999, order: 3 )
+europe.route_points.build( x: 48.8582776, y: 2.3507652, order: 4 )
+europe.route_points.build( x: 47.3725471, y: 8.5380592, order: 5 )
+europe.route_points.build( x: 46.8667638, y: 8.642395, order: 6 )
+europe.route_points.build( x: 46.4548893, y: 11.3274536, order: 7 )
+europe.route_points.build( x: 47.4503798, y: 18.9975586, order: 8 )
+europe.save!
+
 if Rails.env.development? || Rails.env.test?
   # Create Dummy Users
   10.times do |n|
