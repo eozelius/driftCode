@@ -104,7 +104,8 @@ ul li.active-tab {
 
 .wizard-step {
   height: 230px;
-  overflow-y: scroll; 
+  overflow-y: scroll;
+  overflow-x: hidden; 
 
   p {
     font-size: 1em;
@@ -133,9 +134,13 @@ ul li.active-tab {
         cursor: initial;
         padding: 3%;
       }
-
       .new-route-inputs {
         margin-top: 10px;
+      }
+      .edit-route {
+        font-style: italic;
+        margin-left: 15px;
+        cursor: pointer;
       }
     }
   }

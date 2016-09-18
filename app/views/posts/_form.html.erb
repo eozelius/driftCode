@@ -55,19 +55,25 @@
                   <p class="route-title" data-route="<%= route.id %>">
                     <%= route.title %>
                   </p>
+                  <p class="route-title-edit hidden" data-route="<%= route.id %>">
+                    <input type="text" name="route[<%= i %>][title]" value="<%= route.title %>" />
+                  </p>
 
                   <div class="route-info" data-route="<%= route.id %>" style="display:none;">
                     <p class="route-body" data-route="<%= route.id %>">
-                      <%= route.description %>
+                      <%= route.description %><span class="edit-route" data-route="<%= route.id %>">- edit</span>
+                    </p>
+                    <p class="route-body-edit hidden" data-route="<%= route.id %>">
+                      <textarea name="route[<%= i %>][description]"><%= route.description %></textarea>
                     </p>
                   </div>
+                  <span class="normal edit-save-route hidden" data-route="<%= route.id %>">save</span>
                 </li>
               <% end %>
             </ul>
 
-            <div class="create-new-route">
-              <span class="normal">create new route</span>
-            </div>
+            <span class="normal create-new-route">create new route</span>
+
           </div>
         </div>
         
@@ -102,7 +108,7 @@
     
     // Routes
     // Step 1 - user clicks 'create new route' button
-    $('.create-new-route span').on('click', function(){
+    $('.create-new-route').on('click', function(){
       $('.save-wizard').addClass('hidden');
       routeIndex++;
       $(this).addClass('hidden');
@@ -159,7 +165,7 @@
         $('.wizard-routes ul').append(new_route);
         $('.wizard-routes input, .wizard-routes textarea').addClass('hidden');
         alert("journey has been created and saved");
-        $('.create-new-route span').removeClass('hidden');
+        $('.create-new-route').removeClass('hidden');
 
         // todo dry this:
         // reveal Route info
@@ -206,6 +212,36 @@
       $('#post_init_y').val(init_y);
       $('#post_init_zoom').val(zoom);
     });
+
+    /* Edit Driftmap */
+    // Edit Route
+    $('.edit-route').on('click', function(){
+      index = $(this).data('route');
+      console.log("i: " + index);
+
+      var selector = '.route-title[data-route="'+ index +'"], ' +
+                     '.route-body[data-route="'+ index +'"], ' +
+                     '.route-title-edit[data-route="'+ index +'"], ' +
+                     '.route-body-edit[data-route="'+ index +'"], ' +
+                     '.create-new-route, ' +
+                     '.driftmap-form-container .save-wizard, ' + 
+                     '.edit-save-route[data-route="'+ index +'"]';
+
+      $(selector).toggleClass('hidden');
+    });
+
+    // Save an update to a route
+    $('.edit-save-route').on('click', function(){
+      index = $(this).data('route');
+      title = $('.route-title-edit[data-route="'+ index +'"] input').val();
+      body = $('.route-body-edit[data-route="'+ index +'"] textarea').val();
+
+      console.log("i: " + index);
+      console.log("title: " + title);
+      console.log('body: ' + body);
+
+    });
+
 
     /* Misc Form/wizard actions */
     // toggle wizard
