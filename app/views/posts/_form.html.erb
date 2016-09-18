@@ -179,13 +179,35 @@
 
     });
 
-    // Add blip to map
+    // Blips
     $('.create-blip').on('click', function(){
       window.map.off('click').on('click', function(e){
         add_blip(window.map, e, ++blipIndex);
       });
     });
 
+    // Title/Default Location
+    $('.update-zoom').on('click', function(){
+      $('#map').css('top', '0');
+      $('.wizard-container, .save-zoom').toggleClass('hidden');
+    });
+
+    // save location/zoom
+    $('.save-zoom').on('click', function(){
+      $('.wizard-container, .save-zoom').toggleClass('hidden');
+      $('#map').css('top', '-310px');
+      alert('location and zoom saved.');
+      var init_x = window.map.getCenter().lat;
+      var init_y = window.map.getCenter().lng;
+      var zoom   = window.map.getZoom();
+    
+      // Post/DriftMap attrs
+      $('#post_init_x').val(init_x);
+      $('#post_init_y').val(init_y);
+      $('#post_init_zoom').val(zoom);
+    });
+
+    /* Misc Form/wizard actions */
     // toggle wizard
     $('.toggle-wizard').on('click', function(){
       if($('.wizard-container').hasClass('active')){
@@ -208,25 +230,6 @@
     // Submit form
     $('.save-wizard').on('click', function(){
       $('.driftmap-form-container form').submit();
-    });
-
-    // user wants to update location
-    $('.update-zoom').on('click', function(){
-      $('.wizard-container, .save-zoom').toggleClass('hidden');
-    });
-
-    // save location/zoom
-    $('.save-zoom').on('click', function(){
-      $('.wizard-container, .save-zoom').toggleClass('hidden');
-      alert('location and zoom saved.');
-      var init_x = window.map.getCenter().lat;
-      var init_y = window.map.getCenter().lng;
-      var zoom   = window.map.getZoom();
-    
-      // Post/DriftMap attrs
-      $('#post_init_x').val(init_x);
-      $('#post_init_y').val(init_y);
-      $('#post_init_zoom').val(zoom);
     });
 
     // reveal Route info
