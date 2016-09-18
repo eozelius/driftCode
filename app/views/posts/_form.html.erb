@@ -103,6 +103,7 @@
     // Routes
     // Step 1 - user clicks 'create new route' button
     $('.create-new-route span').on('click', function(){
+      $('.save-wizard').addClass('hidden');
       routeIndex++;
       $(this).addClass('hidden');
       route_inputs =  '<div class="new-route-inputs">' +
@@ -122,6 +123,8 @@
       // Step 2 - User clicks 'plot of map'
       $('.plot-route.normal').on('click', function(){
         $(this).remove()
+        $('.wizard-container').removeClass('active');
+        $('#map').css('top', '0');
         $('.wizard-container, .save-route').toggleClass('hidden');
         routePoints = [];
         routePointIndex = -1;
@@ -139,6 +142,8 @@
       // Step 3 - User has written title/desc and plotted points on map, finally clicks save
       // Save route
       $('.save-route').on('click', function(){
+        $('.save-wizard').removeClass('hidden');
+        $('#map').css('top', '-310px')
         window.map.off('click');
         $('.wizard-container, .save-route').toggleClass('hidden');
         var new_route = '<li class="route">' + 
