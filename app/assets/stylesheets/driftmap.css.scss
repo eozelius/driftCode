@@ -47,15 +47,17 @@ p.instructions-title {
 .wizard-container {
   width: 260px;
   height: 310px;
-  position: absolute;
+  position: relative;
   z-index: 999;
   background-color: #EFEFEF;
   padding-bottom: 3%;
   border: 1px solid #ccc;
   border-radius: 3px;
-  bottom: -7%;
-  left: 10%;
+  top: 200px;
+}
 
+.active.wizard-container {
+  margin-left: -1000px;
 }
 
 #edit-driftmap-container .toggle-wizard {
@@ -154,36 +156,6 @@ ul li.active-tab {
   opacity: .8;
 }
 
-/* map attributes */
-
-/*li.wizard-step {
-  background-color: #E9EEF0;
-  cursor: pointer;
-  height: 50px;
-  border: 1px solid #552727; 
-  border-bottom: none; 
-  display: inline-block;
-  width: 105px;
-  margin: 0;
-  border-radius: 5px 5px 0 0;
-}*/
-
-/*li.wizard-step p {
-  font-size: 1em;
-  line-height: 50px;
-  text-align: center; 
-}*/
-
-/*p.wizard-step-title {
-  margin: 20px 0 18px 10px;
-  color: #552727;
-}*/
-
-/*li.wizard-step div {
-  padding: 0 4%;
-  height: 100px;
-}*/
-
 /* Marker */
 .marker-box {
   width: 600px;
@@ -240,6 +212,24 @@ div.blip-popup {
   left: -85px;
 }
 
+@media (min-width: 1200px){
+  .wizard-container {
+    left: 66px;
+  }
+}
+
+@media (max-width: 1200px){
+  .wizard-container {
+    left: 55px;
+  }
+}
+
+@media (max-width: 767px) {
+  .wizard-container {
+    left: 33px;
+  }
+}
+
 @media (max-width: 480px){
   .application-container {
     padding: 0 3%;
@@ -276,9 +266,11 @@ div.blip-popup {
     width: 390px;
     height: 140px;
     margin: 0 auto;
-
-
-
     display: block;
+  }
+
+  /* wizard */
+  .wizard-container {
+    left: 20px;
   }
 }

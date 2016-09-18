@@ -16,9 +16,9 @@ ethan = User.create!(
 ethan.post = Post.create(
   title:  "./driftmap",
   body:   "just a computer hacker trying to get some fresh air.",
-  init_x: 26.549222577692,
-  init_y: -83.0126953125,
-  init_zoom: 4
+  init_x: 0.924206230200376,
+  init_y: -34.2400771379471,
+  init_zoom: 2
 )
 
 queens = ethan.post.blips.create!(

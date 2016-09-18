@@ -14,9 +14,9 @@
 
   <div class="wizard-container">
     <ul class="tabs-menu">
+      <li data-step="routes" class="active-tab wizard-table" style="font-size:.88em;">journeys</li>
       <li data-step="title" class="wizard-table">title</li>
       <li data-step="body" class="wizard-table" style="font-size:.88em;line-height: 26px;">descrip- tion</li>
-      <li data-step="routes" class="active-tab wizard-table" style="font-size:.88em;">journeys</li>
       <li data-step="markers" class="wizard-table"></i>blips</li>
     </ul>
 
@@ -49,9 +49,6 @@
         <!-- Step 4 routes -->
         <div class="routes-container wizard-step">
           <div class="wizard-routes">
-            <a class="reveal-route-info">readme</a>
-            <p class="instructions-title hidden">you can organize your map into journeys, tracking your progress around the globe, and associating a set of blips with a specific journey</p>
-
             <ul>
               <% @post.routes.each_with_index do |route, i| %>
                 <li class="route">
@@ -186,7 +183,11 @@
 
     // toggle wizard
     $('.toggle-wizard').on('click', function(){
-      $('.wizard-container').toggleClass('hidden');
+      if($('.wizard-container').hasClass('active')){
+        $('.wizard-container').removeClass('active');
+      } else {
+        $('.wizard-container').addClass('active');
+      }
     });
 
     // Change menu tab
@@ -235,11 +236,6 @@
         $('.route-info[data-route="'+ route_index +'"]').slideDown(700);
         $(this).addClass('active');
       }
-    });
-
-    // reveal route readme infomation - this script will never run.  todo, setup an email notification if anyone ever clicks this
-    $('.reveal-route-info').on('click', function(){
-      $('.routes-container p').toggleClass('hidden');
     });
 
     // Cannot upload images larger than 3M
