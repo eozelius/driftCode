@@ -61,7 +61,7 @@
                       <%= route.description %><span class="edit-route" data-route="<%= route.id %>">- edit</span>
                     </p>
                     <p class="del-route">
-                      <%= link_to 'delete', route_path(route), method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <%#= link_to 'delete', route_path(route), method: :delete, data: { confirm: 'Are you sure?' } %>
                     </p>
                   </div>
                   <span class="normal edit-save-route hidden" data-route="<%= route.id %>">save</span>
@@ -111,14 +111,14 @@
       route_inputs =  '<div class="new-route-inputs">' +
                         '<p class="route-title-edit" data-route="'+ routeIndex +'">' + 
                           '<input type="text" name="route['+ routeIndex +'][title]" value="my journey title" />' + 
-                          '</p>' +
-                          '<p class="route-body-edit" data-route="'+ routeIndex +'">' + 
-                            '<textarea name="route['+ routeIndex +'][description]">my journey description</textarea>' +
-                          '</p>' +
-                          '<p>' +
-                            '<span style="margin: 10px 0" class="plot-route normal">plot on map</span>' +
-                          '</p>' +
-                        '</div>';
+                        '</p>' +
+                        '<p class="route-body-edit" data-route="'+ routeIndex +'">' + 
+                          '<textarea name="route['+ routeIndex +'][description]">my journey description</textarea>' +
+                        '</p>' +
+                        '<p>' +
+                          '<span style="margin: 10px 0" class="plot-route normal">plot on map</span>' +
+                        '</p>' +
+                      '</div>';
 
       $(this).before(route_inputs);
 
@@ -138,6 +138,7 @@
           routePoints.push(newPoint);
 
           add_route(window.map, routeIndex, ++routePointIndex, routePoints);
+          add_blip(window.map, e, ++blipIndex)
         });
       });
 

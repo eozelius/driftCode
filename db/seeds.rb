@@ -21,6 +21,7 @@ ethan.post = Post.create(
   init_zoom: 2
 )
 
+# StandAlone Blips
 queens = ethan.post.blips.create!(
   title: 'Sunnyside Queens',
   body: 'Queens NY.  From Flushing to Astoria to Jamaica, for centuries the world has landed in Queens to embark on a new life in the United States.  The culture, diversity and unforgettable food has made Queens one of the greatest places in the world to live, and a must-see for US and World citizens alike.'.html_safe,

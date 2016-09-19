@@ -1,5 +1,6 @@
 class Blip < ActiveRecord::Base
   belongs_to :post
+  belongs_to :route
   has_many :blip_images, dependent: :destroy
 
   validates :title,   :presence => true, :length => { minimum: 4, maximum: 40 }

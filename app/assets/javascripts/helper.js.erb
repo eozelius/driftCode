@@ -57,7 +57,6 @@ function init_map(dom, driftmap, blips, routes){
 																'<p>'+ body +'</p>' + 
 															'</div>' +
 															blip_images_tags +
-															// '<p><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/blips/'+ blips[i].id +'">delete</a></p>' +
 														'</div>';
 
 				var blipMarker = L.marker([lat, lng]).addTo(m);
@@ -116,44 +115,59 @@ function add_blip(driftmap, e, blipIndex){
 
   var blipContent = '<div class="blip-wrapper-'+ blipIndex +'">' +
 	                    '<p class="instructions">Title</p>' +
-	                    '<input id="blip-title-'+ blipIndex +'" class="blip-title" name="blip['+ blipIndex +'][title]" data-blip="'+ blipIndex +'" type="text" />' +
+	                    '<input id="blip-title-'+ blipIndex +'" class="blip-title" name="blip['+ blipIndex +'][title]" data-blip="'+ blipIndex +'" type="text" value="my blip title" />' +
 	                    '<p class="instructions">Description</p>' +
-	                    '<textarea id="blip-body-'+ blipIndex +'" class="blip-body" name="blip['+ blipIndex +'][body]" data-blip="'+ blipIndex +'"></textarea>' +
+	                    '<textarea id="blip-body-'+ blipIndex +'" class="blip-body" name="blip['+ blipIndex +'][body]" data-blip="'+ blipIndex +'">my blip description</textarea>' +
 	                    '<input class="blip-file" name="blip['+ blipIndex +'][photos][0]" id="blip_'+ blipIndex +'_photos_0" data-blip="'+ blipIndex +'" accept="image/jpeg, image/gif, image/png, image/jpg" type="file">' +
 	                    '<span class="normal" id="add-new-blip" data-photo="0" data-blip="'+ blipIndex +'"><i class="fa fa-plus"></i> photo</span>' +
 	                    '<span class="normal">cancel</span>' +
 	                  '</div>';
 
   var blipMarker = L.marker([lat, lng]).addTo(driftmap);
-  var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(blipContent).openOn(driftmap);
+  var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(blipContent);
   blipMarker.bindPopup(blipPopup);
 
   var blipInputs = '<input type="hidden" name="blip['+ blipIndex +'][x]" value="'+ lat +'">' + 
-                   '<input type="hidden" name="blip['+ blipIndex +'][y]" value="'+ lng +'">';
+                   '<input type="hidden" name="blip['+ blipIndex +'][y]" value="'+ lng +'">' + 
+                   '<input id="blip-title-'+ blipIndex +'" class="blip-title hidden" name="blip['+ blipIndex +'][title]" data-blip="'+ blipIndex +'" type="text" value="my blip title" />' + 
+                   '<textarea id="blip-body-'+ blipIndex +'" class="blip-body hidden" name="blip['+ blipIndex +'][body]" data-blip="'+ blipIndex +'">my blip description</textarea>' + 
+                   '<input class="blip-file hidden" name="blip['+ blipIndex +'][photos][0]" id="blip_'+ blipIndex +'_photos_0" data-blip="'+ blipIndex +'" accept="image/jpeg, image/gif, image/png, image/jpg" type="file">';
 
-  $('#post-form-container form').prepend(blipInputs);
+  $('.driftmap-form-container form').prepend(blipInputs);
 
-  $('.blip-wrapper-'+ blipIndex + ' input').on('change', function(){
-  	$('#post-form-container form').prepend($(this).clone().addClass('hidden'));
+  // Blip Event Listeners
+  // title
+  $('.blip-wrapper-'+ blipIndex + ' input[type="text"]').on('change', function(){
+  	$('.driftmap-form-container form .blip-title[data-blip="'+ blipIndex +'"]').val(xss_trim($(this).val()));
   });
 
+  // body
   $('.blip-wrapper-'+ blipIndex + ' textarea').on('change', function(){
-  	var blipIndex = $(this).data('blip');
-  	var blipBodyInput = '<input type="hidden" name="blip['+ blipIndex +'][body]" value="'+ $(this).val() +'" class="blip-body" data-blip="'+ blipIndex +'"/>';
-  	$('#post-form-container form').prepend(blipBodyInput);
+  	$('.driftmap-form-container form .blip-body[data-blip="'+ blipIndex +'"]').val(xss($(this).val()));
   })
 
-  // Add event listener for 'add another photo button'
+  // images
+  $('.blip-wrapper-'+ blipIndex +'input[type="file"]').on('change', function(){
+  	$('.driftmap-form-container form .blip-file[data-blip="'+ blipIndex +'"]').val($(this).val());
+  });
+
+  // add another photo
   $('#add-new-blip[data-blip="'+ blipIndex +'"]').on('click' , function(){
   	var blipIndex = $(this).data('blip');
   	var photoIndex = $(this).data('photo') + 1;
-    var addPhoto = '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip['+ blipIndex +'][photos]['+ photoIndex +']" id="blip_'+ blipIndex +'_photos_'+ photoIndex +'" type="file">';
+    var addPhotoInput = '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip['+ blipIndex +'][photos]['+ photoIndex +']" id="blip_'+ blipIndex +'_photos_'+ photoIndex +'" type="file" data-photo="'+ photoIndex +'">';
 
-    $(this).before(addPhoto).data('photo', photoIndex);
+    $('.driftmap-form-container form').prepend(addPhotoInput);
+    $(this).before(addPhotoInput);
 
-    $('#blip_'+ blipIndex +'_photos_'+ photoIndex).on('change', function(){
-    	$('#post-form-container form').prepend($(this).clone().addClass('hidden'));
+    $('blip_'+ blipIndex +'_photos_'+ photoIndex + '[data-photo="'+ photoIndex +'"]').on('change', function(){
+    	$('.driftmap-form-container form').prepend($(this).clone().addClass('hidden'));
     });
+
+
+/*    $('#blip_'+ blipIndex +'_photos_'+ photoIndex).on('change', function(){
+    	$('.driftmap-form-container form').prepend($(this).clone().addClass('hidden'));
+    });*/
   });
 } // end add_blip
 
