@@ -149,13 +149,6 @@ ul li.active-tab {
       }      
     }
   }
-
-
-  /* routes */
-  
-  
-
-
 }
 
 .save-zoom,
@@ -186,32 +179,33 @@ ul li.active-tab {
 }
 
 /* popups */
-.leaflet-popup-content{
-  min-width: 600px;
-}
 
 /* Blips */
 .leaflet-popup-content-wrapper {
-  min-height: 300px;
+  min-height: 350px;
 }
 
 div.blip-popup {
-  width: 710px;
+  //width: 710px;
   max-height: 400px;
-  min-width: 150px;
+  //min-width: 150px;
 }
 
 .blip-images {
   display: inline-block;
-  width: 400px;
+  width: 90%;
   height: 285px;
 }
-
 
 .blip-text {
   display: inline-block;
   width: 240px;
   float: left;
+  padding: 6%;
+}
+
+.blip-popup-body {
+  height: 250px;
 }
 
 /* unslider */
@@ -251,8 +245,9 @@ div.blip-popup {
   }
 
   .leaflet-popup-content-wrapper {
-    min-width: 0;
+    //min-width: 0;
     width: 239px;
+    //height: 225px;
   }
   .leaflet-popup-content {
     width: 229px !important;
@@ -263,15 +258,20 @@ div.blip-popup {
     width: 229px;
   }
   .blip-text{
-    width: 220px;
+    width: 228px;
     height: 200px;
     overflow: scroll;
     display: block;
     float: none;
   }
+  .blip-popup-body {
+    height: 140px;
+  }
   .blip-images {
-    width:230px; 
     height: auto;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
   }
   .unslider img {
     width: 390px;
