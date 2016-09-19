@@ -61,7 +61,7 @@
                       <%= route.description %><span class="edit-route" data-route="<%= route.id %>">- edit</span>
                     </p>
                     <p class="del-route">
-                      <%#= link_to 'delete', route_path(route), method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <%= link_to 'delete', route_path(route), method: :delete, data: { confirm: 'Are you sure?' } %>
                     </p>
                   </div>
                   <span class="normal edit-save-route hidden" data-route="<%= route.id %>">save</span>
