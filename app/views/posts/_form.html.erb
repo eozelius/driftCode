@@ -258,6 +258,10 @@
                                   '.edit-route[data-route="'+ index +'"]';
             $(remove_selector).remove();
             $(selector).toggleClass('hidden');
+
+            $('.route-title[data-route="'+ index +'"]').html(title);
+            $('.route-body[data-route="'+ index +'"]').html(body);
+
             alert(r.title + " has been successfully updated.");
           } else {
             alert('Whoops, something went a little haywire, please refresh your browser and try again.');
