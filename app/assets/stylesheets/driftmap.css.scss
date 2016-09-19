@@ -245,9 +245,8 @@ div.blip-popup {
   }
 
   .leaflet-popup-content-wrapper {
-    //min-width: 0;
     width: 239px;
-    //height: 225px;
+    min-height: 0;
   }
   .leaflet-popup-content {
     width: 229px !important;
