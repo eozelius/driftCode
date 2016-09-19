@@ -5,6 +5,8 @@ class CreateBlips < ActiveRecord::Migration
       t.text :body
       t.float :x
       t.float :y
+      t.route_id :integer
+
       t.references :post, index: true, foreign_key: true
 
       t.timestamps null: false
