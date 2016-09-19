@@ -160,23 +160,9 @@
                         '</li>';
         $('.wizard-routes ul').append(new_route);
         $('.wizard-routes input, .wizard-routes textarea').addClass('hidden');
-        alert("journey has been created and saved");
         $('.create-new-route').removeClass('hidden');
-
-        // todo dry this:
-        // reveal Route info
-        $('p.route-title').on('click', function(){
-          active = $(this).hasClass('active');
-          route_index = $(this).data('route');
-
-          if(active){
-            $('.route-info[data-route="'+ route_index +'"]').slideUp(700);
-            $(this).removeClass('active');
-          } else {
-            $('.route-info[data-route="'+ route_index +'"]').slideDown(700);
-            $(this).addClass('active');
-          }     
-        });
+        alert("journey has been created and saved");
+        $('.driftmap-form-container form').submit();
       });
 
     });
@@ -207,6 +193,7 @@
       $('#post_init_x').val(init_x);
       $('#post_init_y').val(init_y);
       $('#post_init_zoom').val(zoom);
+      $('.driftmap-form-container form').submit();
     });
 
     /* Edit Driftmap */
