@@ -44,6 +44,7 @@ function init_map(dom, driftmap, blips, routes){
 																'<p class="blip-popup-body">'+ body +'</p>' + 
 															'</div>' +
 															blip_images_tags +
+															'<div class="edit-blip"><a><span data-blip="'+ id +'">edit</span></a></div>' +
 														'</div>';
 
 				var blipMarker = L.marker([lat, lng]).addTo(m);
