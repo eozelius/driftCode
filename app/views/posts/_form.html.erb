@@ -227,8 +227,8 @@
     // Save an update to a route
     $('.edit-save-route').on('click', function(){
       index = $(this).data('route');
-      title = $('.route-title-edit[data-route="'+ index +'"] input').val();
-      body = $('.route-body-edit[data-route="'+ index +'"] textarea').val();
+      title = xss_trim($('.route-title-edit[data-route="'+ index +'"] input').val());
+      body = xss_trim($('.route-body-edit[data-route="'+ index +'"] textarea').val());
 
       $.ajax({
         url: '/update_route',
@@ -264,19 +264,26 @@
     // Edit Blip
     $(document).on('click', '.edit-blip span', function(){
       var index = $(this).data('blip');
-      console.log("index: " + index);
-
       var oldTitle = $.trim($('.blip-popup[data-blip="'+ index +'"] h4').text());
       var oldBody = $.trim($('.blip-popup[data-blip="'+ index +'"] p').text());
       var editTitleInput =  '<p class="blip-title-edit">title<br>' + 
-                              '<input type="text" name="blip['+ index +'][title]" value="'+ oldTitle +'"/>' +
+                              '<input type="text" data-blip="'+ index +'" name="blip['+ index +'][title]" value="'+ oldTitle +'"/>' +
                             '</p>';
       var editBodyTextarea =  '<p class="blip-body-edit">description<br>' +
-                                '<textarea name="blip['+ index +'][description]">'+ oldBody +'</textarea>' +
+                                '<textarea data-blip="'+ index +'" name="blip['+ index +'][description]">'+ oldBody +'</textarea>' +
+                                '<span class="normal edit-save-blip" data-blip="'+ index +'">save</span>' +
                               '</p>';
 
       $('.blip-popup[data-blip="'+ index +'"] h4').addClass('hidden').after(editTitleInput);
       $('.blip-popup[data-blip="'+ index +'"] .blip-popup-body').addClass('hidden').after(editBodyTextarea);
+    });
+
+    // Save an update to a Blip
+    $(document).on('click', '.edit-save-blip', function(){
+      var index = $(this).data('blip');
+      var title = xss_trim($('input[data-blip="'+ index +'"]').val());
+      var body = xss_trim($('textarea[data-blip="'+ index +'"]').val());
+
     });
 
     /* Misc Form/wizard actions */
