@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
-  resources :blips, only: :destroy
+  resources :blips,  only: :destroy
+  resources :routes, only: :destroy
 
   post   '/update_route' => 'posts#update_route'
   get    'signup' => 'users#new'

@@ -10,7 +10,7 @@
 <% end %>
 
 <div id="edit-driftmap-container">
-  <button class="toggle-wizard normal"><i class="fa fa-reorder"></i></button>
+  <button class="toggle-wizard normal"><i class="fa fa-tachometer"></i></button>
 
   <div class="wizard-container">
     <ul class="tabs-menu">
@@ -60,6 +60,9 @@
                     <p class="route-body" data-route="<%= route.id %>">
                       <%= route.description %><span class="edit-route" data-route="<%= route.id %>">- edit</span>
                     </p>
+                    <p class="del-route">
+                      <%= link_to 'delete', route_path(route), method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </p>
                   </div>
                   <span class="normal edit-save-route hidden" data-route="<%= route.id %>">save</span>
                 </li>
@@ -67,7 +70,6 @@
             </ul>
 
             <span class="normal create-new-route">create new route</span>
-
           </div>
         </div>
         
@@ -227,6 +229,7 @@
       selector = '.route-title[data-route="'+ index +'"], ' +
                  '.route-body[data-route="'+ index +'"], ' +
                  '.create-new-route, ' +
+                 '.del-route, ' +
                  '.driftmap-form-container .save-wizard, ' + 
                  '.edit-save-route[data-route="'+ index +'"]';
 

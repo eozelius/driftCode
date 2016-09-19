@@ -141,7 +141,13 @@ ul li.active-tab {
         font-style: italic;
         margin-left: 15px;
         cursor: pointer;
+        color: #ADCDDB;
       }
+      .del-route {
+        text-align: right;
+        color: #552727;
+        margin-top: 15px;
+      }      
     }
   }
 
