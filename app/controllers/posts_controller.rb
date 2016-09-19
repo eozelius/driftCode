@@ -75,6 +75,29 @@ class PostsController < ApplicationController
 		}
 	end
 
+	def update_blip
+		blip = Blip.find(params[:id])
+
+		blip.update_attributes(
+			title: params[:title],
+			body: params[:body]
+		)
+
+		if blip.save
+			status = 200
+			message = 'success'
+		else
+			status = 500
+			message = 'failure'
+		end
+
+		render json: { 
+			status:  status,
+			message: message,
+			title:   blip.reload.title
+		}
+	end
+
 	def destroy
 		@post = Post.find(params[:id])
 		@post.destroy

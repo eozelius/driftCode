@@ -264,15 +264,15 @@
     // Edit Blip
     $(document).on('click', '.edit-blip span', function(){
       var index = $(this).data('blip');
+      $(this).remove()
+      $('.edit-save-blip').removeClass('hidden');
       var oldTitle = $.trim($('.blip-popup[data-blip="'+ index +'"] h4').text());
       var oldBody = $.trim($('.blip-popup[data-blip="'+ index +'"] p').text());
       var editTitleInput =  '<p class="blip-title-edit">title<br>' + 
                               '<input type="text" data-blip="'+ index +'" name="blip['+ index +'][title]" value="'+ oldTitle +'"/>' +
                             '</p>';
       var editBodyTextarea =  '<p class="blip-body-edit">description<br>' +
-                                '<textarea data-blip="'+ index +'" name="blip['+ index +'][description]">'+ oldBody +'</textarea>' +
-                                '<span class="normal edit-save-blip" data-blip="'+ index +'">save</span>' +
-                              '</p>';
+                                '<textarea data-blip="'+ index +'" name="blip['+ index +'][description]">'+ oldBody +'</textarea></p>';
 
       $('.blip-popup[data-blip="'+ index +'"] h4').addClass('hidden').after(editTitleInput);
       $('.blip-popup[data-blip="'+ index +'"] .blip-popup-body').addClass('hidden').after(editBodyTextarea);
@@ -280,10 +280,48 @@
 
     // Save an update to a Blip
     $(document).on('click', '.edit-save-blip', function(){
+      $(this).remove();
       var index = $(this).data('blip');
-      var title = xss_trim($('input[data-blip="'+ index +'"]').val());
-      var body = xss_trim($('textarea[data-blip="'+ index +'"]').val());
+      var title = xss_trim($('.blip-title-edit input').val());
+      var body = xss_trim($('.blip-body-edit textarea').val());
 
+      console.log("index: " + index)
+      console.log("title: " + title)
+      console.log("body: " + body)
+
+      $.ajax({
+        url: '/update_blip',
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+          id: index,
+          title: title,
+          body: body
+        },
+        complete: function(response) {
+          r = response.responseJSON;
+          window.r = r;
+
+          if(r.status == 200){
+
+
+
+            /*var remove_selector = '.route-title-edit[data-route="'+ index +'"] input, ' + 
+                                  '.route-body-edit[data-route="'+ index +'"] textarea, ' + 
+                                  '.edit-route[data-route="'+ index +'"]';
+            $(remove_selector).remove();
+            $(selector).toggleClass('hidden');
+
+            $('.route-title[data-route="'+ index +'"]').html(title);
+            $('.route-body[data-route="'+ index +'"]').html(body);*/
+
+            alert(r.title + " has been successfully updated.");
+          } else {
+            alert('Whoops, something went a little haywire, please refresh your browser and try again.');
+          }
+        }
+
+      });
     });
 
     /* Misc Form/wizard actions */
