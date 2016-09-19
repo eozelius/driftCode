@@ -11,7 +11,7 @@ function init_map(dom, driftmap, blips, routes){
 			{	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 	    	maxZoom: 18,
 	    	id: 'eozelius77.j4hekake',
-	    	accessToken: 'pk.eyJ1IjoiZW96ZWxpdXM3NyIsImEiOiJkQmhDSl8wIn0.MzOmrtAL3uTNmVfLmEZ57g'
+	    	accessToken: "<%= ENV['MAPBOX_SECRET_KEY'] %>"
 			}).addTo(m);
 
 		// Add blips to Map
