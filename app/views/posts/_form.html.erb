@@ -261,6 +261,24 @@
       });
     });
 
+    // Edit Blip
+    $(document).on('click', '.edit-blip span', function(){
+      var index = $(this).data('blip');
+      console.log("index: " + index);
+
+      var oldTitle = $.trim($('.blip-popup[data-blip="'+ index +'"] h4').text());
+      var oldBody = $.trim($('.blip-popup[data-blip="'+ index +'"] p').text());
+      var editTitleInput =  '<p class="blip-title-edit">title<br>' + 
+                              '<input type="text" name="blip['+ index +'][title]" value="'+ oldTitle +'"/>' +
+                            '</p>';
+      var editBodyTextarea =  '<p class="blip-body-edit">description<br>' +
+                                '<textarea name="blip['+ index +'][description]">'+ oldBody +'</textarea>' +
+                              '</p>';
+
+      $('.blip-popup[data-blip="'+ index +'"] h4').addClass('hidden').after(editTitleInput);
+      $('.blip-popup[data-blip="'+ index +'"] .blip-popup-body').addClass('hidden').after(editBodyTextarea);
+    });
+
     /* Misc Form/wizard actions */
     // toggle wizard
     $('.toggle-wizard').on('click', function(){

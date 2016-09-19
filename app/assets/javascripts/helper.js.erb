@@ -40,11 +40,11 @@ function init_map(dom, driftmap, blips, routes){
 
 				var popupContent =  '<div class="blip-popup" data-blip="'+ id +'">' + 
 															'<div class="blip-text">' +
-																'<h4 class="instructions">'+ title +'</h4>' + 
+																'<h4 class="blip-popup-title instructions">'+ title +'</h4>' + 
 																'<p class="blip-popup-body">'+ body +'</p>' + 
 															'</div>' +
 															blip_images_tags +
-															'<div class="edit-blip"><a><span data-blip="'+ id +'">edit</span></a></div>' +
+															'<div class="edit-blip"><span data-blip="'+ id +'">edit</span></div>' +
 														'</div>';
 
 				var blipMarker = L.marker([lat, lng]).addTo(m);
