@@ -191,9 +191,14 @@ ul li.active-tab {
 }
 
 /* Blips */
+.leaflet-popup-content-wrapper {
+  min-height: 300px;
+}
+
 div.blip-popup {
   width: 710px;
   max-height: 400px;
+  min-width: 150px;
 }
 
 .blip-images {
