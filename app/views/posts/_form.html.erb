@@ -55,16 +55,10 @@
                   <p class="route-title" data-route="<%= route.id %>">
                     <%= route.title %>
                   </p>
-                  <p class="route-title-edit hidden" data-route="<%= route.id %>">
-                    <input type="text" name="route[<%= i %>][title]" value="<%= route.title %>" />
-                  </p>
 
                   <div class="route-info" data-route="<%= route.id %>" style="display:none;">
                     <p class="route-body" data-route="<%= route.id %>">
                       <%= route.description %><span class="edit-route" data-route="<%= route.id %>">- edit</span>
-                    </p>
-                    <p class="route-body-edit hidden" data-route="<%= route.id %>">
-                      <textarea name="route[<%= i %>][description]"><%= route.description %></textarea>
                     </p>
                   </div>
                   <span class="normal edit-save-route hidden" data-route="<%= route.id %>">save</span>
@@ -217,15 +211,24 @@
     // Edit Route
     $('.edit-route').on('click', function(){
       index = $(this).data('route');
-      console.log("i: " + index);
 
-      var selector = '.route-title[data-route="'+ index +'"], ' +
-                     '.route-body[data-route="'+ index +'"], ' +
-                     '.route-title-edit[data-route="'+ index +'"], ' +
-                     '.route-body-edit[data-route="'+ index +'"], ' +
-                     '.create-new-route, ' +
-                     '.driftmap-form-container .save-wizard, ' + 
-                     '.edit-save-route[data-route="'+ index +'"]';
+      var oldTitle = $.trim($('.route-title[data-route="'+ index +'"]').text());
+      var oldBody = $.trim($('.route-body[data-route="'+ index +'"]').text().trim());
+      var editTitleInput =  '<p class="route-title-edit" data-route="'+ index +'">' + 
+                              '<input type="text" name="route['+ index +'][title]" value="'+ oldTitle +'"/>' +
+                            '</p>';
+      var editBodyTextarea =  '<p class="route-body-edit" data-route="'+ index +'">' +
+                                '<textarea name="route['+ index +'][description]">'+ oldBody +'</textarea>' +
+                              '</p>';
+
+      $('.route-title[data-route="'+ index +'"]').after(editTitleInput);
+      $('.route-body[data-route="'+ index +'"]').after(editBodyTextarea);
+
+      selector = '.route-title[data-route="'+ index +'"], ' +
+                 '.route-body[data-route="'+ index +'"], ' +
+                 '.create-new-route, ' +
+                 '.driftmap-form-container .save-wizard, ' + 
+                 '.edit-save-route[data-route="'+ index +'"]';
 
       $(selector).toggleClass('hidden');
     });
@@ -236,12 +239,32 @@
       title = $('.route-title-edit[data-route="'+ index +'"] input').val();
       body = $('.route-body-edit[data-route="'+ index +'"] textarea').val();
 
-      console.log("i: " + index);
-      console.log("title: " + title);
-      console.log('body: ' + body);
+      $.ajax({
+        url: '/update_route',
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+          id: index,
+          title: title,
+          body: body
+        },
+        complete: function(response){
+          r = response.responseJSON;
+          window.r = r;
 
+          if(r.status == 200){
+            var remove_selector = '.route-title-edit[data-route="'+ index +'"] input, ' + 
+                                  '.route-body-edit[data-route="'+ index +'"] textarea, ' + 
+                                  '.edit-route[data-route="'+ index +'"]';
+            $(remove_selector).remove();
+            $(selector).toggleClass('hidden');
+            alert(r.title + " has been successfully updated.");
+          } else {
+            alert('Whoops, something went a little haywire, please refresh your browser and try again.');
+          }
+        }
+      });
     });
-
 
     /* Misc Form/wizard actions */
     // toggle wizard

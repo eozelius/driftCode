@@ -50,6 +50,31 @@ class PostsController < ApplicationController
 		end
 	end
 
+	def update_route
+		# todo implement strong params and identity checking
+
+		route = Route.find(params[:id])
+
+		route.update_attributes(
+			title: params[:title],
+			description: params[:body]
+		)
+
+		if route.save
+			status = 200
+			message = 'success'
+		else
+			status = 500
+			message = 'failure'
+		end
+
+		render json: { 
+			status:  status,
+			message: message,
+			title:   route.reload.title
+		}
+	end
+
 	def destroy
 		@post = Post.find(params[:id])
 		@post.destroy

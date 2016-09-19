@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :posts
   resources :blips, only: :destroy
 
+  post   '/update_route' => 'posts#update_route'
   get    'signup' => 'users#new'
   get    'login'  => 'sessions#new'
   post   'login'  => 'sessions#create'
