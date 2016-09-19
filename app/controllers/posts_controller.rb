@@ -38,8 +38,8 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 		@user = User.find(@post.user_id)
 
-		create_blip if params[:blip].present?
 		create_routes if params[:route].present?
+		create_blip if params[:blip].present?
 
 		if @post.update_attributes(post_params)
 			flash[:success] = "driftmap successfully updated"
@@ -86,12 +86,26 @@ class PostsController < ApplicationController
 	private
 		def create_blip
 			params[:blip].each do |blip|
-				@blip = @post.blips.build(
-					title: blip[1]["title"],
-					body:  blip[1]["body"],
-					x: 		 blip[1]["x"],
-					y: 		 blip[1]["y"]
-				)
+				if blip[1]["route"].present?
+					@route = @post.routes.last
+					@blip = @route.blips.new(
+						title: blip[1]["title"],
+						body:  blip[1]["body"],
+						x: 		 blip[1]["x"],
+						y: 		 blip[1]["y"],
+						post_id: @post.id
+
+						#post_id: blip[1]["order"]
+						#order: blip[1]
+					)
+				else
+					@blip = @post.blips.build(
+						title: blip[1]["title"],
+						body:  blip[1]["body"],
+						x: 		 blip[1]["x"],
+						y: 		 blip[1]["y"]
+					)
+				end
 
 				@post.save
 

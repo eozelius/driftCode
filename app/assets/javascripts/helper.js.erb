@@ -28,19 +28,6 @@ function init_map(dom, driftmap, blips, routes){
 				var body 	= xss_trim(blips[i].body);
 				var title = xss_trim(blips[i].title);
 				var blip_images_tags = '';
-/*				
-					blip[0] { 
-						id: "1", 
-						x: "40.743", 
-						y: "-73.922",
-						title: "Sunnyside Queens", 
-						body: "7 train", 
-						images: [
-							"<img src="/uploads/blip_image/image/1/bogota.jpg" alt="Bogota" />",
-							"<img src="/uploads/blip_image/image/1/bogota.jpg" alt="Bogota" />"
-						] 
-					}
-				*/
 
 				if(blips[i].images.length > 0) {
 					blip_images_tags += '<div class="blip-images"><ul>';
@@ -104,7 +91,7 @@ function init_map(dom, driftmap, blips, routes){
 	}	
 }
 
-function add_blip(driftmap, e, blipIndex){
+function add_blip(driftmap, e, blipIndex, route){
 	var lat = e.latlng.lat.toFixed(7);
   var lng = e.latlng.lng.toFixed(7);
 
@@ -132,6 +119,11 @@ function add_blip(driftmap, e, blipIndex){
                    '<input id="blip-title-'+ blipIndex +'" class="blip-title hidden" name="blip['+ blipIndex +'][title]" data-blip="'+ blipIndex +'" type="text" value="my blip title" />' + 
                    '<textarea id="blip-body-'+ blipIndex +'" class="blip-body hidden" name="blip['+ blipIndex +'][body]" data-blip="'+ blipIndex +'">my blip description</textarea>' + 
                    '<input class="blip-file hidden" name="blip['+ blipIndex +'][photos][0]" id="blip_'+ blipIndex +'_photos_0" data-blip="'+ blipIndex +'" accept="image/jpeg, image/gif, image/png, image/jpg" type="file">';
+
+  if(route){
+  	blipInputs += '<input type="hidden" name="blip['+ blipIndex +'][route]" value="true" />';
+  }
+
 
   $('.driftmap-form-container form').prepend(blipInputs);
 
