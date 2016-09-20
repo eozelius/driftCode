@@ -286,10 +286,6 @@
       var title = xss_trim($('.blip-text input[type="text"]').val());
       var body = xss_trim($('.blip-text textarea').val());
 
-      console.log("index: " + index)
-      console.log("title: " + title)
-      console.log("body: " + body)
-
       $.ajax({
         url: '/update_blip',
         type: 'POST',
@@ -321,7 +317,6 @@
             alert('Whoops, something went a little haywire, please refresh your browser and try again.');
           }
         }
-
       });
     });
 
@@ -373,4 +368,9 @@
       }
     });
   </script>
+  <style type="text/css">
+    .edit-blip {
+      display: block !important;
+    }
+  </style>
 </div>

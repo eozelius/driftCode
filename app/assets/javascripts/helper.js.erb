@@ -44,10 +44,10 @@ function init_map(dom, driftmap, blips, routes){
 																'<p class="blip-popup-body">'+ body +'</p>' + 
 															'</div>' +
 															blip_images_tags +
-															'<div class="edit-blip">' + 
-																'<span data-blip="'+ id +'">edit</span></div>' +
+															'<div class="edit-blip hidden">' + 
+																'<span data-blip="'+ id +'">edit</span>' +
 																'<span class="edit-save-blip normal hidden" data-blip="'+ id +'">save</span>' +	
-														'</div>';
+															'</div>';
 
 				var blipMarker = L.marker([lat, lng]).addTo(m);
 				var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
@@ -56,7 +56,7 @@ function init_map(dom, driftmap, blips, routes){
 				// Marker Event Listeners ////
 				blipMarker.on('click', function(){
 					$('.blip-images').unslider();
-				})
+				});
 			}
 		} // end Markers
 
