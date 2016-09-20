@@ -21,8 +21,8 @@ class PostsController < ApplicationController
 			flash[:success] = "driftmap created successfully"
 
 			# create Blips if user added any.
-			create_blip if params[:blip].present?
-			create_routes if params[:route].present?
+			#create_blip if params[:blip].present?
+			#create_routes if params[:route].present?
 			redirect_to @user
 		else
 			flash[:danger] = "Whoops something went wrong, please try again"

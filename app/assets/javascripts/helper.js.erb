@@ -172,7 +172,7 @@ function add_route(driftmap, routeIndex, routePointIndex, routePoints){
   var routeMarker = L.marker(toPoint).addTo(driftmap);
 
   // todo add a popup that allows user to delete that routePoint
-
+	/*
   var routeInputs = '<input type="hidden"' +
   												 'name="route['+ routeIndex +'][routePoint]['+ routePointIndex +'][x]" '+
   												 'value="'+ toPoint.lat +'"/>' + 
@@ -183,11 +183,55 @@ function add_route(driftmap, routeIndex, routePointIndex, routePoints){
   												 'name="route['+ routeIndex +'][routePoint]['+ routePointIndex +'][order]"' +
   												 'value="'+ routePointIndex +'"/>';
 
-	$('.driftmap-form-container form').prepend(routeInputs);
+	$('.driftmap-form-container form').prepend(routeInputs);*/
 
   if(routePointIndex > 0){
   	var line = L.polyline([fromPoint, toPoint]).addTo(driftmap);
   }
+}
+
+function create_route(title, description){
+	var t = xss_trim(title);
+	var d = xss_trim(description);
+
+	$.ajax({
+	  url: '/routes',
+	  type: 'POST',
+	  dataType: 'JSON',
+	  data: {
+	    title: t,
+	    description: d
+	  },
+	  complete: function(response){
+	    var r = response.responseJSON;
+	    if(r.status == 200){
+	    	route_id = r.id
+	    } else {
+	      alert('Whoops, something went a little haywire while attempting to create this journey.  please refresh your browser and try again.');
+	    }
+	  }
+	})
+}
+
+function create_routePoint(x, y, order){
+	$.ajax({
+	  url: '/route_points',
+	  type: 'POST',
+	  dataType: 'JSON',
+	  data: {
+	    x: x,
+	    y: x,
+	    order: order,
+	    id: route_id 
+	  },
+	  complete: function(response){
+	    var r = response.responseJSON
+
+	    if(r.status != 200){
+	    	alert('Whoops!  it looks like something went a little haywire while plotting that last waypoint.  Please refresh your browser, and try again.')
+	    }
+	  }
+	});
 }
 
 function flash_now(type, message){

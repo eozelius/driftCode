@@ -69,7 +69,7 @@
               <% end %>
             </ul>
 
-            <span class="normal create-new-route">create new route</span>
+            <span class="normal create-new-route"><i class="fa fa-plus"></i> journey</span>
           </div>
         </div>
         
@@ -103,12 +103,12 @@
     var routePoints = [];
     
     // Routes
-    // Step 1 - user clicks 'create new route' button
+    // Step 1 - [new route] Create new Route user clicks 'create new journey' button
     $('.create-new-route').on('click', function(){
       $('.save-wizard').addClass('hidden');
       routeIndex++;
       $(this).addClass('hidden');
-      route_inputs =  '<div class="new-route-inputs">' +
+      /*route_inputs =  '<div class="new-route-inputs">' +
                         '<p class="route-title-edit" data-route="'+ routeIndex +'">' + 
                           '<input type="text" name="route['+ routeIndex +'][title]" value="my journey title" />' + 
                         '</p>' +
@@ -118,37 +118,55 @@
                         '<p>' +
                           '<span style="margin: 10px 0" class="plot-route normal">plot on map</span>' +
                         '</p>' +
-                      '</div>';
+                      '</div>';*/
+
+      route_inputs =  '<div class="new-route-inputs" data-route="'+ routeIndex +'">' +
+                        '<p class="route-title-edit">' + 
+                          '<input type="text" value="my journey title" />' + 
+                        '</p>' +
+                        '<p class="route-body-edit">' + 
+                          '<textarea>my journey description</textarea>' +
+                        '</p>' +
+                        '<p>' +
+                          '<span style="margin: 10px 0" class="plot-route normal">plot on map</span>' +
+                        '</p>' +
+                      '</div>';                      
 
       $(this).before(route_inputs);
 
-      // Step 2 - User clicks 'plot of map'
-      $('.plot-route.normal').on('click', function(){
+      // Step 2 - [create route] - User clicks 'plot of map'
+      $('.plot-route').on('click', function(){
         $(this).remove()
         $('.wizard-container').removeClass('active');
         $('#map').css('top', '0');
         $('.wizard-container, .save-route').toggleClass('hidden');
-        routePoints = [];
-        routePointIndex = -1;
+        var routePoints = [];
+        var routePointIndex = -1;
+        var title = xss_trim($('.new-route-inputs input[type="text"]').val())
+        var description = xss_trim($('.new-route-inputs textarea').val())
 
+        create_route(title, description);
+
+        // Step 3... [create route_point] - User clicks on map to create a waypoint
         window.map.off('click').on('click', function(e){
           var lat = e.latlng.lat.toFixed(7);
           var lng = e.latlng.lng.toFixed(7);
           var newPoint = L.latLng(lat, lng);
           routePoints.push(newPoint);
+          routePointIndex++;
 
-          add_route(window.map, routeIndex, ++routePointIndex, routePoints);
+          add_route(window.map, routeIndex, routePointIndex, routePoints);
           add_blip(window.map, e, ++blipIndex);
+          create_routePoint(lat, lng, routePointIndex);
 
-          // Step 3 - Add a waypoint
+          // Step 4 - Add another waypoint
           $('.add-route-pt').on('click', function(){
-            $(".leaflet-popup-close-button")[0].click();
+            $('.leaflet-popup-close-button')[0].click();
           });
         });
       });
 
-
-      // Step 4 - User completed all steps, ready to save
+      // Step 5 - User completed all steps, ready to save
       // Save route
       $('.save-route').on('click', function(){
         $('.save-wizard').removeClass('hidden');
@@ -168,11 +186,9 @@
         $('.wizard-routes ul').append(new_route);
         $('.wizard-routes input, .wizard-routes textarea').addClass('hidden');
         $('.create-new-route').removeClass('hidden');
-        $(".leaflet-popup-close-button")[0].click();
-        alert("journey has been created and saved");
+        alert('journey has been created and saved');
         $('.driftmap-form-container form').submit();
       });
-
     });
 
     // Blips
@@ -211,9 +227,9 @@
 
       var oldTitle = $.trim($('.route-title[data-route="'+ index +'"]').text());
       var oldBody = $.trim($('.route-body[data-route="'+ index +'"]').text().trim());
-      var editTitleInput =  '<p class="route-title-edit" data-route="'+ index +'">' + 
-                              '<input type="text" name="route['+ index +'][title]" value="'+ oldTitle +'"/>' +
-                            '</p>';
+      var editTitleInput =    '<p class="route-title-edit" data-route="'+ index +'">' + 
+                                '<input type="text" name="route['+ index +'][title]" value="'+ oldTitle +'"/>' +
+                              '</p>';
       var editBodyTextarea =  '<p class="route-body-edit" data-route="'+ index +'">' +
                                 '<textarea name="route['+ index +'][description]">'+ oldBody +'</textarea>' +
                               '</p>';
@@ -233,9 +249,9 @@
 
     // Save an update to a route
     $('.edit-save-route').on('click', function(){
-      index = $(this).data('route');
-      title = xss_trim($('.route-title-edit[data-route="'+ index +'"] input').val());
-      body = xss_trim($('.route-body-edit[data-route="'+ index +'"] textarea').val());
+      var index = $(this).data('route');
+      var title = xss_trim($('.route-title-edit[data-route="'+ index +'"] input').val());
+      var body = xss_trim($('.route-body-edit[data-route="'+ index +'"] textarea').val());
 
       $.ajax({
         url: '/update_route',
@@ -259,7 +275,6 @@
 
             $('.route-title[data-route="'+ index +'"]').html(title);
             $('.route-body[data-route="'+ index +'"]').html(body);
-
             alert(r.title + " has been successfully updated.");
           } else {
             alert('Whoops, something went a little haywire, please refresh your browser and try again.');
