@@ -110,11 +110,11 @@ function add_blip(driftmap, e, blipIndex, route){
 	                    '<textarea id="blip-body-'+ blipIndex +'" class="blip-body" name="blip['+ blipIndex +'][body]" data-blip="'+ blipIndex +'">my blip description</textarea>' +
 	                    '<input class="blip-file" name="blip['+ blipIndex +'][photos][0]" id="blip_'+ blipIndex +'_photos_0" data-blip="'+ blipIndex +'" accept="image/jpeg, image/gif, image/png, image/jpg" type="file">' +
 	                    '<span class="normal" id="add-new-blip" data-photo="0" data-blip="'+ blipIndex +'"><i class="fa fa-plus"></i> photo</span>' +
-	                    '<span class="normal">cancel</span>' +
+	                    '<span class="normal add-route-pt"><i class="fa fa-plus"> waypoint</i></span>' +
 	                  '</div>';
 
   var blipMarker = L.marker([lat, lng]).addTo(driftmap);
-  var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(blipContent);
+  var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(blipContent).openOn(driftmap);
   blipMarker.bindPopup(blipPopup);
 
   var blipInputs = '<input type="hidden" name="blip['+ blipIndex +'][x]" value="'+ lat +'">' + 
