@@ -94,6 +94,59 @@ function init_map(dom, driftmap, blips, routes){
 	}	
 }
 
+function create_route(title, description){
+	var t = xss_trim(title);
+	var d = xss_trim(description);
+
+	$.ajax({
+	  url: '/routes',
+	  type: 'POST',
+	  dataType: 'JSON',
+	  data: {
+	    title: t,
+	    description: d
+	  },
+	  complete: function(response){
+	    var r = response.responseJSON;
+	    if(r.status == 200){
+	    	route_id = r.id
+
+	    } else {
+	      alert('Whoops, something went a little haywire while attempting to create this journey.  please refresh your browser and try again.');
+	    }
+	  }
+	});
+}
+
+function create_routePoint(driftmap, routePoints, order){
+	var currentPt = routePoints[routePoints.length - 1];
+
+	$.ajax({
+	  url: '/route_points',
+	  type: 'POST',
+	  dataType: 'JSON',
+	  data: {
+	    x: currentPt.lat,
+	    y: currentPt.lng,
+	    order: order,
+	    id: route_id
+	  },
+	  complete: function(response){
+	    var r = response.responseJSON
+
+	    if(r.status == 200){
+				if(order > 0){
+					var toPoint 	= routePoints[routePoints.length - 1];
+					var fromPoint = routePoints[routePoints.length - 2];
+					var routeLine = L.polyline([fromPoint, toPoint]).addTo(driftmap);
+				}
+	    } else if (r.status == 200) {
+	    	alert('Whoops!  it looks like something went a little haywire while plotting that last waypoint.  Please refresh your browser, and try again.');
+	    }
+	  }
+	});
+}
+
 function create_blip(driftmap, point, blipIndex, route){
 	var lat = point.lat;
   var lng = point.lng;
@@ -161,129 +214,6 @@ function create_blip(driftmap, point, blipIndex, route){
 			$('.driftmap-form-container form').prepend($(this).clone().addClass('hidden'));
 		});
   });
-}
-
-function add_blip(driftmap, e, blipIndex, route){
-	var lat = e.latlng.lat.toFixed(7);
-  var lng = e.latlng.lng.toFixed(7);
-
-  var popupOptions = { 
-    className: 'new-blip-box blip-box-' + blipIndex,
-    offset: [100, -40]
-  }
-
-  var blipContent = '<div class="blip-wrapper-'+ blipIndex +'">' +
-	                    '<p class="instructions">Title</p>' +
-	                    '<input id="blip-title-'+ blipIndex +'" class="blip-title" name="blip['+ blipIndex +'][title]" data-blip="'+ blipIndex +'" type="text" value="my blip title" />' +
-	                    '<p class="instructions">Description</p>' +
-	                    '<textarea id="blip-body-'+ blipIndex +'" class="blip-body" name="blip['+ blipIndex +'][body]" data-blip="'+ blipIndex +'">my blip description</textarea>' +
-	                    '<input class="blip-file" name="blip['+ blipIndex +'][photos][0]" id="blip_'+ blipIndex +'_photos_0" data-blip="'+ blipIndex +'" accept="image/jpeg, image/gif, image/png, image/jpg" type="file">' +
-	                    '<span class="normal" id="add-new-blip" data-photo="0" data-blip="'+ blipIndex +'"><i class="fa fa-plus"></i> photo</span>' +
-	                    '<span class="normal add-route-pt"><i class="fa fa-plus"> waypoint</i></span>' +
-	                  '</div>';
-
-  var blipMarker = L.marker([lat, lng]).addTo(driftmap);
-  var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(blipContent).openOn(driftmap);
-  blipMarker.bindPopup(blipPopup);
-
-  var blipInputs = '<input type="hidden" name="blip['+ blipIndex +'][x]" value="'+ lat +'">' + 
-                   '<input type="hidden" name="blip['+ blipIndex +'][y]" value="'+ lng +'">' + 
-                   '<input id="blip-title-'+ blipIndex +'" class="blip-title hidden" name="blip['+ blipIndex +'][title]" data-blip="'+ blipIndex +'" type="text" value="my blip title" />' + 
-                   '<textarea id="blip-body-'+ blipIndex +'" class="blip-body hidden" name="blip['+ blipIndex +'][body]" data-blip="'+ blipIndex +'">my blip description</textarea>' + 
-                   '<input class="blip-file hidden" name="blip['+ blipIndex +'][photos][0]" id="blip_'+ blipIndex +'_photos_0" data-blip="'+ blipIndex +'" accept="image/jpeg, image/gif, image/png, image/jpg" type="file">';
-
-  if(route){
-  	blipInputs += '<input type="hidden" name="blip['+ blipIndex +'][route]" value="true" />';
-  }
-
-  $('.driftmap-form-container form').prepend(blipInputs);
-
-  // Blip Event Listeners
-  // title
-  $('.blip-wrapper-'+ blipIndex + ' input[type="text"]').on('change', function(){
-  	$('.driftmap-form-container form .blip-title[data-blip="'+ blipIndex +'"]').val(xss_trim($(this).val()));
-  });
-
-  // body
-  $('.blip-wrapper-'+ blipIndex + ' textarea').on('change', function(){
-  	$('.driftmap-form-container form .blip-body[data-blip="'+ blipIndex +'"]').val(xss_trim($(this).val()));
-  });
-
-  // images
-  $('.blip-wrapper-'+ blipIndex +'input[type="file"]').on('change', function(){
-  	$('.driftmap-form-container form .blip-file[data-blip="'+ blipIndex +'"]').val($(this).val());
-  });
-
-  // add another photo
-  $('#add-new-blip[data-blip="'+ blipIndex +'"]').on('click' , function(){
-  	var blipIndex = $(this).data('blip');
-  	var photoIndex = $(this).data('photo') + 1;
-    var addPhotoInput = '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip['+ blipIndex +'][photos]['+ photoIndex +']" id="blip_'+ blipIndex +'_photos_'+ photoIndex +'" type="file" data-photo="'+ photoIndex +'">';
-
-    $('.driftmap-form-container form').prepend(addPhotoInput);
-    $(this).before(addPhotoInput);
-
-    $('blip_'+ blipIndex +'_photos_'+ photoIndex + '[data-photo="'+ photoIndex +'"]').on('change', function(){
-    	$('.driftmap-form-container form').prepend($(this).clone().addClass('hidden'));
-    });
-  });
-
-	$('#blip_'+ blipIndex +'_photos_'+ photoIndex).on('change', function(){
-		$('.driftmap-form-container form').prepend($(this).clone().addClass('hidden'));
-	});
-} // end add_blip
-
-function create_route(title, description){
-	var t = xss_trim(title);
-	var d = xss_trim(description);
-
-	$.ajax({
-	  url: '/routes',
-	  type: 'POST',
-	  dataType: 'JSON',
-	  data: {
-	    title: t,
-	    description: d
-	  },
-	  complete: function(response){
-	    var r = response.responseJSON;
-	    if(r.status == 200){
-	    	route_id = r.id
-
-	    } else {
-	      alert('Whoops, something went a little haywire while attempting to create this journey.  please refresh your browser and try again.');
-	    }
-	  }
-	});
-}
-
-function create_routePoint(driftmap, routePoints, order){
-	var currentPt = routePoints[routePoints.length - 1];
-
-	$.ajax({
-	  url: '/route_points',
-	  type: 'POST',
-	  dataType: 'JSON',
-	  data: {
-	    x: currentPt.lat,
-	    y: currentPt.lng,
-	    order: order,
-	    id: route_id
-	  },
-	  complete: function(response){
-	    var r = response.responseJSON
-
-	    if(r.status == 200){
-				if(order > 0){
-					var toPoint 	= routePoints[routePoints.length - 1];
-					var fromPoint = routePoints[routePoints.length - 2];
-					var routeLine = L.polyline([fromPoint, toPoint]).addTo(driftmap);
-				}
-	    } else if (r.status == 200) {
-	    	alert('Whoops!  it looks like something went a little haywire while plotting that last waypoint.  Please refresh your browser, and try again.');
-	    }
-	  }
-	});
 }
 
 function flash_now(type, message){

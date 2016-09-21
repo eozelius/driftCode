@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916135411) do
+ActiveRecord::Schema.define(version: 20160902125452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,12 +31,13 @@ ActiveRecord::Schema.define(version: 20160916135411) do
     t.float    "x"
     t.float    "y"
     t.integer  "post_id"
+    t.integer  "route_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "route_id"
   end
 
   add_index "blips", ["post_id"], name: "index_blips_on_post_id", using: :btree
+  add_index "blips", ["route_id"], name: "index_blips_on_route_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -64,10 +65,10 @@ ActiveRecord::Schema.define(version: 20160916135411) do
 
   create_table "routes", force: :cascade do |t|
     t.text     "description"
+    t.string   "title"
     t.integer  "post_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "title"
   end
 
   add_index "routes", ["post_id"], name: "index_routes_on_post_id", using: :btree
@@ -75,25 +76,26 @@ ActiveRecord::Schema.define(version: 20160916135411) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.string   "gps"
+    t.string   "from"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.boolean  "admin"
+    t.boolean  "admin",             default: false
     t.boolean  "activated",         default: false
     t.string   "activation_digest"
     t.datetime "activated_at"
+    t.string   "profile_pic"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
-    t.string   "profile_pic"
-    t.string   "from"
-    t.string   "gps"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
   add_foreign_key "blip_images", "blips"
   add_foreign_key "blips", "posts"
+  add_foreign_key "blips", "routes"
   add_foreign_key "route_points", "routes"
   add_foreign_key "routes", "posts"
 end
