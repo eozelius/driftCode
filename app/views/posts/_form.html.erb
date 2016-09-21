@@ -97,17 +97,14 @@
   <span class="save-wizard normal bottom">save driftMap</span>
 
   <script type="text/javascript">
-    var blipIndex = -1;
     var routeIndex = -1;
-    var routePointIndex = -1;
-    var routePoints = [];
     
     // Routes
     // Step 1 - [new route] Create new Route user clicks 'create new journey' button
     $('.create-new-route').on('click', function(){
       $('.save-wizard').addClass('hidden');
       $(this).addClass('hidden');
-      
+
       routeIndex++;
       route_inputs =  '<div class="new-route-inputs" data-route="'+ routeIndex +'">' +
                         '<p class="route-title-edit">' + 
@@ -131,6 +128,7 @@
         $('.wizard-container, .save-route').toggleClass('hidden');
         var routePoints = [];
         var routePointIndex = -1;
+        var blipIndex = -1;
         var title = xss_trim($('.new-route-inputs input[type="text"]').val())
         var description = xss_trim($('.new-route-inputs textarea').val())
 
@@ -145,7 +143,7 @@
           routePointIndex++;
 
           create_routePoint(window.map, routePoints, routePointIndex);
-          add_blip(window.map, e, ++blipIndex);
+          create_blip(window.map, newPoint, ++blipIndex, true)
 
           // Step 4 - Add another waypoint
           $('.add-route-pt').on('click', function(){
@@ -182,7 +180,10 @@
     // Blips
     $('.create-blip').on('click', function(){
       window.map.off('click').on('click', function(e){
-        add_blip(window.map, e, ++blipIndex);
+        var lat = e.latlng.lat.toFixed(7);
+        var lng = e.latlng.lng.toFixed(7);
+        var newPoint  = L.latLng(lat, lng);
+        create_blip(window.map, newPoint, ++blipIndex, false);
       });
     });
 
