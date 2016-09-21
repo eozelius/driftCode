@@ -127,24 +127,23 @@ function add_blip(driftmap, e, blipIndex, route){
   	blipInputs += '<input type="hidden" name="blip['+ blipIndex +'][route]" value="true" />';
   }
 
-
-  $('.driftmap-form-container form').prepend(blipInputs);
+  // $('.driftmap-form-container form').prepend(blipInputs);
 
   // Blip Event Listeners
   // title
-  $('.blip-wrapper-'+ blipIndex + ' input[type="text"]').on('change', function(){
+  /*$('.blip-wrapper-'+ blipIndex + ' input[type="text"]').on('change', function(){
   	$('.driftmap-form-container form .blip-title[data-blip="'+ blipIndex +'"]').val(xss_trim($(this).val()));
-  });
+  });*/
 
   // body
-  $('.blip-wrapper-'+ blipIndex + ' textarea').on('change', function(){
+  /*$('.blip-wrapper-'+ blipIndex + ' textarea').on('change', function(){
   	$('.driftmap-form-container form .blip-body[data-blip="'+ blipIndex +'"]').val(xss($(this).val()));
-  })
+  })*/
 
   // images
-  $('.blip-wrapper-'+ blipIndex +'input[type="file"]').on('change', function(){
+  /*$('.blip-wrapper-'+ blipIndex +'input[type="file"]').on('change', function(){
   	$('.driftmap-form-container form .blip-file[data-blip="'+ blipIndex +'"]').val($(this).val());
-  });
+  });*/
 
   // add another photo
   $('#add-new-blip[data-blip="'+ blipIndex +'"]').on('click' , function(){
@@ -152,43 +151,19 @@ function add_blip(driftmap, e, blipIndex, route){
   	var photoIndex = $(this).data('photo') + 1;
     var addPhotoInput = '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip['+ blipIndex +'][photos]['+ photoIndex +']" id="blip_'+ blipIndex +'_photos_'+ photoIndex +'" type="file" data-photo="'+ photoIndex +'">';
 
-    $('.driftmap-form-container form').prepend(addPhotoInput);
+    //$('.driftmap-form-container form').prepend(addPhotoInput);
     $(this).before(addPhotoInput);
 
     $('blip_'+ blipIndex +'_photos_'+ photoIndex + '[data-photo="'+ photoIndex +'"]').on('change', function(){
     	$('.driftmap-form-container form').prepend($(this).clone().addClass('hidden'));
     });
+  });
 
 
 /*    $('#blip_'+ blipIndex +'_photos_'+ photoIndex).on('change', function(){
     	$('.driftmap-form-container form').prepend($(this).clone().addClass('hidden'));
     });*/
-  });
 } // end add_blip
-
-function add_route(driftmap, routeIndex, routePointIndex, routePoints){
-	var toPoint = 	routePoints[routePoints.length - 1];
-	var fromPoint = routePoints[routePoints.length - 2];
-  var routeMarker = L.marker(toPoint).addTo(driftmap);
-
-  // todo add a popup that allows user to delete that routePoint
-	/*
-  var routeInputs = '<input type="hidden"' +
-  												 'name="route['+ routeIndex +'][routePoint]['+ routePointIndex +'][x]" '+
-  												 'value="'+ toPoint.lat +'"/>' + 
-  									'<input type="hidden"' + 
-  												 'name="route['+ routeIndex +'][routePoint]['+ routePointIndex +'][y]"' +
-  												 'value="'+ toPoint.lng +'"/>' + 
-  									'<input type="hidden"' + 
-  												 'name="route['+ routeIndex +'][routePoint]['+ routePointIndex +'][order]"' +
-  												 'value="'+ routePointIndex +'"/>';
-
-	$('.driftmap-form-container form').prepend(routeInputs);*/
-
-  if(routePointIndex > 0){
-  	var line = L.polyline([fromPoint, toPoint]).addTo(driftmap);
-  }
-}
 
 function create_route(title, description){
 	var t = xss_trim(title);
@@ -206,29 +181,38 @@ function create_route(title, description){
 	    var r = response.responseJSON;
 	    if(r.status == 200){
 	    	route_id = r.id
+
 	    } else {
 	      alert('Whoops, something went a little haywire while attempting to create this journey.  please refresh your browser and try again.');
 	    }
 	  }
-	})
+	});
 }
 
-function create_routePoint(x, y, order){
+function create_routePoint(driftmap, routePoints, order){
+	var currentPt = routePoints[routePoints.length - 1];
+
 	$.ajax({
 	  url: '/route_points',
 	  type: 'POST',
 	  dataType: 'JSON',
 	  data: {
-	    x: x,
-	    y: x,
+	    x: currentPt.lat,
+	    y: currentPt.lng,
 	    order: order,
-	    id: route_id 
+	    id: route_id
 	  },
 	  complete: function(response){
 	    var r = response.responseJSON
 
-	    if(r.status != 200){
-	    	alert('Whoops!  it looks like something went a little haywire while plotting that last waypoint.  Please refresh your browser, and try again.')
+	    if(r.status == 200){
+				if(order > 0){
+					var toPoint 	= routePoints[routePoints.length - 1];
+					var fromPoint = routePoints[routePoints.length - 2];
+					var routeLine = L.polyline([fromPoint, toPoint]).addTo(driftmap);
+				}
+	    } else if (r.status == 200) {
+	    	alert('Whoops!  it looks like something went a little haywire while plotting that last waypoint.  Please refresh your browser, and try again.');
 	    }
 	  }
 	});

@@ -20,8 +20,7 @@ class RoutePointsController < ApplicationController
 
 		render json: { 
 			status:  status,
-			message: message,
-			id: 		 route_point.id
+			message: message
 		}
 	end
 

@@ -106,20 +106,9 @@
     // Step 1 - [new route] Create new Route user clicks 'create new journey' button
     $('.create-new-route').on('click', function(){
       $('.save-wizard').addClass('hidden');
-      routeIndex++;
       $(this).addClass('hidden');
-      /*route_inputs =  '<div class="new-route-inputs">' +
-                        '<p class="route-title-edit" data-route="'+ routeIndex +'">' + 
-                          '<input type="text" name="route['+ routeIndex +'][title]" value="my journey title" />' + 
-                        '</p>' +
-                        '<p class="route-body-edit" data-route="'+ routeIndex +'">' + 
-                          '<textarea name="route['+ routeIndex +'][description]">my journey description</textarea>' +
-                        '</p>' +
-                        '<p>' +
-                          '<span style="margin: 10px 0" class="plot-route normal">plot on map</span>' +
-                        '</p>' +
-                      '</div>';*/
-
+      
+      routeIndex++;
       route_inputs =  '<div class="new-route-inputs" data-route="'+ routeIndex +'">' +
                         '<p class="route-title-edit">' + 
                           '<input type="text" value="my journey title" />' + 
@@ -151,13 +140,12 @@
         window.map.off('click').on('click', function(e){
           var lat = e.latlng.lat.toFixed(7);
           var lng = e.latlng.lng.toFixed(7);
-          var newPoint = L.latLng(lat, lng);
+          var newPoint  = L.latLng(lat, lng);
           routePoints.push(newPoint);
           routePointIndex++;
 
-          add_route(window.map, routeIndex, routePointIndex, routePoints);
+          create_routePoint(window.map, routePoints, routePointIndex);
           add_blip(window.map, e, ++blipIndex);
-          create_routePoint(lat, lng, routePointIndex);
 
           // Step 4 - Add another waypoint
           $('.add-route-pt').on('click', function(){
@@ -175,11 +163,11 @@
         $('.wizard-container, .save-route').toggleClass('hidden');
         var new_route = '<li class="route">' + 
                           '<p class="route-title" data-route="'+ routeIndex +'">' + 
-                            $('.route-title-edit[data-route="'+ routeIndex +'"] input').val() + 
+                            $('.new-route-inputs[data-route="'+ routeIndex +'"] .route-title-edit input[type="text"]').val() + 
                           '</p>' +
                           '<div class="route-info" data-route="'+ routeIndex +'" style="display:none;">' + 
                             '<p class="route-body" data-route="'+ routeIndex +'">' + 
-                              $('.route-body-edit[data-route="'+ routeIndex +'"] textarea').val() +
+                              $('.new-route-inputs[data-route="'+ routeIndex +'"] .route-body-edit textarea').val() +
                             '</p>' + 
                           '</div>' +
                         '</li>';
