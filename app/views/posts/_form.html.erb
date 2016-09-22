@@ -218,7 +218,7 @@
     /* Edit Driftmap */
     // Edit Route
     $('.edit-route').on('click', function(){
-      index = $(this).data('route');
+      var index = $(this).data('route');
 
       var oldTitle = $.trim($('.route-title[data-route="'+ index +'"]').text());
       var oldBody = $.trim($('.route-body[data-route="'+ index +'"]').text().trim());

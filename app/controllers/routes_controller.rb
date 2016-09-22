@@ -54,6 +54,6 @@ class RoutesController < ApplicationController
 		route = Route.find(params[:id])
 		route.destroy
 
-		redirect_to root_path
+		redirect_to current_user
 	end
 end
