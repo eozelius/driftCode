@@ -25,6 +25,7 @@
         <%= f.hidden_field :init_x %>
         <%= f.hidden_field :init_y %>
         <%= f.hidden_field :init_zoom %>
+        <%= f.hidden_field :post_id, value: @post.id %>
 
         <!-- Step 1 Title -->
         <div class="title-container wizard-step hidden">
@@ -140,13 +141,18 @@
           var lng = e.latlng.lng.toFixed(7);
           var newPoint  = L.latLng(lat, lng);
           routePoints.push(newPoint);
-          routePointIndex++;
 
-          create_routePoint(window.map, routePoints, routePointIndex);
-          create_blip(window.map, newPoint, ++blipIndex, true)
+          create_routePoint(window.map, routePoints, ++routePointIndex);
+          new_blip(window.map, newPoint, ++blipIndex);
 
-          // Step 4 - Add another waypoint
+          // Step 4 - Save Blip
           $('.add-route-pt').on('click', function(){
+            var title = xss_trim($('#blip-title-'+ blipIndex).val());
+            var description = xss_trim($('#blip-body-'+ blipIndex).val());
+            var post_id = $('#post_post_id').val();
+
+            create_blip(newPoint, title, description, post_id);
+
             $('.leaflet-popup-close-button')[0].click();
           });
         });
@@ -276,7 +282,7 @@
     $(document).on('click', '.edit-blip span', function(){
       var index = $(this).data('blip');
       $(this).remove()
-      $('.edit-save-blip').removeClass('hidden');
+      $('.edit-update-zoom').removeClass('hidden');
       var oldTitle = $.trim($('.blip-popup[data-blip="'+ index +'"] h4').text());
       var oldBody = $.trim($('.blip-popup[data-blip="'+ index +'"] p').text());
       var editTitleInput =  '<p class="blip-title-edit">'+
@@ -291,7 +297,7 @@
     });
 
     // Save an update to a Blip
-    $(document).on('click', '.edit-save-blip', function(){
+    $(document).on('click', '.edit-update-zoom', function(){
       $(this).remove();
       var index = $(this).data('blip');
       var title = xss_trim($('.blip-text input[type="text"]').val());
