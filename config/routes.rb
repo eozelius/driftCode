@@ -3,12 +3,14 @@ Rails.application.routes.draw do
 
   resources :routes,       only: [:create, :destroy]
   resources :route_points, only: [:create, :update, :destroy]
-  resources :blips,        only: [:create, :update, :destroy]
+  resources :blips,        only: [:create, :destroy]
   resources :blip_images,  only: [:create, :update, :destroy]
   resources :users
   resources :posts
 
-  post   'update_route' => 'routes#update'
+  post 'update_route' => 'routes#update'
+  post 'update_blip' => 'blips#update'
+
   get    'signup' => 'users#new'
   get    'login'  => 'sessions#new'
   post   'login'  => 'sessions#create'

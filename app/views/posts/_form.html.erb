@@ -221,7 +221,7 @@
       var index = $(this).data('route');
 
       var oldTitle = $.trim($('.route-title[data-route="'+ index +'"]').text());
-      var oldBody = $.trim($('.route-body[data-route="'+ index +'"]').text().trim());
+      var oldBody = $.trim($('.route-body[data-route="'+ index +'"]').text());
       var editTitleInput =    '<p class="route-title-edit" data-route="'+ index +'">' + 
                                 '<input type="text" name="route['+ index +'][title]" value="'+ oldTitle +'"/>' +
                               '</p>';
@@ -278,30 +278,32 @@
       });
     });
 
-    // Edit Blip
-    $(document).on('click', '.edit-blip span', function(){
+    // edit_blip
+    $(document).on('click', '.edit-blip-btn', function(){
       var index = $(this).data('blip');
       $(this).remove()
       $('.edit-update-zoom').removeClass('hidden');
-      var oldTitle = $.trim($('.blip-popup[data-blip="'+ index +'"] h4').text());
-      var oldBody = $.trim($('.blip-popup[data-blip="'+ index +'"] p').text());
+
+      var oldTitle = xss_trim($.trim($('.blip-popup-title').text()));
+      var oldBody =  xss_trim($.trim($('.blip-popup[data-blip="'+ index +'"] p').text()));
+      
       var editTitleInput =  '<p class="blip-title-edit">'+
                               '<h4 style="text-align:left" class="edit-blip-title">title</h4>' + 
-                              '<input type="text" data-blip="'+ index +'" name="blip['+ index +'][title]" value="'+ oldTitle +'"/>' +
+                              '<input type="text" class="old-title" value="'+ oldTitle +'"/>' +
                             '</p>';
       var editBodyTextarea =  '<p class="blip-body-edit"><h4 class="edit-blip-description" style="text-align:left">description</h4>' +
-                                '<textarea data-blip="'+ index +'" name="blip['+ index +'][description]">'+ oldBody +'</textarea></p>';
+                                '<textarea class="old-body">'+ oldBody +'</textarea></p>';
 
       $('.blip-popup[data-blip="'+ index +'"] h4').addClass('hidden').after(editTitleInput);
       $('.blip-popup[data-blip="'+ index +'"] .blip-popup-body').addClass('hidden').after(editBodyTextarea);
     });
 
-    // Save an update to a Blip
+    // update_blip
     $(document).on('click', '.edit-update-zoom', function(){
       $(this).remove();
       var index = $(this).data('blip');
-      var title = xss_trim($('.blip-text input[type="text"]').val());
-      var body = xss_trim($('.blip-text textarea').val());
+      var title = xss_trim($.trim($('.old-title').val()));
+      var body = xss_trim($.trim($('.old-body').val()));
 
       $.ajax({
         url: '/update_blip',
@@ -328,6 +330,8 @@
                            '.blip-popup-body ';
 
             $(selector).toggleClass('hidden');
+
+            $('.old-body, .old-title').remove();
 
             alert(title + " has been successfully updated.");
           } else {
