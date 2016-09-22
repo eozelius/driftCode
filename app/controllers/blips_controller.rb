@@ -4,16 +4,27 @@ class BlipsController < ApplicationController
 	def create
 		@post  = Post.find(params[:post_id])
 		
-		@route = @post.routes.last
+		if params[:route] == 'false'
+			@blip = Blip.new(
+				title: 		params[:title],
+				body:  		params[:description],
+				x: 		 		params[:x],
+				y: 		 		params[:y],
+				post_id: 	@post.id,
+				route_id: nil
+			)
+		else
+			@route = @post.routes.last	
+			@blip = Blip.new(
+				title: 		params[:title],
+				body:  		params[:description],
+				x: 		 		params[:x],
+				y: 		 		params[:y],
+				post_id: 	@post.id,
+				route_id: @route.id
+			)
+		end
 
-		@blip = Blip.new(
-			title: 		params[:title],
-			body:  		params[:description],
-			x: 		 		params[:x],
-			y: 		 		params[:y],
-			post_id: 	@post.id,
-			route_id: @route.id
-		)
 
 		if @blip.save
 			status = 200

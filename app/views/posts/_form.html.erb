@@ -99,6 +99,7 @@
 
   <script type="text/javascript">
     var routeIndex = -1;
+    var blipIndex = -1;
     
     // Routes
     // Step 1 - [new route] Create new Route user clicks 'create new journey' button
@@ -129,7 +130,6 @@
         $('.wizard-container, .save-route').toggleClass('hidden');
         var routePoints = [];
         var routePointIndex = -1;
-        var blipIndex = -1;
         var title = xss_trim($('.new-route-inputs input[type="text"]').val())
         var description = xss_trim($('.new-route-inputs textarea').val())
 
@@ -183,13 +183,30 @@
       });
     });
 
-    // Blips
+    // Standalone Blips
+    // Step 1 - User wants to create a standalone blip
     $('.create-blip').on('click', function(){
+      $('.wizard-container').removeClass('active');
+      $('#map').css('top', '0');
+      $('.wizard-container, .new-blip').toggleClass('hidden');
+
+      // Step 2 - Plot standalone blip on map
       window.map.off('click').on('click', function(e){
         var lat = e.latlng.lat.toFixed(7);
         var lng = e.latlng.lng.toFixed(7);
-        var newPoint  = L.latLng(lat, lng);
-        create_blip(window.map, newPoint, ++blipIndex, false);
+        newPoint  = L.latLng(lat, lng);
+        new_blip(window.map, newPoint, ++blipIndex);      
+
+        // Step 3 - save_blip
+        $('.add-route-pt').on('click', function(){  // poor naming convention since this is a standalone blip.
+          var title = xss_trim($('.blip-title').val());
+          var description = xss_trim($('.blip-body').val());
+          var post_id = $('#post_post_id').val();
+
+          create_blip(newPoint, title, description, post_id, false);
+
+          $('.leaflet-popup-close-button')[0].click();
+        });
       });
     });
 

@@ -147,7 +147,7 @@ function create_routePoint(driftmap, routePoints, order){
 	});
 }
 
-function new_blip(driftmap, point, blipIndex){
+function new_blip(driftmap, point, blipIndex, route){
 	var lat = point.lat;
 	var lng = point.lng;
 
@@ -183,7 +183,7 @@ function new_blip(driftmap, point, blipIndex){
 	});
 }
 
-function create_blip(point, title, description, post_id){
+function create_blip(point, title, description, post_id, route){
 	$.ajax({
 		url: '/blips',
 		type: 'POST',
@@ -193,11 +193,16 @@ function create_blip(point, title, description, post_id){
 			y: point.lng,
 			title: title,
 			description: description,
-			post_id: post_id
+			post_id: post_id,
+			route: route
 		},
 		complete: function(response){
 			var r = response;
 			window.r = r;
+			if(route == false){
+				alert("Blip created successfully");
+				$('form').submit();
+			}
 		}
 	});  
 }
