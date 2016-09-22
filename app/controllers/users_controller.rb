@@ -13,6 +13,18 @@ class UsersController < ApplicationController
       @user.send_activation_email
       flash[:info] = "welcome to driftMap"
       log_in @user
+
+      post = Post.new(
+        title: 'my driftMap title',
+        body:  'my driftMap description',
+        init_x: 40.735,
+        init_y: -73.890,
+        init_zoom: 12
+      )
+
+      @user.post = post
+      @user.save
+
       redirect_to new_post_path
   	else
   		render 'new'

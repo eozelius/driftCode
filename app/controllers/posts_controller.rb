@@ -3,10 +3,7 @@ class PostsController < ApplicationController
 	before_action :correct_user, 		only: [:destroy, :update]
 
 	def new
-		@post = Post.new(
-			title: 'my driftmap title',
-			body:  'my driftmap body'
-		)
+		@post = current_user.post
 	end
 
 	def create
