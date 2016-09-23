@@ -22,21 +22,6 @@ ethan.post = Post.create(
 )
 
 # Routes
-colombia = ethan.post.routes.create!(
-  title: '2015 - Colombia',
-  description: 'A gonzo style adventure into the heart and fringes of this South American Gem.'
-)
-
-colombia.route_points.build( x: 4.6077624, y: -74.0745113, order: 0 ) # bogota
-colombia.route_points.build( x: 6.2807872, y: -75.5511055, order: 1 ) # medellin
-colombia.route_points.build( x: 5.1073584, y: -75.5126810, order: 2 ) # manizales
-colombia.route_points.build( x: 4.8564869, y: -75.6857157, order: 3 ) # pereira
-colombia.route_points.build( x: 4.6671150, y: -75.5951801, order: 4 ) # Salento
-colombia.route_points.build( x: 3.5644319, y: -76.5052577, order: 5 ) # Cali
-colombia.route_points.build( x: 3.8408223, y: -76.8986596, order: 6 ) # San Cipriano
-colombia.route_points.build( x: 4.6501713, y: -74.0550950, order: 7 ) # Bogota x2
-colombia.save!
-
 europe = ethan.post.routes.create!(
   title: '2016 - Europe',
   description: 'Backpacking across the pond'
@@ -53,21 +38,23 @@ europe.route_points.build( x: 46.4548893, y: 11.3274536, order: 7 )
 europe.route_points.build( x: 47.4503798, y: 18.9975586, order: 8 )
 europe.save!
 
-# Blips
-medellin = colombia.blips.create!(
-  title: 'Medellin Colombia',
-  body: 'Without a question, Paisas, (the inhabitants of Medellin) are the friendliest people I\'ve come across in all my travels.  In Christmas this wonderland takes on a purple tint, and the entire city lights up as every home dons lights.  Built in the bottom of a valley, every view is spectacular, the city runs up from the river into the walls of the valley that is not to be missed.'.html_safe,
-  x: 6.2807872, 
-  y: -75.5511055,
-  post_id: ethan.post.id
+colombia = ethan.post.routes.create!(
+  title: '2015 - Colombia',
+  description: 'A gonzo style adventure into the heart and fringes of this South American Gem.'
 )
 
-medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin_itigui.JPG"));
-medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin_night.JPG"));
-medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin_plane.JPG"));
-medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin.jpg"));
-medellin.save!
+colombia.route_points.build( x: 4.6077624, y: -74.0745113, order: 0 ) # bogota
+colombia.route_points.build( x: 6.2807872, y: -75.5511055, order: 1 ) # medellin
+colombia.route_points.build( x: 5.1073584, y: -75.5126810, order: 2 ) # manizales
+colombia.route_points.build( x: 4.8564869, y: -75.6857157, order: 3 ) # pereira
+colombia.route_points.build( x: 4.6671150, y: -75.5951801, order: 4 ) # Salento
+colombia.route_points.build( x: 3.5644319, y: -76.5052577, order: 5 ) # Cali
+colombia.route_points.build( x: 3.8408223, y: -76.8986596, order: 6 ) # San Cipriano
+colombia.route_points.build( x: 4.6501713, y: -74.0550950, order: 7 ) # Bogota x2
+colombia.save!
 
+
+# Blips
 bogota = colombia.blips.create!(
   title: 'Bogota Colombia',
   body: 'The Capital and heart of business in Colombia, Bogoat boasts a massive sprawling population of over 9 million inhabitants.  Bogota is a great window into the lives of everyday Colombians, their joy, dance, activism and struggle.'.html_safe,
@@ -82,6 +69,19 @@ bogota.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_
 bogota.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/bogota/bogota_fut.jpg"))
 bogota.save!
 
+medellin = colombia.blips.create!(
+  title: 'Medellin Colombia',
+  body: 'Without a question, Paisas, (the inhabitants of Medellin) are the friendliest people I\'ve come across in all my travels.  In Christmas this wonderland takes on a purple tint, and the entire city lights up as every home dons lights.  Built in the bottom of a valley, every view is spectacular, the city runs up from the river into the walls of the valley that is not to be missed.'.html_safe,
+  x: 6.2807872, 
+  y: -75.5511055,
+  post_id: ethan.post.id
+)
+
+medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin_itigui.JPG"));
+medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin_night.JPG"));
+medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin_plane.JPG"));
+medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin.jpg"));
+medellin.save!
 manizales = colombia.blips.create!(
   title: 'Manizales Colombia',
   body: 'I packed my bag in a hurry to head south to Manizales for the city Feria.  The night I arrived I instantly made friends with a dude from manizales at a salsa concert.',

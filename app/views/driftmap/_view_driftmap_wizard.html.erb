@@ -15,7 +15,7 @@
         <ul>
           <% @post.routes.each_with_index do |route, i| %>
             <li class="route">
-              <p class="route-title" data-route="<%= route.id %>">
+              <p class="route-title" data-route="<%= route.id %>" data-initx="<%= route.route_points.first.x %>" data-inity="<%= route.route_points.first.y %>">
                 <%= route.title %>
               </p>
 
@@ -72,6 +72,9 @@
       } else {
         $('.route-info[data-route="'+ route_index +'"]').slideDown(700);
         $(this).addClass('active');
+        var init_x = $(this).data('initx') - 0.5;
+        var init_y = $(this).data('inity') - 2.2;
+        window.map.setZoomAround([init_x, init_y], 7);
       }
     });
   });
