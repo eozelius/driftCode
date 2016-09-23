@@ -59,3 +59,40 @@
   </div>
 </div>
 </div>
+
+<script type="text/javascript">
+  $(function(){
+    // toggle wizard
+    $('.toggle-wizard').on('click', function(){
+      if($('.wizard-container').hasClass('active')){
+        $('.wizard-container').removeClass('active');
+      } else {
+        $('.wizard-container').addClass('active');
+      }
+    });
+
+    // Change menu tab
+    $('.tabs-menu li').on('click', function(){
+      $('.active-tab').removeClass('active-tab');
+      var tab = $(this).data('step');
+      $(this).addClass('active-tab');
+
+      $('.wizard-step').addClass('hidden');
+      $('.'+ tab + '-container').removeClass('hidden');    
+    });
+
+    // reveal Route info
+    $('.route-title').on('click', function(){
+      active = $(this).hasClass('active');
+      route_index = $(this).data('route');
+
+      if(active){
+        $('.route-info[data-route="'+ route_index +'"]').slideUp(700);
+        $(this).removeClass('active');
+      } else {
+        $('.route-info[data-route="'+ route_index +'"]').slideDown(700);
+        $(this).addClass('active');
+      }
+    });
+  });
+</script>
