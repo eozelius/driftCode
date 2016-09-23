@@ -199,7 +199,11 @@ function create_blip(point, title, description, post_id, route, images){
 		complete: function(response){
 			var r = response;
 			window.r = r;
-			create_blip_image(images);
+			if(typeof images != undefined){
+				create_blip_image(images);
+			} else {
+				alert("blip created");
+			}
 		}
 	});  
 }
@@ -222,7 +226,6 @@ function create_blip_image(images){
 	  complete: function(){
 	    alert('blip created');
 	    $('.leaflet-popup-close-button')[0].click();
-	    $('form').submit();
 	  }
 	});
 }
