@@ -2,7 +2,7 @@
 
 	.wizard-container {
 		height: 241px;
-		opacity: .9;
+		opacity: .87;
 		border: 1px solid #ddd;
 		margin-bottom: 71px;
 		top: 271px;
@@ -16,4 +16,14 @@
 		right: 0;
 		top: 139px;
 	}
+
+	li.wizard-table[data-step="title"] {
+		overflow: hidden;
+	}
+
+}
+
+.instructions-title,
+.route-title {
+	color: #552727;
 }
