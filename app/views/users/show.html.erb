@@ -1,5 +1,7 @@
 <% provide(:title, @user.name) %>
 <div class="map-container">
+	<%= render 'driftmap/edit_driftmap_wizard' %>
+	
 	<div id="map"></div>
 
 	<%= render 'driftmap/init_driftmap' %>

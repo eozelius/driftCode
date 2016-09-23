@@ -1,0 +1,58 @@
+<button class="toggle-wizard normal"><i class="fa fa-tachometer"></i></button>
+
+<div class="wizard-container">
+  <ul class="tabs-menu">
+    <li data-step="routes" class="active-tab wizard-table" style="font-size:.88em;">journeys</li>
+    <li data-step="title" class="wizard-table">title</li>
+    <li data-step="body" class="wizard-table" style="font-size:.88em;line-height: 26px;">descrip- tion</li>
+    <li data-step="markers" class="wizard-table"></i>blips</li>
+  </ul>
+
+  <div class="driftmap-form-container">
+   	<!-- Step 1 Title -->
+    <div class="title-container wizard-step hidden">
+      <div class="wizard-title">
+        <p class="instructions-title">driftMap title</p>
+        <p class="instructions-title" style="margin-top:15px;">you can also adjust the default location and zoom of your driftMap</p>
+        <span class="normal update-zoom">set location</span>
+      </div>
+    </div>
+
+    <!-- Step 2 description -->
+    <div class="body-container wizard-step hidden">
+      <div class="wizard-body" >
+        <p class="instructions-title">driftMap description</p>
+        <div class="action-body">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 routes -->
+    <div class="routes-container wizard-step">
+      <div class="wizard-routes">
+        <ul>
+          <% @post.routes.each_with_index do |route, i| %>
+            <li class="route">
+              <p class="route-title" data-route="<%= route.id %>">
+                <%= route.title %>
+              </p>
+
+              <div class="route-info" data-route="<%= route.id %>" style="display:none;">
+                <p class="route-body" data-route="<%= route.id %>">
+                  <%= route.description %>
+                </p>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Step 3 blips -->
+    <div class="markers-container wizard-step hidden">
+      <div class="wizard-markers">
+        <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
+      </div>
+    </div>
+  </div>
+</div>
