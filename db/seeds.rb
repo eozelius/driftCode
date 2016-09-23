@@ -133,7 +133,7 @@ bogota_2 = colombia.blips.create!(
 
 salento2 = colombia.blips.create!(
   title: "Bike Trek Salento",
-  body: "After a code filled week in Periera, I needed to feel the breeze.  So I hopped a bus to the coffee regeion, arrived and had no clue where to go or what to do.  I quickly realized that most coffee farms are a hours drive out of the pueblo, and require a few days advance planning.  not my style.  So instead I rented a bicycle and trekked up up the most beautiful countryside I have ever ventured."
+  body: "After a code filled week in Periera, I needed to feel the breeze.  So I hopped a bus to the coffee regeion, arrived and had no clue where to go or what to do.  I quickly realized that most coffee farms are a hours drive out of the pueblo, and require a few days advance planning.  not my style.  So instead I rented a bicycle and trekked up up the most beautiful countryside I have ever ventured.",
   x: 4.5985839,
   y: -75.5405988,
   post_id: ethan.post.id
