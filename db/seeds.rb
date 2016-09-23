@@ -82,6 +82,7 @@ medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/bli
 medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin_plane.JPG"));
 medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin.jpg"));
 medellin.save!
+
 manizales = colombia.blips.create!(
   title: 'Manizales Colombia',
   body: 'I packed my bag in a hurry to head south to Manizales for the city Feria.  The night I arrived I instantly made friends with a dude from manizales at a salsa concert.',
@@ -130,12 +131,21 @@ bogota_2 = colombia.blips.create!(
   post_id: ethan.post.id
 )
 
+salento2 = colombia.blips.create!(
+  title: "Bike Trek Salento",
+  body: "After a code filled week in Periera, I needed to feel the breeze.  So I hopped a bus to the coffee regeion, arrived and had no clue where to go or what to do.  I quickly realized that most coffee farms are a hours drive out of the pueblo, and require a few days advance planning.  not my style.  So instead I rented a bicycle and trekked up up the most beautiful countryside I have ever ventured."
+  x: 4.5985839,
+  y: -75.5405988,
+  post_id: ethan.post.id
+)
+
 queens = ethan.post.blips.create!(
   title: 'Sunnyside Queens',
   body: 'Queens NY.  From Flushing to Astoria to Jamaica, for centuries the world has landed in Queens to embark on a new life in the United States.  The culture, diversity and unforgettable food has made Queens one of the greatest places in the world to live, and a must-see for US and World citizens alike.'.html_safe,
   x: 40.743,
   y: -73.922
 )
+
 
 queens.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/queens/queens_graffiti.JPG"))
 queens.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/queens/queens_mets.jpg"))
@@ -152,6 +162,13 @@ concord = ethan.post.blips.create!(
 concord.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/concord/concord_castros.jpg"))
 concord.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/concord/concord.jpg"))
 concord.save!
+
+burmuda = ethan.post.blips.create!(
+  x: 32.3286273,
+  y: -64.7264328,
+  title: 'Burmuda',
+  body:  'Burmuda might be the best place in the world for a spur of the moment 3 or 4 day escape from the city.  Sometimes golf, beach, and zipping around on scooters, the preferred mode of transportation on the island, is exactly the oceanic vacation you need for 3 days.', 
+)
 
 if Rails.env.development? || Rails.env.test?
   # Create Dummy Users
