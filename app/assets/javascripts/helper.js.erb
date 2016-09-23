@@ -177,13 +177,13 @@ function new_blip(driftmap, point, blipIndex, route){
 	$('#add-new-blip[data-blip="'+ blipIndex +'"]').on('click' , function(){
 		var blipIndex = $(this).data('blip');
 		var photoIndex = $(this).data('photo') + 1;
-	  var addPhotoInput = '<input accept="image/jpeg, image/gif, image/png, image/jpg" name="blip['+ blipIndex +'][photos]['+ photoIndex +']" id="blip_'+ blipIndex +'_photos_'+ photoIndex +'" type="file" data-photo="'+ photoIndex +'">';
+	  var addPhotoInput = '<input class="blip-file" accept="image/jpeg, image/gif, image/png, image/jpg" name="blip['+ blipIndex +'][photos]['+ photoIndex +']" id="blip_'+ blipIndex +'_photos_'+ photoIndex +'" type="file" data-photo="'+ photoIndex +'">';
 
 	  $(this).before(addPhotoInput);
 	});
 }
 
-function create_blip(point, title, description, post_id, route){
+function create_blip(point, title, description, post_id, route, images){
 	$.ajax({
 		url: '/blips',
 		type: 'POST',
@@ -199,12 +199,32 @@ function create_blip(point, title, description, post_id, route){
 		complete: function(response){
 			var r = response;
 			window.r = r;
-			if(route == false){
-				alert("Blip created successfully");
-				$('form').submit();
-			}
+			create_blip_image(images);
 		}
 	});  
+}
+
+function create_blip_image(images){
+	var blipImageform = new FormData();
+
+	for(var i = 0; i < image.length; i++){
+		blipImageform.append('blip_image['+i+'][image]', images[i].files[0]);
+	}
+
+	$.ajax({
+	  url: '/blip_images',
+	  dataType: 'JSON',
+	  data: blipImageform,
+	  cache: false,
+	  contentType: false,
+	  processData: false,
+	  type: 'PUT',
+	  complete: function(){
+	    alert('blip created');
+	    $('.leaflet-popup-close-button')[0].click();
+	    $('form').submit();
+	  }
+	});
 }
 
 function flash_now(type, message){
