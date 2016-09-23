@@ -2,9 +2,7 @@ class BlipImagesController < ApplicationController
 	def create
 		@blip = current_user.post.blips.last
 
-
 		params[:blip_image].each do |image|
-			byebug
 			@blip_image = @blip.blip_images.build( image: image[1]["image"] )			
 		end
 

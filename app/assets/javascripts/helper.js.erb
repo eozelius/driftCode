@@ -207,7 +207,7 @@ function create_blip(point, title, description, post_id, route, images){
 function create_blip_image(images){
 	var blipImageform = new FormData();
 
-	for(var i = 0; i < image.length; i++){
+	for(var i = 0; i < images.length; i++){
 		blipImageform.append('blip_image['+i+'][image]', images[i].files[0]);
 	}
 
