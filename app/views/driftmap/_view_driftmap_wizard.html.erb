@@ -4,13 +4,21 @@
 
 <div class="wizard-container">
   <ul class="tabs-menu">
-    <li data-step="routes" class="wizard-table active-tab" style="font-size:.88em;">journeys</li>
+    <li data-step="todo" class="wizard-table active-tab">all</li>
+    <li data-step="routes" class="wizard-table" style="font-size:.88em;">journeys</li>
     <li data-step="markers" class="wizard-table"></i>blips</li>
   </ul>
 
   <div class="driftmap-form-container">
-   	<!-- Step 4 routes -->
-    <div class="routes-container wizard-step">
+    <div class="todo-step-container wizard-step">
+      <div class="wizard-todo">
+        <p class="instructions-title" style="color: #552727">all my blips and journeys</p>
+        <button class="todo normal">reveal</button>
+      </div>
+    </div>
+
+   	<!-- routes -->
+    <div class="routes-container wizard-step hidden">
       <div class="wizard-routes">
         <ul>
           <% @post.routes.each_with_index do |route, i| %>
@@ -30,12 +38,16 @@
       </div>
     </div>
     
-    <!-- Step 3 blips -->
+    <!-- blips -->
     <div class="markers-container wizard-step hidden">
       <div class="wizard-markers">
         <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
       </div>
     </div>
+  </div>
+
+  <div class="todo-container hidden">
+
   </div>
 </div>
 </div>
@@ -76,6 +88,13 @@
         var init_y = $(this).data('inity') - 2.2;
         window.map.setZoomAround([init_x, init_y], 7);
       }
+    });
+
+    // reveal all journey and blips data
+    $('.todo').on('click', function(){
+      $('.wizard-container').addClass('reveal-all');
+      $('#map').css('top','-489px');
+      $('.tabs-menu, .todo-container, .wizard-todo').toggleClass('hidden');
     });
   });
 </script>
