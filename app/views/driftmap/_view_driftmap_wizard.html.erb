@@ -1,55 +1,117 @@
 <div id="view-driftmap-wizard">
+  <button class="toggle-wizard normal"><i class="fa fa-tachometer"></i></button>
 
-<button class="toggle-wizard normal"><i class="fa fa-tachometer"></i></button>
+  <div class="wizard-container">
+    <ul class="tabs-menu">
+      <li data-step="todo" class="wizard-table active-tab">all</li>
+      <li data-step="routes" class="wizard-table" style="font-size:.88em;">journeys</li>
+      <li data-step="markers" class="wizard-table"></i>blips</li>
+    </ul>
 
-<div class="wizard-container">
-  <ul class="tabs-menu">
-    <li data-step="todo" class="wizard-table active-tab">all</li>
-    <li data-step="routes" class="wizard-table" style="font-size:.88em;">journeys</li>
-    <li data-step="markers" class="wizard-table"></i>blips</li>
-  </ul>
+    <div class="driftmap-form-container">
+      <div class="todo-step-container wizard-step">
+        <div class="wizard-todo">
+          <p class="instructions-title" style="color: #552727">all my blips and journeys</p>
+          <button class="todo normal">reveal</button>
+        </div>
+      </div>
 
-  <div class="driftmap-form-container">
-    <div class="todo-step-container wizard-step">
-      <div class="wizard-todo">
-        <p class="instructions-title" style="color: #552727">all my blips and journeys</p>
-        <button class="todo normal">reveal</button>
+     	<!-- routes -->
+      <div class="routes-container wizard-step hidden">
+        <div class="wizard-routes">
+          <ul>
+            <% @post.routes.each_with_index do |route, i| %>
+              <li class="route">
+                <p class="route-title" data-route="<%= route.id %>" data-initx="<%= route.route_points.first.x %>" data-inity="<%= route.route_points.first.y %>">
+                  <%= route.title %>
+                </p>
+
+                <div class="route-info" data-route="<%= route.id %>">
+                  <p class="route-body" data-route="<%= route.id %>">
+                    <%= route.description %>
+                  </p>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- blips -->
+      <div class="markers-container wizard-step hidden">
+        <div class="wizard-markers">
+          <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
+        </div>
       </div>
     </div>
 
-   	<!-- routes -->
-    <div class="routes-container wizard-step hidden">
-      <div class="wizard-routes">
-        <ul>
-          <% @post.routes.each_with_index do |route, i| %>
-            <li class="route">
-              <p class="route-title" data-route="<%= route.id %>" data-initx="<%= route.route_points.first.x %>" data-inity="<%= route.route_points.first.y %>">
-                <%= route.title %>
-              </p>
+    <div id="todo">
+      <div class="todo-container hidden">
+        <div class="todo-routes-container">
+          <h4>journeys</h4>
 
-              <div class="route-info" data-route="<%= route.id %>" style="display:none;">
-                <p class="route-body" data-route="<%= route.id %>">
+          <div class="todo-routes">
+            <% @post.routes.each do |route| %>
+              <div class="asdf-route">
+                <p class="todo-route-title todo-title">
+                  <%= route.title %>
+                </p>
+
+                <p class="todo-route-body todo-body">
                   <%= route.description %>
                 </p>
+
+                <% route.blips.each do |blip| %>
+                  <div class="asdf-blip">
+                    <p class="todo-blip-title todo-title">
+                      <%= blip.title %>
+                    </p>
+                    <p class="todo-blip-route todo-body">
+                      <%= blip.body %>
+                    </p>
+
+                    <ul>
+                      <% blip.blip_images.each do |image| %>
+                        <li><%= image_tag image.image %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
               </div>
-            </li>
-          <% end %>
-        </ul>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- StandAlone Blips -->
+        <% if false %>
+          <div class="todo-blips">
+            <% @post.blips.each do |blip| %>
+              <div class="asdf-standalone-blip">
+                <p class="todo-standalone-title todo-title">
+                  <%= blip.title %>
+                </p>
+
+                <p class="todo-standalone-body todo-body">
+                  <%= blip.body %>
+                </p>
+
+                <ul>
+                  <% blip.blip_images.each do |image| %>
+                    <%= image_tag image.image %>
+                  <% end %>
+                </ul>
+
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
-    </div>
-    
-    <!-- blips -->
-    <div class="markers-container wizard-step hidden">
-      <div class="wizard-markers">
-        <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
+
+      <div class="dismiss-todo">
+        <button class="todo normal">hide</button>
       </div>
     </div>
   </div>
-
-  <div class="todo-container hidden">
-
-  </div>
-</div>
 </div>
 
 <script type="text/javascript">
@@ -92,9 +154,18 @@
 
     // reveal all journey and blips data
     $('.todo').on('click', function(){
-      $('.wizard-container').addClass('reveal-all');
-      $('#map').css('top','-489px');
-      $('.tabs-menu, .todo-container, .wizard-todo').toggleClass('hidden');
+      toggleTodo();
     });
   });
+
+  function toggleTodo(){
+    if($(this).hasClass('toggle-todo')){
+      $('.wizard-container').removeClass('reveal-all');
+      $('#map').removeClass('toggle-todo');
+    } else {
+      $('.wizard-container').addClass('reveal-all');
+      $('#map').addClass('toggle-todo');
+    }
+    $('.tabs-menu, .todo-container, .wizard-todo, .todo-step-container').toggleClass('hidden');
+  }
 </script>

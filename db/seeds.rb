@@ -22,30 +22,6 @@ ethan.post = Post.create(
 )
 
 # Routes
-europe = ethan.post.routes.create!(
-  title: '2016 - Europe',
-  description: 'Backpacking across the pond'
-)
-
-europe.route_points.build( x: 55.6895847, y: 12.5706253, order: 0 )
-europe.route_points.build( x: 53.552139,  y: 9.9933014, order: 1 )
-europe.route_points.build( x: 52.5216526, y: 13.3855019, order: 2 )
-europe.route_points.build( x: 52.3786382, y: 4.9043999, order: 3 )
-europe.route_points.build( x: 48.8582776, y: 2.3507652, order: 4 )
-europe.route_points.build( x: 47.3725471, y: 8.5380592, order: 5 )
-europe.route_points.build( x: 46.8667638, y: 8.642395, order: 6 )
-europe.route_points.build( x: 46.4548893, y: 11.3274536, order: 7 )
-europe.route_points.build( x: 47.4503798, y: 18.9975586, order: 8 )
-europe.blips.create(
-  title: 'Copenhagen Denmark', 
-  body: 'Journey begins Oct 5, 2016.', 
-  x: 55.6895847, 
-  y: 12.5706253,
-  post_id: ethan.post.id
-)
-
-europe.save!
-
 colombia = ethan.post.routes.create!(
   title: '2015 - Colombia',
   description: 'A gonzo style adventure into the heart and fringes of this South American Gem.'
@@ -145,6 +121,31 @@ bogota_2 = colombia.blips.create!(
   post_id: ethan.post.id
 )
 
+europe = ethan.post.routes.create!(
+  title: '2016 - Europe',
+  description: 'Backpacking across the pond'
+)
+
+europe.route_points.build( x: 55.6895847, y: 12.5706253, order: 0 )
+europe.route_points.build( x: 53.552139,  y: 9.9933014, order: 1 )
+europe.route_points.build( x: 52.5216526, y: 13.3855019, order: 2 )
+europe.route_points.build( x: 52.3786382, y: 4.9043999, order: 3 )
+europe.route_points.build( x: 48.8582776, y: 2.3507652, order: 4 )
+europe.route_points.build( x: 47.3725471, y: 8.5380592, order: 5 )
+europe.route_points.build( x: 46.8667638, y: 8.642395, order: 6 )
+europe.route_points.build( x: 46.4548893, y: 11.3274536, order: 7 )
+europe.route_points.build( x: 47.4503798, y: 18.9975586, order: 8 )
+europe.blips.create(
+  title: 'Copenhagen Denmark', 
+  body: 'Journey begins Oct 5, 2016.', 
+  x: 55.6895847, 
+  y: 12.5706253,
+  post_id: ethan.post.id
+)
+
+europe.save!
+
+# StandAlone Blips
 queens = ethan.post.blips.create!(
   title: 'Sunnyside Queens',
   body: 'Queens NY.  From Flushing to Astoria to Jamaica, for centuries the world has landed in Queens to embark on a new life in the United States.  The culture, diversity and unforgettable food has made Queens one of the greatest places in the world to live, and a must-see for US and World citizens alike.'.html_safe,

@@ -36,7 +36,48 @@
 
 .todo-container {
 	width: 95%;
-	height: 400px;
+	height: 360px;
 	display: block;
 	margin: 8px auto;
+	overflow-y: scroll;
+	overflow-x: hidden; 
+}
+
+.todo-routes-container {
+
+	h4 {
+		width: 70%;
+		display: block;
+		margin: 0 auto;
+		padding-bottom: 11px;
+		border-bottom: 2px solid #ccc;
+	}
+
+	p.todo-title {
+		font-size: 1.5em;
+		color: #552727;
+		margin: 3%;
+	}
+
+	p.todo-body {
+		font-size: 1.2em;
+		margin: 3%;
+	}
+
+	p.todo-route-body {
+		margin-bottom: 20px;
+	}
+
+	.asdf-route {
+		border: 1px solid #aaa;
+		margin: 20px 0 40px;
+	}
+}
+
+#map.toggle-todo {
+	top: -489px !important;
+}
+
+.dismiss-todo {
+	float: right;
 }
