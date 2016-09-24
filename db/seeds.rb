@@ -36,6 +36,14 @@ europe.route_points.build( x: 47.3725471, y: 8.5380592, order: 5 )
 europe.route_points.build( x: 46.8667638, y: 8.642395, order: 6 )
 europe.route_points.build( x: 46.4548893, y: 11.3274536, order: 7 )
 europe.route_points.build( x: 47.4503798, y: 18.9975586, order: 8 )
+europe.blips.create(
+  title: 'Copenhagen Denmark', 
+  body: 'Journey begins Oct 5, 2016.', 
+  x: 55.6895847, 
+  y: 12.5706253,
+  post_id: ethan.post.id
+)
+
 europe.save!
 
 colombia = ethan.post.routes.create!(
@@ -107,6 +115,12 @@ salento = colombia.blips.create!(
   post_id: ethan.post.id
 )
 
+salento.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/salento/DSCF6468.JPG"))
+salento.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/salento/DSCF6487.JPG"))
+salento.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/salento/DSCF6491.JPG"))
+salento.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/salento/DSCF6500.JPG"))
+salento.save!
+
 cali = colombia.blips.create!(
   title: 'Cali Colombia',
   body: 'El tierra de baile salsa.  Cali lives and breathes salse and nothing but.  I quickly relized my preconceptions that learning salsa in two classes was 100% incorrect, so I cut my loses and made some of the greatest friends in the world instead.'.html_safe,
@@ -131,21 +145,12 @@ bogota_2 = colombia.blips.create!(
   post_id: ethan.post.id
 )
 
-salento2 = colombia.blips.create!(
-  title: "Bike Trek Salento",
-  body: "After a code filled week in Periera, I needed to feel the breeze.  So I hopped a bus to the coffee regeion, arrived and had no clue where to go or what to do.  I quickly realized that most coffee farms are a hours drive out of the pueblo, and require a few days advance planning.  not my style.  So instead I rented a bicycle and trekked up up the most beautiful countryside I have ever ventured.",
-  x: 4.5985839,
-  y: -75.5405988,
-  post_id: ethan.post.id
-)
-
 queens = ethan.post.blips.create!(
   title: 'Sunnyside Queens',
   body: 'Queens NY.  From Flushing to Astoria to Jamaica, for centuries the world has landed in Queens to embark on a new life in the United States.  The culture, diversity and unforgettable food has made Queens one of the greatest places in the world to live, and a must-see for US and World citizens alike.'.html_safe,
   x: 40.743,
   y: -73.922
 )
-
 
 queens.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/queens/queens_graffiti.JPG"))
 queens.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/queens/queens_mets.jpg"))
