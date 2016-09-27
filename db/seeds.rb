@@ -75,6 +75,11 @@ manizales = colombia.blips.create!(
   post_id: ethan.post.id
 )
 
+manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/1.JPG"))
+manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/2.JPG"))
+manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/3.JPG"))
+manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/4.JPG"))
+
 pereira = colombia.blips.create!(
   title: 'Pereira Colombia',
   body: 'In Pereira, the lower points of the digital nomal lifestyle took a bit of a toll.  Work was excessive and friends were few and far between.  As in, I was literally the only guest at my residency.',
@@ -82,6 +87,10 @@ pereira = colombia.blips.create!(
   y: -75.6857157,
   post_id: ethan.post.id
 )
+
+pereira.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/pereira/1.JPG"))
+pereira.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/pereira/2.JPG"))
+pereira.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/pereira/3.JPG"))
 
 salento = colombia.blips.create!(
   title: 'Salento Colombia',
@@ -175,6 +184,57 @@ burmuda = ethan.post.blips.create!(
   title: 'Burmuda',
   body:  'Burmuda might be the best place in the world for a spur of the moment 3 or 4 day escape from the city.  Sometimes golf, beach, and zipping around on scooters, the preferred mode of transportation on the island, is exactly the oceanic vacation you need for 3 days.', 
 )
+
+burmuda.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/bermuda/1.jpg"))
+burmuda.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/bermuda/2.jpg"))
+
+estrella = ethan.post.blips.create!(
+  x: 6.1358612,
+  y: -75.6441994,
+  title: 'Estrella - Antioquia',
+  body: 'Estrella is a more rural pueblo on the southern outskirts of medellin where I escaped the party of downtown medellin for a moment.  It becomes evident how quickly colombia can transform from a buslingly city into a rich jungle, alive with wildlife and the most vivid vegitation imaginable.'
+)
+
+estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/1.JPG"))
+estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/2.JPG"))
+estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/3.JPG"))
+estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/4.JPG"))
+estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/5.JPG"))
+estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/6.JPG"))
+estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/7.JPG"))
+estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/8.JPG"))
+estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/9.JPG"))
+estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/10.JPG"))
+
+laureles = ethan.post.blips.create!(
+  x: 6.2450411,
+  y: -75.5926666,
+  title: 'las laureles - medellin',
+  body: 'Laureles is one of the wealthier neighborhoods in medellin and a common destination for backpackers and students looking to avoid the gringo central of the poblado neighborhood.'
+)
+
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/1.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/2.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/3.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/4.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/5.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/6.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/7.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/8.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/9.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/10.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/11.JPG"))
+laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/12.JPG"))
+
+
+
+
+
+
+
+
+
+
 
 if Rails.env.development? || Rails.env.test?
   # Create Dummy Users
