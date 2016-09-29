@@ -37,7 +37,6 @@ colombia.route_points.build( x: 3.8408223, y: -76.8986596, order: 6 ) # San Cipr
 colombia.route_points.build( x: 4.6501713, y: -74.0550950, order: 7 ) # Bogota x2
 colombia.save!
 
-
 # Blips
 bogota = colombia.blips.create!(
   title: 'Bogota Colombia',
@@ -79,6 +78,7 @@ manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/
 manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/2.JPG"))
 manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/3.JPG"))
 manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/4.JPG"))
+manizales.save!
 
 pereira = colombia.blips.create!(
   title: 'Pereira Colombia',
@@ -91,6 +91,7 @@ pereira = colombia.blips.create!(
 pereira.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/pereira/1.JPG"))
 pereira.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/pereira/2.JPG"))
 pereira.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/pereira/3.JPG"))
+pereira.save!
 
 salento = colombia.blips.create!(
   title: 'Salento Colombia',
@@ -151,7 +152,6 @@ europe.blips.create(
   y: 12.5706253,
   post_id: ethan.post.id
 )
-
 europe.save!
 
 # StandAlone Blips
@@ -187,6 +187,7 @@ burmuda = ethan.post.blips.create!(
 
 burmuda.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/bermuda/1.jpg"))
 burmuda.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/bermuda/2.jpg"))
+burmuda.save!
 
 estrella = ethan.post.blips.create!(
   x: 6.1358612,
@@ -205,6 +206,7 @@ estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/bli
 estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/8.JPG"))
 estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/9.JPG"))
 estrella.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/estrella/10.JPG"))
+estrella.save!
 
 laureles = ethan.post.blips.create!(
   x: 6.2450411,
@@ -225,16 +227,7 @@ laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/bli
 laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/10.JPG"))
 laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/11.JPG"))
 laureles.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/laureles/12.JPG"))
-
-
-
-
-
-
-
-
-
-
+laureles.save!
 
 if Rails.env.development? || Rails.env.test?
   # Create Dummy Users
