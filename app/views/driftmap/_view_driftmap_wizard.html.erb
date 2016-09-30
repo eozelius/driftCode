@@ -9,7 +9,7 @@
     </ul>
 
     <div class="driftmap-form-container">
-      <div class="todo-step-container wizard-step">
+      <div class="todo-container wizard-step">
         <div class="wizard-todo">
           <p class="instructions-title" style="color: #552727">all my blips and journeys</p>
           <button class="todo normal">reveal</button>
@@ -46,7 +46,7 @@
     </div>
 
     <div id="todo">
-      <div class="todo-container hidden">
+      <div class="todo-content-container hidden">
         <div class="todo-routes-container">
           <h4>journeys</h4>
 
@@ -159,7 +159,7 @@
   });
 
   function toggleTodo(){
-    $('.tabs-menu, .todo-container, .wizard-todo, .todo-step-container, .dismiss-todo').toggleClass('hidden');
+    $('.tabs-menu, .todo-container, .wizard-todo, .todo-content-container, .dismiss-todo').toggleClass('hidden');
     $('.wizard-container').toggleClass('reveal-all').css('opacity', '1');
     $('#map, .todo').toggleClass('toggle-todo');
   }
