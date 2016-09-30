@@ -107,7 +107,7 @@
         <% end %>
       </div>
 
-      <div class="dismiss-todo">
+      <div class="dismiss-todo hidden">
         <button class="todo normal">hide</button>
       </div>
     </div>
@@ -159,13 +159,8 @@
   });
 
   function toggleTodo(){
-    if($(this).hasClass('toggle-todo')){
-      $('.wizard-container').removeClass('reveal-all');
-      $('#map').removeClass('toggle-todo');
-    } else {
-      $('.wizard-container').addClass('reveal-all');
-      $('#map').addClass('toggle-todo');
-    }
-    $('.tabs-menu, .todo-container, .wizard-todo, .todo-step-container').toggleClass('hidden');
+    $('.tabs-menu, .todo-container, .wizard-todo, .todo-step-container, .dismiss-todo').toggleClass('hidden');
+    $('.wizard-container').toggleClass('reveal-all').css('opacity', '1');
+    $('#map, .todo').toggleClass('toggle-todo');
   }
 </script>
