@@ -325,6 +325,7 @@
     });
 
     // Cannot upload images larger than 3M
+    addedImages = false;
     $(document).on('change', 'input[type="file"]', function() {
       addedImages = true;
     });

@@ -199,10 +199,11 @@ function create_blip(point, title, description, post_id, route, images){
 		complete: function(response){
 			var r = response;
 			window.r = r;
-			if(typeof images != undefined){
+			if(typeof images !== "undefined"){
 				create_blip_image(images);
 			} else {
-				alert("blip created");
+				alert("blip created and saved");
+				$('form').submit();
 			}
 		}
 	});  
