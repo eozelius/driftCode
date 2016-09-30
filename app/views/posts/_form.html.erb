@@ -240,7 +240,6 @@
                                 '<textarea class="old-body">'+ oldBody +'</textarea>' + 
                               '</p>' + 
                               '<p>' +
-                                '<input class="blip-image-file" type="file" accept="image/jpeg, image/gif, image/png, image/jpg">' + 
                                 '<button class="normal blip-image-edit"><i class="fa fa-plus"> photo</i></button>' +
                               '</p>';
 
@@ -248,7 +247,7 @@
       $('.blip-popup[data-blip="'+ index +'"] .blip-popup-body').addClass('hidden').after(editBodyTextarea);
 
       $('button.blip-image-edit').on('click', function(){
-        $(this).before('<input class="blip-image-file" type="file" accept="image/jpeg, image/gif, image/png, image/jpg">')
+        $(this).before('<input class="blip-image-file" name="blip-image-file" type="file" accept="image/jpeg, image/gif, image/png, image/jpg">');
       });
     });
 
@@ -286,8 +285,34 @@
             $(selector).toggleClass('hidden');
             $('.old-body, .old-title').remove();
 
-            alert(title + " has been successfully updated.");
-            $('form').submit();
+            // if user added any images update them also
+            if($('.blip-image-file').length > 0){
+              var blipImageForm = new FormData();
+              blipImageForm.append('id', index)
+
+              for(var i = 0; i < $('.blip-image-file').length; i++){
+                blipImageForm.append('blip_image['+i+'][image]', $('.blip-image-file')[i].files[0]);
+              }
+
+              $.ajax({
+                url: '/update_blip_image',
+                type: 'PUT',
+                dataType: 'JSON',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: blipImageForm,
+                complete: function(){
+                  r = response.responseJSON;
+                  window.r = r;
+                  alert(title + " has been successfully updated.");
+                  $('form').submit();    
+                }
+              });
+            } else {
+              alert(title + " has been successfully updated.");
+              $('form').submit();
+            }
           } else {
             alert('Whoops, something went a little haywire, please refresh your browser and try again.');
           }

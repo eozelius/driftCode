@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
 
+  put  'blip_images' => 'blip_images#create'
+  
   post 'update_route' => 'routes#update'
   post 'update_blip' => 'blips#update'
-  put  'blip_images' => 'blip_images#create'
+  put  'update_blip_image' => 'blip_images#update'
 
   get    'signup' => 'users#new'
   get    'login'  => 'sessions#new'
