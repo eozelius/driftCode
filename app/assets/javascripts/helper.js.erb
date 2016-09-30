@@ -200,7 +200,7 @@ function create_blip(point, title, description, post_id, route, images){
 			var r = response;
 			window.r = r;
 			if(typeof images !== "undefined"){
-				create_blip_image(images);
+				create_blip_image(images, route);
 			} else {
 				alert("blip created and saved");
 				$('form').submit();
@@ -209,7 +209,7 @@ function create_blip(point, title, description, post_id, route, images){
 	});  
 }
 
-function create_blip_image(images){
+function create_blip_image(images, route){
 	var blipImageform = new FormData();
 
 	for(var i = 0; i < images.length; i++){
@@ -225,8 +225,12 @@ function create_blip_image(images){
 	  processData: false,
 	  type: 'PUT',
 	  complete: function(){
-	    alert('blip created');
-	    $('.leaflet-popup-close-button')[0].click();
+	  	if(route){
+	  		$('.leaflet-popup-close-button')[0].click();
+	  	} else {
+	    	alert("blip created and saved");
+	  		$('form').submit()
+	  	}
 	  }
 	});
 }
