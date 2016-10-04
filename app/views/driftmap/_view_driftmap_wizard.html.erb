@@ -20,7 +20,7 @@
       <div class="routes-container wizard-step hidden">
         <div class="wizard-routes">
           <ul>
-            <% @post.routes.each_with_index do |route, i| %>
+            <% Route.all.each do |route| %>
               <li class="route">
                 <p class="route-title" data-route="<%= route.id %>" data-initx="<%= route.route_points.first.x %>" data-inity="<%= route.route_points.first.y %>">
                   <%= route.title %>
@@ -40,7 +40,21 @@
       <!-- blips -->
       <div class="markers-container wizard-step hidden">
         <div class="wizard-markers">
-          <p class="instructions-title">a blip is a moment in time on your map.  It can be a park, a tour, cafe, experience or anything you would like it to be.  you may give your radar blip(s) names, descriptions and image galleries.</p>
+          <ul>
+            <% Blip.all.each do |blip| %>
+              <li class="blip">
+                <p class="blip-title" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
+                  <%= blip.title %>
+                </p>
+
+                <div class="blip-info" data-blip="<%= blip.id %>">
+                  <p class="blip-body">
+                    <%= blip.body %>
+                  </p>
+                </div>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
@@ -137,8 +151,8 @@
 
     // reveal Route info
     $('.route-title').on('click', function(){
-      active = $(this).hasClass('active');
-      route_index = $(this).data('route');
+      var active = $(this).hasClass('active');
+      var route_index = $(this).data('route');
 
       if(active){
         $('.route-info[data-route="'+ route_index +'"]').slideUp(700);
@@ -148,7 +162,24 @@
         $(this).addClass('active');
         var init_x = $(this).data('initx') - 0.5;
         var init_y = $(this).data('inity') - 2.2;
-        window.map.setZoomAround([init_x, init_y], 7);
+        window.map.setView([init_x, init_y]).setZoom(7);
+      }
+    });
+
+    // reveal blip info
+    $('.blip-title').on('click', function(){
+      var active = $(this).hasClass('active');
+      var blip_index = $(this).data('blip');
+
+      if(active){
+        $('.blip-info[data-blip="'+ blip_index +'"]').slideUp(700);
+        $(this).removeClass('active');
+      } else {
+        $('.blip-info[data-blip="'+ blip_index +'"]').slideDown(700);
+        $(this).addClass('active');
+        var init_x = $(this).data('initx') - 0.5;
+        var init_y = $(this).data('inity') - 2.2;
+        window.map.setView([init_x, init_y]).setZoom(7);
       }
     });
 

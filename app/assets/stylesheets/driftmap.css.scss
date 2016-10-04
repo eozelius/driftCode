@@ -101,6 +101,7 @@ ul li.active-tab {
   right: 0;
 }
 
+
 .wizard-step {
   height: 230px;
   overflow-y: scroll;
@@ -116,7 +117,13 @@ ul li.active-tab {
     left: 6px;
   }
   /* description */
-  .wizard-routes {
+  .route-info,
+  .blip-info {
+    display: none;
+  }
+  
+  .wizard-routes,
+  .wizard-markers {
     text-align: right;
     ul {
       padding: 3% 0;
