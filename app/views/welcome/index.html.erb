@@ -1,7 +1,7 @@
 <% if !logged_in? %>
   <div class="readme-container">
     <h4>Welcome to driftMap</h4>
-    <p>driftMap is a platform that allows you to create, customize and share a map of where in the world you have been, and what was great about those places.</p>
+    <p>driftMap is a backpacking and travelling platform that allows you to share a map of your journeys, adventures and wild experiences. </p>
     <%= link_to signup_path do %>
     	<button class="normal">Sign up</button>
     <% end %>
@@ -11,6 +11,19 @@
     <% end %>
   </div>
 <% end %>
+
+<!-- todo - delete this -->
+<style type="text/css">
+    #view-driftmap-wizard .toggle-wizard {
+        top: 55%;
+    }
+
+    @media (max-width: 480px){
+        #view-driftmap-wizard .toggle-wizard {
+            top: 66%;
+        }
+    }
+</style>
 
 <div class="map-container">
     <%= render 'driftmap/view_driftmap_wizard' %>
