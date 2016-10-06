@@ -20,7 +20,7 @@
       <div class="routes-container wizard-step hidden">
         <div class="wizard-routes">
           <ul>
-            <% Route.all.each do |route| %>
+            <% @post.routes.each do |route| %>
               <li class="route">
                 <p class="route-title" data-route="<%= route.id %>" data-initx="<%= route.route_points.first.x %>" data-inity="<%= route.route_points.first.y %>">
                   <%= route.title %>
@@ -41,7 +41,7 @@
       <div class="markers-container wizard-step hidden">
         <div class="wizard-markers">
           <ul>
-            <% Blip.all.each do |blip| %>
+            <% @post.blips.each do |blip| %>
               <li class="blip">
                 <p class="blip-title" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
                   <%= blip.title %>
