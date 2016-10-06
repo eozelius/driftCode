@@ -16,11 +16,11 @@
 			<% end %>
 
 			blips.push({
-				id: 		'<%= blip.id %>',
-				x: 			'<%= blip.x %>',
-				y: 			'<%= blip.y %>',
-				title: 	'<%= blip.title %>',
-				body: 	'<%= blip.body %>',
+				id: 		"<%= blip.id %>",
+				x: 			"<%= blip.x %>",
+				y: 			"<%= blip.y %>",
+				title: 	"<%= blip.title.to_json %>",
+				body: 	"<%= blip.body.to_json %>",
 				images: blipImages
 			})
 
@@ -42,7 +42,7 @@
 			<% end %>
 
 			routes.push({
-				description: '<%= route.description.html_safe %>',
+				description: "<%= route.description.to_json %>",
 				routePoints: routePoints
 			});
 		<% end %>
