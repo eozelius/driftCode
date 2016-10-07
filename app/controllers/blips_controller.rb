@@ -36,6 +36,10 @@ class BlipsController < ApplicationController
 		@blip = Blip.find(params[:id])
 
 		if @blip.update_attributes(blip_params)
+			if params[:photo].present?
+				@blip.blip_images.build(image: params[:photo])
+				@blip.save
+			end
 			flash[:success] = 'blip successfully updated'
 			redirect_to current_user
 		else
