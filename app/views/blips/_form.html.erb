@@ -1,4 +1,4 @@
-<%= form_for @blip do |f| %>
+<%= form_for @blip, html: { multipart: true } do |f| %>
 	<% x = @blip.x.present? ? @blip.x : params[:x] %>
 	<% y = @blip.y.present? ? @blip.y : params[:y] %>
 
@@ -14,6 +14,11 @@
 		<%= f.label :body %>
 		<%= f.text_area :body %>
 	</p>
+
+	<p style="margin: 30px 0;">
+		photos
+	</p>
+	<input class="normail blip-image-0" name="photo" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="0">
 
 	<p style="margin-top: 30px;">
 		<button name="commit" class="normal" type="submit">save</button>

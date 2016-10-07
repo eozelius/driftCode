@@ -12,12 +12,20 @@ class BlipsController < ApplicationController
 		@blip.post_id = @post.id
 
 		if @blip.save
+			if params[:photo].present?
+				@blip.blip_images.build(image: params[:photo])
+				@blip.save
+			end
 			flash[:success] = "blip created"
 			redirect_to current_user
 		else
 			flash[:danger] = 'whoops, something went wrong'
 			render 'new'
 		end
+	end
+
+	def show
+		@blip = Blip.find(params[:id])
 	end
 
 	def edit
