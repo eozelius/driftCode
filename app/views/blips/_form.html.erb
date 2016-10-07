@@ -1,6 +1,9 @@
 <%= form_for @blip do |f| %>
-	<%= f.hidden_field :x, value: params[:x] %>
-	<%= f.hidden_field :y, value: params[:y] %>
+	<% x = @blip.x.present? ? @blip.x : params[:x] %>
+	<% y = @blip.y.present? ? @blip.y : params[:y] %>
+
+	<%= f.hidden_field :x, value: x %>
+	<%= f.hidden_field :y, value: y %>
 
 	<p>
 		<%= f.label :title %>
@@ -12,7 +15,7 @@
 		<%= f.text_area :body %>
 	</p>
 
-	<p>
-		<%= f.submit 'save' %>
+	<p style="margin-top: 30px;">
+		<button class="normal" type="submit">save</button>
 	</p>
 <% end %>
