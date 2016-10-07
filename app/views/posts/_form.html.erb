@@ -46,6 +46,7 @@
 
         if(routePointIndex == 0) {
           new_blip(window.map, newPoint, ++blipIndex, true);
+          $('.blip-file, #add-new-blip').remove();
 
           // Step 4 - Save Blip
           $('.route-init-blip').on('click', function(){
