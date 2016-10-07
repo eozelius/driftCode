@@ -1,7 +1,22 @@
 class BlipsController < ApplicationController
 	before_action :logged_in_user
 
+	def new
+		@blip = Blip.new
+	end
+
 	def create
+		@blip = Blip.new(blip_params)
+
+		if @blip.save
+			flash[:success] = "blip created"
+			redirect_to current_user
+		end
+
+
+
+=begin
+		
 		@post  = Post.find(params[:post_id])
 		
 		if params[:route] == 'false'
@@ -39,11 +54,19 @@ class BlipsController < ApplicationController
 			message: message,
 			title:   @blip.reload.title
 		}
+=end
+	end
+
+	def edit
+		@blip = Blip.find(params[:id])
 	end
 
 	def update
 		blip = Blip.find(params[:id])
 
+		
+
+=begin
 		blip.update_attributes(
 			title: params[:title],
 			body: params[:body]
@@ -62,6 +85,7 @@ class BlipsController < ApplicationController
 			message: message,
 			title:   blip.reload.title
 		}
+=end
 	end
 
 	def destroy

@@ -1,0 +1,18 @@
+<%= form_for @blip do |f| %>
+	<%= f.hidden_field :x, value: params[:x] %>
+	<%= f.hidden_field :y, value: params[:y] %>
+
+	<p>
+		<%= f.label :title %>
+		<%= f.text_field :title %>
+	</p>
+
+	<p>
+		<%= f.label :body %>
+		<%= f.text_area :body %>
+	</p>
+
+	<p>
+		<%= f.submit 'save' %>
+	</p>
+<% end %>
