@@ -7,54 +7,17 @@ class BlipsController < ApplicationController
 
 	def create
 		@blip = Blip.new(blip_params)
+		@post = current_user.post
+
+		@blip.post_id = @post.id
 
 		if @blip.save
 			flash[:success] = "blip created"
 			redirect_to current_user
-		end
-
-
-
-=begin
-		
-		@post  = Post.find(params[:post_id])
-		
-		if params[:route] == 'false'
-			@blip = Blip.new(
-				title: 		params[:title],
-				body:  		params[:description],
-				x: 		 		params[:x],
-				y: 		 		params[:y],
-				post_id: 	@post.id,
-				route_id: nil
-			)
 		else
-			@route = @post.routes.last	
-			@blip = Blip.new(
-				title: 		params[:title],
-				body:  		params[:description],
-				x: 		 		params[:x],
-				y: 		 		params[:y],
-				post_id: 	@post.id,
-				route_id: @route.id
-			)
+			flash[:danger] = 'whoops, something went wrong'
+			render 'new'
 		end
-
-
-		if @blip.save
-			status = 200
-			message = 'success'
-		else
-			status = 500
-			message = 'failure'
-		end
-
-		render json: { 
-			status:  status,
-			message: message,
-			title:   @blip.reload.title
-		}
-=end
 	end
 
 	def edit
@@ -62,30 +25,15 @@ class BlipsController < ApplicationController
 	end
 
 	def update
-		blip = Blip.find(params[:id])
+		@blip = Blip.find(params[:id])
 
-		
-
-=begin
-		blip.update_attributes(
-			title: params[:title],
-			body: params[:body]
-		)
-
-		if blip.save
-			status = 200
-			message = 'success'
+		if @blip.update_attributes(blip_params)
+			flash[:success] = 'blip successfully updated'
+			redirect_to current_user
 		else
-			status = 500
-			message = 'failure'
+			flash[:danger] = 'whoops, something went wrong'
+			render 'edit'
 		end
-
-		render json: { 
-			status:  status,
-			message: message,
-			title:   blip.reload.title
-		}
-=end
 	end
 
 	def destroy
@@ -103,6 +51,4 @@ class BlipsController < ApplicationController
 		def blip_params
 			params.require(:blip).permit(:title, :body, :x, :y)
 		end
-
-
 end

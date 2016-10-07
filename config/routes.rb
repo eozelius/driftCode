@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :routes,       only: [:create, :destroy]
   resources :route_points, only: [:create, :update, :destroy]
-  resources :blips,        only: [:create, :new, :edit, :update, :destroy]
+  resources :blips
   resources :blip_images,  only: [:create, :destroy]
   resources :users
   resources :posts
