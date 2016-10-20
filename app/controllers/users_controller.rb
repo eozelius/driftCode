@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       @user.post = post
       @user.save
 
-      redirect_to new_post_path
+      redirect_to @user 
   	else
   		render 'new'
   	end
