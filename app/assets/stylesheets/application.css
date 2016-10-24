@@ -17,6 +17,7 @@
  *= require view_driftmap_wizard.css.scss
  *= require login.css.scss
  *= require signup.css.scss
+ *= require legend.css.scss
  *= require_tree .
  *= require_self
  */

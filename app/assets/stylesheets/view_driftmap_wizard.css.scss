@@ -2,19 +2,12 @@
 
 	.wizard-container {
 		height: 241px;
+		width: 100%;
 		opacity: .87;
+		margin: 15px 0 71px 0;
 		border: 1px solid #ddd;
-		margin-bottom: 71px;
-		top: 271px;
-	}
-
-	.toggle-wizard {
-		width: 47px;
-		height: 40px;
-		position: absolute;
-		z-index: 1; 
-		right: 0;
-		top: 139px;
+		top: 0;
+		left: 0;
 	}
 
 	li.wizard-table[data-step="title"] {
@@ -83,7 +76,7 @@
 }
 
 #map.toggle-todo {
-	top: -489px !important;
+
 }
 
 .dismiss-todo {

@@ -1,0 +1,37 @@
+#dm-content-container {
+	height: 600px;
+	padding: 1%;
+
+	.item{
+		height: 400px;
+
+		 img {
+			width: 100%;
+			height: 400px !important;
+			height: auto;
+			vertical-align: middle ;
+		}
+	}
+
+	.carousel-control {
+		background: none;
+
+		i {
+			position: absolute;
+			top: 44%;
+		}
+
+		i.fa-angle-right {
+			margin-right: -15px;
+		}
+
+		i.fa-angle-left {
+			margin-left: -15px;
+		}
+	}
+}
+
+#dm-legend {
+	height: 600px;
+	padding: 1%;
+}

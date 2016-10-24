@@ -12,23 +12,53 @@
   </div>
 <% end %>
 
-<!-- todo - delete this -->
-<style type="text/css">
-    #view-driftmap-wizard .toggle-wizard {
-        top: 55%;
-    }
+<div class="container">
+  <div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 
-    @media (max-width: 480px){
-        #view-driftmap-wizard .toggle-wizard {
-            top: 66%;
-        }
-    }
-</style>
 
-<div class="map-container">
-    <%= render 'driftmap/view_driftmap_wizard' %>
+    <% blips = User.first.post.blips %>
+
+    <% blips.each_with_index do |blip, index| %>
+      <div id="images-carousel" class="carousel slide <%= 'hidden' if index != 0 %>" data-ride="carousel" data-blip="index">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <% blip.blip_images.count.times do |b| %>
+            <li data-target="#images-carousel" data-slide-to="<%= b %>" class="active"></li>
+          <% end %>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <% blips.first.blip_images.each_with_index do |image, i| %>
+            <div class="item <%= 'active' if i == 0 %>">
+              <%= image_tag image.image %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <i class="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+          <i class="fa fa-angle-right fa-3x" aria-hidden="true"></i>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="dm-legend" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+    <div class="map-container">
+      <div id='map'></div>
+      <%= render 'driftmap/init_driftmap' %>
+    </div>
+
+    <div class="view-wizard-container">
+      <%= render 'driftmap/view_driftmap_wizard' %>
+    </div>
     
-	<div id='map'></div>
-	
-	<%= render 'driftmap/init_driftmap' %>
-</div><!-- End Map -->
+  </div>
+</div>
