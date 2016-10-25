@@ -1,7 +1,8 @@
 #dm-content-container {
-	height: 600px;
 	padding: 1%;
+	margin: 0 0 55px 0;
 
+	/* Carousel */
 	.carousel-inner {
 		height: 400px;
 	}
@@ -32,6 +33,18 @@
 		i.fa-angle-left {
 			margin-left: -15px;
 		}
+	}
+
+	/* Blip title author body */
+	.blip-title {
+		margin: 3%;
+	}
+
+	.blip-body img {
+		width: 200px;
+		height: 200px;
+		margin: 0 2% 2% 0;
+		float: left;
 	}
 }
 
