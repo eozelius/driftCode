@@ -102,7 +102,7 @@ ul li.active-tab {
 }
 
 .wizard-step {
-  height: 230px;
+  max-height: 230px;
   overflow-y: scroll;
   overflow-x: hidden; 
 

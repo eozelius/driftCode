@@ -78,7 +78,7 @@ img.error-map {
 
 /* New Blib */
 div.profile {
-	width: 37%;
+	width: 100%;
 	float: right;
 	margin-left: 4%;
 }
@@ -103,10 +103,10 @@ div.new-blip-container {
 	}
 
 	img.pp {
-		width: 200px;
-		height: 225px;
+		width: 100%;
+		height: auto;
 		float: left;
-		margin-top: 40px;
+		margin-top: 11px;
 		margin-right: 5px;
 	}
 
@@ -126,8 +126,7 @@ div.new-blip-container {
 
 .edit-delete-map {
 	margin-top: 10px;
-	top: -310px;
-	position: relative;
+	float: right;	
 
 	span {
 		display: inline;

@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         body:  'my driftMap description',
         init_x: 40.735,
         init_y: -73.890,
-        init_zoom: 12
+        init_zoom: 6
       )
 
       @user.post = post
