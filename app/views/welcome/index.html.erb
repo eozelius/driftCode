@@ -18,7 +18,7 @@
     <% blips = User.first.post.blips %>
 
     <% blips.each_with_index do |blip, index| %>
-      <div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= index %>">
+      <div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= blip.id %>">
         <% if blip.blip_images.any? %>
           <div id="images-carousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -70,8 +70,8 @@
         <div class="wizard-markers">
           <ul>
             <% @post.blips.each do |blip| %>
-              <li class="blip">
-                <p class="blip-title" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
+              <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
+                <p class="blip-title">
                   <%= blip.title %>
                 </p>
               </li>
@@ -85,7 +85,7 @@
 
 <script type="text/javascript">
   // reveal blip info
-  $('.blip-title').on('click', function(){
+  $('.blip').on('click', function(){
     var active = $(this).hasClass('active');
     var blip_index = $(this).data('blip');
     $('.blip-content').addClass('hidden');
