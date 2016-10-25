@@ -1,4 +1,4 @@
-function init_map(dom, driftmap, blips, routes){
+function init_map(dom, driftmap, blips){
 	L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
 	try {
 		var x = driftmap.init_x || 40.735;

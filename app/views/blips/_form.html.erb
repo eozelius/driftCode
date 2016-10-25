@@ -1,4 +1,5 @@
 <div class="container">
+	<!-- Blip title images body -->
 	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 		<div class="blip-content" data-blip="<%= @blip.id %>">
 
@@ -58,6 +59,44 @@
 					<button name="commit" class="normal" type="submit">save</button>
 				</p>
 			<% end %>
+		</div>
+	</div>
+
+	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+		<div class="map-container">
+			<div id='map'></div>
+			<script type="text/javascript">
+				var blips = [];
+				var blipImages = [];
+
+				<% @blip.blip_images.each do |blip_image| %>
+					blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
+				<% end %>
+				<% if action_name == "new" %>
+					var driftmap = {
+						init_x: 40.735,
+						init_y: -73.890,
+						init_zoom: 10,
+					}
+				<% else %>
+					var driftmap = {
+						init_x: '<%= @blip.x %>',
+						init_y: '<%= @blip.y %>',
+						init_zoom: 10,
+					}
+
+					blips.push({
+						id: 		"<%= @blip.id %>",
+						x: 			"<%= @blip.x %>",
+						y: 			"<%= @blip.y %>",
+						title: 	"<%= @blip.title.to_json %>",
+						body: 	"<%= @blip.body.to_json %>",
+						images: blipImages
+					});
+				<% end %>
+
+				init_map('map', driftmap, blips)
+			</script>
 		</div>
 	</div>
 </div>
