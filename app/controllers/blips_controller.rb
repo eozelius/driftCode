@@ -13,7 +13,9 @@ class BlipsController < ApplicationController
 
 		if @blip.save
 			if params[:photo].present?
-				@blip.blip_images.build(image: params[:photo])
+				params[:photo].each do |image|
+					@blip.blip_images.build(image: image[1])
+				end
 				@blip.save
 			end
 			flash[:success] = "blip created"
@@ -24,20 +26,14 @@ class BlipsController < ApplicationController
 		end
 	end
 
-	def show
-		@blip = Blip.find(params[:id])
-	end
-
-	def edit
-		@blip = Blip.find(params[:id])
-	end
-
 	def update
 		@blip = Blip.find(params[:id])
 
 		if @blip.update_attributes(blip_params)
 			if params[:photo].present?
-				@blip.blip_images.build(image: params[:photo])
+				params[:photo].each do |image|
+					@blip.blip_images.build(image: image[1])
+				end
 				@blip.save
 			end
 			flash[:success] = 'blip successfully updated'
@@ -46,6 +42,14 @@ class BlipsController < ApplicationController
 			flash[:danger] = 'whoops, something went wrong'
 			render 'edit'
 		end
+	end
+
+	def show
+		@blip = Blip.find(params[:id])
+	end
+
+	def edit
+		@blip = Blip.find(params[:id])
 	end
 
 	def destroy
