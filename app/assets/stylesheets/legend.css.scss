@@ -34,4 +34,16 @@
 #dm-legend {
 	height: 600px;
 	padding: 1%;
+
+	ul.tabs-menu {
+		width: 30%;
+
+		li {
+			width: 100%;
+		}
+	}
+
+	.driftmap-form-container {
+		width: 70%;
+	}
 }

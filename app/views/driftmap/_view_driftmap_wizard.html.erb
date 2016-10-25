@@ -1,13 +1,41 @@
 <div id="view-driftmap-wizard">
   <div class="wizard-container">
     <ul class="tabs-menu">
-      <li data-step="todo" class="wizard-table active-tab">all</li>
+      <li data-step="markers" class="wizard-table active-tab"></i>blips</li>
       <li data-step="routes" class="wizard-table" style="font-size:.88em;">journeys</li>
-      <li data-step="markers" class="wizard-table"></i>blips</li>
+      <li data-step="todo" class="wizard-table">all</li>
     </ul>
 
     <div class="driftmap-form-container">
-      <div class="todo-container wizard-step">
+      <!-- blips -->
+      <div class="markers-container wizard-step">
+        <div class="wizard-markers">
+          <ul>
+            <% @post.blips.each do |blip| %>
+              <li class="blip">
+                <p class="blip-title" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
+                  <%= blip.title %>
+                </p>
+
+                <div class="blip-info" data-blip="<%= blip.id %>">
+                  <p class="blip-body">
+                    <%= blip.body %>
+                  </p>
+                  <p class="blip-photos">
+                    <% blip.blip_images.each do |image| %>
+                      <%= image_tag image.image %>
+                    <% end %>
+                  </p>
+
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <!-- todo -->
+      <div class="todo-container wizard-step hidden">
         <div class="wizard-todo">
           <p class="instructions-title" style="color: #552727">all my blips and journeys</p>
           <button class="todo normal">reveal</button>
@@ -28,33 +56,6 @@
                   <p class="route-body" data-route="<%= route.id %>">
                     <%= route.description %>
                   </p>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-      
-      <!-- blips -->
-      <div class="markers-container wizard-step hidden">
-        <div class="wizard-markers">
-          <ul>
-            <% @post.blips.each do |blip| %>
-              <li class="blip">
-                <p class="blip-title" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
-                  <%= blip.title %>
-                </p>
-
-                <div class="blip-info" data-blip="<%= blip.id %>">
-                  <p class="blip-body">
-                    <%= blip.body %>
-                  </p>
-                  <p class="blip-photos">
-                    <% blip.blip_images.each do |image| %>
-                      <%= image_tag image.image %>
-                    <% end %>
-                  </p>
-
                 </div>
               </li>
             <% end %>
