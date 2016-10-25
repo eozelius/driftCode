@@ -1,33 +1,64 @@
-<%= form_for @blip, html: { multipart: true } do |f| %>
-	<% x = @blip.x.present? ? @blip.x : params[:x] %>
-	<% y = @blip.y.present? ? @blip.y : params[:y] %>
+<div class="container">
+	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+		<div class="blip-content" data-blip="<%= @blip.id %>">
 
-	<%= f.hidden_field :x, value: x %>
-	<%= f.hidden_field :y, value: y %>
+			<%= form_for @blip, html: { multipart: true } do |f| %>
+				<% x = @blip.x.present? ? @blip.x : params[:x] %>
+				<% y = @blip.y.present? ? @blip.y : params[:y] %>
 
-	<p>
-		<%= f.label :title %>
-		<%= f.text_field :title %>
-	</p>
+				<%= f.hidden_field :x, value: x %>
+				<%= f.hidden_field :y, value: y %>
 
-	<p>
-		<%= f.label 'blip description' %>
-		<%= f.text_area :body %>
-	</p>
+				<% if @blip.blip_images.any? %>
+					<!-- <p style="margin-top: 30px;">
+						<%= f.label 'images' %>
+					</p> -->
+					<div class="form-blip-images">
+						<div id="images-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner" role="listbox">
+							  <% @blip.blip_images.each_with_index do |image, i| %>
+							    <div class="item <%= 'active' if i == 0 %>">
+							      <%= image_tag image.image %>
+							    </div>
+							  <% end %>
 
-	<% if @blip.blip_images.any? %>
-		<div class="form-blip-images">
-			<ul>
-				<% @blip.blip_images.each do |image| %>
-					<li><%= image_tag image.image %></li>
+							  <% if @blip.blip_images.count > 1 %>
+						    	<!-- Indicators -->
+						    	<ol class="carousel-indicators">
+						    	  <% @blip.blip_images.count.times do |b| %>
+						    	    <li data-target="#images-carousel" data-slide-to="<%= b %>" class="active"></li>
+						    	  <% end %>
+						    	</ol>
+
+							    <!-- Controls -->
+							    <a class="left carousel-control" href="#images-carousel" role="button" data-slide="prev">
+							      <i class="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+							      <span class="sr-only">Previous</span>
+							    </a>
+							    <a class="right carousel-control" href="#images-carousel" role="button" data-slide="next">
+							      <i class="fa fa-angle-right fa-3x" aria-hidden="true"></i>
+							      <span class="sr-only">Next</span>
+							    </a>
+						    <% end %>
+							</div>
+						</div>
+
+						<input class="normail blip-image-0" name="photo" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="0" style="margin: 6% 6% 5% 3%;">
+					</div>
+				<% else %>
+					<h4 class="blip-title" style="width:35%;display:inline; float:left">add photos</h4>
+					<input class="normail blip-image-0" name="photo" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="0" style="margin: 6% 6% 5% 3%; width:100%;">
 				<% end %>
-			</ul>
-		</div>
-	<% end %>
-	
-	<input class="normail blip-image-0" name="photo" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="0">
+				<h4 class="blip-title" style="display:inline; float:left;margin-top:-4px">Title</h4>
+				<%= f.text_field :title %><br>
 
-	<p style="margin-top: 30px;">
-		<button name="commit" class="normal" type="submit">save</button>
-	</p>
-<% end %>
+				<h4 class="blip-title" style="display:inline; float:left;margin-top:0">Description</h4>
+				<%= f.text_area :body %>
+				
+				<p style="margin: 30px 0 0 3%">
+					<button name="commit" class="normal" type="submit">save</button>
+				</p>
+			<% end %>
+		</div>
+	</div>
+</div>

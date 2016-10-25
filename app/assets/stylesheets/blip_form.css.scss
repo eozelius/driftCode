@@ -1,0 +1,25 @@
+.edit_blip p label {
+  color: #C2D9EB;
+}
+
+form.edit_blip, 
+form.new_blip {
+	input[type="text"] {
+		height: 2em;
+		margin-top:24px;
+	}
+
+	textarea {
+		margin: 0 0 7% 3%;
+	}
+
+
+	input[type="text"],
+	textarea {
+		padding: 4px;
+		border-radius: 0;
+		background: #fff;
+		border: 1px solid #ccc;
+		
+	}
+}
