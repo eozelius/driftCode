@@ -11,8 +11,6 @@
  * file per style scope.
  *
  *= require bootstrap.min.css
- *= require unslider.css
- *= require unslider-dots.css
  *= require leaflet.css
  *= require view_driftmap_wizard.css.scss
  *= require login.css.scss

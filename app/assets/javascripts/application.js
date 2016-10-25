@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require leaflet-src.js
-//= require unslider-min.js
 //= require bootstrap.min.js
 //= require helper.js.erb
 //= require user.js

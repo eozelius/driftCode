@@ -53,16 +53,11 @@ function init_map(dom, driftmap, blips, routes){
 				var blipMarker = L.marker([lat, lng]).addTo(m);
 				var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
 				blipMarker.bindPopup(blipPopup);
-
-				// Marker Event Listeners ////
-				blipMarker.on('click', function(){
-					$('.blip-images').unslider();
-				});
 			}
 		} // end Markers
 
 		// Add routes to Map
-		if(routes.length > 0){
+/*		if(routes.length > 0){
 			for(var i in routes){ 
 				var title = xss_trim(routes[i].title);
 				var description = xss_trim(routes[i].description);
@@ -86,7 +81,7 @@ function init_map(dom, driftmap, blips, routes){
 					}					
 				}
 			}
-		}
+		}*/
 
 	} catch(e) {
 		console.log('error: ' + e);

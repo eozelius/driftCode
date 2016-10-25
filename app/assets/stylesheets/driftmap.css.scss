@@ -225,21 +225,6 @@ div.blip-popup {
   margin: -3% 6% 6% !important;
 }
 
-/* unslider */
-.unslider {
-  overflow: hidden;
-  padding-bottom: 12px;
-
-}
-
-.unslider-arrow {
-  position: relative;
-}
-
-.unslider-arrow.prev {
-  left: -85px;
-}
-
 @media (min-width: 1200px){
   .wizard-container {
     left: 90px;
@@ -292,11 +277,6 @@ div.blip-popup {
     padding-top: 10px;
     border-top: 1px solid #ccc;
   }
-  .unslider img {
-    margin: 0 auto;
-    display: block;
-  }
-
   /* wizard */
   .wizard-container {
     left: 20px;

@@ -16,25 +16,13 @@
 	</p>
 
 	<% if @blip.blip_images.any? %>
-	<div class="form-blip-images">
-		<ul>
-			<% @blip.blip_images.each do |image| %>
-				<li><%= image_tag image.image %></li>
-			<% end %>
-		</ul>
-	</div>
-		<style type="text/css">
-			.unslider {
-				margin: 20px 0;
-			}
-			.unslider-arrow.prev{
-				left: 0;
-			}
-		</style>
-
-		<script type="text/javascript">
-			$('.form-blip-images').unslider();
-		</script>
+		<div class="form-blip-images">
+			<ul>
+				<% @blip.blip_images.each do |image| %>
+					<li><%= image_tag image.image %></li>
+				<% end %>
+			</ul>
+		</div>
 	<% end %>
 	
 	<input class="normail blip-image-0" name="photo" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="0">
