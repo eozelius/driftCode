@@ -104,8 +104,10 @@
 
 <div class="container">
 	<div class="map-details col-lg-8 col-md-8 col-sm-12 col-xs-12">
-		<h3 class="page-title post-title"><%= @post.title %></h3>
-		<p class="post-title"><%= @post.body %></p>
+		<h3 class="page-title post-title"><%= @post.title %><%= link_to '<span style="font-size: .48em"> - edit</span>'.html_safe, edit_post_path(@post) if user_is_home(@user) %></h3>
+
+		<p class="post-title"><%= @post.body %> <%= link_to '<span style="font-size: .8em"> - edit</span>'.html_safe, edit_post_path(@post) if user_is_home(@user) %>
+		</p>
 	</div>
 
 	<div id="pro-parts-container" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">

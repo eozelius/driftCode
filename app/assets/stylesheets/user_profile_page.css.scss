@@ -105,6 +105,7 @@ div.new-blip-container {
 	img.pp {
 		width: 100%;
 		height: auto;
+		max-width: 265px;
 		float: left;
 		margin-top: 11px;
 		margin-right: 5px;
@@ -151,7 +152,6 @@ $white-grey: #E9EEF0;
 		margin: 20px 0 20px;
 	}
 }
-
 
 @media (max-width: 767px){
 	.profile-details {
