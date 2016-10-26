@@ -9,259 +9,86 @@
   </div>  
 <% end %>
 
-<div id="edit-driftmap-container">
-  <%= render 'driftmap/edit_driftmap_wizard' %>
+<div class="container">
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+    <%= form_for @post, html: { multipart: true } do |f| %>
+      <%= f.hidden_field :init_x %>
+      <%= f.hidden_field :init_y %>
+      <%= f.hidden_field :init_zoom %>
+      <%= f.hidden_field :post_id, value: @post.id %>
 
-  <div id="map"></div>
+      <!-- title -->
+      <h4 class="blip-title" style="margin-top:-4px; width: 15%">Title</h4>
+      <%= f.text_field :title %>
 
-  <%= render 'driftmap/init_driftmap' %>
+      <!-- driftmap description -->
+      <h4 class="blip-title" style="display:inline; float:left;margin-top:0">Description</h4>
 
-  <span class="save-zoom normal hidden">save default view</span>
-  <span class="save-route normal hidden">save route</span>
-  <span class="save-wizard normal bottom">save driftMap</span>
+      <%= f.text_area :body %>
 
-  <script type="text/javascript">
-    var routeIndex = -1;
-    var blipIndex = -1;
-    
-    // Routes
-    // Step 1 - [new route] Create new Route user clicks 'create new journey' button
-    $('.create-new-route').on('click', function(){
-      $('.save-wizard').addClass('hidden');
-      $(this).addClass('hidden');
-      routeIndex++;
-      $('.wizard-container').removeClass('active');
-      $('#map').css('top', '0');
-      $('.wizard-container, .save-route').toggleClass('hidden');
-      routePoints = [];
-      routePointIndex = -1;
+      <h4 class="blip-title" style="display:inline; float:left;margin-top:0; font-size: 1.3em">
+        to customize the location and zoom level of your driftmap, just drag and zoom the map to the right, and click save.
+      </h4>
 
-      // Step 3... [create route_point] - User clicks on map to create a waypoint
-      window.map.off('click').on('click', function(e){
-        var lat = e.latlng.lat.toFixed(7);
-        var lng = e.latlng.lng.toFixed(7);
-        var newPoint  = L.latLng(lat, lng);
-        routePoints.push(newPoint);
-        routePointIndex++;
+    <% end %>
+  </div>
 
-        if(routePointIndex == 0) {
-          new_blip(window.map, newPoint, ++blipIndex, true);
-          $('.blip-file, #add-new-blip').remove();
 
-          // Step 4 - Save Blip
-          $('.route-init-blip').on('click', function(){
-            var title = xss_trim($('.blip-title').val());
-            var description = xss_trim($('.blip-body').val());
-            post_id = $('#post_post_id').val();
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    <div id="map"></div>
 
-            route_id = create_route(title, description, true);
-
-            blip_images = undefined;
-            if(addedImages)
-              blip_images = $('.blip-file');
-
-            create_blip(newPoint, title, description, post_id, true, blip_images);
-
-            $('.leaflet-popup-close-button')[0].click();
-          });
-        } else {
-          create_routePoint(window.map, routePoints, ++routePointIndex, route_id, post_id);
-        }
-
-      });
-
-      // Step 5 - User completed all steps, ready to save
-      // Save route
-      $('.save-route').on('click', function(){
-        $('.save-wizard').removeClass('hidden');
-        $('#map').css('top', '-310px')
-        window.map.off('click');
-        $('.wizard-container, .save-route').toggleClass('hidden');
-        var new_route = '<li class="route">' + 
-                          '<p class="route-title" data-route="'+ routeIndex +'">' + 
-                            $('.new-route-inputs[data-route="'+ routeIndex +'"] .route-title-edit input[type="text"]').val() + 
-                          '</p>' +
-                          '<div class="route-info" data-route="'+ routeIndex +'" style="display:none;">' + 
-                            '<p class="route-body" data-route="'+ routeIndex +'">' + 
-                              $('.new-route-inputs[data-route="'+ routeIndex +'"] .route-body-edit textarea').val() +
-                            '</p>' + 
-                          '</div>' +
-                        '</li>';
-        $('.wizard-routes ul').append(new_route);
-        $('.wizard-routes input, .wizard-routes textarea').addClass('hidden');
-        $('.create-new-route').removeClass('hidden');
-        alert('journey has been created and saved');
-        $('.driftmap-form-container form').submit();
-      });
-    });
-
-    // Standalone Blips
-    // Step 1 - User wants to create a standalone blip
-    $('.create-blip').on('click', function(){
-      $('.wizard-container').removeClass('active');
-      $('#map').css('top', '0');
-      $('.wizard-container, .new-blip').toggleClass('hidden');
-
-      // Step 2 - Plot standalone blip on map
-      window.map.off('click').on('click', function(e){
-        var lat = e.latlng.lat.toFixed(7);
-        var lng = e.latlng.lng.toFixed(7);
-
-        var blipMarker = L.marker([lat, lng]).addTo(window.map);
-
-        if(confirm('create blip here?')){
-          window.location = '/blips/new?x=' + lat + '&y=' + lng;
-        } else {
-          blipMarker.remove();
-        }
-      });
-    });
-
-    // Title/Default Location
-    $('.update-zoom').on('click', function(){
-      $('#map').css('top', '0');
-      $('.wizard-container, .save-zoom').toggleClass('hidden');
-    });
-
-    // save location/zoom
-    $('.save-zoom').on('click', function(){
-      $('.wizard-container, .save-zoom').toggleClass('hidden');
-      $('#map').css('top', '-310px');
-      alert('location and zoom saved.');
-      var init_x = window.map.getCenter().lat;
-      var init_y = window.map.getCenter().lng;
-      var zoom   = window.map.getZoom();
-    
-      // Post/DriftMap attrs
-      $('#post_init_x').val(init_x);
-      $('#post_init_y').val(init_y);
-      $('#post_init_zoom').val(zoom);
-      $('.driftmap-form-container form').submit();
-    });
-
-    /* Edit Driftmap */
-    // Edit Route
-    $('.edit-route').on('click', function(){
-      var index = $(this).data('route');
-
-      var oldTitle = $.trim($('.route-title[data-route="'+ index +'"]').text());
-      var oldBody = $.trim($('.route-body[data-route="'+ index +'"]').text());
-      var editTitleInput =    '<p class="route-title-edit" data-route="'+ index +'">' + 
-                                '<input type="text" name="route['+ index +'][title]" value="'+ oldTitle +'"/>' +
-                              '</p>';
-      var editBodyTextarea =  '<p class="route-body-edit" data-route="'+ index +'">' +
-                                '<textarea name="route['+ index +'][description]">'+ oldBody +'</textarea>' +
-                              '</p>';
-
-      $('.route-title[data-route="'+ index +'"]').after(editTitleInput);
-      $('.route-body[data-route="'+ index +'"]').after(editBodyTextarea);
-
-      selector = '.route-title[data-route="'+ index +'"], ' +
-                 '.route-body[data-route="'+ index +'"], ' +
-                 '.create-new-route, ' +
-                 '.del-route, ' +
-                 '.driftmap-form-container .save-wizard, ' + 
-                 '.edit-save-route[data-route="'+ index +'"]';
-
-      $(selector).toggleClass('hidden');
-    });
-
-    // Save an update to a route
-    $('.edit-save-route').on('click', function(){
-      var index = $(this).data('route');
-      var title = xss_trim($('.route-title-edit[data-route="'+ index +'"] input').val());
-      var body = xss_trim($('.route-body-edit[data-route="'+ index +'"] textarea').val());
-
-      $.ajax({
-        url: '/update_route',
-        type: 'POST',
-        dataType: 'JSON',
-        data: {
-          id: index,
-          title: title,
-          body: body
-        },
-        complete: function(response){
-          r = response.responseJSON;
-          window.r = r;
-
-          if(r.status == 200){
-            var remove_selector = '.route-title-edit[data-route="'+ index +'"] input, ' + 
-                                  '.route-body-edit[data-route="'+ index +'"] textarea, ' + 
-                                  '.edit-route[data-route="'+ index +'"]';
-            $(remove_selector).remove();
-            $(selector).toggleClass('hidden');
-
-            $('.route-title[data-route="'+ index +'"]').html(title);
-            $('.route-body[data-route="'+ index +'"]').html(body);
-            alert(r.title + " has been successfully updated.");
-          } else {
-            alert('Whoops, something went a little haywire, please refresh your browser and try again.');
-          }
-        }
-      });
-    });
-
-    /* Misc Form/wizard actions */
-    // toggle wizard
-    $('.toggle-wizard').on('click', function(){
-      if($('.wizard-container').hasClass('active')){
-        $('.wizard-container').removeClass('active');
-      } else {
-        $('.wizard-container').addClass('active');
+    <script type="text/javascript">
+      var driftmap = {
+        init_x: '<%= @post.init_x %>',
+        init_y: '<%= @post.init_y %>',
+        init_zoom: '<%= @post.init_zoom %>',
       }
-    });
 
-    // Change menu tab
-    $('.tabs-menu li').on('click', function(){
-      $('.active-tab').removeClass('active-tab');
-      var tab = $(this).data('step');
-      $(this).addClass('active-tab');
+      var blips = [];
 
-      $('.wizard-step').addClass('hidden');
-      $('.'+ tab + '-container').removeClass('hidden');    
-    });
+      <% if @post.blips.any? %> 
+        <% @post.blips.each do |blip| %>
 
-    // Submit form
-    $('.save-wizard').on('click', function(){
-      $('.driftmap-form-container form').submit();
-    });
+          var blipImages = [];
+          <% blip.blip_images.each do |blip_image| %>
+            blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
+          <% end %>
 
-    // reveal Route info
-    $('.route-title').on('click', function(){
-      active = $(this).hasClass('active');
-      route_index = $(this).data('route');
+          blips.push({
+            id:   "<%= blip.id %>",
+            x:    "<%= blip.x %>",
+            y:    "<%= blip.y %>",
+            title:  "<%= blip.title.to_json %>",
+            body:   "<%= blip.body.to_json %>",
+            images: blipImages
+          })
 
-      if(active){
-        $('.route-info[data-route="'+ route_index +'"]').slideUp(700);
-        $(this).removeClass('active');
-      } else {
-        $('.route-info[data-route="'+ route_index +'"]').slideDown(700);
-        $(this).addClass('active');
-      }
-    });
+        <% end %>
+      <% end %>
 
-    // Cannot upload images larger than 3M
-    addedImages = false;
-    $(document).on('change', 'input[type="file"]', function() {
-      addedImages = true;
-    });
-
-  </script>
-  <style type="text/css">
-    .edit-blip {
-      display: inline-block !important;
-    }
-    .edit-blip button {
-      margin: -10px 0 0 60px;
-    }
-    span.save-wizard.bottom {
-       float: right;
-       margin: -200px 45px 45px;
-       margin: -290px 45px 45px;
-    }
-    .leaflet-popup-content {
-      padding: 2% 0 15%;
-    }
-  </style>
+      init_map('map', driftmap, blips)
+    </script>
+  </div>
 </div>
+
+<!-- Submit button -->
+<div class="container">
+  <div class="col-xs-12">
+    <span class="normal save" style="margin: 5% 2%;">save</span>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    $('span.normal.save').on('click', function(){
+      var lat = window.map.getCenter().lat
+      var lng = window.map.getCenter().lng
+      var zoom = window.map.getZoom()
+
+      $('#post_init_x').val(lat)
+      $('#post_init_y').val(lng)
+      $('#post_init_zoom').val(zoom)
+      $('form').submit();
+    });
+  });
+</script>

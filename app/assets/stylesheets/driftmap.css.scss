@@ -1,6 +1,11 @@
 /* Driftmap form */
 .edit_post,
 .new_post {
+
+  margin: 4% 3%;
+  padding: 1% 0;
+
+
   input[type="text"],
   textarea {
     background-color: #fff;
@@ -13,6 +18,7 @@
     position: relative;
     padding: 3%;
     bottom: 0;
+    margin-left: 0 !important;
   }
 }
 
