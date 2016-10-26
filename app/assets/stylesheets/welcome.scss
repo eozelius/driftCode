@@ -99,18 +99,6 @@ div.readme-container {
 	}
 }
 
-@media (min-width: 768px) and (max-width: 992px){
-	#map {
-		height: 270px;
-	}
-	#dm-content-container .item img {
-		height: 336px;
-	}
-	#dm-content-container .carousel-inner {
-		height: 350px;
-	}
-}
-
 @media (max-width: 767px){
 	.wizard-step .wizard-routes li, 
 	.wizard-step .wizard-markers li {
@@ -133,5 +121,40 @@ div.readme-container {
 		button {
 			margin: 10px 5px;
 		}
+	}
+}
+
+
+/* image optimization - do not touch */
+@media (min-width: 701px) and (max-width: 992px){
+	#map {
+		height: 270px;
+	}
+	#dm-content-container .item img {
+		height: 336px;
+	}
+	#dm-content-container .carousel-inner {
+		height: 350px;
+	}
+}
+
+@media (max-width: 700px){
+	#dm-content-container .item img,
+	#dm-content-container .carousel-inner {
+		height: 300px;
+	}
+}
+
+@media (max-width: 480px){
+	#dm-content-container .item img,
+	#dm-content-container .carousel-inner {
+		height: 280px;
+	}	
+}
+
+@media (max-width: 400px){
+	#dm-content-container .item img,
+	#dm-content-container .carousel-inner {
+		height: 230px;
 	}
 }

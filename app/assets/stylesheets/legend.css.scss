@@ -118,25 +118,17 @@
 			}
 		}
 	}
-}
 
-@media (max-width: 700px){
-	#dm-content-container .item img,
-	#dm-content-container .carousel-inner {
-		height: 300px;
+	.map-container {
+		position: relative;
+		top: 240px;
 	}
-}
 
-@media (max-width: 480px){
-	#dm-content-container .item img,
-	#dm-content-container .carousel-inner {
-		height: 280px;
-	}	
-}
-
-@media (max-width: 400px){
-	#dm-content-container .item img,
-	#dm-content-container .carousel-inner {
-		height: 230px;
+	.view-wizard-container {
+		background-color: #f9fbff;
+		padding: 10px 0 0 10px;
+		border-radius: 5px 0 0 0;
+		position: relative;
+		top: -375px;
 	}
 }
