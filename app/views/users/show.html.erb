@@ -86,7 +86,7 @@
 
 		<% if user_is_home(@user) || admin_user %>
 			<p class="edit-delete-map">
-				<%= link_to 'edit driftmap', edit_post_path(@post) %>
+				<%= link_to 'new blip', new_blip_path %>
 				<%#= link_to 'delete driftmap', @post, method: :delete, data: { confirm: "Are you sure?" } %>
 			</p>
 		<% end %>
