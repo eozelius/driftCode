@@ -98,6 +98,13 @@
 				init_map('map', driftmap, blips)
 			</script>
 		</div>
+
+		<%= link_to @blip, method: :delete, data: { confirm: "Are you Sure?" } do %>
+			<span class="normal pull-right" style="margin: 4% 0 0" rel="nofollow" data-method="delete" data-confirm="Are you sure">delete</span>
+		<% end %>
+		<%= link_to user_path(@user) do %>
+			<span class="normal" style="margin: 4% 0 0">cancel</span>
+		<% end %>
 	</div>
 </div>
 

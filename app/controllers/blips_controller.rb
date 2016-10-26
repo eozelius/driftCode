@@ -50,6 +50,7 @@ class BlipsController < ApplicationController
 
 	def edit
 		@blip = Blip.find(params[:id])
+		@user = current_user
 	end
 
 	def destroy
