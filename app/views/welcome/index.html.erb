@@ -14,7 +14,7 @@
 
 <div class="container">
   <div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-    <% Blip.all.each_with_index do |blip, index| %>
+    <% @blips.each_with_index do |blip, index| %>
       <div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= blip.id %>">
         <!-- blip carousel -->
         <% if blip.blip_images.any? %>
@@ -33,8 +33,11 @@
               <!-- Indicators -->
               <ol class="carousel-indicators">
                 <% blip.blip_images.count.times do |b| %>
-                  <li data-target="#images-carousel" data-slide-to="<%= b %>" class="active"></li>
+                  <li data-target="#images-carousel" data-slide-to="<%= b %>"></li>
                 <% end %>
+                <script type="text/javascript">
+                  $('li[data-target="#images-carousel"]').first().addClass('active')
+                </script>
               </ol>
 
               <!-- Controls -->
@@ -79,7 +82,7 @@
 
         var blips = [];
 
-        <% Blip.all.each do |blip| %>
+        <% @blips.each do |blip| %>
           var blipImages = [];
           <% blip.blip_images.each do |blip_image| %>
             blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
@@ -93,13 +96,11 @@
             body:   "<%= blip.body.to_json %>",
             images: blipImages
           })
-
         <% end %>
 
         var routes = [];
 
         <% Route.all.each do |route| %>
-
           var routePoints = [];
           <% route.route_points.each do |route_point| %>
             routePoints.push({
@@ -124,10 +125,11 @@
       <div class="markers-container wizard-step">
         <div class="wizard-markers">
           <ul>
-            <% Blip.all.each do |blip| %>
+            <% @blips.each do |blip| %>
+              <% author = User.find(Post.find(blip.post_id).user_id) # wowzers %>
               <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
                 <p class="blip-title">
-                  <%= blip.title %>
+                  <%= blip.title %> <%= link_to "<span class='author-name'> - #{author.name}</span>".html_safe, user_path(author.id) %>
                 </p>
               </li>
             <% end %>
