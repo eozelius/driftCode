@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 <div class="container">
-	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<% if @user.post.blips.any? %>
 			<% @blips.each_with_index do |blip, index| %>
 				<div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= blip.id %>">
@@ -65,7 +65,7 @@
 		<% end %>
 	</div>
 
-	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 		<div class="map-container">
 			<div id='map'></div>
 			<%= render 'driftmap/init_driftmap' %>
@@ -89,14 +89,14 @@
 		      </ul>
 		    </div>
 		  </div>
-		</div>
 
-		<% if user_is_home(@user) || admin_user %>
-			<p class="edit-delete-map">
-				<%= link_to 'new blip', new_blip_path %>
-				<%#= link_to 'delete driftmap', @post, method: :delete, data: { confirm: "Are you sure?" } %>
-			</p>
-		<% end %>
+		  <% if user_is_home(@user) || admin_user %>
+		  	<p class="edit-delete-map">
+		  		<%= link_to 'new blip', new_blip_path %>
+		  		<%#= link_to 'delete driftmap', @post, method: :delete, data: { confirm: "Are you sure?" } %>
+		  	</p>
+		  <% end %>
+		</div>
 	</div>
 </div>
 
