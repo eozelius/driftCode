@@ -2,7 +2,7 @@
 <div class="container">
 	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 		<% if @user.post.blips.any? %>
-			<% @user.post.blips.each_with_index do |blip, index| %>
+			<% @blips.each_with_index do |blip, index| %>
 				<div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= blip.id %>">
 					<!-- blip carousel -->
 					<% if blip.blip_images.any? %>
@@ -22,6 +22,9 @@
 					    	  <% blip.blip_images.count.times do |b| %>
 					    	    <li data-target="#images-carousel" data-slide-to="<%= b %>" class="active"></li>
 					    	  <% end %>
+					    	  <script type="text/javascript">
+					    	    $('li[data-target="#images-carousel"]').first().addClass('active')
+					    	  </script>
 					    	</ol>
 
 						    <!-- Controls -->

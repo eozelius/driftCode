@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @post = @user.post
+    @post.blips.any? ? @blips = @post.blips.order(created_at: :desc) : @blips = nil
   end
 
   def update
