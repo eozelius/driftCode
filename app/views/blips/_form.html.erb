@@ -64,6 +64,8 @@
 
 	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 		<div class="map-container">
+			<span class="normal edit-location" style="margin: 0 auto 5%;">edit location</span>
+
 			<div id='map'></div>
 			<script type="text/javascript">
 				var blips = [];
@@ -95,7 +97,7 @@
 					});
 				<% end %>
 
-				init_map('map', driftmap, blips)
+				init_map('map', driftmap, blips);
 			</script>
 		</div>
 
@@ -116,7 +118,31 @@
 			var index = $(this).data('photo-index')
 			var new_img = '<input class="blip-image" name="photo['+ index +']" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="'+ index +'" style="margin: 6% 6% 5% 3%; width:100%;">';
 			$('.add-photo').last().after(new_img);
+		});
 
+		// edit blip location
+		$('span.edit-location').on('click', function(){
+			/*if(window.width > 767){
+				$('#map').addClass('expanded-map');
+			}*/
+
+			var b = window.blipMarker;
+			b.dragging.enable();
+			b.on('dragend', function(e){
+				window.e = e;
+
+				var lat = e.target.getLatLng().lat;
+				var lng = e.target.getLatLng().lng;
+
+				console.log("lat: " + lat);
+				console.log("lng: " + lng);
+
+				$('#blip_x').val(lat);
+				$('#blip_y').val(lng);
+
+			});
+
+			// add event listener for when user is done dragging.
 
 		});
 	});
