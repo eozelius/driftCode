@@ -50,10 +50,14 @@
 				</div>
 			<% end %>
 		<% else %>
-			<div class="jumbotron">
-				<%= link_to edit_post_path(@user.post) do %>
-					<p>create a new blip</p>
-				<% end %>
+			<div class="start-new">
+				<%= image_tag 'switzerland10.JPG' %>
+
+				<div class="start-text">
+					<%= link_to new_blip_path do %>
+						<p>begin an new adventure now</p>
+					<% end %>
+				</div>
 			</div>
 		<% end %>
 	</div>
