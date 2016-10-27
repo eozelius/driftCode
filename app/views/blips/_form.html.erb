@@ -45,14 +45,14 @@
 						<span class="normal add-photo" style="margin: 35px 0 35px 3%;" data-photo-index="0"><i class="fa fa-plus"></i> photo</span>
 					</div>
 				<% else %>
-					<h4 class="blip-title" style="width:35%;" data-photo-index="0">add photos</h4><br> 
+					<h4 class="blip-title" data-photo-index="0">add photos</h4>
 
 					<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
 				<% end %>
-				<h4 class="blip-title" style="float:left;margin-top:-4px">Title</h4>
-				<%= f.text_field :title %><br>
+				<h4 class="blip-title">Title</h4>
+				<%= f.text_field :title %>
 
-				<h4 class="blip-title" style="display:inline; float:left;margin-top:0">Description</h4>
+				<h4 class="blip-title">Description</h4>
 				<%= f.text_area :body %>
 				
 				<p style="margin: 30px 0 0 3%">
@@ -60,56 +60,6 @@
 				</p>
 			<% end %>
 		</div>
-	</div>
-
-	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-		<div class="map-container">
-
-			<hr class="mobile-only"></hr>
-
-			<span class="normal edit-location" style="margin: 0 auto 5%;">edit location</span>
-
-			<div id='map'></div>
-			<script type="text/javascript">
-				var blips = [];
-				var blipImages = [];
-
-				<% @blip.blip_images.each do |blip_image| %>
-					blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
-				<% end %>
-				<% if action_name == "new" %>
-					var driftmap = {
-						init_x: 40.735,
-						init_y: -73.890,
-						init_zoom: 10,
-					}
-				<% else %>
-					var driftmap = {
-						init_x: '<%= @blip.x %>',
-						init_y: '<%= @blip.y %>',
-						init_zoom: 10,
-					}
-
-					blips.push({
-						id: 		"<%= @blip.id %>",
-						x: 			"<%= @blip.x %>",
-						y: 			"<%= @blip.y %>",
-						title: 	"<%= @blip.title.to_json %>",
-						body: 	"<%= @blip.body.to_json %>",
-						images: blipImages
-					});
-				<% end %>
-
-				init_map('map', driftmap, blips);
-			</script>
-		</div>
-
-		<%= link_to @blip, method: :delete, data: { confirm: "Are you Sure?" } do %>
-			<span class="normal pull-right" style="margin: 4% 0 0" rel="nofollow" data-method="delete" data-confirm="Are you sure">delete</span>
-		<% end %>
-		<%= link_to user_path(current_user) do %>
-			<span class="normal" style="margin: 4% 0 0">cancel</span>
-		<% end %>
 	</div>
 </div>
 
