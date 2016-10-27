@@ -93,6 +93,45 @@ div.blip-popup {
 }
 
 /* new code todo clean the above shit. */
+/* popups */
+#map {  
+  p {
+    font-size: 1.3em;
+  }
+
+  .leaflet-popup-content-wrapper {
+    width: 150px;
+  }
+  .blip-text {
+    padding: 5px;
+  }
+  .leaflet-popup-content {
+    margin: 0;
+    padding: 3px 5px;
+  }
+  .blip-popup-body {
+    margin: 0;
+    height: 45px;
+    overflow: hidden;
+  }
+  .blip-images {
+    height: 100px;
+
+    .carousel-inner {
+      height: 100px;
+
+      .item {
+        display: block;
+      }
+    }
+
+    img {
+      width: 139px;
+      height: 120px;
+    }
+  }
+}
+
 @media (min-width: 480px) and (max-width: 767px){
   #map {
     .leaflet-popup-content-wrapper {
@@ -130,42 +169,5 @@ div.blip-popup {
 }
 
 @media (min-width: 320px) and (max-width: 479px){
-  /* popups */
-  #map {  
-    p {
-      font-size: 1.3em;
-    }
 
-    .leaflet-popup-content-wrapper {
-      width: 150px;
-    }
-    .blip-text {
-      padding: 5px;
-    }
-    .leaflet-popup-content {
-      margin: 0;
-      padding: 3px 5px;
-    }
-    .blip-popup-body {
-      margin: 0;
-      height: 45px;
-      overflow: hidden;
-    }
-    .blip-images {
-      height: 100px;
-
-      .carousel-inner {
-        height: 100px;
-
-        .item {
-          display: block;
-        }
-      }
-
-      img {
-        width: 139px;
-        height: 120px;
-      }
-    }
-  }
 }
