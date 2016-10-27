@@ -75,6 +75,10 @@ li {
 	list-style-type: none;
 }
 
+.mobile-only {
+	display: none;
+}
+
 div.center {
 	width: 100%;
 	display: block;
@@ -193,6 +197,9 @@ input[type="password"] {
 	width: 80%;
 	display: block;
 	max-width: 215px;
+	background: #fff;
+	border-radius: 0;
+	border: 1px solid #ccc;
 }
 
 textarea {
@@ -348,6 +355,12 @@ button.normal:hover{
 		height: 40px;
 		margin: 0 5px 0 0;
 	}
+}
+
+@media (min-width: 767px){
+	.mobile-only {
+		display: block;
+	}	
 }
 
 /* Header - don't fucking touch this */

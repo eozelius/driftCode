@@ -1,6 +1,6 @@
 <div class="container">
 	<!-- Blip title images body -->
-	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<div class="blip-content" data-blip="<%= @blip.id %>">
 
 			<%= form_for @blip, html: { multipart: true } do |f| %>
@@ -62,8 +62,11 @@
 		</div>
 	</div>
 
-	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 		<div class="map-container">
+
+			<hr class="mobile-only"></hr>
+
 			<span class="normal edit-location" style="margin: 0 auto 5%;">edit location</span>
 
 			<div id='map'></div>
@@ -147,3 +150,9 @@
 		});
 	});
 </script>
+
+<style type="text/css">
+	.map-container {
+		top: 0;
+	}
+</style>

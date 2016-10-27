@@ -20,7 +20,7 @@
 					    	<!-- Indicators -->
 					    	<ol class="carousel-indicators">
 					    	  <% blip.blip_images.count.times do |b| %>
-					    	    <li data-target="#images-carousel" data-slide-to="<%= b %>" class="active"></li>
+					    	    <li data-target="#images-carousel" data-slide-to="<%= b %>"></li>
 					    	  <% end %>
 					    	  <script type="text/javascript">
 					    	    $('li[data-target="#images-carousel"]').first().addClass('active')
