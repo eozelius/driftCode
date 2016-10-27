@@ -24,12 +24,23 @@ form.edit_post {
 		border: 1px solid #ccc;
 		
 	}
-}
 
-form h4.blip-title{
-	width: -moz-fit-content;
-}
+	h4.blip-title{
+		width: -moz-fit-content;
+	}
 
-form #blip_title {
-	margin: 3% 0 8% 3%;
+	#blip_title {
+		margin: 3% 0 8% 3%;
+	}
+
+	button[name="commit"] {
+		float: right;
+		margin: 0 17% 0 0;
+	}
+
+	span.cancel {
+		float: left;
+		margin: 0 0 0 3%;
+	}
+
 }
