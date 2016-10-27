@@ -57,6 +57,10 @@
 	height: 600px;
 	padding: 1%;
 
+	p {
+		font-size: 1.07em;
+	}
+
 	ul.tabs-menu {
 		width: 30%;
 
@@ -143,5 +147,20 @@
 		border-radius: 5px 0 0 0;
 		position: relative;
 		top: -375px;
+	}
+}
+
+@media (max-width: 480px){
+	#dm-legend .markers-container.wizard-step{
+		margin-top: 2px;
+	}
+	#dm-content-container .blip-body {
+		font-size: 1.1em;
+
+		img {
+			width: 50px;
+			height: 50px;
+		}
+
 	}
 }

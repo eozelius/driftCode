@@ -22,83 +22,6 @@
   }
 }
 
-span.save-wizard.bottom {
-  float: right;
-  margin: -200px 45px 45px;
-}
-
-.driftmap-form-container span.save-wizard{
-  cursor: pointer;
-  position: absolute;
-  top: 255px;
-  right: 38px;
-
-}
-
-p.instructions-title {
-  margin-bottom: 7px;
-  color: #ADCDDB;
-  font-size: 17px;
-}
-
-#edit-driftmap {
-  width: 90%;
-  display: block;
-  margin: 0 auto 30px;
-  height: 575px;
-  margin-bottom: 100px;
-}
-/* new menu */
-.wizard-container {
-  width: 260px;
-  height: 310px;
-  position: relative;
-  z-index: 999;
-  background-color: #EFEFEF;
-  padding-bottom: 3%;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  top: 200px;
-}
-
-.active.wizard-container {
-  margin-left: -1000px;
-}
-
-#edit-driftmap-container .toggle-wizard {
-  width: 47px;
-  height: 40px;
-  position: absolute;
-  z-index: 1; 
-  right: 0;
-  top: 139px;
-}
-
-ul.tabs-menu {
-  width: 70px;
-  height: 240px;
-  background-color: #EFEFEF;
-}
-
-ul.tabs-menu li {
-  height: 60px;
-  width: 74px;
-  line-height: 60px;
-  cursor: pointer;
-  display: inline-block;
-  border: 1px solid #ddd;
-  background-color: #EFEFEF;
-  padding: 0;
-  text-align: center;
-  border-right: 3px solid #ADCDDB;
-}
-
-ul li.active-tab {
-  background-color: #f5f5f5;
-  border: 3px solid #ADCDDB;
-  line-height: 58px;
-}
-
 .driftmap-form-container {
   width: 184px;
   padding: 3%;
@@ -112,15 +35,6 @@ ul li.active-tab {
   overflow-y: scroll;
   overflow-x: hidden; 
 
-  p {
-    font-size: 1em;
-  }
-  /* title */
-  .update-zoom {
-    position: relative;
-    top: 20px;
-    left: 6px;
-  }
   /* description */
   .route-info,
   .blip-info {
@@ -148,27 +62,8 @@ ul li.active-tab {
       .new-route-inputs {
         margin-top: 10px;
       }
-      .edit-route {
-        font-style: italic;
-        margin-left: 15px;
-        cursor: pointer;
-        color: #ADCDDB;
-      }
-      .del-route {
-        text-align: right;
-        color: #552727;
-        margin-top: 15px;
-      }      
     }
   }
-}
-
-.save-zoom,
-.save-route    {
-  position: absolute;
-  bottom: 111px;
-  left: 146px;
-  opacity: .8;
 }
 
 /* Marker */
@@ -193,10 +88,6 @@ ul li.active-tab {
 /* popups */
 
 /* Blips */
-.leaflet-popup-content-wrapper {
-  min-height: 350px;
-}
-
 div.blip-popup {
   max-height: 400px;
 }
@@ -207,84 +98,28 @@ div.blip-popup {
   height: 285px;
 }
 
-.blip-text {
-  display: inline-block;
-  width: 240px;
-  float: left;
-  padding: 6%;
-}
+/* new code todo clean the above shit. */
+@media (min-width: 320px) and (max-width: 479px){
+  /* popups */
+  #map {  
+    p {
+      font-size: 1.3em;
+    }
 
-.blip-popup-body {
-  height: 250px;
-}
-
-.edit-blip {
-  font-size: 1.5em;
-  padding: 5% 7%;
-  color: #ADCDDB;
-  text-align: right;
-  cursor: pointer;
-  font-style: italic;
-}
-
-.edit-save-blip {
-  margin: -3% 6% 6% !important;
-}
-
-@media (min-width: 1200px){
-  .wizard-container {
-    left: 90px;
-  }
-}
-
-@media (max-width: 1200px){
-  .wizard-container {
-    left: 55px;
-  }
-}
-
-@media (max-width: 767px) {
-  .wizard-container {
-    left: 33px;
-  }
-}
-
-@media (max-width: 480px){
-  .application-container {
-    padding: 0 3%;
-  }
-
-  .leaflet-popup-content-wrapper {
-    width: 239px;
-    min-height: 0;
-  }
-  .leaflet-popup-content {
-    width: 229px !important;
-    min-width: 0;
-    padding: 2% 0 6%;
-    margin: 0 5px;
-  }
-  div.blip-popup {
-    width: 229px;
-  }
-  .blip-text{
-    width: 228px;
-    height: 200px;
-    overflow: scroll;
-    display: block;
-    float: none;
-  }
-  .blip-popup-body {
-    height: 140px;
-  }
-  .blip-images {
-    height: auto;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #ccc;
-  }
-  /* wizard */
-  .wizard-container {
-    left: 20px;
+    .leaflet-popup-content-wrapper {
+      width: 150px;
+    }
+    .blip-text {
+      padding: 5px;
+    }
+    .leaflet-popup-content {
+      margin: 0;
+      padding: 3px 5px;
+    }
+    .blip-popup-body {
+      margin: 0;
+      height: 45px;
+      overflow: hidden;
+    }
   }
 }
