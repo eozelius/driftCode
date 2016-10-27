@@ -151,6 +151,9 @@
 }
 
 @media (max-width: 480px){
+	#dm-legend .leaflet-popup-content {
+		width:150px;
+	}
 	#dm-legend .markers-container.wizard-step{
 		margin-top: 2px;
 	}
