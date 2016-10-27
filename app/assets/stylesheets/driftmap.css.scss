@@ -93,6 +93,42 @@ div.blip-popup {
 }
 
 /* new code todo clean the above shit. */
+@media (min-width: 480px) and (max-width: 767px){
+  #map {
+    .leaflet-popup-content-wrapper {
+      width: 275px;
+      margin: 0;
+    }
+    .leaflet-popup-content {
+      margin: 4%;
+    }
+    .blip-popup-body {
+      margin: 0;
+      height: 45px;
+      overflow: hidden;
+    }
+    .blip-images {
+      height: 135px;
+      margin-top: 5px;
+
+      .carousel-inner {
+        height: 140px;
+
+        .item {
+          display: block;
+        }
+      }
+
+      img {
+        width: 240px;
+        height: 140px;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
 @media (min-width: 320px) and (max-width: 479px){
   /* popups */
   #map {  
