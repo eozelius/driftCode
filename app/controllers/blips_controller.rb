@@ -8,7 +8,6 @@ class BlipsController < ApplicationController
 	def create
 		@blip = Blip.new(blip_params)
 		@post = current_user.post
-
 		@blip.post_id = @post.id
 
 		if @blip.save
@@ -32,6 +31,7 @@ class BlipsController < ApplicationController
 		if @blip.update_attributes(blip_params)
 			if params[:photo].present?
 				params[:photo].each do |image|
+					byebug
 					@blip.blip_images.build(image: image[1])
 				end
 				@blip.save

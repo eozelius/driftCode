@@ -1,1 +1,93 @@
-<%= render 'blips/form' %>
+<div class="container">
+	<!-- Blip title images body -->
+	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+		<div class="blip-content" data-blip="<%= @blip.id %>">
+
+			<%= form_for @blip, html: { multipart: true } do |f| %>
+				<%= f.hidden_field :x %>
+				<%= f.hidden_field :y %>
+
+				<h4 class="blip-title" data-photo-index="0">add photos</h4>
+				<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
+
+				<h4 class="blip-title">Title</h4>
+				<%= f.text_field :title %>
+
+				<h4 class="blip-title">Description</h4>
+				<%= f.text_area :body %>
+			<% end %>
+		</div>
+	</div>
+
+	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+		<div class="map-container">
+			<h4 class="blip-title">
+				click anywhere on the map to set the location of your blip
+			</h4>
+
+			<div id='map'></div>
+
+			<button name="commit" class="normal commit" type="submit" style="margin: 35px 0">save</button>
+
+			<%= link_to user_path(current_user) do %>
+				<span class="normal cancel">cancel</span>
+			<% end %>
+
+			<script type="text/javascript">
+				var driftmap = {
+					init_x: 15,
+					init_y: -54,
+					init_zoom: 2,
+				}
+
+				blips = [];
+
+				init_map('map', driftmap, blips);
+			</script>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		var photo_index = 0;
+		var locationSet = false;
+		
+		// add photos to blip
+		$(document).on('click', '.add-photo', function(){
+			$(this).data('photo-index', ++photo_index)
+			var index = $(this).data('photo-index')
+			var new_img = '<input class="blip-image" name="photo['+ index +']" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="'+ index +'" style="margin: 6% 6% 5% 3%; width:100%;">';
+			$('.add-photo').last().after(new_img);
+		});
+
+		// set location of blip
+		window.map.on('click', function(e){
+			window.map.off('click');
+			locationSet = true;
+			setLatLng(e.latlng.lat, e.latlng.lng);
+
+			var m = L.marker([e.latlng.lat, e.latlng.lng]).addTo(window.map)
+			m.dragging.enable();
+			m.on('dragend', function(e){
+				setLatLng(e.target.getLatLng().lat, e.target.getLatLng().lng)
+			});
+		});
+
+		// submit form
+		$('.commit').on('click', function(){
+			locationSet == false ? alert('A location must be set, click anywhere on the map to set your blip.') : $('form').submit()
+		});
+
+		function setLatLng(lat, lng) {
+			$('#blip_x').val(lat);
+			$('#blip_y').val(lng);			
+		}
+	});
+</script>
+
+<style type="text/css">
+	.map-container {
+		top: 0;
+	}
+</style>
