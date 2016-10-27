@@ -16,5 +16,4 @@
 //= require bootstrap.min.js
 //= require helper.js.erb
 //= require user.js
-//= require unslider.js
 //= require_tree .

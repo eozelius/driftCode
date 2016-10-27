@@ -92,12 +92,6 @@ div.blip-popup {
   max-height: 400px;
 }
 
-.blip-images {
-  display: inline-block;
-  width: 90%;
-  height: 285px;
-}
-
 /* new code todo clean the above shit. */
 @media (min-width: 320px) and (max-width: 479px){
   /* popups */
@@ -120,6 +114,22 @@ div.blip-popup {
       margin: 0;
       height: 45px;
       overflow: hidden;
+    }
+    .blip-images {
+      height: 100px;
+
+      .carousel-inner {
+        height: 100px;
+
+        .item {
+          display: block;
+        }
+      }
+
+      img {
+        width: 139px;
+        height: 120px;
+      }
     }
   }
 }

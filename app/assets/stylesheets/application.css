@@ -17,9 +17,6 @@
  *= require signup.css.scss
  *= require legend.css.scss
  *= require blip_form.css.scss
- *= require unslider.css
- *= require dots.scss
- *= require unslider_reset.scss
  *= require_tree .
  *= require_self
  */

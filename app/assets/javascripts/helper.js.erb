@@ -27,15 +27,18 @@ function init_map(dom, driftmap, blips){
 				var lng 	= xss_trim(blips[i].y);
 				var body 	= blips[i].body;
 				var title = blips[i].title;
-				var blip_images_tags = '';
+				var blip_images_carousel = '';
 
 				if(blips[i].images.length > 0) {
-					blip_images_tags += '<div class="blip-images"><ul>';
+					blip_images_carousel += '<div id="popup-carousel" class="carousel slide" data-ride="carousel">' + 
+				  													'<div class="carousel-inner" role="listbox">';
 
 					for(var x in blips[i].images)
-						blip_images_tags += '<li>' + blips[i].images[x] + '</li>';
+						blip_images_carousel += '<div class="item">' + blips[i].images[x] + '</div>';
 
-					blip_images_tags += '</ul></div>';
+					blip_images_carousel += '</div>';
+
+					//blip_images_carousel += '</ol><a class="left carousel-control" href="#popup-carousel" role="button" data-slide="prev"><i class="fa fa-arrow-left" aria-hidden="true"></i><span class="sr-only">Previous</span></a><a class="right carousel-control" href="#popup-carousel" role="button" data-slide="next"><i class="fa fa-arrow-right" aria-hidden="true"></i><span class="sr-only">Next</span></a></div>';
 				}
 
 				var popupContent =  '<div class="blip-popup" data-blip="'+ id +'">' + 
@@ -43,13 +46,9 @@ function init_map(dom, driftmap, blips){
 																'<h4 class="blip-popup-title instructions">'+ title +'</h4>' + 
 																'<p class="blip-popup-body">'+ body +'</p>' + 
 															'</div>' +
-															blip_images_tags +
-															'<div class="edit-blip hidden">' + 
-																'<a href="/blips/'+ id +'/edit">' + 
-																	'<span class="edit-blip-btn normal" data-blip="'+ id +'">edit</span>' +
-																'</a>' + 
-															'</div>';
-
+															'<div class="blip-images">' + 
+																blip_images_carousel;
+															'</div>'
 
 				window.blipMarker = L.marker([lat, lng]).addTo(m);
 				var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
@@ -57,8 +56,8 @@ function init_map(dom, driftmap, blips){
 			}
 		} // end Markers
 
-		// Add routes to Map
-/*		if(routes.length > 0){
+/*		// Add routes to Map
+		if(routes.length > 0){
 			for(var i in routes){ 
 				var title = xss_trim(routes[i].title);
 				var description = xss_trim(routes[i].description);
