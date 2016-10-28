@@ -2,10 +2,6 @@ class PostsController < ApplicationController
 	before_action :logged_in_user,	only: [:create,  :update, :destroy]
 	before_action :correct_user,	only: [:destroy, :update]
 
-	def new
-		@post = current_user.post
-	end
-
 	def create
 		@user = current_user
 		@post = Post.create(post_params)

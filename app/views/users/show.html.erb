@@ -68,7 +68,39 @@
 	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 		<div class="map-container">
 			<div id='map'></div>
-			<%= render 'driftmap/init_driftmap' %>
+
+			<script type="text/javascript">
+				var driftmap = {
+					init_x: '<%= @post.init_x %>',
+					init_y: '<%= @post.init_y %>',
+					init_zoom: '<%= @post.init_zoom %>',
+				}
+
+				var blips = [];
+
+				<% if @user.post.blips.any? %>
+					<% @blips.each do |blip| %>
+						var blipImages = [];
+						<% blip.blip_images.each do |blip_image| %>
+							blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
+						<% end %>
+
+						blips.push({
+							id: 	"<%= blip.id %>",
+							x: 		"<%= blip.x %>",
+							y: 		"<%= blip.y %>",
+							title: 	"<%= blip.title.to_json %>",
+							body: 	"<%= blip.body.to_json %>",
+							images: blipImages
+						})
+
+					<% end %>
+				<% end %>
+
+				//init_map('map', driftmap, blips, routes)
+				init_map('map', driftmap, blips)
+			</script>
+
 		</div>
 
 		<div class="view-wizard-container">
@@ -222,6 +254,18 @@
 </script>
 
 <script type="text/javascript">
+	var maroonMarker = L.icon({ 
+	  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
+	  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+	  popupAnchor:  [0, -35]
+	});
+
+	var blueMarker = L.icon({
+	  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-icon.png").to_s %>',
+	  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+	  popupAnchor:  [0, -35]
+	})
+
   // reveal blip info
   $('.blip').on('click', function(){
     var active = $(this).hasClass('active');
@@ -229,13 +273,19 @@
     $('.blip-content').addClass('hidden');
     $('.blip-content[data-blip="'+ blip_index +'"]').removeClass("hidden");
 
+    for(var i in window.blipsIndexer)
+      window.blipsIndexer[i].marker.setIcon(blueMarker);
+
+    window.blipsIndexer[blip_index].marker.setIcon(maroonMarker);
+    window.blipsIndexer[blip_index].popup.openOn(window.map)
+    
     if(active){
       $(this).removeClass('active');
     } else {
       $('.blip-info[data-blip="'+ blip_index +'"]').slideDown(700);
       $(this).addClass('active');
-      var init_x = $(this).data('initx');
-      var init_y = $(this).data('inity');
+      var init_x = $(this).data('initx') + .36377;
+      var init_y = $(this).data('inity') + .1;
       window.map.setView([init_x, init_y]).setZoom(9);
     }
   });

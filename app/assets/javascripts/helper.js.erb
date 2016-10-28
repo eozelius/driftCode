@@ -69,8 +69,9 @@ function init_map(dom, driftmap, blips){
 			  popupAnchor:  [0, -35]
 			});
 
-			blipPopup.openOn(m);
-			window.blipMarker.setIcon(maroonMarker);
+			window.blipsIndexer[blips[0].id.toString()].popup.openOn(map);
+			window.blipsIndexer[blips[0].id.toString()].marker.setIcon(maroonMarker);
+
 		} // end Markers
 
 /*		// Add routes to Map

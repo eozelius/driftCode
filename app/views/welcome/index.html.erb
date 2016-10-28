@@ -83,7 +83,6 @@
         }
 
         var blips = [];
-
         <% @blips.each do |blip| %>
           var blipImages = [];
           <% blip.blip_images.each do |blip_image| %>
@@ -100,25 +99,7 @@
           })
         <% end %>
 
-        var routes = [];
-
-        <% Route.all.each do |route| %>
-          var routePoints = [];
-          <% route.route_points.each do |route_point| %>
-            routePoints.push({
-              x: '<%= route_point.x %>',
-              y: '<%= route_point.y %>',
-              order: '<%= route_point.order %>'
-            });
-          <% end %>
-
-          routes.push({
-            description: "<%= route.description.to_json %>",
-            routePoints: routePoints
-          });
-        <% end %>
-
-        init_map('map', driftmap, blips, routes)
+        init_map('map', driftmap, blips)
       </script>
     </div>
 
@@ -162,13 +143,11 @@
     $('.blip-content').addClass('hidden');
     $('.blip-content[data-blip="'+ blip_index +'"]').removeClass("hidden");
 
-
     for(var i in window.blipsIndexer)
       window.blipsIndexer[i].marker.setIcon(blueMarker);
 
     window.blipsIndexer[blip_index].marker.setIcon(maroonMarker);
-    window.blipsIndexer[blip_index].popup.openOn(window.map)
-
+    window.blipsIndexer[blip_index].popup.openOn(window.map);
 
     if(active){
       $(this).removeClass('active');
