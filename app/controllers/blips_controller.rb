@@ -45,6 +45,7 @@ class BlipsController < ApplicationController
 
 	def show
 		@blip = Blip.find(params[:id])
+		@user = User.find(Post.find(@blip.post_id).user_id);
 	end
 
 	def edit

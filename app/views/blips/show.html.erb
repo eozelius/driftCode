@@ -79,6 +79,29 @@
 		    init_map('map', driftmap, blips);
 	    </script>
 		</div>
+
+		<div class="pro-part profile">
+			<div class="profile-details-container">
+				<div class="profile-details">
+					<p><%= @user.name %></p>
+					<%= link_to user_path @user do %>
+						<%= image_tag @user.profile_pic, class: 'pp' if @user.profile_pic %>
+					<% end %>
+
+					<div class="user-info">
+						<% if @user.from %>
+							<p class="user-from">from: </p>
+							<p><%= @user.from %></p>
+						<% end %>			
+
+						<% if @user.gps %>
+							<p class="user-gps">current location: </p>
+							<p><%= @user.gps %></p>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 

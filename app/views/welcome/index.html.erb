@@ -64,8 +64,13 @@
           </h4>
 
           <p class="blip-body">
-            <%= image_tag user.profile_pic if user.profile_pic %>
-            <%= blip.body %>
+            <%= link_to user_path user do %>
+              <%= image_tag user.profile_pic if user.profile_pic %>
+            <% end %>
+
+            <a href="/blips/<%= blip.id %>" class="blip-body">
+              <p class="blip-body"><%= blip.body %></p>
+            </a>
           </p>
         </div>
       </div>
