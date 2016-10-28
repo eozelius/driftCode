@@ -149,6 +149,12 @@
     popupAnchor:  [0, -35]
   });
 
+  var blueMarker = L.icon({
+    iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-icon.png").to_s %>',
+    shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+    popupAnchor:  [0, -35]
+  })
+
   // reveal blip info
   $('.blip').on('click', function(){
     var active = $(this).hasClass('active');
@@ -156,8 +162,13 @@
     $('.blip-content').addClass('hidden');
     $('.blip-content[data-blip="'+ blip_index +'"]').removeClass("hidden");
 
+
+    for(var i in window.blipsIndexer)
+      window.blipsIndexer[i].marker.setIcon(blueMarker);
+
     window.blipsIndexer[blip_index].marker.setIcon(maroonMarker);
     window.blipsIndexer[blip_index].popup.openOn(window.map)
+
 
     if(active){
       $(this).removeClass('active');
