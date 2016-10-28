@@ -17,9 +17,9 @@ class UsersController < ApplicationController
       post = Post.new(
         title: 'my driftMap title',
         body:  'my driftMap description',
-        init_x: 40.735,
-        init_y: -73.890,
-        init_zoom: 6
+        init_x: 1,
+        init_y: -54,
+        init_zoom: 2
       )
 
       @user.post = post

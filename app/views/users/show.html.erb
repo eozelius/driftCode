@@ -1,5 +1,5 @@
 <% provide(:title, @user.name) %>
-<div class="container">
+<div class="container" id="profile">
 	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<% if @user.post.blips.any? %>
 			<% @blips.each_with_index do |blip, index| %>
@@ -75,18 +75,30 @@
 		  <!-- blips -->
 		  <div class="markers-container wizard-step">
 		    <div class="wizard-markers">
-		      <ul>
-		        <% @user.post.blips.all.each do |blip| %>
-		          <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
-		            <p class="blip-title">
-		              <%= blip.title %>
-		              <% if user_is_home(@user) %>
-		              	<%= link_to '<span style="font-style:italic;"> - edit</span>'.html_safe, edit_blip_path(blip) %>
-		              <% end %>
-		            </p>
-		          </li>
-		        <% end %>
-		      </ul>
+		    	<% if @user.post.blips.count > 0 %>
+			      <ul>
+			        <% @user.post.blips.all.each do |blip| %>
+			          <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
+			            <p class="blip-title">
+			              <%= blip.title %>
+			              <% if user_is_home(@user) %>
+			              	<%= link_to '<span style="font-style:italic;"> - edit</span>'.html_safe, edit_blip_path(blip) %>
+			              <% end %>
+			            </p>
+			          </li>
+			        <% end %>
+			      </ul>
+			    <% else %>
+			    	<ul>
+			    		<li class="blip">
+			    			<%= link_to new_blip_path do %>
+				    			<p class="blip-title">
+				    				create new blip
+				    			</p>
+			    			<% end %>
+			    		</li>
+			    	</ul>
+			    <% end %>
 		    </div>
 		  </div>
 

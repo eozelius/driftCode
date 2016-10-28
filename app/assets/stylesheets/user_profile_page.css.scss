@@ -151,6 +151,10 @@ $white-grey: #E9EEF0;
 	img.pp {
 		margin: 20px 0 20px;
 	}
+	#profile .start-new {
+		height: 270px;
+		margin-bottom: 0;
+	}
 }
 
 @media (max-width: 767px){
@@ -168,6 +172,12 @@ $white-grey: #E9EEF0;
 	.profile-details-container img.pp {
 		width: 165px;
 		height: 165px;
+	}
+	#profile #dm-content-container {
+		margin: 0;
+	}
+	#profile  .map-container {
+		top: 200px;
 	}
 }
 

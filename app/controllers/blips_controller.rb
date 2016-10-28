@@ -1,5 +1,5 @@
 class BlipsController < ApplicationController
-	before_action :logged_in_user
+	before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy ]
 
 	def new
 		@blip = Blip.new
