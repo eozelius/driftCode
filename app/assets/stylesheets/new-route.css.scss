@@ -1,0 +1,28 @@
+#route {
+	.view-wizard-container.journey-stops,
+	.markers-container.wizard-step {
+		height: 100px;
+		margin-bottom: 15px;
+		overflow: hidden;
+
+		ul {
+		}		
+	}
+
+	.view-wizard-container.existing-blips{
+		border-top: 3px solid #C2D9EB;
+
+		.wizard-step {
+			overflow-y: scroll; 
+		}
+
+		.markers-container {
+			height: 250px;
+
+			li {
+				cursor: grab;
+			}
+		}
+
+	}
+}

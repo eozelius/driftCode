@@ -134,10 +134,11 @@
 		    </div>
 		  </div>
 
-		  <% if user_is_home(@user) || admin_user %>
+		  <% if user_is_home(@user) %>
 		  	<p class="edit-delete-map">
+		  		<%= link_to 'new journey', new_route_path %><span style="
+		  		color:#23527c"> | </span> 
 		  		<%= link_to 'new blip', new_blip_path %>
-		  		<%#= link_to 'delete driftmap', @post, method: :delete, data: { confirm: "Are you sure?" } %>
 		  	</p>
 		  <% end %>
 		</div>

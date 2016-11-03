@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
-  resources :routes,       only: [:create, :destroy]
+  resources :routes
   resources :route_points, only: [:create, :update, :destroy]
   resources :blips
   resources :blip_images,  only: [:create, :destroy]
