@@ -2,67 +2,134 @@
 
 	<div class="container">
 		<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-			<h4 class="blip-title">Create New Journey</h4>
+			<h4 class="blip-title" style="font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Create New Journey</h4>
 
-			<p style="color:#C2D9EB; margin-left:3%">
-				You can start your journey by choosing an existing blip you have created, by dragging and dropping the blip from the Blips list into the Journey stops list.
-			</p>
+			<%= form_for @route do |f| %>
+				<!-- Journey metadata -->
+				<h4 class="blip-title">Journey Title</h4>
+				<%= f.text_field :title, { style: 'margin-left:3%;' } %>
+
+				<h4 class="blip-title">Journey Description</h4>
+				<%= f.text_area :description %>
+				
+				<hr class="gray-spacer"></hr>
+
+				<!-- First blip of Journey -->
+				<h4 class="blip-title">First Stop</h4>
+
+				<p style="color:#C2D9EB; margin-left:3%">
+					Start your journey by creating a new blip below, or by dragging an existing blip onto the Journey stops list.
+				</p>
+
+				<h4 class="blip-title" data-photo-index="0">add photos</h4>
+				<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
+
+				<h4 class="blip-title">Blip Title</h4>
+				<%= text_field :blip_title, {}, { style: 'margin-left:3%;' } %>
+
+				<h4 class="blip-title">Blip Description</h4>
+				<%= text_area_tag :blip_description %>
+
+			<% end %>
 		</div>
 
 		<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 		  <div class="map-container">
-		  <div id='map'></div>
+		  	<h4 class="blip-title" style="font-size: 1.1em;">
+		  		click anywhere on the map to set the location of your blip
+		  	</h4>
+		  	<div id='map'></div>
 
-		  <script type="text/javascript">
-		  	var driftmap = {
-		  	  init_x: 0.924206230200376,
-		  	  init_y: -40.2400771379471,
-		  	  init_zoom: 2,
-		  	}
+			  <script type="text/javascript">
+			  	var driftmap = {
+			  	  init_x: 0.924206230200376,
+			  	  init_y: -40.2400771379471,
+			  	  init_zoom: 2,
+			  	}
 
-		  	var blips = [];
+			  	var blips = [];
 
-		  	init_map('map', driftmap, blips);
-		  </script>
-		</div>
-
-	  <!-- Journey stops -->
-	  <div class="view-wizard-container journey-stops">
-	  	<!-- blips -->
-	  	<div class="markers-container wizard-step">
-	  	  <div class="wizard-markers">
-	  	  	<ul>
-	  	  		<li style="background-color:#e2e2e2" >
-	  	  			<p style="text-align:center">Journey Stops</p>
-	  	  		</li>
-	  	  		<li class="blip">
-	  	  			<p class="blip-title">
-	  	  				<%= link_to 'brand new blip', new_blip_path %>
-	  	  			</p>
-	  	  		</li>
-	  	  	</ul>
-				</div>
+			  	init_map('map', driftmap, blips);
+			  </script>
 			</div>
-		</div>
 
-		<!-- existing blips -->
-		<div class="view-wizard-container existing-blips">
-			<div class="markers-container wizard-step">
-				<div class="wizard-markers">
-					<ul>
-						<li style="background-color:#e2e2e2" >
-							<p style="text-align:center">Existing Blips</p>
-						</li>
-						<% @user.post.blips.each do |blip| %>
-							<li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
-								<p class="blip-title">
-									<%= blip.title %>
-								</p>
+			<!-- Journey stops -->
+			<div class="view-wizard-container journey-stops">
+				<div class="markers-container wizard-step">
+					<div class="wizard-markers">
+						<ul>
+							<li style="background-color:#e2e2e2" >
+								<p style="text-align:center">Journey Stops</p>
 							</li>
-						<% end %>
-					</ul>
+							<li class="blip">
+								<p class="blip-title" style="text-align:center">
+									drag an existing blip here to start
+								</p>
+							</li>						
+						</ul>
+					</div>
 				</div>
 			</div>
+
+			<!-- existing blips -->
+			<div class="view-wizard-container existing-blips">
+				<div class="markers-container wizard-step">
+					<div class="wizard-markers">
+						<ul style="height: 229px;">
+							<li style="background-color:#e2e2e2" >
+								<p style="text-align:center">Existing Blips</p>
+							</li>
+							<% @user.post.blips.each do |blip| %>
+								<li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
+									<p class="blip-title">
+										<%= blip.title %>
+									</p>
+								</li>
+							<% end %>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<button name="commit" class="normal commit" type="submit" style="margin: 35px 0">save</button>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		var photo_index = 0;
+		var locationSet = false;
+
+		// add photos to blip
+		$(document).on('click', '.add-photo', function(){
+			$(this).data('photo-index', ++photo_index)
+			var index = $(this).data('photo-index')
+			var new_img = '<input class="blip-image" name="photo['+ index +']" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="'+ index +'" style="margin: 6% 6% 5% 3%; width:100%;">';
+			$('.add-photo').last().after(new_img);
+		});
+
+		// set location of blip
+		window.map.on('click', function(e){
+			window.map.off('click');
+			locationSet = true;
+			setLatLng(e.latlng.lat, e.latlng.lng);
+
+			var m = L.marker([e.latlng.lat, e.latlng.lng]).addTo(window.map)
+			m.dragging.enable();
+			m.on('dragend', function(e){
+				setLatLng(e.target.getLatLng().lat, e.target.getLatLng().lng)
+			});
+		});
+
+		// submit form
+		$('.commit').on('click', function(){
+			locationSet == false ? alert('A location must be set, click anywhere on the map to set your blip.') : $('form').submit()
+		});
+
+		function setLatLng(lat, lng) {
+			$('#blip_x').val(lat);
+			$('#blip_y').val(lng);			
+		}
+	});
+</script>

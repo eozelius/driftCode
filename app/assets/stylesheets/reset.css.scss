@@ -222,8 +222,18 @@ textarea {
 }
 
 hr.gray-spacer {
-	width: 90%;
-	margin: 20px 0;
+	width: 94%;
+	margin: 30px auto;
+	height: 7px;
+	background: #ccc;
+}
+
+hr.blue-spacer {
+	width: 94%;
+	margin: 30px auto;
+	height: 7px;
+	background: #C2D9EB;
+
 }
 
 /* Fake Header */

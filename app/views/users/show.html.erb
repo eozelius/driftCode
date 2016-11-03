@@ -57,7 +57,7 @@
 				<%= image_tag 'switzerland10.JPG' %>
 
 				<div class="start-text">
-					<%= link_to new_blip_path do %>
+					<%= link_to new_route_path do %>
 						<p>begin an new adventure now</p>
 					<% end %>
 				</div>
@@ -137,7 +137,7 @@
 		  <% if user_is_home(@user) %>
 		  	<p class="edit-delete-map">
 		  		<%= link_to 'new journey', new_route_path %><span style="
-		  		color:#23527c"> | </span> 
+		  		color:#23527c; font-size:14px;"> | </span> 
 		  		<%= link_to 'new blip', new_blip_path %>
 		  	</p>
 		  <% end %>
