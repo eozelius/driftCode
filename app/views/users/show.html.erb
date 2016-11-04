@@ -1,7 +1,58 @@
 <% provide(:title, @user.name) %>
 <div class="container" id="profile">
 	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<% if @user.post.blips.any? %>
+
+		<!-- Routes -->
+		<% if !@route.nil? %>
+			<div class="route-content">
+				<div id='dm-timeline' style="width: 100%; height: 600px"></div>
+				<script type="text/javascript">
+					<% blip1 = @route.blips.first %>
+					<% blip_image1 = blip1.blip_images.first %>
+
+					var events = [];
+
+					<% @route.blips.each_with_index do |blip, index| %>
+						events.push({
+							"media": {
+								url: '<%= image_path(blip.blip_images.first.image).html_safe %>',
+								caption: 'image caption...'
+							},
+							start_date: {
+								month: '<%= 6 + index %>',
+								day: '<%= 9 + index %>',
+								year: 1945
+							},
+							text: {
+								headline: "<%= blip.title %>",
+								text: "<%= blip.body %>"
+							}
+						})
+					<% end %>
+
+					var dmJson = {
+					  title: {
+					    media: {
+					      url: '<%= image_path(blip_image1.image).html_safe %>',
+					      caption: "<%= @route.title %>"
+					    },
+					    text: {
+					      headline: "<%= @route.title %>",
+					      text: "<%= @route.description %>"
+					    }
+					  },
+					  events: events
+					}
+
+				  timeline = new TL.Timeline('dm-timeline', dmJson);
+				</script>
+			</div>
+
+
+
+
+		<!-- Blips -->
+		<% elsif !@blips.nil? %>
 			<% @blips.each_with_index do |blip, index| %>
 				<div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= blip.id %>">
 					<!-- blip carousel -->

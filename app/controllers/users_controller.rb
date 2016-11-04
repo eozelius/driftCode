@@ -34,7 +34,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @post = @user.post
-    @post.blips.any? ? @blips = @post.blips.order(created_at: :desc) : @blips = nil
+    @post.blips.any?  ? @blips  = @post.blips.order(created_at: :desc) : @blips  = nil
+    #@post.routes.any? ? @routes = @post.routes.order(created_at: :desc): @routes = nil
+    @post.routes.any? ? @route = @post.routes.second : @route = nil
   end
 
   def update
