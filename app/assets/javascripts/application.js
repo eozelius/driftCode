@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require leaflet-src.js
 //= require bootstrap.min.js
+//= require moment.js
+//= require bootstrap-datetimepicker.min.js
 //= require helper.js.erb
 //= require user.js
 //= require_tree .

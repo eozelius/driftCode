@@ -2,7 +2,7 @@
 
 	<div class="container">
 		<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-			<h4 class="blip-title" style="font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Create New Journey</h4>
+			<h4 class="blip-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Create New Journey</h4>
 
 			<%= form_for @route, html: { multipart: true } do |f| %>
 				<!-- Journey metadata -->
@@ -20,6 +20,13 @@
 				<p style="color:#C2D9EB; margin-left:3%">
 					Start your journey by creating a new blip below, or by dragging an existing blip onto the Journey stops list.
 				</p>
+
+				<div class='input-group date' id='datetimepicker1'>
+					<input style="margin: 13% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
+					<span class="input-group-addon" style="float:left; margin-top:13%; height:38px; padding:10px 0 0 1px; width:30px">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
 
 				<%= hidden_field_tag :blip_x %>
 				<%= hidden_field_tag :blip_y %>
@@ -104,6 +111,9 @@
 
 <script type="text/javascript">
 	$(function(){
+		// init date-picker-calender
+		$('#datetimepicker1').datetimepicker();
+
 		var photo_index = 0;
 		var locationSet = false;
 
