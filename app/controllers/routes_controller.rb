@@ -41,6 +41,13 @@ class RoutesController < ApplicationController
 		end
 	end
 
+	def edit
+		@user = current_user
+		@post = current_user.post
+		@route = Route.find(params[:id])
+		@blips = @route.blips
+	end
+
 	def destroy
 		route = Route.find(params[:id])
 		route.destroy
