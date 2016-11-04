@@ -44,6 +44,9 @@
 					<div class="blip-info" data-blip="<%= blip.id %>">
 					  <h4 class="blip-title">
 					    <%= blip.title %>
+					    <% if user_is_home(@user) %>
+								<%= link_to '<span style="font-style:italic;font-size:.7em;"> - edit</span>'.html_safe, edit_blip_path(blip) %>
+							<% end %>
 					  </h4>
 
 					  <p class="blip-body">
@@ -56,11 +59,19 @@
 			<div class="start-new">
 				<%= image_tag 'switzerland10.JPG' %>
 
-				<div class="start-text">
-					<%= link_to new_route_path do %>
-						<p>begin an new adventure now</p>
-					<% end %>
-				</div>
+				<% if user_is_home(@user) %>
+					<div class="start-text">
+						<%= link_to new_route_path do %>
+							<p>begin an new adventure now</p>
+						<% end %>
+					</div>
+				<% else %>
+					<div class="start-text">
+						<p>
+							<%= @user.name %> has not added any content yet.
+						</p>
+					</div>
+				<% end %>
 			</div>
 		<% end %>
 	</div>
@@ -122,13 +133,15 @@
 			      </ul>
 			    <% else %>
 			    	<ul>
-			    		<li class="blip">
-			    			<%= link_to new_blip_path do %>
-				    			<p class="blip-title">
-				    				create new blip
-				    			</p>
-			    			<% end %>
-			    		</li>
+			    		<% if user_is_home(@user) %>
+								<li class="blip">
+									<%= link_to new_blip_path do %>
+										<p class="blip-title">
+											create new blip
+										</p>
+									<% end %>
+								</li>
+							<% end %>
 			    	</ul>
 			    <% end %>
 		    </div>
