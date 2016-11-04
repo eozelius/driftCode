@@ -115,12 +115,38 @@
 		</div>
 
 		<div class="view-wizard-container">
+			<!-- Routes -->
+			<div class="markers-container wizard-step">
+		    <div class="wizard-markers">
+		    	<% if @user.post.routes.count > 0 %>
+		    		<ul>
+		    			<li class="blip">
+		    				<p class="blip-title">Journeys</p>
+		    			</li>
+		    			<% @user.post.routes.each do |route| %>
+		    				<li class="blip" data-route="<%= route.id %>">
+		    					<p class="blip-title">
+		    						<%= route.title %>
+		    						<% if user_is_home(@user) %>
+			              	<%= link_to '<span style="font-style:italic;"> - edit</span>'.html_safe, edit_route_path(route) %>
+			              <% end %>
+		    					</p>
+		    				</li>
+		    			<% end %>
+		    		</ul>
+		    	<% end %>
+		    </div>
+		  </div>
+
 		  <!-- blips -->
 		  <div class="markers-container wizard-step">
 		    <div class="wizard-markers">
 		    	<% if @user.post.blips.count > 0 %>
 			      <ul>
-			        <% @user.post.blips.all.each do |blip| %>
+							<li class="blip">
+								<p class="blip-title">Blips</p>
+							</li>
+			        <% @user.post.blips.each do |blip| %>
 			          <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
 			            <p class="blip-title">
 			              <%= blip.title %>

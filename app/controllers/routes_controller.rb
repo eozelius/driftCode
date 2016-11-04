@@ -48,6 +48,10 @@ class RoutesController < ApplicationController
 		@blips = @route.blips
 	end
 
+	def show
+		@route = Route.find(params[:id])
+	end
+
 	def destroy
 		route = Route.find(params[:id])
 		route.destroy
