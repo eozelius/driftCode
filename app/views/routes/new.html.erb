@@ -4,41 +4,45 @@
 			<h4 class="blip-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Create New Journey</h4>
 
 			<%= form_for @route, html: { multipart: true } do |f| %>
-				<!-- Journey metadata -->
-				<h4 class="blip-title">Journey Title</h4>
-				<%= f.text_field :title, { style: 'margin-left:3%;' } %>
+				<div class="route-info">
+					<!-- Journey metadata -->
+					<h4 class="blip-title">Journey Title</h4>
+					<%= f.text_field :title, { style: 'margin-left:3%;' } %>
 
-				<h4 class="blip-title">Journey Description</h4>
-				<%= f.text_area :description %>
-				
-				<hr class="gray-spacer"></hr>
+					<h4 class="blip-title">Journey Description</h4>
+					<%= f.text_area :description %>
+					
+					<!-- First blip of Journey -->
+					<h4 class="blip-title">First Stop</h4>
 
-				<!-- First blip of Journey -->
-				<h4 class="blip-title">First Stop</h4>
+					<p style="color:#C2D9EB; margin-left:3%">
+						To create the first stop of this journey, drag an existing blip onto the Journey Stops List to the right.  Or you can create a brand new blip.
+					</p>
 
-				<p style="color:#C2D9EB; margin-left:3%">
-					Start your journey by creating a new blip below, or by dragging an existing blip onto the Journey stops list.
-				</p>
+					<span class="normal create-first-stop" style="margin:3%">Create New Stop</span>
+				</div>
 
-				<%= hidden_field_tag :blip_x %>
-				<%= hidden_field_tag :blip_y %>
+				<div class="first-stop-info hidden">
+					<%= hidden_field_tag :blip_x %>
+					<%= hidden_field_tag :blip_y %>
 
-				<h4 class="blip-title" data-photo-index="0">add photos</h4>
-				<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
+					<h4 class="blip-title" data-photo-index="0">add photos</h4>
+					<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
 
-				<h4 class="blip-title">Blip Title</h4>
-				<%= text_field_tag :blip_title %>
+					<h4 class="blip-title">Blip Title</h4>
+					<%= text_field_tag :blip_title %>
 
-				<h4 class="blip-title">Blip Description</h4>
-				<%= text_area_tag :blip_description %>
+					<h4 class="blip-title">Blip Description</h4>
+					<%= text_area_tag :blip_description %>
 
-				<div class='input-group date' id='datetimepicker1'>
-					<h4 class="blip-title" style="margin:0% 0 8% 8%">Date</h4>
-					<input id="blip-date" style="margin: 3% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
-					<%= hidden_field_tag :blip_date %>
-					<span class="input-group-addon" style="float:left; margin-top:3%; height:38px; padding:10px 0 0 1px; width:30px">
-						<span class="glyphicon glyphicon-calendar"></span>
-					</span>
+					<div class='input-group date' id='datetimepicker1'>
+						<h4 class="blip-title" style="margin:0% 0 8% 8%">Date</h4>
+						<input id="blip-date" style="margin: 3% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
+						<%= hidden_field_tag :blip_date %>
+						<span class="input-group-addon" style="float:left; margin-top:3%; height:38px; padding:10px 0 0 1px; width:30px">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
 				</div>
 			<% end %>
 		</div>
@@ -155,5 +159,10 @@
 			$('#blip_x').val(lat);
 			$('#blip_y').val(lng);			
 		}
+
+		// create first stop manually
+		$('.create-first-stop').on('click', function(){
+			$('.route-info, .first-stop-info, .existing-blips, .journey-stops').toggleClass('hidden');
+		});
 	});
 </script>
