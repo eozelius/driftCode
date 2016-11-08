@@ -10,7 +10,6 @@ class BlipsController < ApplicationController
 		@post = current_user.post
 		@blip.post_id = @post.id
 
-
 		date = Date.new(params[:blip][:date].slice(0, 4).to_i,
 										params[:blip][:date].slice(4, 2).to_i,
 										params[:blip][:date].slice(6, 2).to_i);
@@ -36,6 +35,14 @@ class BlipsController < ApplicationController
 		@blip = Blip.find(params[:id])
 
 		if @blip.update_attributes(blip_params)
+			# update date
+			date = Date.new(params[:blip][:date].slice(0, 4).to_i,
+											params[:blip][:date].slice(4, 2).to_i,
+											params[:blip][:date].slice(6, 2).to_i);
+
+			@blip.date = date
+			@blip.save
+
 			if params[:photo].present?
 				params[:photo].each do |image|
 					@blip.blip_images.build(image: image[1])

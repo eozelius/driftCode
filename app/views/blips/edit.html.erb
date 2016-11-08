@@ -52,6 +52,16 @@
 				<!-- body -->
 				<h4 class="blip-title">Description</h4>
 				<%= f.text_area :body %>
+
+				<!-- date -->
+				<div class='input-group date' id='datetimepicker1'>
+					<h4 class="blip-title" style="margin:10% 0 8% 8%">Date</h4>
+					<input id="blip-date" style="margin: 0% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
+					<%= f.hidden_field :date %>
+					<span class="input-group-addon" style="float:left; margin-top:0%; height:38px; padding:10px 0 0 1px; width:30px">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
 			<% end %>
 		</div>
 	</div>
@@ -106,6 +116,8 @@
 
 <script type="text/javascript">
 	$(function(){
+		// init date-picker-calender
+		$('#datetimepicker1').datetimepicker();
 
 		// add photos
 		var photo_index = 0;
@@ -125,6 +137,11 @@
 
 		// save edit
 		$('.commit').on('click', function(){
+			var date = $('#blip_date').val();
+			var mm = 	 date.slice(0, 2)
+			var dd = 	 date.slice(3, 5)
+			var yyyy = date.slice(6, 10);
+			$('#blip_date').val(yyyy + mm + dd);
 			$('form').submit();
 		});
 
