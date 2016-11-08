@@ -20,14 +20,6 @@
 					Start your journey by creating a new blip below, or by dragging an existing blip onto the Journey stops list.
 				</p>
 
-				<div class='input-group date' id='datetimepicker1'>
-					<input id="blip-date" style="margin: 13% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
-					<%= hidden_field_tag :blip_date %>
-					<span class="input-group-addon" style="float:left; margin-top:13%; height:38px; padding:10px 0 0 1px; width:30px">
-						<span class="glyphicon glyphicon-calendar"></span>
-					</span>
-				</div>
-
 				<%= hidden_field_tag :blip_x %>
 				<%= hidden_field_tag :blip_y %>
 
@@ -39,6 +31,15 @@
 
 				<h4 class="blip-title">Blip Description</h4>
 				<%= text_area_tag :blip_description %>
+
+				<div class='input-group date' id='datetimepicker1'>
+					<h4 class="blip-title" style="margin:0% 0 8% 8%">Date</h4>
+					<input id="blip-date" style="margin: 3% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
+					<%= hidden_field_tag :blip_date %>
+					<span class="input-group-addon" style="float:left; margin-top:3%; height:38px; padding:10px 0 0 1px; width:30px">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
 			<% end %>
 		</div>
 
