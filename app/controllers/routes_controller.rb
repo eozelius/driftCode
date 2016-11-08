@@ -19,7 +19,7 @@ class RoutesController < ApplicationController
  				date = Date.new(params[:blip_date].slice(0, 4).to_i, 
 												params[:blip_date].slice(4, 2).to_i, 
 												params[:blip_date].slice(6, 2).to_i);
-				
+
 				@blip = Blip.new(
 					title: params[:blip_title],
 					body:  params[:blip_description],
@@ -55,7 +55,10 @@ class RoutesController < ApplicationController
 	end
 
 	def show
+		@user = current_user
 		@route = Route.find(params[:id])
+		@post = current_user.post
+		@blips = @route.blips
 	end
 
 	def destroy

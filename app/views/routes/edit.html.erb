@@ -1,7 +1,112 @@
 <div id="route" class="edit-route">
 	<div class="container">
 		<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-			<h4 class="blip-title" style="font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Update <%= @route.title %> </h4>
+
+			<div class="route-content">
+				<div id='dm-timeline' style="width: 100%; height: 600px"></div>
+				<script type="text/javascript">
+					var events = [];
+
+					<% if @route.blips.first.blip_images.any? %>
+						var blip_cover_image = '<%= image_path(@route.blips.first.blip_images.first.image).html_safe %>';
+					<% else %>
+						var blip_cover_image = '<%= image_path(switzerland10.JPG).html_safe %>';
+					<% end %>
+
+					<% @route.blips.each do |blip| %>
+						events.push({
+							"media": {
+								url: blip_cover_image,
+								caption: 'image caption...'
+							},
+							start_date: {
+								month: '<%= blip.date.month %>',
+								day: '<%= blip.date.day %>',
+								year: '<%= blip.date.year %>'
+							},
+							text: {
+								headline: "<%= blip.title %>",
+								text: "<%= blip.body %>"
+							}
+						});
+					<% end %>
+
+					var dmJson = {
+					  title: {
+					    media: {
+					      url: '<%= image_path(@route.blips.first.blip_images.second.image).html_safe %>',
+					      caption: "<%= @route.title %>"
+					    },
+					    text: {
+					      headline: "<%= @route.title %>",
+					      text: "<%= @route.description %>"
+					    }
+					  },
+					  events: events
+					}
+				  timeline = new TL.Timeline('dm-timeline', dmJson);
+				</script>
+			</div>
+		</div>
+
+		<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+			<div class="map-container">
+				<div id='map'></div>
+
+				<script type="text/javascript">
+					var driftmap = {
+						init_x: '<%= @post.init_x %>',
+						init_y: '<%= @post.init_y %>',
+						init_zoom: '<%= @post.init_zoom %>',
+					}
+
+					var blips = [];
+
+					<% if @user.post.blips.any? %>
+						<% @blips.each do |blip| %>
+							var blipImages = [];
+							<% blip.blip_images.each do |blip_image| %>
+								blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
+							<% end %>
+
+							blips.push({
+								id: 	"<%= blip.id %>",
+								x: 		"<%= blip.x %>",
+								y: 		"<%= blip.y %>",
+								title: 	"<%= blip.title.to_json %>",
+								body: 	"<%= blip.body.to_json %>",
+								images: blipImages
+							})
+
+						<% end %>
+					<% end %>
+
+					//init_map('map', driftmap, blips, routes)
+					init_map('map', driftmap, blips)
+				</script>
+
+			  <!-- blips -->
+			  <div class="markers-container wizard-step">
+			    <div class="wizard-markers">
+			    	<ul>
+			    		<li class="blip">
+			    			<p class="blip-title">Blips</p>
+			    		</li>
+
+			    		<% @route.blips.each do |blip| %>
+			    			<li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
+			    			  <p class="blip-title">
+			    			    <%= blip.title %>
+			    			    <% if user_is_home(@user) %>
+			    			    	<%= link_to '<span style="font-style:italic;"> - edit</span>'.html_safe, edit_blip_path(blip) %>
+			    			    <% end %>
+			    			  </p>
+			    			</li>
+			    		<% end %>
+			    	</ul>
+			    </div>
+			  </div>
+			</div>
 		</div>
 	</div>
 </div>
