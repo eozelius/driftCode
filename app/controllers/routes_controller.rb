@@ -15,11 +15,17 @@ class RoutesController < ApplicationController
 		if @route.save
 			# user choose to create a new blip
 			if params[:new_blip].present?
+
+ 				date = Date.new(params[:blip_date].slice(0, 4).to_i, 
+												params[:blip_date].slice(4, 2).to_i, 
+												params[:blip_date].slice(6, 2).to_i);
+				
 				@blip = Blip.new(
 					title: params[:blip_title],
 					body:  params[:blip_description],
 					x: 		 params[:blip_x],
-					y:  	 params[:blip_y]
+					y:  	 params[:blip_y],
+					date:  date
 				)
 				@blip.post_id = @post.id
 				@blip.route_id = @route.id
