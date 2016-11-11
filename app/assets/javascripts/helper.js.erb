@@ -51,16 +51,17 @@ function init_map(dom, driftmap, blips){
 																blip_images_carousel +
 															'</div></div>';
 
-
-
 				window.blipMarker = L.marker([lat, lng]).addTo(m);
 				var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
 				blipMarker.bindPopup(blipPopup);
 				
 				blipsIndexer[blips[i].id.toString()] = {
+					id: blips[i].id,
 					marker: window.blipMarker,
 					popup: blipPopup
 				}
+
+
 			}
 			window.blipsIndexer = blipsIndexer;
 			var maroonMarker = L.icon({ 

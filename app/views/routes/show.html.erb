@@ -3,83 +3,13 @@
 		<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 			<div class="route-content">
 				<div id='dm-timeline' style="width: 100%; height: 600px"></div>
-				<script type="text/javascript">
-					var events = [];
-
-					<% if @route.blips.first.blip_images.any? %>
-						var blip_cover_image = '<%= image_path(@route.blips.first.blip_images.first.image).html_safe %>';
-					<% else %>
-						var blip_cover_image = '<%= image_path(switzerland10.JPG).html_safe %>';
-					<% end %>
-
-					<% @route.blips.each do |blip| %>
-						events.push({
-							"media": {
-								url: blip_cover_image,
-								caption: 'image caption...'
-							},
-							start_date: {
-								month: '<%= blip.date.month %>',
-								day: '<%= blip.date.day %>',
-								year: '<%= blip.date.year %>'
-							},
-							text: {
-								headline: "<%= blip.title %>",
-								text: "<%= blip.body %>"
-							}
-						});
-					<% end %>
-
-					var dmJson = {
-					  title: {
-					    media: {
-					      url: '<%= image_path(@route.blips.first.blip_images.second.image).html_safe %>',
-					      caption: "<%= @route.title %>"
-					    },
-					    text: {
-					      headline: "<%= @route.title %>",
-					      text: "<%= @route.description %>"
-					    }
-					  },
-					  events: events
-					}
-				  timeline = new TL.Timeline('dm-timeline', dmJson);
-				</script>
+				
 			</div>
 		</div>
 
 		<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 			<div class="map-container">
 				<div id='map'></div>
-				<script type="text/javascript">
-					var driftmap = {
-						init_x: '<%= @post.init_x %>',
-						init_y: '<%= @post.init_y %>',
-						init_zoom: '<%= @post.init_zoom %>',
-					}
-
-					var blips = [];
-
-					<% @blips.each do |blip| %>
-						var blipImages = [];
-						<% blip.blip_images.each do |blip_image| %>
-							blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
-						<% end %>
-
-						blips.push({
-							id: 	"<%= blip.id %>",
-							x: 		"<%= blip.x %>",
-							y: 		"<%= blip.y %>",
-							title: 	"<%= blip.title.to_json %>",
-							body: 	"<%= blip.body.to_json %>",
-							images: blipImages
-						})
-
-					<% end %>
-
-					//init_map('map', driftmap, blips, routes)
-					init_map('map', driftmap, blips)
-				</script>
 			</div>
 		</div>
 	</div>
@@ -128,3 +58,104 @@
 		<% end %>
 	</div>
 </div>
+
+<script type="text/javascript">
+	/* TimelineJS */
+	var events = [];
+
+	<% if @route.blips.first.blip_images.any? %>
+		var blip_cover_image = '<%= image_path(@route.blips.first.blip_images.first.image).html_safe %>';
+	<% else %>
+		var blip_cover_image = '<%= image_path(switzerland10.JPG).html_safe %>';
+	<% end %>
+
+	<% @route.blips.each do |blip| %>
+		events.push({
+			"media": {
+				url: blip_cover_image,
+				caption: 'image caption...'
+			},
+			start_date: {
+				month: '<%= blip.date.month %>',
+				day: '<%= blip.date.day %>',
+				year: '<%= blip.date.year %>'
+			},
+			text: {
+				headline: "<%= blip.title %>",
+				text: "<%= blip.body %>"
+			}
+		});
+	<% end %>
+
+	var tlJson = {
+	  title: {
+	    media: {
+	      url: '<%= image_path(@route.blips.first.blip_images.second.image).html_safe %>',
+	      caption: "<%= @route.title %>"
+	    },
+	    text: {
+	      headline: "<%= @route.title %>",
+	      text: "<%= @route.description %>"
+	    }
+	  },
+	  events: events
+	}
+
+	var dmOptions = {
+	  default_bg_color: {r:0, g:70, b:200},
+	  timenav_height: 180
+	}
+
+	/* Leaflet */
+	var driftmap = {
+		init_x: '<%= @post.init_x %>',
+		init_y: '<%= @post.init_y %>',
+		init_zoom: '<%= @post.init_zoom %>',
+	}
+
+	var blips = [];
+
+	<% @blips.each do |blip| %>
+		var blipImages = [];
+		<% blip.blip_images.each do |blip_image| %>
+			blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
+		<% end %>
+
+		blips.push({
+			id: 	"<%= blip.id %>",
+			x: 		"<%= blip.x %>",
+			y: 		"<%= blip.y %>",
+			title: 	"<%= blip.title.to_json %>",
+			body: 	"<%= blip.body.to_json %>",
+			images: blipImages
+		})
+
+	<% end %>
+
+	//init_map('map', driftmap, blips, routes)
+	init_map('map', driftmap, blips);
+	var timeline = new TL.Timeline('dm-timeline', tlJson, dmOptions);
+
+
+	// timeline Event listeners
+	timeline.on("change", function(data) {
+		// code
+	});
+
+	// add a class of tl-blip-index-X to the TL items so that I can select/focus/manipulate them as necessary
+	var blipIds = [];
+	for(var x in window.blipsIndexer)
+		blipIds.push(window.blipsIndexer[x].id)
+
+	var tlBlips = document.getElementsByClassName('tl-timemarker');
+
+	for(var i = 0; i < tlBlips.length; i++){
+		var tlBlipIndex = 'tl-blip-index-' + blipIds[i];
+		addClass(tlBlips[i], tlBlipIndex);
+	}
+
+	function addClass(el, newClass){
+		el.className += ' ' + newClass;   
+	}
+
+</script>

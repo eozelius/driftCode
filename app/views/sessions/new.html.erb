@@ -3,7 +3,7 @@
 	<%= form_for :session, url: login_path do |f| %>
 		<p>
 			<%= f.label :email %>
-			<%= f.text_field :email %>
+			<%= f.text_field :email, autofocus: true %>
 		</p>	
 
 		<p>
