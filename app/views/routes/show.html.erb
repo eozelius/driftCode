@@ -136,10 +136,31 @@
 	init_map('map', driftmap, blips);
 	var timeline = new TL.Timeline('dm-timeline', tlJson, dmOptions);
 
+	var maroonMarker = L.icon({ 
+	  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
+	  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+	  popupAnchor:  [0, -35]
+	});
+
+	var blueMarker = L.icon({
+	  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-icon.png").to_s %>',
+	  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+	  popupAnchor:  [0, -35]
+	});
 
 	// timeline Event listeners
 	timeline.on("change", function(data) {
-		// code
+		var unique_id = data.unique_id;
+		var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
+
+		for(var i in window.blipsIndexer)
+      window.blipsIndexer[i].marker.setIcon(blueMarker);
+
+
+		var tlBlip = window.blipsIndexer[targetBlipId]
+
+		tlBlip.popup.openOn(window.map);
+		tlBlip.marker.setIcon(maroonMarker);
 	});
 
 	// add a class of tl-blip-index-X to the TL items so that I can select/focus/manipulate them as necessary
@@ -147,15 +168,7 @@
 	for(var x in window.blipsIndexer)
 		blipIds.push(window.blipsIndexer[x].id)
 
-	var tlBlips = document.getElementsByClassName('tl-timemarker');
-
-	for(var i = 0; i < tlBlips.length; i++){
-		var tlBlipIndex = 'tl-blip-index-' + blipIds[i];
-		addClass(tlBlips[i], tlBlipIndex);
-	}
-
-	function addClass(el, newClass){
-		el.className += ' ' + newClass;   
-	}
-
+	$('.tl-timemarker').each(function(i, elem){
+		$(this).attr('data-tlBlipIndex', blipIds[i])
+	});
 </script>
