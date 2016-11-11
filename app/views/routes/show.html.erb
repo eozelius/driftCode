@@ -90,7 +90,7 @@
 	var tlJson = {
 	  title: {
 	    media: {
-	      url: '<%= image_path(@route.blips.first.blip_images.second.image).html_safe %>',
+	      url: '<%= image_path(@route.coverphoto).html_safe %>',
 	      caption: "<%= @route.title %>"
 	    },
 	    text: {
@@ -101,10 +101,7 @@
 	  events: events
 	}
 
-	var dmOptions = {
-	  default_bg_color: {r:0, g:70, b:200},
-	  timenav_height: 180
-	}
+	var dmOptions = { timenav_height: 180 }
 
 	/* Leaflet */
 	var driftmap = {
