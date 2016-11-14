@@ -1,8 +1,18 @@
 #dm-timeline {
-	margin-top:75px;
+	overflow: visible;
+
+	.tl-storyslider {
+		overflow: visible;
+	}
+
 
 	.tl-slidenav-icon {
-		position: absolute;
-		top: 50px;
+		position: relative;
+		top: 390px;
+	}
+
+	.carousel-control {
+		color: #fff;
+		opacity: .8;
 	}
 }
