@@ -17,18 +17,17 @@
 
 <script type="text/javascript">
 	/* TimelineJS */
-	var events = [];
-
-	<% if @route.blips.first.blip_images.any? %>
-		var blip_cover_image = '<%= image_path(@route.blips.first.blip_images.first.image).html_safe %>';
+	<% if @route.coverphoto.present? %>
+		var blip_cover_image = '<%= image_path(@route.coverphoto).html_safe %>';
 	<% else %>
 		var blip_cover_image = '<%= image_path(switzerland10.JPG).html_safe %>';
 	<% end %>
 
+	var events = [];
 	<% @route.blips.each do |blip| %>
 		events.push({
 			"media": {
-				url: blip_cover_image,
+				url: '',
 				caption: 'image caption...'
 			},
 			start_date: {
@@ -46,7 +45,7 @@
 	var tlJson = {
 	  title: {
 	    media: {
-	      url: '<%= image_path(@route.coverphoto).html_safe %>',
+	      url: blip_cover_image,
 	      caption: "<%= @route.title %>"
 	    },
 	    text: {
@@ -124,7 +123,7 @@
 		$(this).attr('data-tlBlipIndex', blipIds[i])
 	});
 
-	$('.tl-slide').each(function(i, elem){
+	$('.tl-slide.tl-slide-text-only').each(function(i, elem){
 		$(this).attr('data-tlBlipIndex', blipIds[i])
 	});
 
