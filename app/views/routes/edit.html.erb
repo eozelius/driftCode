@@ -83,30 +83,11 @@
 
 					//init_map('map', driftmap, blips, routes)
 					init_map('map', driftmap, blips)
-				</script>
-
-			  <!-- blips -->
-			  <div class="markers-container wizard-step">
-			    <div class="wizard-markers">
-			    	<ul>
-			    		<li class="blip">
-			    			<p class="blip-title">Blips</p>
-			    		</li>
-
-			    		<% @route.blips.each do |blip| %>
-			    			<li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
-			    			  <p class="blip-title">
-			    			    <%= blip.title %>
-			    			    <% if user_is_home(@user) %>
-			    			    	<%= link_to '<span style="font-style:italic;"> - edit</span>'.html_safe, edit_blip_path(blip) %>
-			    			    <% end %>
-			    			  </p>
-			    			</li>
-			    		<% end %>
-			    	</ul>
-			    </div>
-			  </div>
+				</script>			  
 			</div>
+			<%= link_to @route, method: :delete, data: { confirm: "Are you Sure?" } do %>
+				<span class="pull-right" style="margin: 2% 0 0; color:red" rel="nofollow" data-method="delete" data-confirm="Are you sure">delete</span>
+			<% end %>
 		</div>
 	</div>
 </div>
