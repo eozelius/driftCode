@@ -1,53 +1,11 @@
 <% provide(:title, @user.name) %>
 <div class="container" id="profile">
-	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+	<div id="dm-content-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
 
 		<!-- Routes -->
 		<% if !@route.nil? %>
 			<div class="route-content">
 				<div id='dm-timeline' style="width: 100%; height: 600px"></div>
-				<script type="text/javascript">
-					var events = [];
-
-					<% if @route.blips.first.blip_images.any? %>
-						var blip_cover_image = '<%= image_path(@route.blips.first.blip_images.first.image).html_safe %>';
-					<% else %>
-						var blip_cover_image = '<%= image_path(switzerland10.JPG).html_safe %>';
-					<% end %>
-
-					<% @route.blips.each do |blip| %>
-						events.push({
-							"media": {
-								url: blip_cover_image,
-								caption: 'image caption...'
-							},
-							start_date: {
-								month: '<%= blip.date.month %>',
-								day: '<%= blip.date.day %>',
-								year: '<%= blip.date.year %>'
-							},
-							text: {
-								headline: "<%= blip.title %>",
-								text: "<%= blip.body %>"
-							}
-						});
-					<% end %>
-
-					var dmJson = {
-					  title: {
-					    media: {
-					      url: '<%= image_path(@route.blips.first.blip_images.first.image).html_safe %>',
-					      caption: "<%= @route.title %>"
-					    },
-					    text: {
-					      headline: "<%= @route.title %>",
-					      text: "<%= @route.description %>"
-					    }
-					  },
-					  events: events
-					}
-				  timeline = new TL.Timeline('dm-timeline', dmJson);
-				</script>
 			</div>
 		<!-- Blips -->
 		<% elsif !@blips.nil? %>
@@ -89,7 +47,7 @@
 					  </div><!-- end carousel -->
 					<% end %>
 
-					<!-- blip author title text  -->
+					<!-- blip title text  -->
 					<div class="blip-info" data-blip="<%= blip.id %>">
 					  <h4 class="blip-title">
 					    <%= blip.title %>
@@ -339,43 +297,168 @@
 			$('.alter-user-container').slideUp();
 			$('.profile-details-container').removeClass('form-open');
 		});
+
+		maroonMarker = L.icon({ 
+		  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
+		  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+		  popupAnchor:  [0, -35]
+		});
+
+		blueMarker = L.icon({
+		  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-icon.png").to_s %>',
+		  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+		  popupAnchor:  [0, -35]
+		})
+
+	  // reveal blip info
+	  $('.blip').on('click', function(){
+	    var active = $(this).hasClass('active');
+	    var blip_index = $(this).data('blip');
+	    $('.blip-content').addClass('hidden');
+	    $('.blip-content[data-blip="'+ blip_index +'"]').removeClass("hidden");
+
+	    for(var i in window.blipsIndexer)
+	      window.blipsIndexer[i].marker.setIcon(blueMarker);
+
+	    window.blipsIndexer[blip_index].marker.setIcon(maroonMarker);
+	    window.blipsIndexer[blip_index].popup.openOn(window.map)
+	    
+	    if(active){
+	      $(this).removeClass('active');
+	    } else {
+	      $('.blip-info[data-blip="'+ blip_index +'"]').slideDown(700);
+	      $(this).addClass('active');
+	      var init_x = $(this).data('initx') + .36377;
+	      var init_y = $(this).data('inity') + .1;
+	      window.map.setView([init_x, init_y]).setZoom(9);
+	    }
+	  });
+
+	  /* TIMELINE */
+		<% if @route.coverphoto.present? %>
+			var blip_cover_image = '<%= image_path(@route.coverphoto).html_safe %>';
+		<% else %>
+			var blip_cover_image = '<%= image_path(switzerland10.JPG).html_safe %>';
+		<% end %>
+
+		var events = [];
+
+		window.routesIndexer = {};
+
+		<% @route.blips.each do |blip| %>
+			events.push({
+				"media": {
+					url: '',
+					caption: ''
+				},
+				start_date: {
+					month: '<%= blip.date.month %>',
+					day: '<%= blip.date.day %>',
+					year: '<%= blip.date.year %>'
+				},
+				text: {
+					headline: "<%= blip.title %>",
+					text: "<%= blip.body %>"
+				}
+			});
+
+			var routeBlipImages = [];
+
+			<% blip.blip_images.each do |image| %>
+				routeBlipImages.push('<%= image_tag(image.image).html_safe %>')
+			<% end %>
+
+			window.routesIndexer["<%= blip.id %>"] = {
+				id:    "<%= blip.id %>",
+				title: "<%= blip.title %>",
+				body:  "<%= blip.body %>",
+				date:  "<%= blip.date %>",
+				images: routeBlipImages
+			}
+		<% end %>
+
+		var tlJson = {
+		  title: {
+		    media: {
+		      url: blip_cover_image,
+		      caption: "<%= @route.title %>"
+		    },
+		    text: {
+		      headline: "<%= @route.title %>",
+		      text: "<%= @route.description %>"
+		    }
+		  },
+		  events: events
+		}
+
+		var dmOptions = { timenav_height: 180 }
+	  timeline = new TL.Timeline('dm-timeline', tlJson, dmOptions);
+
+		// timeline Event listeners
+		timeline.on("change", function(data) {
+			window.ethan = data;
+			var unique_id = data.unique_id;
+			var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
+			var tlBlip = window.blipsIndexer[targetBlipId];
+
+			for(var i in window.blipsIndexer)
+	      window.blipsIndexer[i].marker.setIcon(blueMarker);
+
+			tlBlip.popup.openOn(window.map);
+			tlBlip.marker.setIcon(maroonMarker);
+			$('.carousel').addClass('hidden');
+
+			setTimeout(function(){
+				$('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
+			}, 600)
+		});
+
+		var blipIds = [];
+		for(var x in window.routesIndexer)
+			blipIds.push(window.blipsIndexer[x].id)
+
+		$('.tl-timemarker').each(function(i, elem){
+			$(this).attr('data-tlBlipIndex', blipIds[i])
+		});
+
+		$('.tl-slide.tl-slide-text-only').each(function(i, elem){
+			$(this).attr('data-tlBlipIndex', blipIds[i])
+		});
+
+		for(var i in window.routesIndexer){
+			var id = window.routesIndexer[i].id;
+			console.log("id: " + id)
+
+			if(window.routesIndexer[i].images.length > 0){
+				var c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel">' + 
+				  				'<div class="carousel-inner" role="listbox">';
+
+				for(var x in window.routesIndexer[i].images){
+					c += '<div class="item">' + window.routesIndexer[i].images[x] + '</div>';
+				}
+
+				if(window.routesIndexer[i].images.length > 1){
+					c += '<ol class="carousel-indicators">';
+
+					for(var i in window.routesIndexer[i].images.length){
+						c +=  '<li data-target="#images-carousel-'+ i +'" data-slide-to="'+ i +'"></li>';
+					}
+
+					c +=  '</ol><a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev">' +
+							    '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>' +
+		      			  '<span class="sr-only">Previous</span>' +
+		      			'</a>' +
+		      			'<a class="right carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="next">' +
+		      			  '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>' +
+	    						'<span class="sr-only">Next</span>' +
+		      			'</a>';
+				}
+				c += '</div></div>'
+			}
+
+			$('.tl-slide[data-tlBlipIndex="'+ id +'"]').addClass('emptying').empty();
+			$('.tl-slide[data-tlBlipIndex="'+ id +'"]').html(c);
+			$('.carousel .item:first-child').addClass('active')
+		}
 	});
-</script>
-
-<script type="text/javascript">
-	var maroonMarker = L.icon({ 
-	  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
-	  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
-	  popupAnchor:  [0, -35]
-	});
-
-	var blueMarker = L.icon({
-	  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-icon.png").to_s %>',
-	  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
-	  popupAnchor:  [0, -35]
-	})
-
-  // reveal blip info
-  $('.blip').on('click', function(){
-    var active = $(this).hasClass('active');
-    var blip_index = $(this).data('blip');
-    $('.blip-content').addClass('hidden');
-    $('.blip-content[data-blip="'+ blip_index +'"]').removeClass("hidden");
-
-    for(var i in window.blipsIndexer)
-      window.blipsIndexer[i].marker.setIcon(blueMarker);
-
-    window.blipsIndexer[blip_index].marker.setIcon(maroonMarker);
-    window.blipsIndexer[blip_index].popup.openOn(window.map)
-    
-    if(active){
-      $(this).removeClass('active');
-    } else {
-      $('.blip-info[data-blip="'+ blip_index +'"]').slideDown(700);
-      $(this).addClass('active');
-      var init_x = $(this).data('initx') + .36377;
-      var init_y = $(this).data('inity') + .1;
-      window.map.setView([init_x, init_y]).setZoom(9);
-    }
-  });
 </script>
