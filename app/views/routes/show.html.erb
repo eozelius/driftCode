@@ -104,14 +104,19 @@
 	timeline.on("change", function(data) {
 		var unique_id = data.unique_id;
 		var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
+		var tlBlip = window.blipsIndexer[targetBlipId];
+
 
 		for(var i in window.blipsIndexer)
       window.blipsIndexer[i].marker.setIcon(blueMarker);
 
-		var tlBlip = window.blipsIndexer[targetBlipId];
-
 		tlBlip.popup.openOn(window.map);
 		tlBlip.marker.setIcon(maroonMarker);
+		$('.carousel').addClass('hidden');
+
+		setTimeout(function(){
+			$('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
+		}, 500)
 	});
 
 	// add a class of tl-blip-index-X to the TL items so that I can select/focus/manipulate them as necessary
@@ -128,11 +133,10 @@
 	});
 
 	for(var i in window.blipsIndexer){
-
 		var id = window.blipsIndexer[i].id;
 
 		if(window.blipsIndexer[i].images.length > 0){
-			var c = '<div id="images-carousel" class="carousel slide" data-ride="carousel">' + 
+			var c = '<div id="images-carousel" class="hidden carousel slide" data-ride="carousel">' + 
 			  				'<div class="carousel-inner" role="listbox">';
 
 			for(var x in window.blipsIndexer[i].images){
@@ -158,10 +162,8 @@
 			c += '</div></div>'
 		}
 
-
 		$('.tl-slide[data-tlBlipIndex="'+ id +'"]').empty();
 		$('.tl-slide[data-tlBlipIndex="'+ id +'"]').html(c);
-
 		$('#images-carousel .item:first-child').addClass('active')
 	}
 </script>
