@@ -55,12 +55,20 @@ function init_map(dom, driftmap, blips){
 				var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
 				blipMarker.bindPopup(blipPopup);
 				
+				var blipImages = [];
+
+				for(var x in blips[i].images){
+					blipImages.push(blips[i].images[x])
+				}
+
 				blipsIndexer[blips[i].id.toString()] = {
 					id: blips[i].id,
+					title: blips[i].title,
+					body:  blips[i].body,
+					images:blipImages,
 					marker: window.blipMarker,
 					popup: blipPopup
 				}
-
 
 			}
 			window.blipsIndexer = blipsIndexer;
