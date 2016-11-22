@@ -1,46 +1,59 @@
 <div id="route" class="edit-route">
 	<div class="container">
 		<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+			<h4 class="blip-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Edit <%= @route.title.html_safe %></h4>
 
-			<div class="route-content">
-				<div id='dm-timeline' style="width: 100%; height: 600px"></div>
-			</div>
+			<%= form_for @route, html: { multipart: true } do |f| %>
+				<div class="route-info">
+					<!-- Journey Cover Photo -->
+					<h4 class="blip-title">Journey Cover Photo</h4>
+					<%= f.file_field :coverphoto, { style: 'margin-left:3%;' } %>
+
+					<!-- Journey metadata -->
+					<h4 class="blip-title">Journey Title</h4>
+					<%= f.text_field :title, { style: 'margin-left:3%;' } %>
+
+					<h4 class="blip-title">Journey Description</h4>
+					<%= f.text_area :description %>
+					<button class="normal add-route-stop" style="margin:3%">Add Blip</button>
+				</div>
+			<% end %>
 		</div>
 
 		<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 			<div class="map-container">
-				<div id='map'></div>
+		  	<div id='map'></div>
 
-				<script type="text/javascript">
+			  <script type="text/javascript">
 					var driftmap = {
 						init_x: '<%= @post.init_x %>',
 						init_y: '<%= @post.init_y %>',
 						init_zoom: '<%= @post.init_zoom %>',
 					}
 
-					var blips = [];
+			  	var blips = [];
 
-					<% if @user.post.blips.any? %>
-						<% @route.blips.each do |blip| %>
-							var blipImages = [];
+			  	<% if @route.blips.any? %>
+			  		<% @route.blips.each do |blip| %>
+			  			var blipImages = [];
+							
 							<% blip.blip_images.each do |blip_image| %>
-								blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
+								blipImages.push('<%= image_tag(blip_image.image).html_safe %>')
 							<% end %>
 
 							blips.push({
-								id: 	"<%= blip.id %>",
-								x: 		"<%= blip.x %>",
-								y: 		"<%= blip.y %>",
-								title: 	"<%= blip.title.to_json %>",
-								body: 	"<%= blip.body.to_json %>",
+								id:     "<%= blip.id %>",
+								x:      "<%= blip.x %>",
+								y:  		"<%= blip.y %>",
+								title:  "<%= blip.title.to_json %>",
+								body:   "<%= blip.body.to_json %>",
 								images: blipImages
-							})
-						<% end %>
-					<% end %>
+							});
+			  		<% end %>
+			  	<% end %>
 
-					//init_map('map', driftmap, blips, routes)
-					init_map('map', driftmap, blips);
-				</script>			  
+			  	init_map('map', driftmap, blips);
+			  </script>
 			</div>
 			<%= link_to @route, method: :delete, data: { confirm: "Are you Sure?" } do %>
 				<span class="pull-right" style="margin: 2% 0 0; color:red" rel="nofollow" data-method="delete" data-confirm="Are you sure">delete</span>
@@ -51,143 +64,9 @@
 
 <script type="text/javascript">	
 	$(document).ready(function(){
-		maroonMarker = L.icon({ 
-		  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
-		  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
-		  popupAnchor:  [0, -35]
-		});
-
-		blueMarker = L.icon({
-		  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-icon.png").to_s %>',
-		  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
-		  popupAnchor:  [0, -35]
-		})
-
-		/* TIMELINE */
-		<% if @route.coverphoto.present? %>
-			var blip_cover_image = '<%= image_path(@route.coverphoto).html_safe %>';
-		<% else %>
-			var blip_cover_image = '<%= image_path(switzerland10.JPG).html_safe %>';
-		<% end %>
-
-		var events = [];
-		window.routesIndexer = {};
-
-		<% @route.blips.each do |blip| %>
-			events.push({
-				"media": {
-					url: '',
-					caption: ''
-				},
-				start_date: {
-					month: '<%= blip.date.month %>',
-					day: '<%= blip.date.day %>',
-					year: '<%= blip.date.year %>'
-				},
-				text: {
-					headline: "<%= blip.title %>",
-					text: "<%= blip.body %>"
-				}
-			});
-
-			var routeBlipImages = [];
-
-			<% blip.blip_images.each do |image| %>
-				routeBlipImages.push('<%= image_tag(image.image).html_safe %>')
-			<% end %>
-
-			window.routesIndexer["<%= blip.id %>"] = {
-				id:    "<%= blip.id %>",
-				title: "<%= blip.title %>",
-				body:  "<%= blip.body %>",
-				date:  "<%= blip.date %>",
-				images: routeBlipImages
-			}
-		<% end %>
-
-		var dmJson = {
-		  title: {
-		    media: {
-		      url: blip_cover_image,
-		      caption: "<%= @route.title %>"
-		    },
-		    text: {
-		      headline: "<%= @route.title %>",
-		      text: "<%= @route.description %>"
-		    }
-		  },
-		  events: events
-		}
-
-		var dmOptions = { timenav_height: 180 }
-	  timeline = new TL.Timeline('dm-timeline', dmJson, dmOptions);
-
-	  var blipIds = [];
-		for(var x in window.routesIndexer)
-			blipIds.push(window.blipsIndexer[x].id)
-
-		$('.tl-timemarker').each(function(i, elem){
-			$(this).attr('data-tlBlipIndex', blipIds[i])
-		});
-
-		$('.tl-slide.tl-slide-text-only').each(function(i, elem){
-			$(this).attr('data-tlBlipIndex', blipIds[i])
-		});
-
-	  /* Add images carousel for each timeline slide */
-		for(var i in window.routesIndexer){
-			var id = window.routesIndexer[i].id;
-			if(window.routesIndexer[i].images.length > 0){
-				var c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel">' + 
-				  				'<div class="carousel-inner" role="listbox">';
-
-				for(var x in window.routesIndexer[i].images){
-					c += '<div class="item">' + window.routesIndexer[i].images[x] + '</div>';
-				}
-
-				if(window.routesIndexer[i].images.length > 1){
-					c += '<ol class="carousel-indicators">';
-
-					for(var i in window.routesIndexer[i].images.length){
-						c +=  '<li data-target="#images-carousel-'+ i +'" data-slide-to="'+ i +'"></li>';
-					}
-
-					c +=  '</ol><a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev">' +
-							    '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>' +
-		      			  '<span class="sr-only">Previous</span>' +
-		      			'</a>' +
-		      			'<a class="right carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="next">' +
-		      			  '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>' +
-	    						'<span class="sr-only">Next</span>' +
-		      			'</a>';
-				}
-				c += '</div></div>'
-			}
-
-			$('.tl-slide[data-tlBlipIndex="'+ id +'"]').addClass('emptying').empty();
-			$('.tl-slide[data-tlBlipIndex="'+ id +'"]').html(c);
-			$('.carousel .item:first-child').addClass('active')
-		}
-
-		// timeline Event listeners
-		timeline.on("change", function(data) {
-			var unique_id = data.unique_id;
-			var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
-
-			if( typeof targetBlipId !== 'undefined'){
-				var tlBlip = window.blipsIndexer[targetBlipId];
-				for(var i in window.blipsIndexer)
-		      window.blipsIndexer[i].marker.setIcon(blueMarker);
-
-				tlBlip.popup.openOn(window.map);
-				tlBlip.marker.setIcon(maroonMarker);
-			}
-
-			$('.carousel').addClass('hidden');
-
-			setTimeout(function(){
-				$('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
-			}, 600)
+		/* Add a stop */
+		$(".add-route-stop").on('click', function(){
+			console.log("fuck")
 		});
 	});
 </script>
