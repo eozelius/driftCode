@@ -396,16 +396,18 @@
 
 		// timeline Event listeners
 		timeline.on("change", function(data) {
-			window.ethan = data;
 			var unique_id = data.unique_id;
 			var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
-			var tlBlip = window.blipsIndexer[targetBlipId];
 
-			for(var i in window.blipsIndexer)
-	      window.blipsIndexer[i].marker.setIcon(blueMarker);
+			if( typeof targetBlipId !== 'undefined'){
+				var tlBlip = window.blipsIndexer[targetBlipId];
+				for(var i in window.blipsIndexer)
+		      window.blipsIndexer[i].marker.setIcon(blueMarker);
 
-			tlBlip.popup.openOn(window.map);
-			tlBlip.marker.setIcon(maroonMarker);
+				tlBlip.popup.openOn(window.map);
+				tlBlip.marker.setIcon(maroonMarker);
+			}
+			
 			$('.carousel').addClass('hidden');
 
 			setTimeout(function(){
