@@ -15,7 +15,31 @@
 
 					<h4 class="blip-title">Journey Description</h4>
 					<%= f.text_area :description %>
-					<button class="normal add-route-stop" style="margin:3%">Add Blip</button>
+					<span class="normal add-route-stop" style="margin:3%">Add Blip</span>
+				</div>
+
+
+				<div class="first-stop-info hidden">
+					<%= hidden_field_tag :blip_x %>
+					<%= hidden_field_tag :blip_y %>
+
+					<h4 class="blip-title" data-photo-index="0">add photos</h4>
+					<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
+
+					<h4 class="blip-title">Blip Title</h4>
+					<%= text_field_tag :blip_title %>
+
+					<h4 class="blip-title">Blip Description</h4>
+					<%= text_area_tag :blip_description %>
+
+					<div class='input-group date' id='datetimepicker1'>
+						<h4 class="blip-title" style="margin:0% 0 8% 8%">Date</h4>
+						<input id="blip-date" style="margin: 3% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
+						<%= hidden_field_tag :blip_date %>
+						<span class="input-group-addon" style="float:left; margin-top:3%; height:38px; padding:10px 0 0 1px; width:30px">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
 				</div>
 			<% end %>
 		</div>
@@ -25,6 +49,9 @@
 		  	<div id='map'></div>
 
 			  <script type="text/javascript">
+			  	// init date-picker-calender
+			  	$('#datetimepicker1').datetimepicker();
+
 					var driftmap = {
 						init_x: '<%= @post.init_x %>',
 						init_y: '<%= @post.init_y %>',
@@ -55,6 +82,12 @@
 			  	init_map('map', driftmap, blips);
 			  </script>
 			</div>
+			<%= link_to user_path(current_user) do %>
+				<span class="normal cancel">cancel</span>
+			<% end %>
+
+			<button name="commit" class="normal commit" type="submit" style="margin: 35px 0">save</button>
+
 			<%= link_to @route, method: :delete, data: { confirm: "Are you Sure?" } do %>
 				<span class="pull-right" style="margin: 2% 0 0; color:red" rel="nofollow" data-method="delete" data-confirm="Are you sure">delete</span>
 			<% end %>
@@ -64,9 +97,51 @@
 
 <script type="text/javascript">	
 	$(document).ready(function(){
+		var photo_index = 0;
+		var locationSet = false;
+
 		/* Add a stop */
 		$(".add-route-stop").on('click', function(){
-			console.log("fuck")
+			/* Switch from Route Details to Blip details */
+			$('.route-info, .first-stop-info').toggleClass('hidden');
+			$('form').append('<input type="hidden" name="new_blip" value="true">');
 		});
+
+		// add photos to blip
+		$(document).on('click', '.add-photo', function(){
+			$(this).data('photo-index', ++photo_index)
+			var index = $(this).data('photo-index')
+			var new_img = '<input class="blip-image" name="photo['+ index +']" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="'+ index +'" style="margin: 6% 6% 5% 3%; width:100%;">';
+			$('.add-photo').last().after(new_img);
+		});
+
+		// set location of blip
+		window.map.on('click', function(e){
+			window.map.off('click');
+			locationSet = true;
+			setLatLng(e.latlng.lat, e.latlng.lng);
+
+			var m = L.marker([e.latlng.lat, e.latlng.lng]).addTo(window.map)
+			m.dragging.enable();
+			m.on('dragend', function(e){
+				setLatLng(e.target.getLatLng().lat, e.target.getLatLng().lng)
+			});
+		});
+
+		// submit form
+		$('.commit').on('click', function(){
+			var date = $('#blip-date').val();
+			var mm = 	 date.slice(0, 2)
+			var dd = 	 date.slice(3, 5)
+			var yyyy = date.slice(6, 10);
+			$('#blip_date').val(yyyy + mm + dd);
+
+			locationSet == false ? alert('A location must be set, click anywhere on the map to set your blip.') : $('form').submit()
+		});
+
+		function setLatLng(lat, lng) {
+			$('#blip_x').val(lat);
+			$('#blip_y').val(lng);			
+		}
 	});
 </script>

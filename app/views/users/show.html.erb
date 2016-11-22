@@ -338,7 +338,7 @@
 		<% if @route.coverphoto.present? %>
 			var blip_cover_image = '<%= image_path(@route.coverphoto).html_safe %>';
 		<% else %>
-			var blip_cover_image = '<%= image_path(switzerland10.JPG).html_safe %>';
+			var blip_cover_image = '<%= image_path("switzerland10.JPG").html_safe %>';
 		<% end %>
 
 		var events = [];

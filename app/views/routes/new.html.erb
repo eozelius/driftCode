@@ -124,7 +124,14 @@
 		$('#datetimepicker1').datetimepicker();
 
 		var photo_index = 0;
-		var locationSet = false;
+		var locationSet = true;
+
+		// create first stop manually
+		$('.create-first-stop').on('click', function(){
+			$('.route-info, .first-stop-info, .existing-blips, .journey-stops').toggleClass('hidden');
+			$('form').append('<input type="hidden" name="new_blip" value="true">');
+			locationSet = false;
+		});
 
 		// add photos to blip
 		$(document).on('click', '.add-photo', function(){
@@ -136,7 +143,6 @@
 
 		// set location of blip
 		window.map.on('click', function(e){
-			$('form').append('<input type="hidden" name="new_blip" value="true">');
 			window.map.off('click');
 			locationSet = true;
 			setLatLng(e.latlng.lat, e.latlng.lng);
@@ -163,10 +169,5 @@
 			$('#blip_x').val(lat);
 			$('#blip_y').val(lng);			
 		}
-
-		// create first stop manually
-		$('.create-first-stop').on('click', function(){
-			$('.route-info, .first-stop-info, .existing-blips, .journey-stops').toggleClass('hidden');
-		});
 	});
 </script>
