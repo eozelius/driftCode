@@ -342,7 +342,6 @@
 		<% end %>
 
 		var events = [];
-
 		window.routesIndexer = {};
 
 		<% @route.blips.each do |blip| %>
@@ -394,27 +393,6 @@
 		var dmOptions = { timenav_height: 180 }
 	  timeline = new TL.Timeline('dm-timeline', tlJson, dmOptions);
 
-		// timeline Event listeners
-		timeline.on("change", function(data) {
-			var unique_id = data.unique_id;
-			var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
-
-			if( typeof targetBlipId !== 'undefined'){
-				var tlBlip = window.blipsIndexer[targetBlipId];
-				for(var i in window.blipsIndexer)
-		      window.blipsIndexer[i].marker.setIcon(blueMarker);
-
-				tlBlip.popup.openOn(window.map);
-				tlBlip.marker.setIcon(maroonMarker);
-			}
-			
-			$('.carousel').addClass('hidden');
-
-			setTimeout(function(){
-				$('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
-			}, 600)
-		});
-
 		var blipIds = [];
 		for(var x in window.routesIndexer)
 			blipIds.push(window.blipsIndexer[x].id)
@@ -427,9 +405,9 @@
 			$(this).attr('data-tlBlipIndex', blipIds[i])
 		});
 
+		/* Add images carousel for each timeline slide */
 		for(var i in window.routesIndexer){
 			var id = window.routesIndexer[i].id;
-			console.log("id: " + id)
 
 			if(window.routesIndexer[i].images.length > 0){
 				var c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel">' + 
@@ -462,5 +440,26 @@
 			$('.tl-slide[data-tlBlipIndex="'+ id +'"]').html(c);
 			$('.carousel .item:first-child').addClass('active')
 		}
+
+		// timeline Event listeners
+		timeline.on("change", function(data) {
+			var unique_id = data.unique_id;
+			var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
+
+			if( typeof targetBlipId !== 'undefined'){
+				var tlBlip = window.blipsIndexer[targetBlipId];
+				for(var i in window.blipsIndexer)
+		      window.blipsIndexer[i].marker.setIcon(blueMarker);
+
+				tlBlip.popup.openOn(window.map);
+				tlBlip.marker.setIcon(maroonMarker);
+			}
+
+			$('.carousel').addClass('hidden');
+
+			setTimeout(function(){
+				$('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
+			}, 600)
+		});
 	});
 </script>
