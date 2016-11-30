@@ -125,12 +125,8 @@
 		var mm = myDate.slice(5, 7) - 1;
 		var dd = myDate.slice(8, 10);
 
-		var asdf = new Date(yy, mm, dd);
-
-		console.log(asdf)
-
-		$('#datetimepicker1').datetimepicker();
-		//$('#datetimepicker').data("DateTimePicker").date(asdf);
+		var blipDate = new Date(yy, mm, dd);
+		$('#datetimepicker1').datetimepicker({ defaultDate: blipDate });
 
 		// add photos
 		var photo_index = 0;
