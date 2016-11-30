@@ -20,7 +20,7 @@
 					<h4 class="blip-title">First Stop</h4>
 
 					<p style="color:#C2D9EB; margin-left:3%">
-						To create the first stop of this journey, drag an existing blip onto the Journey Stops List to the right.  Or you can create a brand new blip.
+						To create the first stop of this journey, a brand new blip.
 					</p>
 
 					<span class="normal create-first-stop" style="margin:3%">Create New Stop</span>
@@ -71,44 +71,6 @@
 			  </script>
 			</div>
 
-			<!-- Journey stops -->
-			<div class="view-wizard-container journey-stops">
-				<div class="markers-container wizard-step">
-					<div class="wizard-markers">
-						<ul>
-							<li style="background-color:#e2e2e2" >
-								<p style="text-align:center">Journey Stops</p>
-							</li>
-							<li class="blip">
-								<p class="blip-title" style="text-align:center">
-									drag an existing blip here to start
-								</p>
-							</li>						
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<!-- existing blips -->
-			<div class="view-wizard-container existing-blips">
-				<div class="markers-container wizard-step">
-					<div class="wizard-markers">
-						<ul style="height: 229px;">
-							<li style="background-color:#e2e2e2" >
-								<p style="text-align:center">Existing Blips</p>
-							</li>
-							<% @user.post.blips.each do |blip| %>
-								<li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
-									<p class="blip-title">
-										<%= blip.title %>
-									</p>
-								</li>
-							<% end %>
-						</ul>
-					</div>
-				</div>
-			</div>
-
 			<%= link_to user_path(current_user) do %>
 				<span class="normal cancel">cancel</span>
 			<% end %>
@@ -121,7 +83,7 @@
 <script type="text/javascript">
 	$(function(){
 		// init date-picker-calender
-		$('#datetimepicker1').datetimepicker();
+		$('#datetimepicker1').datetimepicker({format: 'DD/MM/YYYY'});
 
 		var photo_index = 0;
 		var locationSet = true;

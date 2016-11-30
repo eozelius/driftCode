@@ -2,6 +2,9 @@
 	<!-- Blip title images body -->
 	<div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<div class="blip-content" data-blip="<%= @blip.id %>">
+
+			<%= hidden_field_tag :my_blip_date, @blip.date %>
+
 			<%= form_for @blip, html: { multipart: true } do |f| %>
 				<%= f.hidden_field :x, value: @blip.x %>
 				<%= f.hidden_field :y, value: @blip.y %>
@@ -116,8 +119,18 @@
 
 <script type="text/javascript">
 	$(function(){
-		// init date-picker-calender
+		// init date-picker-calender, then populate with existing @blip.date
+		var myDate = $('#my_blip_date').val();
+		var yy = myDate.slice(0, 4);
+		var mm = myDate.slice(5, 7) - 1;
+		var dd = myDate.slice(8, 10);
+
+		var asdf = new Date(yy, mm, dd);
+
+		console.log(asdf)
+
 		$('#datetimepicker1').datetimepicker();
+		//$('#datetimepicker').data("DateTimePicker").date(asdf);
 
 		// add photos
 		var photo_index = 0;

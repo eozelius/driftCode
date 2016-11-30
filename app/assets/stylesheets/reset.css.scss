@@ -338,6 +338,11 @@ button.normal:hover{
 	font-size: .8em;
 }
 
+.input-group-addon,
+.bootstrap-datetimepicker-widget {
+	cursor: pointer;
+}
+
 /* Leaflet generic components */
 #map {
 	width: 100%;
