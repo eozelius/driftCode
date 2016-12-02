@@ -96,7 +96,7 @@ class RoutesController < ApplicationController
 		@user = current_user
 		@route = Route.find(params[:id])
 		@post = current_user.post
-		@blips = @route.blips
+		@blips = @route.blips.order(:date)
 	end
 
 	def destroy

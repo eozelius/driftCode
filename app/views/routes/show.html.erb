@@ -2,6 +2,7 @@
 	<div class="container">
 		<div id="dm-content-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
 			<div class="route-content">
+				<h4 class="route-header"><%= @route.title %></h4>
 				<div id='dm-timeline' style="width: 100%; height: 600px"></div>
 				
 			</div>
@@ -11,11 +12,45 @@
 			<div class="map-container">
 				<div id='map'></div>
 			</div>
+
+			<!-- blips -->
+			<div class="markers-container wizard-step">
+			  <div class="wizard-markers">
+		      <ul>
+						<li class="blip">
+							<p class="blip-title">Stops</p>
+						</li>
+		        <% @blips.each_with_index do |blip, index| %>
+		          <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
+		            <p class="blip-title">
+		              <%= blip.title %>
+		            </p>
+		            <p class="route-stop-body <%= 'hidden' if index != 0 %>">
+		            	<%= blip.body %>
+		            </p>
+		          </li>
+		        <% end %>
+		      </ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
+	/* Generic DOM */	
+	$('li.blip').on('click', function(){
+		showStopper($(this).data('blip'))
+	});
+
+	function showStopper(id){
+ 		var title = window.blipsIndexer[id].title.replace(/&quot;/g, '');
+		$('.route-header').text(title);
+
+		$('p.route-stop-body').addClass('hidden');
+		$('li.blip[data-blip="'+ id +'"] p.route-stop-body').removeClass('hidden');
+	}
+
 	/* TimelineJS */
 	<% if @route.coverphoto.present? %>
 		var blip_cover_image = '<%= image_path(@route.coverphoto).html_safe %>';
@@ -46,11 +81,11 @@
 	  title: {
 	    media: {
 	      url: blip_cover_image,
-	      caption: "<%= @route.title %>"
+	      caption: ""
 	    },
 	    text: {
-	      headline: "<%= @route.title %>",
-	      text: "<%= @route.description %>"
+	      headline: "",
+	      text: ""
 	    }
 	  },
 	  events: events
@@ -62,7 +97,8 @@
 	var driftmap = {
 		init_x: '<%= @post.init_x %>',
 		init_y: '<%= @post.init_y %>',
-		init_zoom: '<%= @post.init_zoom %>',
+		init_zoom: 6,
+		//init_zoom: '<%= @post.init_zoom %>',
 	}
 
 	var blips = [];
@@ -104,19 +140,24 @@
 	timeline.on("change", function(data) {
 		var unique_id = data.unique_id;
 		var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
-		var tlBlip = window.blipsIndexer[targetBlipId];
 
+		if(window.blipsIndexer[targetBlipId] !== undefined){
+			var tlBlip = window.blipsIndexer[targetBlipId];
 
-		for(var i in window.blipsIndexer)
-      window.blipsIndexer[i].marker.setIcon(blueMarker);
+			// reveal stop title and body in stop details
+			showStopper(tlBlip.id);		
 
-		tlBlip.popup.openOn(window.map);
-		tlBlip.marker.setIcon(maroonMarker);
-		$('.carousel').addClass('hidden');
+			for(var i in window.blipsIndexer)
+	      window.blipsIndexer[i].marker.setIcon(blueMarker);
 
-		setTimeout(function(){
-			$('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
-		}, 500)
+			tlBlip.popup.openOn(window.map);
+			tlBlip.marker.setIcon(maroonMarker);
+			$('.carousel').addClass('hidden');
+
+			setTimeout(function(){
+				$('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
+			}, 500);
+		}
 	});
 
 	// add a class of tl-blip-index-X to the TL items so that I can select/focus/manipulate them as necessary
@@ -159,7 +200,7 @@
     						'<span class="sr-only">Next</span>' +
 	      			'</a>';
 			}
-			c += '</div></div>'
+			c += '</div></div>';
 		}
 
 		$('.tl-slide[data-tlBlipIndex="'+ id +'"]').empty();
