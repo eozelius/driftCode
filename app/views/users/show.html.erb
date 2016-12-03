@@ -8,6 +8,8 @@
 				<div id='dm-timeline' style="width: 100%; height: 600px"></div>
 			</div>
 		<!-- Blips -->
+		
+
 		<% elsif !@blips.nil? %>
 			<% @blips.each_with_index do |blip, index| %>
 				<div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= blip.id %>">
@@ -335,7 +337,7 @@
 	  });
 
 	  /* TIMELINE */
-	  <% !@route.nil? %>
+	  <% if !@route.nil? %>
 			<% if @route.coverphoto.present? %>
 				var blip_cover_image = '<%= image_path(@route.coverphoto).html_safe %>';
 			<% else %>
@@ -393,75 +395,76 @@
 
 			var dmOptions = { timenav_height: 180 }
 		  timeline = new TL.Timeline('dm-timeline', tlJson, dmOptions);
-		<% end %>
 
-		var blipIds = [];
-		for(var x in window.routesIndexer)
-			blipIds.push(window.blipsIndexer[x].id)
+		  // timeline Event listeners
+		  timeline.on("change", function(data) {
+		  	var unique_id = data.unique_id;
+		  	var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
 
-		$('.tl-timemarker').each(function(i, elem){
-			$(this).attr('data-tlBlipIndex', blipIds[i])
-		});
+		  	if( typeof targetBlipId !== 'undefined'){
+		  		var tlBlip = window.blipsIndexer[targetBlipId];
+		  		for(var i in window.blipsIndexer)
+		        window.blipsIndexer[i].marker.setIcon(blueMarker);
 
-		$('.tl-slide.tl-slide-text-only').each(function(i, elem){
-			$(this).attr('data-tlBlipIndex', blipIds[i])
-		});
+		  		tlBlip.popup.openOn(window.map);
+		  		tlBlip.marker.setIcon(maroonMarker);
+		  	}
 
-		/* Add images carousel for each timeline slide */
-		for(var i in window.routesIndexer){
-			var id = window.routesIndexer[i].id;
+		  	$('.carousel').addClass('hidden');
 
-			if(window.routesIndexer[i].images.length > 0){
-				var c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel">' + 
-				  				'<div class="carousel-inner" role="listbox">';
+		  	setTimeout(function(){
+		  		$('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
+		  	}, 600)
+		  });
 
-				for(var x in window.routesIndexer[i].images){
-					c += '<div class="item">' + window.routesIndexer[i].images[x] + '</div>';
-				}
+		  var blipIds = [];
+		  for(var x in window.routesIndexer)
+		  	blipIds.push(window.blipsIndexer[x].id)
 
-				if(window.routesIndexer[i].images.length > 1){
-					c += '<ol class="carousel-indicators">';
+		  $('.tl-timemarker').each(function(i, elem){
+		  	$(this).attr('data-tlBlipIndex', blipIds[i])
+		  });
 
-					for(var i in window.routesIndexer[i].images.length){
-						c +=  '<li data-target="#images-carousel-'+ i +'" data-slide-to="'+ i +'"></li>';
+		  $('.tl-slide.tl-slide-text-only').each(function(i, elem){
+		  	$(this).attr('data-tlBlipIndex', blipIds[i])
+		  });
+
+			/* Add images carousel for each timeline slide */
+			for(var i in window.routesIndexer){
+				var id = window.routesIndexer[i].id;
+
+				if(window.routesIndexer[i].images.length > 0){
+					var c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel">' + 
+					  				'<div class="carousel-inner" role="listbox">';
+
+					for(var x in window.routesIndexer[i].images){
+						c += '<div class="item">' + window.routesIndexer[i].images[x] + '</div>';
 					}
 
-					c +=  '</ol><a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev">' +
-							    '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>' +
-		      			  '<span class="sr-only">Previous</span>' +
-		      			'</a>' +
-		      			'<a class="right carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="next">' +
-		      			  '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>' +
-	    						'<span class="sr-only">Next</span>' +
-		      			'</a>';
+					if(window.routesIndexer[i].images.length > 1){
+						c += '<ol class="carousel-indicators">';
+
+						for(var i in window.routesIndexer[i].images.length){
+							c +=  '<li data-target="#images-carousel-'+ i +'" data-slide-to="'+ i +'"></li>';
+						}
+
+						c +=  '</ol><a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev">' +
+								    '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>' +
+			      			  '<span class="sr-only">Previous</span>' +
+			      			'</a>' +
+			      			'<a class="right carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="next">' +
+			      			  '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>' +
+		    						'<span class="sr-only">Next</span>' +
+			      			'</a>';
+					}
+					c += '</div></div>'
 				}
-				c += '</div></div>'
+
+				$('.tl-slide[data-tlBlipIndex="'+ id +'"]').addClass('emptying').empty();
+				$('.tl-slide[data-tlBlipIndex="'+ id +'"]').html(c);
+				$('.carousel .item:first-child').addClass('active')
 			}
 
-			$('.tl-slide[data-tlBlipIndex="'+ id +'"]').addClass('emptying').empty();
-			$('.tl-slide[data-tlBlipIndex="'+ id +'"]').html(c);
-			$('.carousel .item:first-child').addClass('active')
-		}
-
-		// timeline Event listeners
-		timeline.on("change", function(data) {
-			var unique_id = data.unique_id;
-			var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
-
-			if( typeof targetBlipId !== 'undefined'){
-				var tlBlip = window.blipsIndexer[targetBlipId];
-				for(var i in window.blipsIndexer)
-		      window.blipsIndexer[i].marker.setIcon(blueMarker);
-
-				tlBlip.popup.openOn(window.map);
-				tlBlip.marker.setIcon(maroonMarker);
-			}
-
-			$('.carousel').addClass('hidden');
-
-			setTimeout(function(){
-				$('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
-			}, 600)
-		});
+		<% end %>
 	});
 </script>
