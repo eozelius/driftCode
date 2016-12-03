@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
 	def index
-	  	@user = User.all
-	  	@blips = Blip.all.order('random()')
+	  	@ethan = User.find(1)
+	  	@route = @ethan.post.routes.find_by(title: '2015 - Colombia')
+	  	@blips = @route.blips.order(:date)
 	end
 end

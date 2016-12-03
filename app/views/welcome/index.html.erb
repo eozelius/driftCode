@@ -15,69 +15,79 @@
 <% end %>
 
 <div class="container">
-  <div id="dm-content-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-    <% @blips.each_with_index do |blip, index| %>
-      <div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= blip.id %>">
-        <!-- blip carousel -->
-        <% if blip.blip_images.any? %>
-          <div id="images-carousel" class="carousel slide" data-ride="carousel">
+  <div id="dm-content-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+    <!-- Route timeline -->
+    <div class="route-content">
+      <h4 class="route-header"><%= @route.title %></h4>
+      <p class="route-description"><%= @route.description %></p>
+      
+      <div id='dm-timeline' style="width: 100%; height: 600px"></div>
+    </div>
 
-            <!-- Blip Photos -->
-            <div class="carousel-inner" role="listbox">
-              <% blip.blip_images.each_with_index do |image, i| %>
-                <div class="item <%= 'active' if i == 0 %>">
-                  <%= image_tag image.image %>
-                </div>
-              <% end %>
-            </div>
+    <% if false %>
+      <% @blips.each_with_index do |blip, index| %>
+        <div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= blip.id %>">
+          <!-- blip carousel -->
+          <% if blip.blip_images.any? %>
+            <div id="images-carousel" class="carousel slide" data-ride="carousel">
 
-            <% if blip.blip_images.count > 1 %>
-              <!-- Indicators -->
-              <ol class="carousel-indicators">
-                <% blip.blip_images.count.times do |b| %>
-                  <li data-target="#images-carousel" data-slide-to="<%= b %>"></li>
+              <!-- Blip Photos -->
+              <div class="carousel-inner" role="listbox">
+                <% blip.blip_images.each_with_index do |image, i| %>
+                  <div class="item <%= 'active' if i == 0 %>">
+                    <%= image_tag image.image %>
+                  </div>
                 <% end %>
-                <script type="text/javascript">
-                  $('li[data-target="#images-carousel"]').first().addClass('active')
-                </script>
-              </ol>
+              </div>
 
-              <!-- Controls -->
-              <a class="left carousel-control" href="#images-carousel" role="button" data-slide="prev">
-                <i class="fa fa-angle-left fa-3x" aria-hidden="true"></i>
-                <span class="sr-only">Previous</span>
+              <% if blip.blip_images.count > 1 %>
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <% blip.blip_images.count.times do |b| %>
+                    <li data-target="#images-carousel" data-slide-to="<%= b %>"></li>
+                  <% end %>
+                  <script type="text/javascript">
+                    $('li[data-target="#images-carousel"]').first().addClass('active')
+                  </script>
+                </ol>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#images-carousel" role="button" data-slide="prev">
+                  <i class="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#images-carousel" role="button" data-slide="next">
+                  <i class="fa fa-angle-right fa-3x" aria-hidden="true"></i>
+                  <span class="sr-only">Next</span>
+                </a>
+              <% end %>
+            </div><!-- end carousel -->
+          <% end %>
+
+          <!-- blip author title text  -->
+          <div class="blip-info" data-blip="<%= blip.id %>">
+            <% user = User.find(blip.post.user_id) %>
+
+            <h4 class="blip-title">
+              <%= blip.title %>
+            </h4>
+
+            <p class="blip-body">
+              <%= link_to user_path user do %>
+                <%= image_tag user.profile_pic if user.profile_pic %>
+              <% end %>
+
+              <a href="/blips/<%= blip.id %>" class="blip-body">
+                <p class="blip-body"><%= blip.body %></p>
               </a>
-              <a class="right carousel-control" href="#images-carousel" role="button" data-slide="next">
-                <i class="fa fa-angle-right fa-3x" aria-hidden="true"></i>
-                <span class="sr-only">Next</span>
-              </a>
-            <% end %>
-          </div><!-- end carousel -->
-        <% end %>
-
-        <!-- blip author title text  -->
-        <div class="blip-info" data-blip="<%= blip.id %>">
-          <% user = User.find(blip.post.user_id) %>
-
-          <h4 class="blip-title">
-            <%= blip.title %>
-          </h4>
-
-          <p class="blip-body">
-            <%= link_to user_path user do %>
-              <%= image_tag user.profile_pic if user.profile_pic %>
-            <% end %>
-
-            <a href="/blips/<%= blip.id %>" class="blip-body">
-              <p class="blip-body"><%= blip.body %></p>
-            </a>
-          </p>
+            </p>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 
-  <div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+  <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
     <div class="map-container">
       <div id='map'></div>
       <script type="text/javascript">
@@ -129,6 +139,7 @@
 </div>
 
 <script type="text/javascript">
+  /* Global Vars */
   var maroonMarker = L.icon({ 
     iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
     shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
@@ -139,10 +150,148 @@
     iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-icon.png").to_s %>',
     shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
     popupAnchor:  [0, -35]
-  })
+  });
+
+  /* Generic DOM */ 
+  $('li.blip').on('click', function(){
+    if( $(this).data('blip') !== undefined){
+      for(var i in window.blipsIndexer)
+        window.blipsIndexer[i].marker.setIcon(blueMarker);
+      
+      var blipSlide = $(this).data('blipslide') + 1;
+      var id = $(this).data('blip');
+      var blip = window.blipsIndexer[id];
+      blip.popup.openOn(window.map);
+      blip.marker.setIcon(maroonMarker);
+      showStopper(id);
+
+      /* update timeline */
+      timeline.goTo(blipSlide)
+    }
+  });
+
+
+  /* TimelineJS */
+  <% if @route.coverphoto.present? %>
+    var blip_cover_image = '<%= image_path(@route.coverphoto).html_safe %>';
+  <% else %>
+    var blip_cover_image = '<%= image_path(switzerland10.JPG).html_safe %>';
+  <% end %>
+
+  var events = [];
+  <% @route.blips.each do |blip| %>
+    events.push({
+      "media": {
+        url: '',
+        caption: ''
+      },
+      start_date: {
+        month: '<%= blip.date.month %>',
+        day: '<%= blip.date.day %>',
+        year: '<%= blip.date.year %>'
+      },
+      text: {
+        headline: "<%= blip.title %>",
+        text: "<%= blip.body %>"
+      }
+    });
+  <% end %>
+
+  var tlJson = {
+    title: {
+      media: {
+        url: blip_cover_image,
+        caption: ""
+      },
+      text: {
+        headline: "",
+        text: ""
+      }
+    },
+    events: events
+  }
+
+  var dmOptions = { timenav_height: 180 }
+  var timeline = new TL.Timeline('dm-timeline', tlJson, dmOptions);
+
+  // timeline Event listeners
+  timeline.on("change", function(data) {
+    var unique_id = data.unique_id;
+    var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
+
+    if(window.blipsIndexer[targetBlipId] !== undefined){
+      var tlBlip = window.blipsIndexer[targetBlipId];
+
+      // reveal stop title and body in stop details
+      showStopper(tlBlip.id);
+
+      for(var i in window.blipsIndexer)
+        window.blipsIndexer[i].marker.setIcon(blueMarker);
+
+      tlBlip.popup.openOn(window.map);
+      tlBlip.marker.setIcon(maroonMarker);
+      $('.carousel').addClass('hidden');
+
+      setTimeout(function(){
+        $('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
+      }, 500);
+    }
+  });
+
+  // add a class of tl-blip-index-X to the TL items so that I can select/focus/manipulate them as necessary
+  var blipIds = [];
+  for(var x in window.blipsIndexer)
+    blipIds.push(window.blipsIndexer[x].id)
+
+  $('.tl-timemarker').each(function(i, elem){
+    $(this).attr('data-tlBlipIndex', blipIds[i])
+  });
+
+  $('.tl-slide.tl-slide-text-only').each(function(i, elem){
+    $(this).attr('data-tlBlipIndex', blipIds[i])
+  });
+
+  // Add a carousel with user content inside timeline
+  for(var i in window.blipsIndexer){
+    var id = window.blipsIndexer[i].id;
+
+    if(window.blipsIndexer[i].images.length > 0){
+      var c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel">' + 
+                '<div class="carousel-inner" role="listbox">';
+
+      for(var x in window.blipsIndexer[i].images){
+        c += '<div class="item">' + window.blipsIndexer[i].images[x] + '</div>';
+      }
+
+      if(window.blipsIndexer[i].images.length > 1){
+        c += '<ol class="carousel-indicators">';
+
+        for(var i in window.blipsIndexer[i].images.length){
+          c +=  '<li data-target="#images-carousel-'+ i +'" data-slide-to="'+ i +'"></li>';
+        }
+
+        c +=  '</ol><a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev">' +
+                '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>' +
+                '<span class="sr-only">Previous</span>' +
+              '</a>' +
+              '<a class="right carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="next">' +
+                '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>' +
+                '<span class="sr-only">Next</span>' +
+              '</a>';
+      }
+      c += '</div></div>';
+    }
+
+    $('.tl-slide[data-tlBlipIndex="'+ id +'"]').empty();
+    $('.tl-slide[data-tlBlipIndex="'+ id +'"]').html(c);
+    $('.carousel .item:first-child').addClass('active')
+  }
+
+  /* end TimelineJS */
+
 
   // reveal blip info
-  $('.blip').on('click', function(){
+  /*$('.blip').on('click', function(){
     var active = $(this).hasClass('active');
     var blip_index = $(this).data('blip');
     $('.blip-content').addClass('hidden');
@@ -163,5 +312,15 @@
       var init_y = $(this).data('inity') + .1;
       window.map.setView([init_x, init_y]).setZoom(9);
     }
-  });
+  });*/
+
+
+  /* Functions */
+  function showStopper(id){
+    var title = window.blipsIndexer[id].title.replace(/&quot;/g, '');
+    $('.route-header').text(title);
+
+    $('p.route-stop-body').addClass('hidden');
+    $('li.blip[data-blip="'+ id +'"] p.route-stop-body').removeClass('hidden');
+  }
 </script>
