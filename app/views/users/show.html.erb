@@ -335,63 +335,65 @@
 	  });
 
 	  /* TIMELINE */
-		<% if @route.coverphoto.present? %>
-			var blip_cover_image = '<%= image_path(@route.coverphoto).html_safe %>';
-		<% else %>
-			var blip_cover_image = '<%= image_path("switzerland10.JPG").html_safe %>';
-		<% end %>
-
-		var events = [];
-		window.routesIndexer = {};
-
-		<% @route.blips.each do |blip| %>
-			events.push({
-				"media": {
-					url: '',
-					caption: ''
-				},
-				start_date: {
-					month: '<%= blip.date.month %>',
-					day: '<%= blip.date.day %>',
-					year: '<%= blip.date.year %>'
-				},
-				text: {
-					headline: "<%= blip.title %>",
-					text: "<%= blip.body %>"
-				}
-			});
-
-			var routeBlipImages = [];
-
-			<% blip.blip_images.each do |image| %>
-				routeBlipImages.push('<%= image_tag(image.image).html_safe %>')
+	  <% !@route.nil? %>
+			<% if @route.coverphoto.present? %>
+				var blip_cover_image = '<%= image_path(@route.coverphoto).html_safe %>';
+			<% else %>
+				var blip_cover_image = '<%= image_path("switzerland10.JPG").html_safe %>';
 			<% end %>
 
-			window.routesIndexer["<%= blip.id %>"] = {
-				id:    "<%= blip.id %>",
-				title: "<%= blip.title %>",
-				body:  "<%= blip.body %>",
-				date:  "<%= blip.date %>",
-				images: routeBlipImages
+			var events = [];
+			window.routesIndexer = {};
+
+			<% @route.blips.each do |blip| %>
+				events.push({
+					"media": {
+						url: '',
+						caption: ''
+					},
+					start_date: {
+						month: '<%= blip.date.month %>',
+						day: '<%= blip.date.day %>',
+						year: '<%= blip.date.year %>'
+					},
+					text: {
+						headline: "<%= blip.title %>",
+						text: "<%= blip.body %>"
+					}
+				});
+
+				var routeBlipImages = [];
+
+				<% blip.blip_images.each do |image| %>
+					routeBlipImages.push('<%= image_tag(image.image).html_safe %>')
+				<% end %>
+
+				window.routesIndexer["<%= blip.id %>"] = {
+					id:    "<%= blip.id %>",
+					title: "<%= blip.title %>",
+					body:  "<%= blip.body %>",
+					date:  "<%= blip.date %>",
+					images: routeBlipImages
+				}
+			<% end %>
+
+			var tlJson = {
+			  title: {
+			    media: {
+			      url: blip_cover_image,
+			      caption: "<%= @route.title %>"
+			    },
+			    text: {
+			      headline: "<%= @route.title %>",
+			      text: "<%= @route.description %>"
+			    }
+			  },
+			  events: events
 			}
+
+			var dmOptions = { timenav_height: 180 }
+		  timeline = new TL.Timeline('dm-timeline', tlJson, dmOptions);
 		<% end %>
-
-		var tlJson = {
-		  title: {
-		    media: {
-		      url: blip_cover_image,
-		      caption: "<%= @route.title %>"
-		    },
-		    text: {
-		      headline: "<%= @route.title %>",
-		      text: "<%= @route.description %>"
-		    }
-		  },
-		  events: events
-		}
-
-		var dmOptions = { timenav_height: 180 }
-	  timeline = new TL.Timeline('dm-timeline', tlJson, dmOptions);
 
 		var blipIds = [];
 		for(var x in window.routesIndexer)
