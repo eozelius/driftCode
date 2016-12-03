@@ -21,7 +21,7 @@
 							<p class="blip-title">Stops</p>
 						</li>
 		        <% @blips.each_with_index do |blip, index| %>
-		          <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
+		          <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>">
 		            <p class="blip-title">
 		              <%= blip.title %>
 		            </p>
@@ -40,7 +40,20 @@
 <script type="text/javascript">
 	/* Generic DOM */	
 	$('li.blip').on('click', function(){
-		showStopper($(this).data('blip'))
+		if( $(this).data('blip') !== undefined){
+			for(var i in window.blipsIndexer)
+	      window.blipsIndexer[i].marker.setIcon(blueMarker);
+			
+			var blipSlide = $(this).data('blipslide') + 1;
+			var id = $(this).data('blip');
+			var blip = window.blipsIndexer[id];
+			blip.popup.openOn(window.map);
+			blip.marker.setIcon(maroonMarker);
+			showStopper(id);
+
+			/* update timeline */
+			timeline.goTo(blipSlide)
+		}
 	});
 
 	function showStopper(id){
@@ -145,7 +158,7 @@
 			var tlBlip = window.blipsIndexer[targetBlipId];
 
 			// reveal stop title and body in stop details
-			showStopper(tlBlip.id);		
+			showStopper(tlBlip.id);
 
 			for(var i in window.blipsIndexer)
 	      window.blipsIndexer[i].marker.setIcon(blueMarker);
