@@ -181,7 +181,6 @@ function init_timeline (t, opts) {
     $('.carousel .item:first-child').addClass('active')
   } // end carousel
 
-
 	/* Timeline Event Listeners */
 	// When timeline changes, update Map and menu of blips
 	timeline.on("change", function(data) {
@@ -203,6 +202,24 @@ function init_timeline (t, opts) {
 	    setTimeout(function(){
 	      $('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
 	    }, 500);
+	  }
+	});
+
+	/* when user clicks waypoint, update map and timeline */
+	$('li.blip').on('click', function(){
+	  if( $(this).data('blip') !== undefined){
+	    for(var i in window.blipsIndexer)
+	      window.blipsIndexer[i].marker.setIcon(window.blueMarker);
+	    
+	    var blipSlide = $(this).data('blipslide') + 1;
+	    var id = $(this).data('blip');
+	    var blip = window.blipsIndexer[id];
+	    blip.popup.openOn(window.map);
+	    blip.marker.setIcon(window.maroonMarker);
+	    wayPtShow(id);
+
+	    /* update timeline */
+	    timeline.goTo(blipSlide)
 	  }
 	});
 }

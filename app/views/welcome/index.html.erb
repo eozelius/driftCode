@@ -23,103 +23,16 @@
       
       <div id='dm-timeline' style="width: 100%; height: 600px"></div>
     </div>
-
-    <% if false %>
-      <% @blips.each_with_index do |blip, index| %>
-        <div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= blip.id %>">
-          <!-- blip carousel -->
-          <% if blip.blip_images.any? %>
-            <div id="images-carousel" class="carousel slide" data-ride="carousel">
-
-              <!-- Blip Photos -->
-              <div class="carousel-inner" role="listbox">
-                <% blip.blip_images.each_with_index do |image, i| %>
-                  <div class="item <%= 'active' if i == 0 %>">
-                    <%= image_tag image.image %>
-                  </div>
-                <% end %>
-              </div>
-
-              <% if blip.blip_images.count > 1 %>
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                  <% blip.blip_images.count.times do |b| %>
-                    <li data-target="#images-carousel" data-slide-to="<%= b %>"></li>
-                  <% end %>
-                  <script type="text/javascript">
-                    $('li[data-target="#images-carousel"]').first().addClass('active')
-                  </script>
-                </ol>
-
-                <!-- Controls -->
-                <a class="left carousel-control" href="#images-carousel" role="button" data-slide="prev">
-                  <i class="fa fa-angle-left fa-3x" aria-hidden="true"></i>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#images-carousel" role="button" data-slide="next">
-                  <i class="fa fa-angle-right fa-3x" aria-hidden="true"></i>
-                  <span class="sr-only">Next</span>
-                </a>
-              <% end %>
-            </div><!-- end carousel -->
-          <% end %>
-
-          <!-- blip author title text  -->
-          <div class="blip-info" data-blip="<%= blip.id %>">
-            <% user = User.find(blip.post.user_id) %>
-
-            <h4 class="blip-title">
-              <%= blip.title %>
-            </h4>
-
-            <p class="blip-body">
-              <%= link_to user_path user do %>
-                <%= image_tag user.profile_pic if user.profile_pic %>
-              <% end %>
-
-              <a href="/blips/<%= blip.id %>" class="blip-body">
-                <p class="blip-body"><%= blip.body %></p>
-              </a>
-            </p>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
   </div>
 
   <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
     <div class="map-container">
       <div id='map'></div>
-      <script type="text/javascript">
-        var driftmap = {
-          init_x: 0.924206230200376,
-          init_y: -40.2400771379471,
-          init_zoom: 2,
-        }
-
-        var blips = [];
-        <% @blips.each do |blip| %>
-          var blipImages = [];
-          <% blip.blip_images.each do |blip_image| %>
-            blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
-          <% end %>
-
-          blips.push({
-            id:     "<%= blip.id %>",
-            x:      "<%= blip.x %>",
-            y:      "<%= blip.y %>",
-            title:  "<%= blip.title.to_json %>",
-            body:   "<%= blip.body.to_json %>",
-            images: blipImages
-          })
-        <% end %>
-
-        init_map('map', driftmap, blips)
-      </script>
     </div>
 
-    <!-- blips -->
+    <!-- waypoints Menu -->
     <div class="view-wizard-container">
+      <h5>waypoints</h5>
       <div class="markers-container wizard-step">
         <div class="wizard-markers">
           <ul>
@@ -139,23 +52,32 @@
 </div>
 
 <script type="text/javascript">
-  /* Generic DOM */ 
-  $('li.blip').on('click', function(){
-    if( $(this).data('blip') !== undefined){
-      for(var i in window.blipsIndexer)
-        window.blipsIndexer[i].marker.setIcon(window.blueMarker);
-      
-      var blipSlide = $(this).data('blipslide') + 1;
-      var id = $(this).data('blip');
-      var blip = window.blipsIndexer[id];
-      blip.popup.openOn(window.map);
-      blip.marker.setIcon(window.maroonMarker);
-      wayPtShow(id);
+  /* Leaflet Map */
+  var driftmap = {
+    init_x: 0.924206230200376,
+    init_y: -40.2400771379471,
+    init_zoom: 2,
+  }
 
-      /* update timeline */
-      timeline.goTo(blipSlide)
-    }
-  });
+  var blips = [];
+  <% @blips.each do |blip| %>
+    var blipImages = [];
+    <% blip.blip_images.each do |blip_image| %>
+      blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
+    <% end %>
+
+    blips.push({
+      id:     "<%= blip.id %>",
+      x:      "<%= blip.x %>",
+      y:      "<%= blip.y %>",
+      title:  "<%= blip.title.to_json %>",
+      body:   "<%= blip.body.to_json %>",
+      images: blipImages
+    })
+  <% end %>
+
+  init_map('map', driftmap, blips);
+  /* End Leaflet Map */
 
   /* TimelineJS */
   <% if @route.coverphoto.present? %>
@@ -199,30 +121,5 @@
 
   var dmOptions = { timenav_height: 180 }
   init_timeline(timeLineData, dmOptions )
-
   /* end TimelineJS */
-
-  // reveal blip info
-  /*$('.blip').on('click', function(){
-    var active = $(this).hasClass('active');
-    var blip_index = $(this).data('blip');
-    $('.blip-content').addClass('hidden');
-    $('.blip-content[data-blip="'+ blip_index +'"]').removeClass("hidden");
-
-    for(var i in window.blipsIndexer)
-      window.blipsIndexer[i].marker.setIcon(window.blueMarker);
-
-    window.blipsIndexer[blip_index].marker.setIcon(window.maroonMarker);
-    window.blipsIndexer[blip_index].popup.openOn(window.map);
-
-    if(active){
-      $(this).removeClass('active');
-    } else {
-      $('.blip-info[data-blip="'+ blip_index +'"]').slideDown(700);
-      $(this).addClass('active');
-      var init_x = $(this).data('initx') + .36377;
-      var init_y = $(this).data('inity') + .1;
-      window.map.setView([init_x, init_y]).setZoom(9);
-    }
-  });*/ 
 </script>
