@@ -29,15 +29,20 @@ function init_map(dom, driftmap, blips){
 
 		// Add blips to Map
 		if(blips.length > 0){
-			var blipsIndexer = {}
+			window.blipsIndexer = {}
 			for(var i in blips){
 				var id 		= xss_trim(blips[i].id); 
 				var lat 	= xss_trim(blips[i].x);
 				var lng 	= xss_trim(blips[i].y);
 				var body 	= blips[i].body;
 				var title = blips[i].title;
-				var blip_images_carousel = '';
+				var blipImages = [];
+				for(var x in blips[i].images){
+					blipImages.push(blips[i].images[x])
+				}
 
+				/* Build a carousel to go inside of the leaflet popup */
+				var blip_images_carousel = '';
 				if(blips[i].images.length > 0) {
 					blip_images_carousel += '<div class="blip-images">' +
 																			'<div id="popup-carousel" class="" data-ride="carousel">' + 
@@ -49,6 +54,7 @@ function init_map(dom, driftmap, blips){
 					blip_images_carousel += '</div>';
 				}
 
+				/* Leaflet Map blip properties */
 				var popupOptions = {
 					className: 'blip-popup'
 				}
@@ -63,29 +69,26 @@ function init_map(dom, driftmap, blips){
 																blip_images_carousel +
 															'</div></div>';
 
-				window.blipMarker = L.marker([lat, lng]).addTo(m);
+				var blipMarker = L.marker([lat, lng]).addTo(m);
 				var blipPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
 				blipMarker.bindPopup(blipPopup);
-				
-				var blipImages = [];
+				/* End Leaflet Map blip properties */
 
-				for(var x in blips[i].images){
-					blipImages.push(blips[i].images[x])
-				}
-
-				// create a window object that all views can access 
-				blipsIndexer[blips[i].id.toString()] = {
-					id: blips[i].id,
-					title: blips[i].title,
-					body:  blips[i].body,
-					images:blipImages,
-					marker: window.blipMarker,
-					popup: blipPopup
+				// once blip has been initialized add it to window.blipsIndexer object that all views can access 
+				// window.blipsIndexer[blips[i].id.toString()] = {
+				window.blipsIndexer[i] = {
+					id: 	  id,
+					title:  title,
+					body:   body,
+					images: blipImages,
+					marker: blipMarker,
+					popup:  blipPopup
 				}
 			}
-			window.blipsIndexer = blipsIndexer;
-			window.blipsIndexer[blips[0].id.toString()].popup.openOn(map);
-			window.blipsIndexer[blips[0].id.toString()].marker.setIcon(window.maroonMarker);
+
+			// Open first blip on map
+			window.blipsIndexer[0].marker.setIcon(window.maroonMarker);
+			window.blipsIndexer[0].popup.openOn(map);
 		} // end Markers
 
 /*		// Add routes to Map
@@ -130,8 +133,8 @@ function init_timeline (t, opts) {
 	// by the DOM elements 
 	// $('.tl-timemarker') = Flags at the bottom, on the timeline. 
 	// $('.tl-slide.tl-slide-text-only') = the slide/content of the timeline
-	// Begin Indexing
 
+	// Begin Indexing
   var blipIds = [];
   for(var x in window.blipsIndexer)
     blipIds.push(window.blipsIndexer[x].id)
@@ -157,28 +160,30 @@ function init_timeline (t, opts) {
         c += '<div class="item">' + window.blipsIndexer[i].images[x] + '</div>';
       }
 
-      if(window.blipsIndexer[i].images.length > 1){
-        c += '<ol class="carousel-indicators">';
-
-        for(var i in window.blipsIndexer[i].images.length){
-          c +=  '<li data-target="#images-carousel-'+ i +'" data-slide-to="'+ i +'"></li>';
-        }
-
-        c +=  '</ol><a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev">' +
-                '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>' +
-                '<span class="sr-only">Previous</span>' +
-              '</a>' +
-              '<a class="right carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="next">' +
-                '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>' +
-                '<span class="sr-only">Next</span>' +
-              '</a>';
+      // if blip has more than one image, add indicators
+      if( window.blipsIndexer[i].images.length > 1 ){
+      	c += '<ol class="carousel-indicators">';
+	      
+	      for(var y in window.blipsIndexer[i].images.length){
+	        c +=  '<li data-target="#images-carousel-'+ i +'" data-slide-to="'+ y +'"></li>';
+	      }
+	      c +=  '</ol><a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev">' +
+	              '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>' +
+	              '<span class="sr-only">Previous</span>' +
+	            '</a>' +
+	            '<a class="right carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="next">' +
+	              '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>' +
+	              '<span class="sr-only">Next</span>' +
+	            '</a>';
+	      c += '</div></div>';
       }
-      c += '</div></div>';
     }
 
     $('.tl-slide[data-tlBlipIndex="'+ id +'"]').empty();
     $('.tl-slide[data-tlBlipIndex="'+ id +'"]').html(c);
-    $('.carousel .item:first-child').addClass('active')
+    $('.carousel .item:first-child').addClass('active');
+
+    // todo, add a condition to handle imageless blips
   } // end carousel
 
 	/* Timeline Event Listeners */
@@ -186,10 +191,10 @@ function init_timeline (t, opts) {
 	timeline.on("change", function(data) {
 	  var unique_id = data.unique_id;
 	  var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
+	  var tlBlip = getBlip(targetBlipId);
 
-	  if(window.blipsIndexer[targetBlipId] !== undefined){
+	  if(tlBlip){
 	    // reveal stop title and body in waypoint menu
-	    var tlBlip = window.blipsIndexer[targetBlipId];
 	    wayPtShow(tlBlip.id);
 
 	    for(var i in window.blipsIndexer)
@@ -202,10 +207,10 @@ function init_timeline (t, opts) {
 	    setTimeout(function(){
 	      $('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
 	    }, 500);
-	  }
+		}
 	});
 
-	/* when user clicks waypoint, update map and timeline */
+	/* when user clicks waypoint <li>, update map and timeline */
 	$('li.blip').on('click', function(){
 	  if( $(this).data('blip') !== undefined){
 	    for(var i in window.blipsIndexer)
@@ -213,22 +218,36 @@ function init_timeline (t, opts) {
 	    
 	    var blipSlide = $(this).data('blipslide') + 1;
 	    var id = $(this).data('blip');
-	    var blip = window.blipsIndexer[id];
-	    blip.popup.openOn(window.map);
-	    blip.marker.setIcon(window.maroonMarker);
-	    wayPtShow(id);
 
-	    /* update timeline */
-	    timeline.goTo(blipSlide)
+	    var blip = getBlip(id);
+	    if(blip){
+				blip.popup.openOn(window.map);
+				blip.marker.setIcon(window.maroonMarker);
+		    wayPtShow(id);
+		    /* update timeline */
+		    timeline.goTo(blipSlide)
+	    }
 	  }
 	});
 }
 
 function wayPtShow (id){
-  var title = window.blipsIndexer[id].title.replace(/&quot;/g, '');
-  $('.route-header').text(title);
-  $('p.route-stop-body').addClass('hidden');
-  $('li.blip[data-blip="'+ id +'"] p.route-stop-body').removeClass('hidden');
+	var blip = getBlip(id);
+
+	if( blip ){
+	  var title  = blip.title.replace(/&quot;/g, '');
+	  var blipId = blip.id;
+	  $('.route-header').text(title);
+	  $('p.route-stop-body').addClass('hidden');
+	  $('li.blip[data-blip="'+ blipId +'"] p.route-stop-body').removeClass('hidden');
+  }
+}
+
+function getBlip(id){
+	for(var x in window.blipsIndexer){
+		if( window.blipsIndexer[x].id == id ){ return window.blipsIndexer[x]; }		
+	}
+	return false;
 }
 
 function flash_now(type, message){

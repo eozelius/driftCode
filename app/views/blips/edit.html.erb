@@ -138,7 +138,7 @@
 		});
 
 		// enable dragging for the marker
-		var b = window.blipMarker;
+		var b = window.blipsIndexer[0].marker; // this works because the index will only have one entry.  This is not always the case.
 		b.dragging.enable();
 		b.on('dragend', function(e){
 			setLatLng(e.target.getLatLng().lat, e.target.getLatLng().lng);
