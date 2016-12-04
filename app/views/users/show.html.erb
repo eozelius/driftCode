@@ -300,13 +300,13 @@
 			$('.profile-details-container').removeClass('form-open');
 		});
 
-		maroonMarker = L.icon({ 
+		window.maroonMarker = L.icon({ 
 		  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
 		  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
 		  popupAnchor:  [0, -35]
 		});
 
-		blueMarker = L.icon({
+		window.blueMarker = L.icon({
 		  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-icon.png").to_s %>',
 		  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
 		  popupAnchor:  [0, -35]
@@ -320,9 +320,9 @@
 	    $('.blip-content[data-blip="'+ blip_index +'"]').removeClass("hidden");
 
 	    for(var i in window.blipsIndexer)
-	      window.blipsIndexer[i].marker.setIcon(blueMarker);
+	      window.blipsIndexer[i].marker.setIcon(window.blueMarker);
 
-	    window.blipsIndexer[blip_index].marker.setIcon(maroonMarker);
+	    window.blipsIndexer[blip_index].marker.setIcon(window.maroonMarker);
 	    window.blipsIndexer[blip_index].popup.openOn(window.map)
 	    
 	    if(active){
@@ -404,10 +404,10 @@
 		  	if( typeof targetBlipId !== 'undefined'){
 		  		var tlBlip = window.blipsIndexer[targetBlipId];
 		  		for(var i in window.blipsIndexer)
-		        window.blipsIndexer[i].marker.setIcon(blueMarker);
+		        window.blipsIndexer[i].marker.setIcon(window.blueMarker);
 
 		  		tlBlip.popup.openOn(window.map);
-		  		tlBlip.marker.setIcon(maroonMarker);
+		  		tlBlip.marker.setIcon(window.maroonMarker);
 		  	}
 
 		  	$('.carousel').addClass('hidden');
