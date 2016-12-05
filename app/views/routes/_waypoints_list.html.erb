@@ -2,27 +2,27 @@
 <div class="view-wizard-container">
 	<h5 class="waypoints-title">journeys</h5>
 	<div class="markers-container wizard-step">
-    <div class="wizard-markers">
-    	<% if !@routes.nil? %>
-    		<ul class="waypoints-container">
-	    		<% @routes.each_with_index do |route| %>
-						<li class="route-container" data-route="<%= route.id %>">
+  	<% if !@routes.nil? %>
+  		<ul class="waypoints-container">
+    		<% @routes.each_with_index do |route, i| %>
+					<li class="route-item-container" data-route="<%= route.id %>">
+						<div class="route-item">
 							<p class="route-title"><%= route.title %></p>
-							<ul>
-								<% route.blips.each_with_index do |blip, index| %>
-									<li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>">
+							<ul class="waypoint <%= 'hidden' if i != 0 %>">
+								<% route.blips.each_with_index do |blip, x| %>
+									<li class="blip <%= ' step-selected' if x == 0 %>" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= x %>">
 										<p class="blip-title"><%= blip.title %></p>
-										<p class="route-stop-body <%= 'hidden' if index != 0 %>">
+										<p class="route-stop-body <%= 'hidden' if x != 0 %>">
 											<%= blip.body %>
 										</p>
 									</li>
 								<% end %>
 							</ul>
-						</li>
-  	  		<% end %>
-    		</ul>
-    	<% end %>
-    </div>
+						</div>
+					</li>
+	  		<% end %>
+  		</ul>
+  	<% end %>
   </div>
 
   <% if user_is_home(@user) %>
@@ -34,3 +34,10 @@
   	</p>
   <% end %>
 </div>
+
+<script type="text/javascript">
+	$('.route-item-container').on('click', function(){
+		$('ul.waypoint').addClass('hidden');
+		$(this).find('ul.waypoint').removeClass('hidden');
+	});
+</script>
