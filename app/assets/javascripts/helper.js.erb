@@ -213,6 +213,9 @@ function init_timeline (t, opts) {
 	/* when user clicks waypoint <li>, update map and timeline */
 	$('li.blip').on('click', function(){
 	  if( $(this).data('blip') !== undefined){
+	  	$('.step-selected').removeClass('step-selected');
+	  	$(this).addClass('step-selected');
+
 	    for(var i in window.blipsIndexer)
 	      window.blipsIndexer[i].marker.setIcon(window.blueMarker);
 	    
@@ -225,7 +228,7 @@ function init_timeline (t, opts) {
 				blip.marker.setIcon(window.maroonMarker);
 		    wayPtShow(id);
 		    /* update timeline */
-		    timeline.goTo(blipSlide)
+		    timeline.goTo(blipSlide);
 	    }
 	  }
 	});

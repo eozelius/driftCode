@@ -32,13 +32,14 @@
 
     <!-- waypoints List -->
     <div class="view-wizard-container">
-      <h5>waypoints</h5>
+      <h5 class="waypoints-title">waypoints</h5>
       <div class="markers-container wizard-step">
         <div class="wizard-markers">
           <ul>
             <% @blips.each_with_index do |blip, index| %>
               <% author = User.find(Post.find(blip.post_id).user_id) # wowzers %>
-              <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
+              <li class="blip <%= 'step-selected' if index == 0 %>" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>">
+
                 <p class="blip-title">
                   <%= blip.title %>
                 </p>

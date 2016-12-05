@@ -9,20 +9,8 @@
 
 	}
 
-	.view-wizard-container.existing-blips{
-		border-top: 3px solid #C2D9EB;
-
-		.wizard-step {
-			overflow-y: scroll; 
-		}
-
-		.markers-container {
-			height: 250px;
-
-			li {
-				cursor: grab;
-			}
-		}
+	.markers-container.wizard-step {
+		max-height: 417px;
 	}
 }
 
@@ -33,4 +21,21 @@
 
 .route-header {
 	margin: 0 0 4%;
+}
+
+.route-description {
+	margin: 0% 5% 3%;
+	color: #C2D9EB;
+	text-align: center;
+}
+
+.waypoints-title {
+	text-align: center;
+	margin: 2% 0 2%;
+}
+
+.step-selected {
+	background-color: #e3e9f2;
+	border: 2px solid #ccc !important;
+	border-bottom: 3px solid #ccc !important;
 }
