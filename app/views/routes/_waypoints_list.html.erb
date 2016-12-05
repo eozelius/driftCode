@@ -1,0 +1,36 @@
+<!-- waypoints List -->
+<div class="view-wizard-container">
+	<h5 class="waypoints-title">journeys</h5>
+	<div class="markers-container wizard-step">
+    <div class="wizard-markers">
+    	<% if !@routes.nil? %>
+    		<ul class="waypoints-container">
+	    		<% @routes.each_with_index do |route| %>
+						<li class="route-container" data-route="<%= route.id %>">
+							<p class="route-title"><%= route.title %></p>
+							<ul>
+								<% route.blips.each_with_index do |blip, index| %>
+									<li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>">
+										<p class="blip-title"><%= blip.title %></p>
+										<p class="route-stop-body <%= 'hidden' if index != 0 %>">
+											<%= blip.body %>
+										</p>
+									</li>
+								<% end %>
+							</ul>
+						</li>
+  	  		<% end %>
+    		</ul>
+    	<% end %>
+    </div>
+  </div>
+
+  <% if user_is_home(@user) %>
+  	<p class="edit-delete-map">
+  		<%= link_to 'new journey', new_route_path %>
+  		<!-- <span style="
+  		color:#23527c; font-size:14px;"> | </span>  -->
+  		<%#= link_to 'new blip', new_blip_path %>
+  	</p>
+  <% end %>
+</div>

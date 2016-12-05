@@ -2,87 +2,12 @@
 <div class="container" id="profile">
 	<div id="dm-content-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
 
-		<!-- Routes -->
-		<% if !@route.nil? %>
-			<div class="route-content">
-				<h4 class="route-header"><%= @route.title %></h4>
-        <p class="route-description"><%= @route.description %></p>
-				<div id='dm-timeline' style="width: 100%; height: 600px"></div>
-			</div>
-		
-		<!-- Blips -->
+		<% if @route.nil? %>
+			<%= render 'routes/init_routes_timeline_html' %>
 		<% elsif !@blips.nil? %>
-			<% @blips.each_with_index do |blip, index| %>
-				<div class="blip-content <%= 'hidden' if index != 0 %>" data-blip="<%= blip.id %>">
-					<!-- blip carousel -->
-					<% if blip.blip_images.any? %>
-					  <div id="images-carousel" class="carousel slide" data-ride="carousel">
-					    <!-- Blip Photos -->
-					    <div class="carousel-inner" role="listbox">
-					      <% blip.blip_images.each_with_index do |image, i| %>
-					        <div class="item <%= 'active' if i == 0 %>">
-					          <%= image_tag image.image %>
-					        </div>
-					      <% end %>
-					    </div>
-
-					    <% if blip.blip_images.count > 1 %>
-					    	<!-- Indicators -->
-					    	<ol class="carousel-indicators">
-					    	  <% blip.blip_images.count.times do |b| %>
-					    	    <li data-target="#images-carousel" data-slide-to="<%= b %>"></li>
-					    	  <% end %>
-					    	  <script type="text/javascript">
-					    	    $('li[data-target="#images-carousel"]').first().addClass('active')
-					    	  </script>
-					    	</ol>
-
-						    <!-- Controls -->
-						    <a class="left carousel-control" href="#images-carousel" role="button" data-slide="prev">
-						      <i class="fa fa-angle-left fa-3x" aria-hidden="true"></i>
-						      <span class="sr-only">Previous</span>
-						    </a>
-						    <a class="right carousel-control" href="#images-carousel" role="button" data-slide="next">
-						      <i class="fa fa-angle-right fa-3x" aria-hidden="true"></i>
-						      <span class="sr-only">Next</span>
-						    </a>
-						  <% end %>
-					  </div><!-- end carousel -->
-					<% end %>
-
-					<!-- blip title text  -->
-					<div class="blip-info" data-blip="<%= blip.id %>">
-					  <h4 class="blip-title">
-					    <%= blip.title %>
-					    <% if user_is_home(@user) %>
-								<%= link_to '<span style="font-style:italic;font-size:.7em;"> - edit</span>'.html_safe, edit_blip_path(blip) %>
-							<% end %>
-					  </h4>
-
-					  <p class="blip-body">
-					    <%= blip.body %>
-					  </p>
-					</div>
-				</div>
-			<% end %>
+			<%= render 'blips/carousel' %>
 		<% else %>
-			<div class="start-new">
-				<%= image_tag 'switzerland10.JPG' %>
-
-				<% if user_is_home(@user) %>
-					<div class="start-text">
-						<%= link_to new_route_path do %>
-							<p>begin an new adventure now</p>
-						<% end %>
-					</div>
-				<% else %>
-					<div class="start-text">
-						<p>
-							<%= @user.name %> has not added any content yet.
-						</p>
-					</div>
-				<% end %>
-			</div>
+			<%= render 'routes/init_adventure' %>
 		<% end %>
 	</div>
 
@@ -91,74 +16,7 @@
 			<div id='map'></div>
 		</div>
 
-		<!-- waypoints List -->
-		<div class="view-wizard-container">
-			<h5 class="waypoints-title">journeys</h5>
-			<div class="markers-container wizard-step">
-		    <div class="wizard-markers">
-		    	<% if @user.post.routes.count > 0 %>
-		    		<ul>
-		    			<% @user.post.routes.each do |route| %>
-		    				<li class="blip" data-route="<%= route.id %>">
-		    					<p class="blip-title">
-		    						<%= route.title %>
-		    						<% if user_is_home(@user) %>
-			              	<%= link_to '<span style="font-style:italic;"> - edit</span>'.html_safe, edit_route_path(route) %>
-			              <% end %>
-		    					</p>
-		    				</li>
-		    			<% end %>
-		    		</ul>
-		    	<% end %>
-		    </div>
-		  </div>
-
-		  <% if false %>
-			  <!-- blips -->
-			  <div class="markers-container wizard-step">
-			    <div class="wizard-markers">
-			    	<% if @user.post.blips.count > 0 %>
-				      <ul>
-								<li class="blip">
-									<p class="blip-title">Blips</p>
-								</li>
-				        <% @user.post.blips.each do |blip| %>
-				          <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
-				            <p class="blip-title">
-				              <%= blip.title %>
-				              <% if user_is_home(@user) %>
-				              	<%= link_to '<span style="font-style:italic;"> - edit</span>'.html_safe, edit_blip_path(blip) %>
-				              <% end %>
-				            </p>
-				          </li>
-				        <% end %>
-				      </ul>
-				    <% else %>
-				    	<ul>
-				    		<% if user_is_home(@user) %>
-									<li class="blip">
-										<%= link_to new_blip_path do %>
-											<p class="blip-title">
-												create new blip
-											</p>
-										<% end %>
-									</li>
-								<% end %>
-				    	</ul>
-				    <% end %>
-			    </div>
-			  </div>
-			<% end %>
-
-		  <% if user_is_home(@user) %>
-		  	<p class="edit-delete-map">
-		  		<%= link_to 'new journey', new_route_path %>
-		  		<!-- <span style="
-		  		color:#23527c; font-size:14px;"> | </span>  -->
-		  		<%#= link_to 'new blip', new_blip_path %>
-		  	</p>
-		  <% end %>
-		</div>
+		<%= render 'routes/waypoints_list' %>
 	</div>
 </div>
 

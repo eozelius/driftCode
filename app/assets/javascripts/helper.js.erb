@@ -125,9 +125,9 @@ function init_map(dom, driftmap, blips){
 	}	
 }
 
-function init_timeline (t, opts) {
+function init_timeline (dom, t, opts) {
 	// Initialize Timeline
-	window.timeline = new TL.Timeline('dm-timeline', t, opts);
+	window.timeline = new TL.Timeline(dom, t, opts);
 
 	// TimelineJS3 does not do a great job of indexing slides, so I am manually indexing each slide of the timeline represented
 	// by the DOM elements 
