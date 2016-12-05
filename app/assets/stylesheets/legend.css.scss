@@ -83,36 +83,39 @@
 		color: #C2D9EB;
 		overflow: hidden;
 	}
-
-
-	/* Wizard */
-	.markers-container.wizard-step {
-		margin-top: 15px;
-	}
-	ul.waypoints-container {
-		height:325px;
-		border: 1px solid #ccc;
-		background-color: #f9fbff;
-		padding: 2%;
-		cursor: pointer;
-		overflow-y: scroll;
-
-		li.route-item-container {
-			border-bottom: 1px solid #ccc;
-			padding: 2%;
-		}
-
-		li.blip {
-			padding: 0 2%;
-			margin: 3%;
-			border-bottom: 1px solid #ccc;
-		}
-	}
-
 }
 
-.expanded-map {
-	position: absolute;	
+/* Wizard Accordian */
+.view-wizard-container {
+	#waypt-accord {
+		cursor: pointer;
+
+		h4 {
+			font-size: 1.3em;
+			color:#552727;
+			font-weight: 400;
+		}
+
+		p {
+			font-size: 1.00em;
+			color:#C2D9EB;
+		}
+
+
+
+	}
+
+	#waypt-accord,
+	.panel,
+	.panel-default,
+	.panel-group .panel + .panel {
+		margin: 0;
+		border-radius: 0;
+	}
+
+	.panel-collapse.collapse.in {
+		height: 200px;
+	}
 }
 
 .start-new {

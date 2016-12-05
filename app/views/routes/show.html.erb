@@ -16,18 +16,26 @@
 			<!-- waypoints List -->
 			<div class="view-wizard-container">
 				<h5 class="waypoints-title">journeys</h5>
-				<div class="markers-container wizard-step">
-					<div class="route-item">
-						<ul class="waypoint">
-							<% @route.blips.each_with_index do |blip, index| %>
-								<li class="blip <%= ' step-selected' if index == 0 %>" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>">
-									<p class="blip-title"><%= blip.title %></p>
-									<p class="route-stop-body <%= 'hidden' if index != 0 %>">
+				<div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true">
+					<% @route.blips.each_with_index do |blip, index| %>
+						<div class="panel panel-default">
+							<div id="heading-<%= index %>" class="panel-heading blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>" role="tab">
+					      <h4 class="panel-title">
+					      	<a role="button" data-toggle="collapse" data-parent="#waypt-accord" href="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>">
+          					<%= blip.title %>
+        					</a>
+					      </h4>
+							</div>
+
+							<div id="collapse-<%= index %>" class="panel-collapse collapse <%= 'in' if index == 0 %>" role="tabpanel" aria-labelledby="heading-<%= index %>">
+								<div class="panel-body">
+									<p>
 										<%= blip.body %>
 									</p>
-								</li>
-							<% end %>
-						</ul>
+								</div>
+							</div>
+						</div>
+					<% end %>
 					</div>
 			  </div>
 
