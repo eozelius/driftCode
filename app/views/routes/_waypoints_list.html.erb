@@ -1,43 +1,76 @@
-<!-- waypoints List -->
-<div class="view-wizard-container">
-	<h5 class="waypoints-title">journeys</h5>
-	<div class="markers-container wizard-step">
-  	<% if !@routes.nil? %>
-  		<ul class="waypoints-container">
-    		<% @routes.each_with_index do |route, i| %>
-					<li class="route-item-container" data-route="<%= route.id %>">
-						<div class="route-item">
-							<p class="route-title"><%= route.title %></p>
-							<ul class="waypoint <%= 'hidden' if i != 0 %>">
-								<% route.blips.each_with_index do |blip, x| %>
-									<li class="blip <%= ' step-selected' if x == 0 %>" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= x %>">
-										<p class="blip-title"><%= blip.title %></p>
-										<p class="route-stop-body <%= 'hidden' if x != 0 %>">
-											<%= blip.body %>
-										</p>
-									</li>
-								<% end %>
-							</ul>
+<% if !@routes.nil? %>
+	<!-- waypoints List -->
+	<div class="view-wizard-container">
+		<h5 class="waypoints-title">journeys</h5>
+		<div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true">
+			<% @routes.each_with_index do |route, index| %>
+	  		<div class="panel panel-default">
+	  			<div id="heading-<%= index %>" class="panel-heading">
+	  				<h4 class="panel-title">
+	  					<a role="button" data-toggle="collapse" data-parent="#waypt-accord" href="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>">
+          			<%= route.title %>
+        			</a>
+	  				</h4>
+	  			</div>
+
+	  			<div id="collapse-<%= index %>" class="panel-collapse collapse <%= 'in' if index == 0 %>" role="tabpanel" aria-labelledby="heading-<%= index %>">
+	  				<div class="panel-body">
+	  					<% if route.blips.present? %>
+	  						<ul class="waypoints-container">
+	  							<% route.blips.each_with_index do |blip, x| %>
+	  								<li class="blip <%= ' step-selected' if x == 0 %>" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= x %>">
+	  									<p class="blip-title"><%= blip.title %></p>
+	  									<p class="route-stop-body hidden">
+	  										<%= blip.body %>
+	  									</p>
+	  								</li>
+			  					<% end %>							
+	  						</ul>
+	  					<% end %>							
 						</div>
-					</li>
-	  		<% end %>
-  		</ul>
-  	<% end %>
-  </div>
+					</div>
+				</div>
+				<% end %>
 
-  <% if user_is_home(@user) %>
-  	<p class="edit-delete-map">
-  		<%= link_to 'new journey', new_route_path %>
-  		<!-- <span style="
-  		color:#23527c; font-size:14px;"> | </span>  -->
-  		<%#= link_to 'new blip', new_blip_path %>
-  	</p>
-  <% end %>
-</div>
 
-<script type="text/javascript">
-	$('.route-item-container').on('click', function(){
-		$('ul.waypoint').addClass('hidden');
-		$(this).find('ul.waypoint').removeClass('hidden');
-	});
-</script>
+
+
+				<% if false %>
+		  		<ul class="waypoints-container">
+		    		<% @routes.each_with_index do |route, i| %>
+							<li class="route-item-container" data-route="<%= route.id %>">
+								<div class="route-item">
+									<p class="route-title"><%= route.title %></p>
+									<ul class="waypoint <%= 'hidden' if i != 0 %>">
+										<% route.blips.each_with_index do |blip, x| %>
+											<li class="blip <%= ' step-selected' if x == 0 %>" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= x %>">
+												<p class="blip-title"><%= blip.title %></p>
+												<p class="route-stop-body <%= 'hidden' if x != 0 %>">
+													<%= blip.body %>
+												</p>
+											</li>
+										<% end %>
+									</ul>
+								</div>
+							</li>
+			  		<% end %>
+		  		</ul>
+		  	<% end %>		  		
+
+	  <% if user_is_home(@user) %>
+	  	<p class="edit-delete-map">
+	  		<%= link_to 'new journey', new_route_path %>
+	  		<!-- <span style="
+	  		color:#23527c; font-size:14px;"> | </span>  -->
+	  		<%#= link_to 'new blip', new_blip_path %>
+	  	</p>
+	  <% end %>
+	</div>
+
+	<script type="text/javascript">
+		$('.route-item-container').on('click', function(){
+			$('ul.waypoint').addClass('hidden');
+			$(this).find('ul.waypoint').removeClass('hidden');
+		});
+	</script>
+<% end %>

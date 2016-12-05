@@ -83,6 +83,11 @@
 		color: #C2D9EB;
 		overflow: hidden;
 	}
+
+	.waypoints-title {
+		text-align: center;
+		margin:2%;
+	}
 }
 
 /* Wizard Accordian */
@@ -101,8 +106,10 @@
 			color:#C2D9EB;
 		}
 
-
-
+		.blip-title {
+			color: #552727;
+			font-style: italic;
+		}
 	}
 
 	#waypt-accord,
@@ -114,7 +121,7 @@
 	}
 
 	.panel-collapse.collapse.in {
-		height: 200px;
+		min-height: 200px;
 	}
 }
 
