@@ -1,7 +1,11 @@
 <div id="route" class="route-show">
 	<div class="container">
 		<div id="dm-content-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-			<%= render 'routes/init_routes_html' %>
+			<div class="route-content">
+				<h4 class="route-header"><%= @route.title %></h4>
+				<p class="route-description"><%= @route.description %></p>
+				<div id='dm-timeline-0' style="width: 100%; height: 600px"></div>
+			</div>
 		</div>
 
 		<div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
@@ -9,28 +13,32 @@
 				<div id='map'></div>
 			</div>
 
-			<!-- Waypoints List -->
+			<!-- waypoints List -->
 			<div class="view-wizard-container">
-				<h5 class="waypoints-title">waypoints</h5>
+				<h5 class="waypoints-title">journeys</h5>
 				<div class="markers-container wizard-step">
-				  <div class="wizard-markers">
-			      <ul>
-			        <% @blips.each_with_index do |blip, index| %>
-			          <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>">
-			            <p class="blip-title">
-			              <%= blip.title %>
-	                  <% if user_is_home(@user) %>
-	              			<%= link_to '<span style="font-style:italic;font-size:.8em;"> - edit</span>'.html_safe, edit_blip_path(blip) %>
-	              		<% end %>
-			            </p>
-			            <p class="route-stop-body <%= 'hidden' if index != 0 %>">
-			            	<%= blip.body %>
-			            </p>
-			          </li>
-			        <% end %>
-			      </ul>
+					<div class="route-item">
+						<ul class="waypoint">
+							<% @route.blips.each_with_index do |blip, index| %>
+								<li class="blip <%= ' step-selected' if index == 0 %>" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>">
+									<p class="blip-title"><%= blip.title %></p>
+									<p class="route-stop-body <%= 'hidden' if index != 0 %>">
+										<%= blip.body %>
+									</p>
+								</li>
+							<% end %>
+						</ul>
 					</div>
-				</div>
+			  </div>
+
+			  <% if user_is_home(@user) %>
+			  	<p class="edit-delete-map">
+			  		<%= link_to 'new journey', new_route_path %>
+			  		<!-- <span style="
+			  		color:#23527c; font-size:14px;"> | </span>  -->
+			  		<%#= link_to 'new blip', new_blip_path %>
+			  	</p>
+			  <% end %>
 			</div>
 		</div>
 	</div>
@@ -58,8 +66,7 @@
 			title: 	"<%= blip.title.to_json %>",
 			body: 	"<%= blip.body.to_json %>",
 			images: blipImages
-		})
-
+		});
 	<% end %>
 
 	init_map('map', driftmap, blips);
@@ -106,5 +113,11 @@
 	}
 
 	var dmOptions = { timenav_height: 180 }	
-	init_timeline(timeLineData, dmOptions );
+	init_timeline('dm-timeline-0', timeLineData, dmOptions );
+
+	/* Generic Dom Functions */
+	$('.route-item-container').on('click', function(){
+		$('ul.waypoint').addClass('hidden');
+		$(this).find('ul.waypoint').removeClass('hidden');
+	});
 </script>

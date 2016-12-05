@@ -93,9 +93,9 @@ class RoutesController < ApplicationController
 	end
 
 	def show
-		@user = current_user
+		@user  = current_user
+		@post  = @user.post
 		@route = Route.find(params[:id])
-		@post = current_user.post
 		@blips = @route.blips.order(:date)
 	end
 

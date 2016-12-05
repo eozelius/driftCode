@@ -18,8 +18,6 @@
   <div id="dm-content-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
     <% if !@routes.nil? %>
       <%= render 'routes/init_routes_timeline_html' %>
-    <% elsif !@blips.nil? %>
-      <%= render 'blips/carousel' %>      
     <% else %>
       <%= render 'routes/init_adventure' %>
     <% end %>
@@ -44,7 +42,7 @@ $(function(){
   }
 
   var blips = [];
-  <% @blips.each do |blip| %>
+  <% @routes.first.blips.each do |blip| %>
     var blipImages = [];
     <% blip.blip_images.each do |blip_image| %>
       blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
