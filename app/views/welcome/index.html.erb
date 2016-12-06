@@ -73,7 +73,7 @@ $(function(){
 
       /* Route waypoints */
       var events = [];
-      <% route.blips.each do |blip| %>
+      <% route.blips.order(:date).each do |blip| %>
         events.push({
           "media": {
             url: '',
@@ -87,7 +87,8 @@ $(function(){
           text: {
             headline: "<%= blip.title %>",
             text: "<%= blip.body %>"
-          }
+          },
+          blip_id: '<%= blip.id %>'
         });
       <% end %>
 
@@ -106,7 +107,7 @@ $(function(){
       }
 
       var dmOptions = { timenav_height: 180 }
-      init_timeline('dm-timeline-<%= index %>', timeLineData, dmOptions );
+      init_timeline('dm-timeline-<%= index %>', timeLineData, dmOptions, '<%= route.id %>' );
     <% end %>
   <% end %>
   /* end TimelineJS */

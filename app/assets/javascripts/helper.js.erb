@@ -11,6 +11,10 @@ window.blueMarker = L.icon({
   popupAnchor:  [0, -35]
 });
 
+window.blipsIndexer = {};
+window.timelineIndexer = [];
+tlCount = -1;
+
 function init_map(dom, driftmap, blips){
 	L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
 	try {
@@ -29,7 +33,6 @@ function init_map(dom, driftmap, blips){
 
 		// Add blips to Map
 		if(blips.length > 0){
-			window.blipsIndexer = {}
 			for(var i in blips){
 				var id 		= xss_trim(blips[i].id); 
 				var lat 	= xss_trim(blips[i].x);
@@ -90,34 +93,6 @@ function init_map(dom, driftmap, blips){
 			window.blipsIndexer[0].marker.setIcon(window.maroonMarker);
 			window.blipsIndexer[0].popup.openOn(map);
 		} // end Markers
-
-/*		// Add routes to Map
-		if(routes.length > 0){
-			for(var i in routes){ 
-				var title = xss_trim(routes[i].title);
-				var description = xss_trim(routes[i].description);
-
-				if(routes[i].routePoints.length > 0){
-
-					var prevLat = xss_trim(routes[i].routePoints[0].x);
-					var prevLng = xss_trim(routes[i].routePoints[0].y);
-					var prevPt = L.latLng(prevLat, prevLng);
-
-					for(var j in routes[i].routePoints){
-						var lat 			= xss_trim(routes[i].routePoints[j].x);
-						var lng 			= xss_trim(routes[i].routePoints[j].y);
-						var order 		= xss_trim(routes[i].routePoints[j].order);
-						var currentPt = L.latLng(lat, lng);
-
-						if(j > 0){
-							var routeLine  = L.polyline([prevPt, currentPt]).addTo(m);
-							prevPt = currentPt;							
-						}
-					}					
-				}
-			}
-		}*/
-
 	} catch(e) {
 		console.log('error: ' + e);
 		flash_now('danger', 'whoops, something went wrong.  Please try again.')
@@ -125,9 +100,12 @@ function init_map(dom, driftmap, blips){
 	}	
 }
 
-function init_timeline (dom, t, opts) {
+function init_timeline (dom, t, opts, route_id) {
+	tlCount++;
+
 	// Initialize Timeline
-	window.timeline = new TL.Timeline(dom, t, opts);
+	window.timelineIndexer[tlCount] = new TL.Timeline(dom, t, opts);
+	window.timelineIndexer[tlCount]["route_id"] = route_id;
 
 	// TimelineJS3 does not do a great job of indexing slides, so I am manually indexing each slide of the timeline represented
 	// by the DOM elements 
@@ -135,39 +113,34 @@ function init_timeline (dom, t, opts) {
 	// $('.tl-slide.tl-slide-text-only') = the slide/content of the timeline
 
 	// Begin Indexing
-  var blipIds = [];
-  for(var x in window.blipsIndexer)
-    blipIds.push(window.blipsIndexer[x].id)
+	var tempBlipIds = [];
+	for(var i = 0; i < t.events.length; i++){
+		tempBlipIds[i] = t.events[i].blip_id;
+	}
+		
+	$('#dm-timeline-'+ tlCount +' .tl-timemarker').each(function(j, elem){
+		$(this).attr('data-tlBlipIndex', tempBlipIds[j])
+	});
 
-  $('.tl-timemarker').each(function(i, elem){
-    $(this).attr('data-tlBlipIndex', blipIds[i])
-  });
-
-  $('.tl-slide.tl-slide-text-only').each(function(i, elem){
-    $(this).attr('data-tlBlipIndex', blipIds[i])
+  $('#dm-timeline-'+ tlCount +' .tl-slide.tl-slide-text-only').each(function(j, elem){
+    $(this).attr('data-tlBlipIndex', tempBlipIds[j])
   });
   // End Indexing
 
-  // Add a carousel with user content inside timeline
-  for(var i in window.blipsIndexer){
-    var id = window.blipsIndexer[i].id;
+  for(var i = 0; i < t.events.length; i++){
+	  var rBlip = getBlip(t.events[i].blip_id);
 
-    if(window.blipsIndexer[i].images.length > 0){
-      var c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel">' + 
+		if(rBlip.images !== undefined){
+			var c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel">' + 
                 '<div class="carousel-inner" role="listbox">';
 
-      for(var x in window.blipsIndexer[i].images){
-        c += '<div class="item">' + window.blipsIndexer[i].images[x] + '</div>';
+      for(var x in rBlip.images){
+        c += '<div class="item">' + rBlip.images[x] + '</div>';
       }
 
       // if blip has more than one image, add indicators
-      if( window.blipsIndexer[i].images.length > 1 ){
-      	c += '<ol class="carousel-indicators">';
-	      
-	      for(var y in window.blipsIndexer[i].images.length){
-	        c +=  '<li data-target="#images-carousel-'+ i +'" data-slide-to="'+ y +'"></li>';
-	      }
-	      c +=  '</ol><a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev">' +
+      if( rBlip.length > 1 ){
+	      c +=  '<a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev">' +
 	              '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>' +
 	              '<span class="sr-only">Previous</span>' +
 	            '</a>' +
@@ -179,16 +152,15 @@ function init_timeline (dom, t, opts) {
       }
     }
 
-    $('.tl-slide[data-tlBlipIndex="'+ id +'"]').empty();
-    $('.tl-slide[data-tlBlipIndex="'+ id +'"]').html(c);
+    $('.tl-slide[data-tlBlipIndex="'+ rBlip.id +'"]').empty();
+    $('.tl-slide[data-tlBlipIndex="'+ rBlip.id +'"]').html(c);
     $('.carousel .item:first-child').addClass('active');
-
-    // todo, add a condition to handle imageless blips
-  } // end carousel
+	}
+  // end carousel
 
 	/* Timeline Event Listeners */
 	// When timeline changes, update Map and menu of blips
-	timeline.on("change", function(data) {
+	window.timelineIndexer[tlCount].on("change", function(data) {
 	  var unique_id = data.unique_id;
 	  var targetBlipId = $('#' + unique_id + '-marker').attr('data-tlBlipIndex');
 	  var tlBlip = getBlip(targetBlipId);
@@ -209,29 +181,6 @@ function init_timeline (dom, t, opts) {
 	    }, 500);
 		}
 	});
-
-	/* when user clicks waypoint <li>, update map and timeline */
-	$('li.blip').on('click', function(){
-	  if( $(this).data('blip') !== undefined){
-	  	$('.step-selected').removeClass('step-selected');
-	  	$(this).addClass('step-selected');
-
-	    for(var i in window.blipsIndexer)
-	      window.blipsIndexer[i].marker.setIcon(window.blueMarker);
-	    
-	    var blipSlide = $(this).data('blipslide') + 1;
-	    var id = $(this).data('blip');
-
-	    var blip = getBlip(id);
-	    if(blip){
-				blip.popup.openOn(window.map);
-				blip.marker.setIcon(window.maroonMarker);
-		    wayPtShow(id);
-		    /* update timeline */
-		    timeline.goTo(blipSlide);
-	    }
-	  }
-	});
 }
 
 function wayPtShow (id){
@@ -244,6 +193,13 @@ function wayPtShow (id){
 	  $('p.route-stop-body').addClass('hidden');
 	  $('li.blip[data-blip="'+ blipId +'"] p.route-stop-body').removeClass('hidden');
   }
+}
+
+function getTimeline(id){
+	for(var x in window.timelineIndexer){
+		if( window.timelineIndexer[x].route_id ){	return window.timelineIndexer[x] }
+	}
+	return false;
 }
 
 function getBlip(id){

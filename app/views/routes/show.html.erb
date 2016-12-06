@@ -17,9 +17,9 @@
 			<div class="view-wizard-container">
 				<h5 class="waypoints-title">journeys</h5>
 				<div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true">
-					<% @route.blips.each_with_index do |blip, index| %>
+					<% @route.blips.order(:date).each_with_index do |blip, index| %>
 						<div class="panel panel-default">
-							<div id="heading-<%= index %>" class="panel-heading blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>" role="tab">
+							<div id="heading-<%= index %>" class="panel-heading blip" role="tab" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>"data-tmSlide="<%= index %>">
 					      <h4 class="panel-title">
 					      	<a role="button" data-toggle="collapse" data-parent="#waypt-accord" href="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>">
           					<%= blip.title %>
@@ -88,7 +88,7 @@
 	<% end %>
 
 	var events = [];
-	<% @route.blips.each do |blip| %>
+	<% @route.blips.order(:date).each do |blip| %>
 		events.push({
 			"media": {
 				url: '',
@@ -127,5 +127,28 @@
 	$('.route-item-container').on('click', function(){
 		$('ul.waypoint').addClass('hidden');
 		$(this).find('ul.waypoint').removeClass('hidden');
+	});
+
+	/* when user clicks waypoint <li>, update map and timeline */
+	$('.blip').on('click', function(){
+	  if( $(this).data('blip') !== undefined){
+	  	// $('.step-selected').removeClass('step-selected');
+	  	// $(this).addClass('step-selected');
+
+	    for(var i in window.blipsIndexer)
+	      window.blipsIndexer[i].marker.setIcon(window.blueMarker);
+	    
+	    var blipSlide = $(this).data('blipslide') + 1;
+	    var id = $(this).data('blip');
+
+	    var blip = getBlip(id);
+	    if(blip){
+				blip.popup.openOn(window.map);
+				blip.marker.setIcon(window.maroonMarker);
+		    wayPtShow(id);
+		    /* update timeline */
+		    timeline.goTo(blipSlide);
+	    }
+	  }
 	});
 </script>

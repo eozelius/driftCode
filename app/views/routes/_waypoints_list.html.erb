@@ -17,10 +17,10 @@
 	  				<div class="panel-body">
 	  					<% if route.blips.present? %>
 	  						<ul class="waypoints-container">
-	  							<% route.blips.each_with_index do |blip, x| %>
-	  								<li class="blip <%= ' step-selected' if x == 0 %>" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= x %>">
+	  							<% route.blips.order(:date).each_with_index do |blip, index| %>
+	  								<li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>" data-routeid="<%= route.id %>">
 	  									<p class="blip-title"><%= blip.title %></p>
-	  									<p class="route-stop-body hidden">
+	  									<p class="route-stop-body <%= 'hidden' if index != 0 %>">
 	  										<%= blip.body %>
 	  									</p>
 	  								</li>
@@ -30,47 +30,39 @@
 						</div>
 					</div>
 				</div>
-				<% end %>
+			<% end %>	  		
 
-
-
-
-				<% if false %>
-		  		<ul class="waypoints-container">
-		    		<% @routes.each_with_index do |route, i| %>
-							<li class="route-item-container" data-route="<%= route.id %>">
-								<div class="route-item">
-									<p class="route-title"><%= route.title %></p>
-									<ul class="waypoint <%= 'hidden' if i != 0 %>">
-										<% route.blips.each_with_index do |blip, x| %>
-											<li class="blip <%= ' step-selected' if x == 0 %>" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= x %>">
-												<p class="blip-title"><%= blip.title %></p>
-												<p class="route-stop-body <%= 'hidden' if x != 0 %>">
-													<%= blip.body %>
-												</p>
-											</li>
-										<% end %>
-									</ul>
-								</div>
-							</li>
-			  		<% end %>
-		  		</ul>
-		  	<% end %>		  		
-
-	  <% if user_is_home(@user) %>
-	  	<p class="edit-delete-map">
-	  		<%= link_to 'new journey', new_route_path %>
-	  		<!-- <span style="
-	  		color:#23527c; font-size:14px;"> | </span>  -->
-	  		<%#= link_to 'new blip', new_blip_path %>
-	  	</p>
-	  <% end %>
+		  <% if user_is_home(@user) %>
+		  	<p class="edit-delete-map">
+		  		<%= link_to 'new journey', new_route_path %>
+		  		<!-- <span style="
+		  		color:#23527c; font-size:14px;"> | </span>  -->
+		  		<%#= link_to 'new blip', new_blip_path %>
+		  	</p>
+		  <% end %>
 	</div>
 
 	<script type="text/javascript">
-		$('.route-item-container').on('click', function(){
-			$('ul.waypoint').addClass('hidden');
-			$(this).find('ul.waypoint').removeClass('hidden');
+		/* when user clicks waypoint <li>, update map and timeline */
+		$('.blip').on('click', function(){
+		  if( $(this).data('blip') !== undefined){
+		    for(var i in window.blipsIndexer)
+		      window.blipsIndexer[i].marker.setIcon(window.blueMarker);
+		    
+		    var blipSlide = $(this).data('blipslide') + 1;
+		    var blip_id = $(this).data('blip');
+		    var route_id = $(this).data('routeid');
+		    var myTimeline = getTimeline(route_id);
+		    var blip = getBlip(blip_id);
+
+		    if(blip){
+					blip.popup.openOn(window.map);
+					blip.marker.setIcon(window.maroonMarker);
+			    wayPtShow(blip_id);
+			    /* update timeline */
+			    myTimeline.goTo(blipSlide);
+		    }
+		  }
 		});
 	</script>
 <% end %>

@@ -36,11 +36,6 @@
 	}
 
 	/* Blip title author body */
-	.blip-title {
-		margin: 3%;
-		text-align: left;
-	}
-
 	.blip-body {
 		margin-left: 3%;
 		color: #C2D9EB;
@@ -109,6 +104,9 @@
 		.blip-title {
 			color: #552727;
 			font-style: italic;
+			margin: 3% 1%;
+			text-align: left;
+			text-decoration: underline;
 		}
 	}
 
