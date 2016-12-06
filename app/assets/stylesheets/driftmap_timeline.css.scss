@@ -16,3 +16,28 @@
 		opacity: .8;
 	}
 }
+
+@media (max-width: 480px){
+	.route-content {
+		.tl-slide-content-container .tl-slide-content{
+			padding: 0 !important;
+			width: 100% !important;
+		}
+ 		.tl-slide-content-container .tl-media {
+			max-width: 100% !important;
+		}
+		.tl-slider-container {
+			height: 70% !important;
+		}
+
+		.tl-timeline .tl-storyslider{
+			height: 330px !important;
+		}
+
+	}
+
+	.tl-slidenav-icon {
+		position: relative;
+		top: 45px;
+	}
+}
