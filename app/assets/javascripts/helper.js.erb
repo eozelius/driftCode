@@ -11,7 +11,7 @@ window.blueMarker = L.icon({
   popupAnchor:  [0, -35]
 });
 
-window.blipsIndexer = {};
+window.blipsIndexer = [];
 window.timelineIndexer = [];
 tlCount = -1;
 
@@ -32,7 +32,7 @@ function init_map(dom, driftmap, blips){
 			}).addTo(m);
 
 		// Add blips to Map
-		if(blips.length > 0){
+		if(blips !== undefined && blips.length > 0){
 			for(var i in blips){
 				var id 		= xss_trim(blips[i].id); 
 				var lat 	= xss_trim(blips[i].x);
@@ -79,14 +79,14 @@ function init_map(dom, driftmap, blips){
 
 				// once blip has been initialized add it to window.blipsIndexer object that all views can access 
 				// window.blipsIndexer[blips[i].id.toString()] = {
-				window.blipsIndexer[i] = {
+				window.blipsIndexer.push({
 					id: 	  id,
 					title:  title,
 					body:   body,
 					images: blipImages,
 					marker: blipMarker,
 					popup:  blipPopup
-				}
+				});
 			}
 
 			// Open first blip on map
@@ -129,7 +129,6 @@ function init_timeline (dom, t, opts, route_id) {
 
   for(var i = 0; i < t.events.length; i++){
 	  var rBlip = getBlip(t.events[i].blip_id);
-
 		if(rBlip.images !== undefined){
 			var c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel">' + 
                 '<div class="carousel-inner" role="listbox">';

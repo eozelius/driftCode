@@ -5,9 +5,9 @@
 		<div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true">
 			<% @routes.each_with_index do |route, index| %>
 	  		<div class="panel panel-default">
-	  			<div id="heading-<%= index %>" class="panel-heading">
+	  			<div id="heading-<%= index %>" class="panel-heading" >
 	  				<h4 class="panel-title">
-	  					<a role="button" data-toggle="collapse" data-parent="#waypt-accord" href="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>">
+	  					<a role="button" data-toggle="collapse" data-parent="#waypt-accord" href="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>" data-route="<%= index %>" class="route-switcher">
           			<%= route.title %>
         			</a>
 	  				</h4>
@@ -43,6 +43,13 @@
 	</div>
 
 	<script type="text/javascript">
+		/* Toggle a Route */
+		$('.route-switcher').on('click', function(){
+			var route_id = $(this).data('route');
+			$('.route-content').addClass('hidden');
+			$('#dm-timeline-' + route_id).removeClass('hidden').parent().removeClass('hidden');
+		});
+
 		/* when user clicks waypoint <li>, update map and timeline */
 		$('.blip').on('click', function(){
 		  if( $(this).data('blip') !== undefined){

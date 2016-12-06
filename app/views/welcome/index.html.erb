@@ -42,24 +42,25 @@ $(function(){
   }
 
   var blips = [];
-  <% @routes.first.blips.each do |blip| %>
-    var blipImages = [];
-    <% blip.blip_images.each do |blip_image| %>
-      blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
-    <% end %>
+  <% @routes.each_with_index do |route, index| %>
+    <% route.blips.each do |blip| %>
+      var blipImages = [];
+      <% blip.blip_images.each do |blip_image| %>
+        blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
+      <% end %>
 
-    blips.push({
-      id:     "<%= blip.id %>",
-      x:      "<%= blip.x %>",
-      y:      "<%= blip.y %>",
-      title:  "<%= blip.title.to_json %>",
-      body:   "<%= blip.body.to_json %>",
-      images: blipImages
-    })
+      blips.push({
+        id:     "<%= blip.id %>",
+        x:      "<%= blip.x %>",
+        y:      "<%= blip.y %>",
+        title:  "<%= blip.title.to_json %>",
+        body:   "<%= blip.body.to_json %>",
+        images: blipImages
+      });
+    <% end %>
   <% end %>
 
   init_map('map', driftmap, blips);
-  /* End Leaflet Map */
 
   /* TimelineJS */
   <% if !@routes.nil? %>
