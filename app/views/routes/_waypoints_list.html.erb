@@ -20,9 +20,6 @@
 	  							<% route.blips.order(:date).each_with_index do |blip, index| %>
 	  								<li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>" data-routeid="<%= route.id %>">
 	  									<p class="blip-title"><%= blip.title %></p>
-	  									<p class="route-stop-body <%= 'hidden' if index != 0 %>">
-	  										<%= blip.body %>
-	  									</p>
 	  								</li>
 			  					<% end %>							
 	  						</ul>

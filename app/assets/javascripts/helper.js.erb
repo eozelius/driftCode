@@ -186,11 +186,11 @@ function wayPtShow (id){
 	var blip = getBlip(id);
 
 	if( blip ){
-	  var title  = blip.title.replace(/&quot;/g, '');
+	  var title = blip.title.replace(/&quot;/g, '');
+	  var body = blip.body.replace(/&quot;/g, '');
 	  var blipId = blip.id;
 	  $('.route-header').text(title);
-	  $('p.route-stop-body').addClass('hidden');
-	  $('li.blip[data-blip="'+ blipId +'"] p.route-stop-body').removeClass('hidden');
+	  $('.route-description').text(body)
   }
 }
 

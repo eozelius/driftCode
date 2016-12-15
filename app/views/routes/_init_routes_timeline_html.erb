@@ -1,6 +1,6 @@
 <!-- Routes -->
 <% @routes.each_with_index do |route, index| %>
-	<div class="route-content <%= 'hidden' if index != 0 %>" data-routecontent="<%= route.id %>">
+	<div class="route-content" data-routecontent="<%= route.id %>">
 		<div class="route-meta">
 			<h4 class="route-header"><%= route.title %></h4>
 			<p class="route-description"><%= route.description %></p>
@@ -8,3 +8,18 @@
 		<div id='dm-timeline-<%= index %>' style="width: 100%; height: 600px"></div>
 	</div>
 <% end %>
+
+<script type="text/javascript">
+	$(function(){
+		var foo = true;
+
+		setTimeout(function(){
+			if(foo){
+				//alert('foo: ' + foo);
+				foo = false;
+				$('.route-content').addClass('hidden');
+				$('.route-content').first().removeClass('hidden').addClass('asdfasfdasdfhidden');				
+			}
+		}, 100);
+	});
+</script>
