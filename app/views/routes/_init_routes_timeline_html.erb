@@ -11,14 +11,14 @@
 
 <script type="text/javascript">
 	$(function(){
+		// This script will hide all timelines except the first, since if the timeline's target is invisible at init, it will not init correctly 
 		var foo = true;
 
 		setTimeout(function(){
 			if(foo){
-				//alert('foo: ' + foo);
 				foo = false;
 				$('.route-content').addClass('hidden');
-				$('.route-content').first().removeClass('hidden').addClass('asdfasfdasdfhidden');				
+				$('.route-content').first().removeClass('hidden');			
 			}
 		}, 100);
 	});

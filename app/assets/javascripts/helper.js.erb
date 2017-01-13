@@ -106,6 +106,8 @@ function init_timeline (dom, t, opts, route_id) {
 	// Initialize Timeline
 	window.timelineIndexer[tlCount] = new TL.Timeline(dom, t, opts);
 	window.timelineIndexer[tlCount]["route_id"] = route_id;
+	window.timelineIndexer[tlCount]["title"] = t.title.text.headline;
+	window.timelineIndexer[tlCount]["description"] = t.title.text.text;
 
 	// TimelineJS3 does not do a great job of indexing slides, so I am manually indexing each slide of the timeline represented
 	// by the DOM elements 
@@ -125,6 +127,9 @@ function init_timeline (dom, t, opts, route_id) {
   $('#dm-timeline-'+ tlCount +' .tl-slide.tl-slide-text-only').each(function(j, elem){
     $(this).attr('data-tlBlipIndex', tempBlipIds[j])
   });
+
+  var titleSlideId = $('#dm-timeline-'+ tlCount +' .tl-slide.tl-slide-titleslide').prop('id')
+
   // End Indexing
 
   for(var i = 0; i < t.events.length; i++){
@@ -178,6 +183,11 @@ function init_timeline (dom, t, opts, route_id) {
 	    setTimeout(function(){
 	      $('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
 	    }, 500);
+		} else {
+			var title = $(this)[0]["title"]; 
+			var description = $(this)[0]["description"];
+			$('.route-header').text(title);
+  		$('.route-description').text(description);		
 		}
 	});
 }
