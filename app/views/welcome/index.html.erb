@@ -74,6 +74,8 @@ $(function(){
 
       /* Route waypoints */
       var events = [];
+
+
       <% route.blips.order(:date).each do |blip| %>
         events.push({
           "media": {
@@ -86,8 +88,8 @@ $(function(){
             year: '<%= blip.date.year %>'
           },
           text: {
-            headline: "<%= blip.title %>",
-            text: "<%= blip.body %>"
+            headline: "<%= blip.to_json %>",
+            text: "<%= blip.body.to_json %>"
           },
           blip_id: '<%= blip.id %>'
         });
@@ -100,8 +102,8 @@ $(function(){
             caption: ""
           },
           text: {
-            headline: "<%= route.title %>",
-            text: "<%= route.description %>"
+            headline: "<%= route.title.to_json %>",
+            text: "<%= route.description.to_json %>"
           }
         },
         events: events
