@@ -206,7 +206,7 @@ function wayPtShow (id){
 
 function getTimeline(id){
 	for(var x in window.timelineIndexer){
-		if( window.timelineIndexer[x].route_id ){	return window.timelineIndexer[x] }
+		if( window.timelineIndexer[x].route_id == id ){ return window.timelineIndexer[x] }
 	}
 	return false;
 }
