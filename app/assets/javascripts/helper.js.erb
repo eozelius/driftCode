@@ -1,3 +1,4 @@
+/* Global Vars */
 /* Custom Makers */
 window.maroonMarker = L.icon({ 
   iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
@@ -15,8 +16,9 @@ window.blipsIndexer = [];
 window.timelineIndexer = [];
 tlCount = -1;
 
+L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
+
 function init_map(dom, driftmap, blips){
-	L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
 	try {
 		var x = driftmap.init_x || 40.735;
 		var y = driftmap.init_y || -73.890;
