@@ -128,7 +128,9 @@ function init_timeline (dom, t, opts, route_id) {
     $(this).attr('data-tlBlipIndex', tempBlipIds[j])
   });
 
-  var titleSlideId = $('#dm-timeline-'+ route_id +' .tl-slide.tl-slide-titleslide').prop('id')
+  var titleSlideId = $('#dm-timeline-'+ route_id +' .tl-slide.tl-slide-titleslide').prop('id');
+  $('#dm-timeline-'+ route_id + ' .tl-slidenav-next .tl-slidenav-icon').before('<span class="next-prev-label next">next waypoint</span>')
+  $('#dm-timeline-'+ route_id + ' .tl-slidenav-previous .tl-slidenav-icon').before('<span class="next-prev-label prev">previous waypoint</span>')
 
   // End Indexing
 
