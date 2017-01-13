@@ -17,6 +17,8 @@
 		setTimeout(function(){
 			if(foo){
 				foo = false;
+				$('.tl-text').addClass('hidden');
+				$('.tl-media').css('border-top', '0');
 				$('.route-content').addClass('hidden');
 				$('.route-content').first().removeClass('hidden');			
 			}
