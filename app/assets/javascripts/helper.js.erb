@@ -36,9 +36,9 @@ function init_map(dom, driftmap, blips){
 		// Add blips to Map
 		if(blips !== undefined && blips.length > 0){
 			for(var i in blips){
-				var id 		= xss_trim(blips[i].id); 
-				var lat 	= xss_trim(blips[i].x);
-				var lng 	= xss_trim(blips[i].y);
+				var id 		= blips[i].id; 
+				var lat 	= blips[i].x;
+				var lng 	= blips[i].y;
 				var body 	= blips[i].body;
 				var title = blips[i].title;
 				var blipImages = [];
@@ -192,10 +192,13 @@ function init_timeline (dom, t, opts, route_id) {
 	    $('.li-blip-selected').removeClass('li-blip-selected');
 	    $('li.blip[data-blip="'+ tlBlip.id +'"] p').addClass('li-blip-selected');
 		} else {
-			var title = $(this)[0]["title"]; 
-			var description = $(this)[0]["description"];
+			var title = $(this)[0]["title"].replace(/&quot;/g, '');
+			var description = $(this)[0]["description"].replace(/&quot;/g, '');
+
+
+
 			$('.route-header').text(title);
-  		$('.route-description').text(description);		
+  		$('.route-description').text(description);
 		}
 	});
 }

@@ -48,8 +48,13 @@
 			$('#dm-timeline-' + route_id).removeClass('hidden').parent().removeClass('hidden');
 
 			// update timeline header and description
-			$('.route-header').text(r.title);
-			$('.route-description').text(r.description);
+			var title = r.title.replace(/&quot;/g, '');
+			var description = r.description.replace(/&quot;/g, '');
+
+			$('.route-header').text(title);
+			$('.route-description').text(description);
+
+
 			r.goToStart(); // reset selected timeline until I can figure out how to keep track of current slide
 		});
 
