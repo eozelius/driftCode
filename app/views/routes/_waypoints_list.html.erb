@@ -43,8 +43,13 @@
 		/* Toggle a Route */
 		$('.route-switcher').on('click', function(){
 			var route_id = $(this).data('route');
+			var r = getTimeline(route_id);
 			$('.route-content').addClass('hidden');
 			$('#dm-timeline-' + route_id).removeClass('hidden').parent().removeClass('hidden');
+
+			// update timeline header and description
+			$('.route-header').text(r.title);
+			$('.route-description').text(r.description);
 		});
 
 		/* when user clicks waypoint <li>, update map and timeline */
