@@ -50,6 +50,7 @@
 			// update timeline header and description
 			$('.route-header').text(r.title);
 			$('.route-description').text(r.description);
+			r.goToStart(); // reset selected timeline until I can figure out how to keep track of current slide
 		});
 
 		/* when user clicks waypoint <li>, update map and timeline */
