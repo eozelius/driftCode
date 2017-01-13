@@ -185,6 +185,10 @@ function init_timeline (dom, t, opts, route_id) {
 	    setTimeout(function(){
 	      $('.tl-slide[data-tlBlipIndex="'+ targetBlipId +'"] .carousel').removeClass('hidden');
 	    }, 500);
+
+	    // reset highlighted waypoints menu
+	    $('.li-blip-selected').removeClass('li-blip-selected');
+	    $('li.blip[data-blip="'+ tlBlip.id +'"] p').addClass('li-blip-selected');
 		} else {
 			var title = $(this)[0]["title"]; 
 			var description = $(this)[0]["description"];
