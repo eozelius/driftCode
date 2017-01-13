@@ -120,15 +120,15 @@ function init_timeline (dom, t, opts, route_id) {
 		tempBlipIds[i] = t.events[i].blip_id;
 	}
 		
-	$('#dm-timeline-'+ tlCount +' .tl-timemarker').each(function(j, elem){
+	$('#dm-timeline-'+ route_id +' .tl-timemarker').each(function(j, elem){
 		$(this).attr('data-tlBlipIndex', tempBlipIds[j])
 	});
 
-  $('#dm-timeline-'+ tlCount +' .tl-slide.tl-slide-text-only').each(function(j, elem){
+  $('#dm-timeline-'+ route_id +' .tl-slide.tl-slide-text-only').each(function(j, elem){
     $(this).attr('data-tlBlipIndex', tempBlipIds[j])
   });
 
-  var titleSlideId = $('#dm-timeline-'+ tlCount +' .tl-slide.tl-slide-titleslide').prop('id')
+  var titleSlideId = $('#dm-timeline-'+ route_id +' .tl-slide.tl-slide-titleslide').prop('id')
 
   // End Indexing
 
