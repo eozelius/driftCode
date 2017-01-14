@@ -39,12 +39,12 @@ var DriftMapLeaflet = function(){
 		// public methods
 		init: function(dom, mapData, wayPoints){
 
-		}
+		},
 
 		/* Getters */
 		getMarker: function(id){
 
-		}
+		},
 
 		/* Setters */
 		setMarker: function(id){

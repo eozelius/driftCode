@@ -1,4 +1,4 @@
-var DriftMapRoute = function(){
+var driftMapRoute = function(){
 	// Private Variables
 
 	/*
@@ -20,16 +20,16 @@ var DriftMapRoute = function(){
 
 
 		// public methods
-		init: function(map, waypoints){
-
-		}
+		init: function(routes){
+			console.log("routes: " + routes)
+		},
 
 		getRoute: function(id){
 
-		}
+		},
 
 		focusRoute: function(id){
 			
 		}
 	}	
-}
+}();
