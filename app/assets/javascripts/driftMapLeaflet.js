@@ -26,8 +26,8 @@ var DriftMapLeaflet = function(){
 	});
 
 	// Private Methods
-	focusWayPoint: function(){
-
+	function focusWayPoint(){
+		return true;
 	}
 
 	/* Event Listeners */

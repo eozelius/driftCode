@@ -17,7 +17,7 @@ var DriftMapWayPt = function(){
 	var currentWayPoint;
 
 	// Private Methods
-	focusWayPt: function(){
+	function focusWayPt(){
 
 	}
 
@@ -28,28 +28,28 @@ var DriftMapWayPt = function(){
 		// public methods
 		init: function(map, waypoints){
 
-		}
+		},
 
 		/* Getters */
 		getWayPt: function(id){
 
-		}
+		},
 
 		getCurrentWayPt: function(){
 
-		}
+		},
 
 		getCorrespondingRoute: function(id){
 
-		}
+		},
 
 		getCorrespondingMarker: function(id){
 
-		}
+		},
 
 		getCorrespondingTimeline: function(id){
 
-		}
+		},
 
 		/* Setters */
 		setWayPt: function(id){

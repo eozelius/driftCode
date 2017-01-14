@@ -1,4 +1,4 @@
-var driftMapRoute = function(){
+var DriftMapRoute = function(){
 	// Private Variables
 
 	/*
