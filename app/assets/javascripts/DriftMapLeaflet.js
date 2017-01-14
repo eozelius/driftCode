@@ -37,7 +37,7 @@ var DriftMapLeaflet = function(){
 
 
 		// public methods
-		init: function(dom, MapData, wayPoints){
+		init: function(dom, mapData, wayPoints){
 
 		}
 

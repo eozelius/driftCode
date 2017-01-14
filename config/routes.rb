@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
+  # API Data Routes
+  post 'get_way_pts' => 'api#get_way_pts'
+  post 'get_journeys' => 'api#get_journeys'
+
+  # end API
+
   get 'ethan', to: redirect('users/1')
   
   resources :account_activations, only: [:edit]
