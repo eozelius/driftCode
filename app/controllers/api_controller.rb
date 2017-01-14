@@ -20,11 +20,10 @@ class ApiController < ApplicationController
 =end
 	end
 
-	def	get_journeys
+	def	get_routes
 		ethan  = User.find(1)
 		routes = ethan.post.routes
 
 		render json: routes.to_a
 	end
-
 end

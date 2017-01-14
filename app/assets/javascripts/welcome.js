@@ -1,12 +1,13 @@
 $(function(){
 	/* Routes */
 	$.ajax({
-		url: '/get_journeys',
+		url: '/get_routes',
 		method: 'POST',
 		dataType: 'JSON',
 		data: {	index: 'index' },
 		complete: function(response) {
 			var r = response.responseJSON;
+			DriftMapRoute.init(r);
 		}
 	});
 
@@ -18,6 +19,7 @@ $(function(){
 		data: {	index: 'index' },
 		complete: function(response) {
 			var r = response.responseJSON;
+			DriftMapWayPt.init(r)
 		}
 	});
 

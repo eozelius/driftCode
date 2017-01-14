@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   # API Data Routes
   post 'get_way_pts' => 'api#get_way_pts'
-  post 'get_journeys' => 'api#get_journeys'
+  post 'get_routes' => 'api#get_routes'
 
   # end API
 
