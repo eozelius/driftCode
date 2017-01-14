@@ -16,6 +16,10 @@
 //= require bootstrap.min.js
 //= require moment.js
 //= require bootstrap-datetimepicker.min.js
+//= require DriftMapLeaflet.js
+//= require DriftMapTimeline.js
+//= require DriftMapWayPt.js
+//= require DriftMapRoute.js
 //= require helper.js.erb
 //= require user.js
 //= require_tree .

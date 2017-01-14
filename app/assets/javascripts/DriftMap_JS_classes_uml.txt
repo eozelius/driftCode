@@ -1,0 +1,68 @@
+Timeline class
+	VARIABLES:
+	- Indexer
+		ex: [
+			{
+				id: <Corresponding Route ID>
+			},
+			<TimelineJS3 data>
+		]
+
+	- current slide
+	- current Timeline
+
+	PRIVATE METHODS:
+	- focusTimeline
+
+	PUBLIC METHODS
+	- init
+	- getTimeline
+	- getCurrentTimeline
+	- getCurrentSlide
+	- setTimeline
+
+Leaflet
+	VARIABLES
+	- currentMarker
+	- indexer[<all markers>]
+	- custom markers_cons
+	- default paths to times
+
+	METHODS
+	- init
+	- getMarker
+	- setMarker
+
+
+WayPoints
+	VARS
+	- Indexer
+		ex: {
+			id: 21,
+			title: "Budapest",
+			body: 'asdf',
+			images: [
+				"<img src="/uploads/blip_image/image…",
+				 "<img src="/uploads/blip_image/image…"
+			]
+			parent_route_id: '54'
+		}
+
+	METHODS:
+		getWaypoint()
+		focusWayPoint()
+
+
+Routes
+	VARS 
+	- Indexer
+	ex: {
+		id,
+		title,
+		description,
+		wayPoints: [< id's of each waypoint >]
+	}
+
+	METHODS:
+		getRoute
+		focusRoute
