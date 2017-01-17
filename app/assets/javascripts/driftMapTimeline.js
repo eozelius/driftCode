@@ -16,12 +16,24 @@ var DriftMapTimeline = function(){
 
 	}
 
+	function renderTimeline(dom, tlData, opts){
+
+	}
+
 	return {
 		// public variables
 
 		// public methods
-		init: function(dom, tlData, opts){
+		init: function(routes){
+			window.r = routes;
+			for(var i in routes){
+				var coverphoto = typeof routes[i].coverphoto.url !== 'undefined' ? routes[i].coverphoto.url : '<%= image_path("switzerland10.JPG").html_safe %>';
 
+
+
+
+
+			}
 		},
 
 		getTimeline: function(id){
