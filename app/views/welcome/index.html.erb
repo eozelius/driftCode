@@ -16,11 +16,7 @@
 
 <div class="container">
   <div id="dm-content-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-    <% if !@routes.nil? %>
-      <%= render 'routes/init_routes_timeline_html' %>
-    <% else %>
-      <%= render 'routes/init_adventure' %>
-    <% end %>
+    <%= render 'routes/init_routes_timeline_html' %>
   </div>
 
   <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
@@ -34,6 +30,8 @@
 
 <script type="text/javascript">
 $(function(){
+  <% if false %>
+
   /* Leaflet Map */
   var driftmap = {
     init_x: 0.924206230200376,
@@ -60,7 +58,9 @@ $(function(){
     <% end %>
   <% end %>
 
-  init_map('map', driftmap, blips);
+  //init_map('map', driftmap, blips);
+
+  <% end %>
 
   /* TimelineJS */
   <% if !@routes.nil? %>

@@ -20,10 +20,14 @@ $(function(){
 		complete: function(response) {
 			var r = response.responseJSON;
 			DriftMapWayPt.init(r)
+
+			// Init Leaflet
+			DriftMapLeaflet.init(r);
 		}
 	});
 
 	/* Timeline */
+
 
 
 

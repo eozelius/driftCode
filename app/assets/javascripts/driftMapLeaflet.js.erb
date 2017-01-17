@@ -1,0 +1,104 @@
+var DriftMapLeaflet = function(){
+	L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
+	// Private Variables
+	var currentMarker;	
+	
+		/*ex indexer[x] = { 
+			id: 12, 
+			title: "Burmuda", 
+			body: "Burmuda might be the best place in …", 
+			marker: { <Leaflet Marker code> },
+			popup: { <Leaflet popup code> }
+		}*/
+	
+	var indexer = []
+
+	/* Custom Makers */
+	var maroonMarker = L.icon({ 
+	  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
+	  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+	  popupAnchor:  [0, -35]
+	});
+
+	var blueMarker = L.icon({
+	  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-icon.png").to_s %>',
+	  shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+	  popupAnchor:  [0, -35]
+	});
+
+	// Private Methods
+	function focusWayPoint(){
+		return true;
+	}
+
+	/* Event Listeners */
+
+	return {
+		// public variables
+
+
+		// public methods
+		init: function(wayPoints, options){
+			var x = typeof options !== 'undefined' ? options.init_x : 0.924206230200376;
+			var y = typeof options !== 'undefined' ? options.init_y : -40.2400771379471;
+			var z = typeof options !== 'undefined' ? options.init_zoom : 2;
+
+			// var m = L.map('map').setView([x, y], z);
+			var m = L.map('map').setView([x, y], z);
+
+			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
+				{	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		    	maxZoom: 18,
+		    	id: 'eozelius77.j4hekake',
+		    	accessToken: "<%= ENV['MAPBOX_SECRET_KEY'] %>"
+				}).addTo(m);
+
+			if(typeof wayPoints !== 'undefined' && wayPoints.length > 0){
+				for(var i in wayPoints){
+					/* Add Marker to Map */
+					var lat = wayPoints[i].x;
+					var lng = wayPoints[i].y;
+					var id = wayPoints[i].id;
+					var title = wayPoints[i].title;
+					var body  = wayPoints[i].body;
+
+					/* Bind popup to marker */
+					var popupContent = 	'<div class="blip-popup" data-blip="'+ id +'">' + 
+																'<div class="blip-text">' +
+																	'<a href="/blips/'+ id +'">' +
+																		'<h4 class="blip-popup-title instructions">'+ title +'</h4>' + 
+																		'<span> - more</span>' +
+																	'</a>' +
+																	'<p class="blip-popup-body">'+ body +'</p>' + 
+																'</div>' +
+																'<img src="'+ wayPoints[i].images[0].image.url +'" style="width: 100%; height:auto;">' +
+															'</div>';
+
+					var popupOptions = { className: 'blip-popup' }
+					var wpMarker = L.marker([lat, lng]).addTo(m);
+					var wpPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
+					wpMarker.bindPopup(wpPopup);
+
+					/* Add wayPoint to indexer */
+					indexer.push({
+						id: 		wayPoints[i].id,
+						title: 	title,
+						body:  	body,
+						marker: wpMarker,
+						popup:  wpPopup
+					});
+				}
+			}
+		},
+
+		/* Getters */
+		getMarker: function(id){
+
+		},
+
+		/* Setters */
+		setMarker: function(id){
+
+		}
+	}
+}();

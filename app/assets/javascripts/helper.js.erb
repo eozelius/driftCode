@@ -1,6 +1,6 @@
 /* Global Vars */
 /* Custom Makers */
-window.maroonMarker = L.icon({ 
+/*window.maroonMarker = L.icon({ 
   iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
   shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
   popupAnchor:  [0, -35]
@@ -11,15 +11,14 @@ window.blueMarker = L.icon({
   shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
   popupAnchor:  [0, -35]
 });
-
+L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
+*/
 window.blipsIndexer = [];
 window.timelineIndexer = [];
 tlCount = -1;
 
-L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
-
 function init_map(dom, driftmap, blips){
-	try {
+	if(false){
 		var x = driftmap.init_x || 40.735;
 		var y = driftmap.init_y || -73.890;
 		var z = driftmap.init_zoom || 12;
@@ -95,11 +94,7 @@ function init_map(dom, driftmap, blips){
 			window.blipsIndexer[0].marker.setIcon(window.maroonMarker);
 			window.blipsIndexer[0].popup.openOn(map);
 		} // end Markers
-	} catch(e) {
-		console.log('error: ' + e);
-		flash_now('danger', 'whoops, something went wrong.  Please try again.')
-		window.DMInitError = e;
-	}	
+	}
 }
 
 function init_timeline (dom, t, opts, route_id) {
