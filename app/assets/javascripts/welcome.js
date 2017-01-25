@@ -7,7 +7,12 @@ $(function(){
 		data: {	index: 'index' },
 		complete: function(response) {
 			var r = response.responseJSON;
+
+			// Init Routes
 			DriftMapRoute.init(r);
+
+			// init Timeline
+			DriftMapTimeline.init(r);
 		}
 	});
 
@@ -18,11 +23,12 @@ $(function(){
 		dataType: 'JSON',
 		data: {	index: 'index' },
 		complete: function(response) {
-			var r = response.responseJSON;
-			DriftMapWayPt.init(r)
+			var wp = response.responseJSON;
+			// Index Waypoints
+			DriftMapWayPt.init(wp);
 
 			// Init Leaflet
-			DriftMapLeaflet.init(r);
+			DriftMapLeaflet.init(wp);
 		}
 	});
 

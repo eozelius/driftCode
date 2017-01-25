@@ -11,7 +11,7 @@ class ApiController < ApplicationController
 								body:   	my_blip.body,
 								x: 		  	my_blip.x,
 								y: 		  	my_blip.y,
-								date: 		my_blip.date,
+								date: 		{ year: my_blip.date.year, month: my_blip.date.month, day: my_blip.date.day },
 								images: 	my_blip.blip_images,
 								post_id:	my_blip.post_id,
 								route_id: my_blip.route_id })			
@@ -21,10 +21,35 @@ class ApiController < ApplicationController
 	end
 
 	def	get_routes
-		ethan  = User.find(1)
-		routes = ethan.post.routes
+		routes 	 = User.find(1).post.routes
+		response = {}
 
-		render json: routes.to_a
+		routes.each do |route|
+			my_route_wps = {}
+			route.blips.each do |blip|
+				my_route_wps[blip.id] = { 
+					id: blip.id,
+					title: blip.title,
+					body: blip.body,
+					x: blip.x,
+					y: blip.y,
+					post_id: blip.post_id,
+					route_id: blip.route_id,
+					date: {
+						year:  blip.date.year,
+						month: blip.date.month,
+						day:   blip.date.day 
+					} 
+				}
+
+				response[route.id] = { 
+					route: route, 
+					waypoints: my_route_wps 
+				}
+			end
+		end
+
+		render json: response
 	end
 end
 

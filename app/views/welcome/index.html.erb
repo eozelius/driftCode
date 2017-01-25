@@ -16,7 +16,18 @@
 
 <div class="container">
   <div id="dm-content-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-    <%= render 'routes/init_routes_timeline_html' %>
+    <!-- Routes -->
+    <% @routes.each_with_index do |route, index| %>
+      <div class="route-content" data-routecontent="<%= route.id %>">
+        <div class="route-meta">
+          <h4 class="route-header"><%= route.title %></h4>
+          <p class="route-description"><%= route.description %></p>
+        </div>
+        <div id='dm-timeline-<%= route.id %>' style="width: 100%; height: 600px"></div>
+      </div>
+    <% end %>
+
+    <%#= render 'routes/init_routes_timeline_html' %>
   </div>
 
   <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
@@ -27,92 +38,3 @@
     <%= render 'routes/waypoints_list' %>
   </div>
 </div>
-
-<script type="text/javascript">
-$(function(){
-  <% if false %>
-
-  /* Leaflet Map */
-  var driftmap = {
-    init_x: 0.924206230200376,
-    init_y: -40.2400771379471,
-    init_zoom: 6,
-  }
-
-  var blips = [];
-  <% @routes.each_with_index do |route, index| %>
-    <% route.blips.order(:date).each do |blip| %>
-      var blipImages = [];
-      <% blip.blip_images.each do |blip_image| %>
-        blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
-      <% end %>
-
-      blips.push({
-        id:     "<%= blip.id %>",
-        x:      "<%= blip.x %>",
-        y:      "<%= blip.y %>",
-        title:  "<%= blip.title.to_json %>",
-        body:   "<%= blip.body.to_json %>",
-        images: blipImages
-      });
-    <% end %>
-  <% end %>
-
-  //init_map('map', driftmap, blips);
-
-  <% end %>
-
-  /* TimelineJS */
-  <% if !@routes.nil? %>
-    <% @routes.each_with_index do |route, index| %>
-      /* Route Coverphoto */
-      <% if route.coverphoto.present? %>
-        var blip_cover_image = '<%= image_path(route.coverphoto).html_safe %>';
-      <% else %>
-        var blip_cover_image = '<%= image_path("switzerland10.JPG").html_safe %>';
-      <% end %>
-
-      /* Route waypoints */
-      var events = [];
-
-
-      <% route.blips.order(:date).each do |blip| %>
-        events.push({
-          "media": {
-            url: '',
-            caption: ''
-          },
-          start_date: {
-            month: '<%= blip.date.month %>',
-            day: '<%= blip.date.day %>',
-            year: '<%= blip.date.year %>'
-          },
-          text: {
-            headline: "<%= blip.to_json %>",
-            text: "<%= blip.body.to_json %>"
-          },
-          blip_id: '<%= blip.id %>'
-        });
-      <% end %>
-
-      var timeLineData = {
-        title: {
-          media: {
-            url: blip_cover_image,
-            caption: ""
-          },
-          text: {
-            headline: "<%= route.title.to_json %>",
-            text: "<%= route.description.to_json %>"
-          }
-        },
-        events: events
-      }
-
-      var dmOptions = { timenav_height: 180 }
-      init_timeline('dm-timeline-<%= route.id %>', timeLineData, dmOptions, '<%= route.id %>' );
-    <% end %>
-  <% end %>
-  /* end TimelineJS */
-});
-</script>
