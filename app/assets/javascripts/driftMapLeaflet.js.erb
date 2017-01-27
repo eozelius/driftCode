@@ -43,7 +43,8 @@ var DriftMapLeaflet = function(){
 			var y = options !== undefined ? options.init_y : -40.2400771379471;
 			var z = options !== undefined ? options.init_zoom : 2;
 
-			var m = L.map('map').setView([x, y], z);
+			m = L.map('map').setView([x, y], z);
+			// indexer['map'] = m;
 
 			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
 				{	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -99,13 +100,25 @@ var DriftMapLeaflet = function(){
 		},
 
 		/* Getters */
-		getMarker: function(id){
-
+		getWayPt: function(id){
+			for(var i in indexer)
+				if(indexer[i].id == id)
+					return indexer[i];
+			return false;
 		},
 
 		/* Setters */
-		setMarker: function(id){
+		setWayPoint: function(id){
+			var wp = DriftMapLeaflet.getWayPt(id)
 
+			if(wp){
+				// reset all waypoint to blue
+				for(var i in indexer)
+					indexer[i].marker.setIcon(blueMarker)
+
+				wp.marker.setIcon(maroonMarker)
+				wp.popup.openOn(m)
+			}			
 		}
 	}
 }();

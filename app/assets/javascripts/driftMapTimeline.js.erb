@@ -121,6 +121,8 @@ var DriftMapTimeline = function(){
 				/* Timeline Event listeners */
 				indexer[r.id].on('change', function(data){
 					var id = data.unique_id
+					// open waypoint on map
+					DriftMapLeaflet.setWayPoint(id)
 
 					// hide all slides/carousels
 					$('.carousel').addClass('hidden')
@@ -133,7 +135,6 @@ var DriftMapTimeline = function(){
 							$('#'+id+ ' .carousel').removeClass('hidden')
 						}
 					}, 500);
-
 				});
 			}
 
