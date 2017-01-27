@@ -121,20 +121,18 @@ var DriftMapTimeline = function(){
 				/* Timeline Event listeners */
 				indexer[r.id].on('change', function(data){
 					var id = data.unique_id
-					console.log("unique_id: " + id)
 
 					// hide all slides/carousels
-					$('.carousel').addClass('hidden');
+					$('.carousel').addClass('hidden')
 
 					// reveal the new current slide's carousel.
 					setTimeout(function(){ $('#'+id+ ' .carousel').removeClass('hidden') }, 500);
-
-					window.ethan = data;
-
 				});
-
 			}
-			hideTimelines();
+
+			// Initialization complete
+			$('.carousel-inner .item:first-child').addClass('active') // Add class of active to first slide of bootstrap carousel
+			$('.route-content').not('.route-content:first-child').addClass('hidden').addClass("asdf-123") // after all timelines have been initialized/render, hide all except first.
 		},
 
 		getTimeline: function(id){
@@ -157,32 +155,5 @@ var DriftMapTimeline = function(){
 		setTimeline: function(id, slide){
 
 		}
-	}	
+	}
 }();
-
-function hideTimelines(){
-	var foo = true;
-	setTimeout(function(){
-		if(foo){
-			foo = false;
-			$('.tl-text').addClass('hidden');
-			$('.tl-media').css('border-top', '0');
-			$('.route-content').addClass('hidden');
-			$('.route-content').first().removeClass('hidden');			
-		}
-	}, 100);
-}
-
-/* 
-setTimeout(function(){
-  if(foo){
-    foo = false;
-    $('.tl-text').addClass('hidden');
-    $('.tl-media').css('border-top', '0');
-    $('.route-content').addClass('hidden');
-    $('.route-content').first().removeClass('hidden');                      
-  }
-}, 100);
-
-
- */
