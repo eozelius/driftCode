@@ -121,9 +121,20 @@ var DriftMapTimeline = function(){
 				/* Timeline Event listeners */
 				indexer[r.id].on('change', function(data){
 					var id = data.unique_id
-					// open waypoint on map
-					DriftMapLeaflet.setWayPoint(id)
+					var wp = DriftMapLeaflet.getWayPoint(id);
 
+					if(wp){
+						/* Leaflet */
+						DriftMapLeaflet.setWayPoint(id);
+
+						// update title and description
+						$('.route-content .route-header:visible').html(wp.title);
+						$('.route-content .route-description:visible').html(wp.body);
+					} else {
+						// todo: update title and description to route title
+					}
+
+					/* TimelineJS */
 					// hide all slides/carousels
 					$('.carousel').addClass('hidden')
 
@@ -135,6 +146,11 @@ var DriftMapTimeline = function(){
 							$('#'+id+ ' .carousel').removeClass('hidden')
 						}
 					}, 500);
+
+
+
+
+
 				});
 			}
 

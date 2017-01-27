@@ -1,18 +1,9 @@
 var DriftMapLeaflet = function(){
-	L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
 	// Private Variables
-	var currentMarker;	
-	
-		/*ex indexer[x] = { 
-			id: 12, 
-			title: "Burmuda", 
-			body: "Burmuda might be the best place in …", 
-			marker: { <Leaflet Marker code> },
-			popup: { <Leaflet popup code> }
-		}*/
-	
+	var currentMarker
 	var indexer = []
 
+	L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
 	/* Custom Makers */
 	var maroonMarker = L.icon({ 
 	  iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
@@ -100,7 +91,7 @@ var DriftMapLeaflet = function(){
 		},
 
 		/* Getters */
-		getWayPt: function(id){
+		getWayPoint: function(id){
 			for(var i in indexer)
 				if(indexer[i].id == id)
 					return indexer[i];
@@ -109,7 +100,7 @@ var DriftMapLeaflet = function(){
 
 		/* Setters */
 		setWayPoint: function(id){
-			var wp = DriftMapLeaflet.getWayPt(id)
+			var wp = DriftMapLeaflet.getWayPoint(id)
 
 			if(wp){
 				// reset all waypoint to blue

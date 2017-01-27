@@ -8,9 +8,6 @@ $(function(){
 			var r = response.responseJSON;
 			window.r = r
 
-			// Init Routes & waypoints
-			DriftMapRoute.init(r);
-
 			// init Timeline
 			DriftMapTimeline.init(r);
 
