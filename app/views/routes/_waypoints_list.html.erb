@@ -41,13 +41,12 @@
 
 	<script type="text/javascript">
 		/* Toggle a Route */
-		$('.route-switcher').on('click', function(){
+		/*$('.route-switcher').on('click', function(){
 			var route_id = $(this).data('route');
 			var r = getTimeline(route_id);
 			$('.route-content').addClass('hidden');
 			$('#dm-timeline-' + route_id).removeClass('hidden').parent().removeClass('hidden');
 
-			// update timeline header and description
 			var title = r.title.replace(/&quot;/g, '');
 			var description = r.description.replace(/&quot;/g, '');
 
@@ -56,10 +55,10 @@
 
 
 			r.goToStart(); // reset selected timeline until I can figure out how to keep track of current slide
-		});
+		});*/
 
 		/* when user clicks waypoint <li>, update map and timeline */
-		$('.blip').on('click', function(){
+		/*$('.blip').on('click', function(){
 		  if( $(this).data('blip') !== undefined){
 		    for(var i in window.blipsIndexer)
 		      window.blipsIndexer[i].marker.setIcon(window.blueMarker);
@@ -74,10 +73,9 @@
 					blip.popup.openOn(window.map);
 					blip.marker.setIcon(window.maroonMarker);
 			    wayPtShow(blip_id);
-			    /* update timeline */
 			    myTimeline.goTo(blipSlide);
 		    }
 		  }
-		});
+		});*/
 	</script>
 <% end %>

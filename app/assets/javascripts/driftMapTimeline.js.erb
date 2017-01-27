@@ -103,7 +103,7 @@ var DriftMapTimeline = function(){
 					var wp = wps[i]
 					if(typeof wp.images !== 'undefined'){
 						// Carousel Wrapper
-						c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel"><div class="carousel-inner" role="listbox">';
+						var c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel"><div class="carousel-inner" role="listbox">';
 
 						// Carousel slides/images
 						for(var j in wp.images) { c += '<div class="item"><img src="' + wp.images[j].image.url + '" /></div>' }
@@ -114,8 +114,8 @@ var DriftMapTimeline = function(){
 
 				  $('#'+ wp.id).empty()
 				  $('#'+ wp.id).html(c)
-				  // $('.carousel .item:first-child').addClass('active');
 				}
+				$('.carousel .item:first-child').addClass('active');
 				/* end WayPoints Carousel */
 
 				/* Timeline Event listeners */
@@ -126,13 +126,20 @@ var DriftMapTimeline = function(){
 					$('.carousel').addClass('hidden')
 
 					// reveal the new current slide's carousel.
-					setTimeout(function(){ $('#'+id+ ' .carousel').removeClass('hidden') }, 500);
+					var foo = true
+					setTimeout(function(){ 
+						if(foo){
+							foo = false;
+							$('#'+id+ ' .carousel').removeClass('hidden')
+						}
+					}, 500);
+
 				});
 			}
 
 			// Initialization complete
-			$('.carousel-inner .item:first-child').addClass('active') // Add class of active to first slide of bootstrap carousel
-			$('.route-content').not('.route-content:first-child').addClass('hidden').addClass("asdf-123") // after all timelines have been initialized/render, hide all except first.
+			// $('.carousel-inner .item:first-child').addClass('active') // Add class of active to first slide of bootstrap carousel
+			$('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
 		},
 
 		getTimeline: function(id){
