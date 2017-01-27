@@ -25,3 +25,7 @@ config/database.yml
 # Ignore test coverage
 /coverage/*
 /coverage/*.json
+
+
+# Ignore images
+/app/assets/images/blip_images/*
