@@ -4,7 +4,6 @@ $(function(){
 		url: '/get_routes',
 		method: 'POST',
 		dataType: 'JSON',
-		data: {	index: 'index' },
 		complete: function(response) {
 			var r = response.responseJSON;
 
@@ -21,7 +20,6 @@ $(function(){
 		url: '/get_way_pts',
 		method: 'POST',
 		dataType: 'JSON',
-		data: {	index: 'index' },
 		complete: function(response) {
 			var wp = response.responseJSON;
 			// Index Waypoints

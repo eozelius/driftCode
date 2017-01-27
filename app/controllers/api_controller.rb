@@ -27,12 +27,18 @@ class ApiController < ApplicationController
 		routes.each do |route|
 			my_route_wps = {}
 			route.blips.each do |blip|
+				wp_images = []
+				blip.blip_images.each do |image|
+					wp_images.push(image)
+				end					
+
 				my_route_wps[blip.id] = { 
 					id: blip.id,
 					title: blip.title,
 					body: blip.body,
 					x: blip.x,
 					y: blip.y,
+					images: wp_images,
 					post_id: blip.post_id,
 					route_id: blip.route_id,
 					date: {
