@@ -38,12 +38,11 @@ var DriftMapLeaflet = function(){
 
 
 		// public methods
-		init: function(wayPoints, options){
-			var x = typeof options !== 'undefined' ? options.init_x : 0.924206230200376;
-			var y = typeof options !== 'undefined' ? options.init_y : -40.2400771379471;
-			var z = typeof options !== 'undefined' ? options.init_zoom : 2;
+		init: function(routes, options){
+			var x = options !== undefined ? options.init_x : 0.924206230200376;
+			var y = options !== undefined ? options.init_y : -40.2400771379471;
+			var z = options !== undefined ? options.init_zoom : 2;
 
-			// var m = L.map('map').setView([x, y], z);
 			var m = L.map('map').setView([x, y], z);
 
 			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
@@ -53,40 +52,46 @@ var DriftMapLeaflet = function(){
 		    	accessToken: "<%= ENV['MAPBOX_SECRET_KEY'] %>"
 				}).addTo(m);
 
-			if(typeof wayPoints !== 'undefined' && wayPoints.length > 0){
-				for(var i in wayPoints){
-					/* Add Marker to Map */
-					var lat = wayPoints[i].x;
-					var lng = wayPoints[i].y;
-					var id = wayPoints[i].id;
-					var title = wayPoints[i].title;
-					var body  = wayPoints[i].body;
 
-					/* Bind popup to marker */
-					var popupContent = 	'<div class="blip-popup" data-blip="'+ id +'">' + 
-																'<div class="blip-text">' +
-																	'<a href="/blips/'+ id +'">' +
-																		'<h4 class="blip-popup-title instructions">'+ title +'</h4>' + 
-																		'<span> - more</span>' +
-																	'</a>' +
-																	'<p class="blip-popup-body">'+ body +'</p>' + 
-																'</div>' +
-																'<img src="'+ wayPoints[i].images[0].image.url +'" style="width: 100%; height:auto;">' +
-															'</div>';
+			for(var x in routes){
+				if(routes[x].route !== undefined && routes[x].waypoints !== undefined){
+					var r = routes[x].route
+					var wps = routes[x].waypoints
 
-					var popupOptions = { className: 'blip-popup' }
-					var wpMarker = L.marker([lat, lng]).addTo(m);
-					var wpPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
-					wpMarker.bindPopup(wpPopup);
+					for(var i in wps){
+						/* Add Marker to Map */
+						var lat = wps[i].x;
+						var lng = wps[i].y;
+						var id = wps[i].id;
+						var title = wps[i].title;
+						var body  = wps[i].body;
 
-					/* Add wayPoint to indexer */
-					indexer.push({
-						id: 		wayPoints[i].id,
-						title: 	title,
-						body:  	body,
-						marker: wpMarker,
-						popup:  wpPopup
-					});
+						/* Bind popup to marker */
+						var popupContent = 	'<div class="blip-popup" data-blip="'+ id +'">' + 
+																	'<div class="blip-text">' +
+																		'<a href="/blips/'+ id +'">' +
+																			'<h4 class="blip-popup-title instructions">'+ title +'</h4>' + 
+																			'<span> - more</span>' +
+																		'</a>' +
+																		'<p class="blip-popup-body">'+ body +'</p>' + 
+																	'</div>' +
+																	'<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' +
+																'</div>';
+
+						var popupOptions = { className: 'blip-popup' }
+						var wpMarker = L.marker([lat, lng]).addTo(m);
+						var wpPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
+						wpMarker.bindPopup(wpPopup);
+
+						/* Add wayPoint to indexer */
+						indexer.push({
+							id: 		wps[i].id,
+							title: 	title,
+							body:  	body,
+							marker: wpMarker,
+							popup:  wpPopup
+						});
+					}					
 				}
 			}
 		},

@@ -7,16 +7,19 @@ $(function(){
 		complete: function(response) {
 			var r = response.responseJSON;
 
-			// Init Routes
+			// Init Routes & waypoints
 			DriftMapRoute.init(r);
 
 			// init Timeline
 			DriftMapTimeline.init(r);
+
+			// init Leaflet
+			DriftMapLeaflet.init(r);
 		}
 	});
 
 	/* WayPoints */
-	$.ajax({
+	/*$.ajax({
 		url: '/get_way_pts',
 		method: 'POST',
 		dataType: 'JSON',
@@ -28,7 +31,7 @@ $(function(){
 			// Init Leaflet
 			DriftMapLeaflet.init(wp);
 		}
-	});
+	});*/
 
 	/* Timeline */
 
