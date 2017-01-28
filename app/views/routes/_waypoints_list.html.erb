@@ -41,13 +41,12 @@
 
 	<script type="text/javascript">
 		/* Toggle a Route */
-		$('.route-switcher').on('click', function(){
+		/*$('.route-switcher').on('click', function(){
 			var route_id = $(this).data('route');
 			var r = getTimeline(route_id);
 			$('.route-content').addClass('hidden');
 			$('#dm-timeline-' + route_id).removeClass('hidden').parent().removeClass('hidden');
 
-			// update timeline header and description
 			var title = r.title.replace(/&quot;/g, '');
 			var description = r.description.replace(/&quot;/g, '');
 
@@ -56,27 +55,20 @@
 
 
 			r.goToStart(); // reset selected timeline until I can figure out how to keep track of current slide
-		});
+		});*/
 
 		/* when user clicks waypoint <li>, update map and timeline */
 		$('.blip').on('click', function(){
-		  if( $(this).data('blip') !== undefined){
-		    for(var i in window.blipsIndexer)
-		      window.blipsIndexer[i].marker.setIcon(window.blueMarker);
-		    
-		    var blipSlide = $(this).data('blipslide') + 1;
-		    var blip_id = $(this).data('blip');
-		    var route_id = $(this).data('routeid');
-		    var myTimeline = getTimeline(route_id);
-		    var blip = getBlip(blip_id);
+		  var id = $(this).data('blip')
+		  var wp = DriftMapLeaflet.getWayPoint(id);
 
-		    if(blip){
-					blip.popup.openOn(window.map);
-					blip.marker.setIcon(window.maroonMarker);
-			    wayPtShow(blip_id);
-			    /* update timeline */
-			    myTimeline.goTo(blipSlide);
-		    }
+		  if(wp){
+		  	// open waypoint on map
+		  	DriftMapLeaflet.setWayPoint(id);
+
+		  	// highlight waypoint text in bootstrap accordian
+		  	$('.li-blip-selected').removeClass('li-blip-selected');
+		    $('li.blip[data-blip="'+ id +'"] p').addClass('li-blip-selected');
 		  }
 		});
 	</script>

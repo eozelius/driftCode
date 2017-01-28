@@ -26,31 +26,27 @@ var DriftMapTimeline = function(){
 		// public methods
 		init: function(routes){
 			/*
-			{ 
-				51: {
-					route: { 
-						id: 51, 
-						description: "My gonzo adventure into Colombia in…", 
-						title: "2015 - Colombia", 
-						post_id: 1, 
-						created_at: "2016-12-03T20:05:51.694Z", 
-						updated_at: "2016-12-03T20:05:51.694Z", 
-						coverphoto: {
-						url: 'assets/asfd.png'
-					},
-					waypoints: { 
-						10: { 
-							id: 10, 
-							title: "Sunnyside Queens", 
-							body: "Queens NY.  From Flushing to Astori…", 
-							x: 40.743, 
-							y: -73.922, 
-							post_id: 1, 
-							route_id: 51, 
-							date:  { year: 2016, month: 11, day: 23 } 
-						}
-					}
-				}
+			{
+				route: [{ 
+					id: 51, 
+					description: "My gonzo adventure into Colombia in…", 
+					title: "2015 - Colombia", 
+					post_id: 1, 
+					created_at: "2016-12-03T20:05:51.694Z", 
+					updated_at: "2016-12-03T20:05:51.694Z", 
+					coverphoto: {	url: 'assets/asfd.png' },
+				}, {}, ...],
+				
+				waypoints: [{ 
+					id: 10, 
+					title: "Sunnyside Queens", 
+					body: "Queens NY.  From Flushing to Astori…", 
+					x: 40.743, 
+					y: -73.922, 
+					post_id: 1, 
+					route_id: 51, 
+					date:  { year: 2016, month: 11, day: 23 } 
+				}, {}, ...]
 			}
 			*/
 
@@ -76,9 +72,10 @@ var DriftMapTimeline = function(){
 						text: {
 							headline: wp.title,
 							text:  		wp.body
-						}
+						},
+						unique_id: wp.id.toString()
 					});
-				} // end r waypoints; ready to init timeline for r
+				} // end r waypoints;
 
 				var tlData = {
 					title: {
@@ -87,17 +84,74 @@ var DriftMapTimeline = function(){
 							caption: ''
 						},
 						text: {
-							headline: r.title,
-							text: r.description
+							headline: '',
+							text: ''
 						}
 					},
 					events: tlEvents
 				}
 
 				var tlOpts = { timenav_height: 180 }
+				indexer[r.id] = new TL.Timeline('dm-timeline-'+r.id, tlData, tlOpts)
 
-				indexer.push( new TL.Timeline('dm-timeline-'+r.id, tlData, tlOpts) );
+				/* WayPoints Carousel */
+				for(var i in wps){
+					var wp = wps[i]
+					var c
+
+					if(wp.images.length > 0){
+						// Carousel Wrapper
+						c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel"><div class="carousel-inner" role="listbox">';
+
+						// Carousel slides/images
+						for(var j in wp.images) { c += '<div class="item"><img src="' + wp.images[j].image.url + '" /></div>' }
+
+						// Carousel indicators
+						if(wp.images.length > 1) { c +=  '<a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="right carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><span class="sr-only">Next</span></a></div></div>' }
+					} else {
+						c = 'no images'
+					}
+
+				  $('#'+ wp.id).empty()
+				  $('#'+ wp.id).html(c)
+				}
+				$('.carousel .item:first-child').addClass('active');
+				/* end WayPoints Carousel */
+
+				/* Timeline Event listeners */
+				indexer[r.id].on('change', function(data){
+					var id = data.unique_id
+					var wp = DriftMapLeaflet.getWayPoint(id);
+
+					if(wp){
+						/* Leaflet */
+						DriftMapLeaflet.setWayPoint(id);
+
+						// update title and description
+						$('.route-content .route-header:visible').html(wp.title);
+						$('.route-content .route-description:visible').html(wp.body);
+					} else {
+						// todo: update title and description to route title
+					}
+
+					/* TimelineJS */
+					// hide all slides/carousels
+					$('.carousel').addClass('hidden')
+
+					// reveal the new current slide's carousel.
+					var foo = true
+					setTimeout(function(){ 
+						if(foo){
+							foo = false;
+							$('#'+id+ ' .carousel').removeClass('hidden')
+						}
+					}, 500);
+				});
 			}
+
+			// Initialization complete
+			// $('.carousel-inner .item:first-child').addClass('active') // Add class of active to first slide of bootstrap carousel
+			$('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
 		},
 
 		getTimeline: function(id){
@@ -120,5 +174,5 @@ var DriftMapTimeline = function(){
 		setTimeline: function(id, slide){
 
 		}
-	}	
+	}
 }();
