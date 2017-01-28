@@ -27,16 +27,6 @@ colombia = ethan.post.routes.create!(
   description: 'A gonzo style adventure into the heart and fringes of this South American Gem.'
 )
 
-colombia.route_points.build( x: 4.6077624, y: -74.0745113, order: 0 ) # bogota
-colombia.route_points.build( x: 6.2807872, y: -75.5511055, order: 1 ) # medellin
-colombia.route_points.build( x: 5.1073584, y: -75.5126810, order: 2 ) # manizales
-colombia.route_points.build( x: 4.8564869, y: -75.6857157, order: 3 ) # pereira
-colombia.route_points.build( x: 4.6671150, y: -75.5951801, order: 4 ) # Salento
-colombia.route_points.build( x: 3.5644319, y: -76.5052577, order: 5 ) # Cali
-colombia.route_points.build( x: 3.8408223, y: -76.8986596, order: 6 ) # San Cipriano
-colombia.route_points.build( x: 4.6501713, y: -74.0550950, order: 7 ) # Bogota x2
-colombia.save!
-
 # Blips
 bogota = colombia.blips.create!(
   title: 'Bogota Colombia',
