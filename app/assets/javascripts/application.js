@@ -18,6 +18,7 @@
 //= require bootstrap-datetimepicker.min.js
 //= require driftMapLeaflet.js
 //= require driftMapTimeline.js
+//= require driftMapAccordian.js
 //= require helper.js.erb
 //= require user.js
 //= require_tree .

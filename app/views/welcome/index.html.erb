@@ -33,6 +33,16 @@
       <div id='map'></div>
     </div>
 
-    <%= render 'routes/waypoints_list' %>
+    <% if !@routes.nil? %>
+      <!-- Accordian -->
+      <div class="view-wizard-container">
+        <h5 class="waypoints-title">journeys</h5>
+        <div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true">
+          
+
+
+        </div>
+      </div>
+    <% end %>    
   </div>
 </div>

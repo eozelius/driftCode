@@ -115,8 +115,11 @@ var DriftMapTimeline = function(){
 				  $('#'+ wp.id).empty()
 				  $('#'+ wp.id).html(c)
 				}
+
 				$('.carousel .item:first-child').addClass('active');
 				/* end WayPoints Carousel */
+				$('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
+				/* End Initialization */
 
 				/* Timeline Event listeners */
 				indexer[r.id].on('change', function(data){
@@ -130,28 +133,36 @@ var DriftMapTimeline = function(){
 						// update title and description
 						$('.route-content .route-header:visible').html(wp.title);
 						$('.route-content .route-description:visible').html(wp.body);
+
+						/* TimelineJS */
+						// hide all slides/carousels
+						$('.carousel').addClass('hidden')
+
+						// reveal the new current slide's carousel.
+						var foo = true
+						setTimeout(function(){ 
+							if(foo){
+								foo = false;
+								$('#'+id+ ' .carousel').removeClass('hidden')
+							}
+						}, 500);
+
+						/* Waypoints Accordian */
+						$('.li-blip-selected').removeClass('li-blip-selected');
+						$('li.blip[data-blip="'+ id +'"] p').addClass('li-blip-selected');
+
+						// highlight the current waypoint in the waypoints accordian
 					} else {
 						// todo: update title and description to route title
 					}
 
-					/* TimelineJS */
-					// hide all slides/carousels
-					$('.carousel').addClass('hidden')
 
-					// reveal the new current slide's carousel.
-					var foo = true
-					setTimeout(function(){ 
-						if(foo){
-							foo = false;
-							$('#'+id+ ' .carousel').removeClass('hidden')
-						}
-					}, 500);
+
+
+
+
 				});
 			}
-
-			// Initialization complete
-			// $('.carousel-inner .item:first-child').addClass('active') // Add class of active to first slide of bootstrap carousel
-			$('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
 		},
 
 		getTimeline: function(id){

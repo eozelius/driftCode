@@ -13,6 +13,9 @@ $(function(){
 
 			// init Leaflet
 			DriftMapLeaflet.init(r);
+
+			// init Accordian
+			DriftMapAccordian.init(r);
 		}
 	});
 });
