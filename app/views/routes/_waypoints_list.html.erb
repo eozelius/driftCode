@@ -19,7 +19,7 @@
 	  						<ul class="waypoints-container">
 	  							<% route.blips.order(:date).each_with_index do |blip, index| %>
 	  								<li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>" data-blipslide="<%= index %>" data-routeid="<%= route.id %>">
-	  									<p class="blip-title"><%= blip.title %></p>
+	  									<p class="blip-title <%= 'li-blip-selected' if index == 0 %>"><%= blip.title %></p>
 	  								</li>
 			  					<% end %>							
 	  						</ul>
