@@ -3,6 +3,10 @@ var DriftMapAccordian = function(){
 	var indexer = []
 
 	// Private Methods
+	function focusWayPoint(id){
+		$('.li-blip-selected').removeClass('li-blip-selected');
+		$('li.waypoint[data-blip="'+ id +'"] p').addClass('li-blip-selected');
+	}
 
 	return {
 		// public variables
@@ -28,16 +32,28 @@ var DriftMapAccordian = function(){
 
 				for(var y in wps){
 					var w = wps[y]
-					a += '<li class="blip" data-blip="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-blipslide="'+ y +'" data-routeid="'+ r.id +'">' + 
+					a += '<li class="waypoint" data-blip="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-blipslide="'+ y +'" data-routeid="'+ r.id +'">' + 
 	  							'<p class="blip-title">'+ w.title +'</p>' +
 	  						'</li>';
 				}
 
 				a += '</ul></div></div></div>';
 				$('#waypt-accord').append(a);
-			}
+			} // end for(var x in routes)
+
 			$('.panel-default:first-child .panel-collapse').addClass('in');
 			$('.waypoints-container').first().find('.blip-title').first().addClass('li-blip-selected')
+
+			/* Event listeners */
+			$('li.waypoint').on('click', function(){
+				var id = $(this).data('blip')
+				var wp = DriftMapLeaflet.getWayPoint(id);
+				if(wp){
+					DriftMapLeaflet.setWayPoint(id);
+					// DriftMapTimeline.
+					focusWayPoint(id);
+				}
+			})
 		}
 	}
 }();
