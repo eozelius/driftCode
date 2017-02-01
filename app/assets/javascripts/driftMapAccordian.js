@@ -48,7 +48,7 @@ var DriftMapAccordian = function(){
 				if(wp){
 					DriftMapLeaflet.setWayPoint(id);
 					// DriftMapTimeline.
-					focusWayPoint(id);
+					DriftMapAccordian.focusWayPoint(id);
 				}
 			});
 
