@@ -80,14 +80,19 @@ var DriftMapLeaflet = function(){
 							id: 		wps[i].id,
 							title: 	title,
 							body:  	body,
-							marker: wpMarker,
-							popup:  wpPopup
+							leaflet: {
+								marker: wpMarker,
+								popup:  wpPopup,
+								map: m
+							}
 						});
 					}					
 				}
 			}
-			indexer[0].marker.setIcon(maroonMarker)
-			indexer[0].popup.openOn(m)
+			indexer[0].leaflet.marker.setIcon(maroonMarker)
+			indexer[0].leaflet.popup.openOn(m)
+
+			window.leafletIndexer = indexer
 		},
 
 		/* Getters */
@@ -105,10 +110,10 @@ var DriftMapLeaflet = function(){
 			if(wp){
 				// reset all waypoint to blue
 				for(var i in indexer)
-					indexer[i].marker.setIcon(blueMarker)
+					indexer[i].leaflet.marker.setIcon(blueMarker)
 
-				wp.marker.setIcon(maroonMarker)
-				wp.popup.openOn(m)
+				wp.leaflet.marker.setIcon(maroonMarker)
+				wp.leaflet.popup.openOn(m)
 			}			
 		}
 	}

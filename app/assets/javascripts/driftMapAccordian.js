@@ -1,6 +1,6 @@
 var DriftMapAccordian = function(){
 	// Private Variables
-	var indexer = []
+	// var indexer = []
 
 	// Private Methods
 	function focusWayPoint(id){
@@ -21,7 +21,7 @@ var DriftMapAccordian = function(){
 				var a = '<div class="panel panel-default">' + 
 									'<div id="heading-'+ x +'" class="panel-heading" >' + 
 										'<h4 class="panel-title">' +
-											'<a role="button" data-toggle="collapse" data-parent="#waypt-accord" href="#collapse-'+ r.id +'" aria-expanded="true" aria-controls="collapse-'+ x +'" data-route="'+ r.id +'" class="route-switcher" >' + 
+											'<a class="route-switcher" role="button" data-toggle="collapse" data-parent="#waypt-accord" href="#collapse-'+ r.id +'" aria-expanded="true" aria-controls="collapse-'+ x +'" data-route="'+ r.id +'">' + 
 												r.title +
 											'</a>' + 
 										'</h4>' + 
@@ -45,6 +45,7 @@ var DriftMapAccordian = function(){
 			$('.waypoints-container').first().find('.blip-title').first().addClass('li-blip-selected')
 
 			/* Event listeners */
+			// Click a specific waypoint
 			$('li.waypoint').on('click', function(){
 				var id = $(this).data('blip')
 				var wp = DriftMapLeaflet.getWayPoint(id);
@@ -53,7 +54,17 @@ var DriftMapAccordian = function(){
 					// DriftMapTimeline.
 					focusWayPoint(id);
 				}
-			})
+			});
+
+			// Click a specific route
+			$('.route-switcher').on('click', function(){
+				var id = $(this).data('route');
+				var r = DriftMapTimeline.getRoute(id);
+
+				if(r){
+					DriftMapTimeline.focusRoute(id);
+				}
+			});
 		}
 	}
 }();

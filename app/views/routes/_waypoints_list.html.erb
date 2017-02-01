@@ -1,4 +1,4 @@
-<% if !@routes.nil? %>
+<% if !@routes.nil? && false %>
 	<!-- waypoints List -->
 	<div class="view-wizard-container">
 		<h5 class="waypoints-title">journeys</h5>
@@ -41,7 +41,7 @@
 
 	<script type="text/javascript">
 		/* Toggle a Route */
-		/*$('.route-switcher').on('click', function(){
+		$('.route-switcher').on('click', function(){
 			var route_id = $(this).data('route');
 			var r = getTimeline(route_id);
 			$('.route-content').addClass('hidden');

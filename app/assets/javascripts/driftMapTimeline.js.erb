@@ -35,6 +35,7 @@ var DriftMapTimeline = function(){
 					created_at: "2016-12-03T20:05:51.694Z", 
 					updated_at: "2016-12-03T20:05:51.694Z", 
 					coverphoto: {	url: 'assets/asfd.png' },
+					timeline: < timelineJS3 data >
 				}, {}, ...],
 				
 				waypoints: [{ 
@@ -92,7 +93,17 @@ var DriftMapTimeline = function(){
 				}
 
 				var tlOpts = { timenav_height: 180 }
-				indexer[r.id] = new TL.Timeline('dm-timeline-'+r.id, tlData, tlOpts)
+				
+				indexer.push({
+					id: r.id,
+					title: r.title,
+					description: r.description,
+					post_id: r.post_id,
+					coverphoto: r.coverphoto,
+					created_at: r.created_at,
+					updated_at: r.updated_at,
+					timeline: new TL.Timeline('dm-timeline-'+r.id, tlData, tlOpts)
+				})
 
 				/* WayPoints Carousel */
 				for(var i in wps){
@@ -118,11 +129,21 @@ var DriftMapTimeline = function(){
 
 				$('.carousel .item:first-child').addClass('active');
 				/* end WayPoints Carousel */
-				$('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
+
+				var foobar = true
+				setTimeout(function(){
+					if(foobar){
+						foobar = false	
+						$('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
+					}
+				}, 500);
+				
+				// $('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
+
 				/* End Initialization */
 
 				/* Timeline Event listeners */
-				indexer[r.id].on('change', function(data){
+				indexer[x].timeline.on('change', function(data){
 					var id = data.unique_id
 					var wp = DriftMapLeaflet.getWayPoint(id);
 
@@ -155,18 +176,10 @@ var DriftMapTimeline = function(){
 					} else {
 						// todo: update title and description to route title
 					}
-
-
-
-
-
-
 				});
 			}
-		},
 
-		getTimeline: function(id){
-
+			window.ethan = indexer;
 		},
 
 		getCurrentTimeline: function(){
@@ -177,13 +190,17 @@ var DriftMapTimeline = function(){
 
 		},
 
-		getCorrespondingRoute: function(id){
-
+		getRoute: function(id){
+			for(var i in indexer)
+				if(id == indexer[i].id)
+					return indexer[i]
+			return false;
 		},
 
 		/* Setters */
-		setTimeline: function(id, slide){
-
+		focusRoute: function(id, slide){
+			$('.route-content').addClass('hidden')
+			$('.route-content[data-routecontent="'+ id +'"]').removeClass('hidden')
 		}
 	}
 }();
