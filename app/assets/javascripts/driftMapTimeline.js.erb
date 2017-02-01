@@ -148,6 +148,9 @@ var DriftMapTimeline = function(){
 					var wp = DriftMapLeaflet.getWayPoint(id);
 
 					if(wp){
+						/* Accordian */
+						DriftMapAccordian.focusWayPoint(id);
+
 						/* Leaflet */
 						DriftMapLeaflet.setWayPoint(id);
 
@@ -167,11 +170,6 @@ var DriftMapTimeline = function(){
 								$('#'+id+ ' .carousel').removeClass('hidden')
 							}
 						}, 500);
-
-						/* Waypoints Accordian */
-						$('.li-blip-selected').removeClass('li-blip-selected');
-						$('li.blip[data-blip="'+ id +'"] p').addClass('li-blip-selected');
-
 						// highlight the current waypoint in the waypoints accordian
 					} else {
 						// todo: update title and description to route title

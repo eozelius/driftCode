@@ -3,10 +3,6 @@ var DriftMapAccordian = function(){
 	// var indexer = []
 
 	// Private Methods
-	function focusWayPoint(id){
-		$('.li-blip-selected').removeClass('li-blip-selected');
-		$('li.waypoint[data-blip="'+ id +'"] p').addClass('li-blip-selected');
-	}
 
 	return {
 		// public variables
@@ -65,6 +61,16 @@ var DriftMapAccordian = function(){
 					DriftMapTimeline.focusRoute(id);
 				}
 			});
+		},
+
+		focusWayPoint: function(id){
+			if(id !== undefined){
+				$('.li-blip-selected').removeClass('li-blip-selected');
+				$('li.waypoint[data-blip="'+ id +'"] p').addClass('li-blip-selected');
+			} else {
+				console.log('id is undefined')
+				$('.route-content:visible .waypoints-container li p').first().addClass('li-blip-selected')
+			}
 		}
 	}
 }();
