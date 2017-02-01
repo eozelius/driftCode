@@ -66,9 +66,12 @@ var DriftMapLeaflet = function(){
 																			'<span> - more</span>' +
 																		'</a>' +
 																		'<p class="blip-popup-body">'+ body +'</p>' + 
-																	'</div>' +
-																	'<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' +
-																'</div>';
+																	'</div>';
+																	//'<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' +
+																//'</div>';
+
+						if(wps[i].images.length > 0){	popupContent += '<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' }
+						popupContent += '</div>'
 
 						var popupOptions = { className: 'blip-popup' }
 						var wpMarker = L.marker([lat, lng]).addTo(m);
