@@ -14,7 +14,7 @@ var DriftMapAccordian = function(){
 				var r = routes[x].route
 				var wps = routes[x].waypoints
 
-				var a = '<div class="panel panel-default">' + 
+				var a = '<div data-route="'+ r.id +'" class="panel panel-default">' + 
 									'<div id="heading-'+ x +'" class="panel-heading" >' + 
 										'<h4 class="panel-title">' +
 											'<a class="route-switcher" role="button" data-toggle="collapse" data-parent="#waypt-accord" href="#collapse-'+ r.id +'" aria-expanded="true" aria-controls="collapse-'+ x +'" data-route="'+ r.id +'">' + 
@@ -59,6 +59,8 @@ var DriftMapAccordian = function(){
 
 				if(r){
 					DriftMapTimeline.focusRoute(id);
+					$('.panel[data-route="'+ id +'"] .blip-title').first().addClass('li-blip-selected')
+					// DriftMapAccordian.focusRoute(id);
 				}
 			});
 		},
@@ -70,6 +72,12 @@ var DriftMapAccordian = function(){
 			} else {
 				console.log('id is undefined')
 				$('.route-content:visible .waypoints-container li p').first().addClass('li-blip-selected')
+			}
+		},
+
+		focusRoute: function(id){
+			if(id !== undefined){
+				$('.panel[data-route="'+ id +'"] .panel-collapse').addClass('in');
 			}
 		}
 	}
