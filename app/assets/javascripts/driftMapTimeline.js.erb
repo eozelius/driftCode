@@ -183,11 +183,11 @@ var DriftMapTimeline = function(){
 
 		/* Setters */
 		focusRoute: function(r_id, wp_id){
-/*		$('.route-content').addClass('hidden')
-			$('.route-content[data-routecontent="'+ r_id +'"]').removeClass('hidden')*/
+			$('.route-content').addClass('hidden')
+			$('.route-content[data-routecontent="'+ r_id +'"]').removeClass('hidden')
 
 			var r = DriftMapTimeline.getRoute(r_id)
-			if(r){ r.timeline.goTo(wp_id)	}
+			if (r){ r.timeline.goTo(wp_id) }
 		}
 	}
 }();

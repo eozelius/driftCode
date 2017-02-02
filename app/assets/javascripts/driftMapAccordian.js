@@ -44,7 +44,6 @@ var DriftMapAccordian = function(){
 			// Click a specific waypoint
 			$('li.waypoint').on('click', function(){
 				var slide_index = $(this).data('slideindex') + 1
-
 				var id = $(this).data('blip')
 				var wp = DriftMapLeaflet.getWayPoint(id);
 
@@ -58,12 +57,13 @@ var DriftMapAccordian = function(){
 
 			// Click a specific route
 			$('.route-switcher').on('click', function(){
-				var id = $(this).data('route');
-				var r = DriftMapTimeline.getRoute(id);
+				var r_id = $(this).data('route');
+				var r = DriftMapTimeline.getRoute(r_id);
 
 				if(r){
-					DriftMapTimeline.focusRoute(id);
-					$('.panel[data-route="'+ id +'"] .blip-title').first().addClass('li-blip-selected')
+					DriftMapTimeline.focusRoute(r_id, 0);
+					$('.blip-title').removeClass('li-blip-selected')
+					$('.waypoint[data-slideindex="0"] p').addClass('li-blip-selected')
 				}
 			});
 		},
