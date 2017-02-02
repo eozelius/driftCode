@@ -51,7 +51,7 @@ var DriftMapAccordian = function(){
 					var wp_route_id = wp.route_id
 					DriftMapLeaflet.focusWayPoint(id);
 					DriftMapAccordian.focusWayPoint(id);
-					DriftMapTimeline.focusRoute(wp_route_id, slide_index)
+					DriftMapTimeline.focusRoute(wp_route_id, slide_index, false)
 				}
 			});
 
@@ -63,7 +63,7 @@ var DriftMapAccordian = function(){
 
 				if(r){
 					/* Timeline */
-					DriftMapTimeline.focusRoute(r_id, 0);
+					DriftMapTimeline.focusRoute(r_id, 0, true);
 
 					/* Waypoints */
 					$('.blip-title').removeClass('li-blip-selected')
@@ -91,6 +91,3 @@ var DriftMapAccordian = function(){
 		}
 	}
 }();
-
-// <%= 'in' if index == 0 %>
-// <%= 'li-blip-selected' if index == 0 %>
