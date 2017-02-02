@@ -18,6 +18,7 @@ class ApiController < ApplicationController
 					body: blip.body,
 					x: blip.x,
 					y: blip.y,
+					route_id: blip.route_id,
 					images: wp_images,
 					post_id: blip.post_id,
 					route_id: blip.route_id,

@@ -57,6 +57,7 @@ var DriftMapLeaflet = function(){
 						var id = wps[i].id;
 						var title = wps[i].title;
 						var body  = wps[i].body;
+						var r_id  = wps[i].route_id;
 
 						/* Bind popup to marker */
 						var popupContent = 	'<div class="blip-popup" data-blip="'+ id +'">' + 
@@ -83,6 +84,7 @@ var DriftMapLeaflet = function(){
 							id: 		wps[i].id,
 							title: 	title,
 							body:  	body,
+							route_id: r_id,
 							leaflet: {
 								marker: wpMarker,
 								popup:  wpPopup,
@@ -104,6 +106,12 @@ var DriftMapLeaflet = function(){
 				if(indexer[i].id == id)
 					return indexer[i];
 			return false;
+		},
+
+		getWayPointRoute: function(id){
+			for(var i in indexer)
+				if(indexer[i].id == id)
+					return DriftMapTimeline.getRoute(id.route_id)
 		},
 
 		/* Setters */

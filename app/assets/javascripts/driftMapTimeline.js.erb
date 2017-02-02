@@ -1,12 +1,5 @@
 var DriftMapTimeline = function(){
 	// Private Variables
-
-	/*
-		ex indexer[x] = {
-			id: "<Corresponding Route ID>",
-			< TimelineJS3 data... >
-		}
-	*/
 	var indexer = []
 	var currentTimeline
 	var currentSlide
@@ -18,6 +11,16 @@ var DriftMapTimeline = function(){
 
 	function renderTimeline(dom, tlData, opts){
 
+	}
+
+	function revealSlide(id){
+		var foobar = true
+		setTimeout(function(){
+			if(foobar){
+				foobar = false
+				$('#'+id+ ' .carousel').removeClass('hidden')
+			}
+		}, 500);
 	}
 
 	return {
@@ -112,7 +115,7 @@ var DriftMapTimeline = function(){
 
 					if(wp.images.length > 0){
 						// Carousel Wrapper
-						c = '<div id="images-carousel-'+ i +'" class="hidden carousel slide" data-ride="carousel"><div class="carousel-inner" role="listbox">';
+						c = '<div id="images-carousel-'+ i +'" class=" carousel slide" data-ride="carousel"><div class="carousel-inner" role="listbox">';
 
 						// Carousel slides/images
 						for(var j in wp.images) { c += '<div class="item"><img src="' + wp.images[j].image.url + '" /></div>' }
@@ -129,7 +132,8 @@ var DriftMapTimeline = function(){
 
 				$('.carousel .item:first-child').addClass('active');
 				/* end WayPoints Carousel */
-
+				
+				// Hide all Timelines except the first
 				var foobar = true
 				setTimeout(function(){
 					if(foobar){
@@ -137,9 +141,6 @@ var DriftMapTimeline = function(){
 						$('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
 					}
 				}, 500);
-				
-				// $('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
-
 				/* End Initialization */
 
 				/* Timeline Event listeners */
@@ -157,27 +158,12 @@ var DriftMapTimeline = function(){
 						// update title and description
 						$('.route-content .route-header:visible').html(wp.title);
 						$('.route-content .route-description:visible').html(wp.body);
-
-						/* TimelineJS */
-						// hide all slides/carousels
-						$('.carousel').addClass('hidden')
-
-						// reveal the new current slide's carousel.
-						var foo = true
-						setTimeout(function(){ 
-							if(foo){
-								foo = false;
-								$('#'+id+ ' .carousel').removeClass('hidden')
-							}
-						}, 500);
-						// highlight the current waypoint in the waypoints accordian
 					} else {
 						// todo: update title and description to route title
 					}
 				});
 			}
-
-			window.ethan = indexer;
+			window.timelineIndexer = indexer
 		},
 
 		getCurrentTimeline: function(){
@@ -196,9 +182,12 @@ var DriftMapTimeline = function(){
 		},
 
 		/* Setters */
-		focusRoute: function(id, slide){
-			$('.route-content').addClass('hidden')
-			$('.route-content[data-routecontent="'+ id +'"]').removeClass('hidden')
+		focusRoute: function(r_id, wp_id){
+/*		$('.route-content').addClass('hidden')
+			$('.route-content[data-routecontent="'+ r_id +'"]').removeClass('hidden')*/
+
+			var r = DriftMapTimeline.getRoute(r_id)
+			if(r){ r.timeline.goTo(wp_id)	}
 		}
 	}
 }();

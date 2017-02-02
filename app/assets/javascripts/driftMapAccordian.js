@@ -28,7 +28,7 @@ var DriftMapAccordian = function(){
 
 				for(var y in wps){
 					var w = wps[y]
-					a += '<li class="waypoint" data-blip="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-blipslide="'+ y +'" data-routeid="'+ r.id +'">' + 
+					a += '<li data-slideindex="'+ y +'" class="waypoint" data-blip="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-blipslide="'+ y +'" data-routeid="'+ r.id +'">' + 
 	  							'<p class="blip-title">'+ w.title +'</p>' +
 	  						'</li>';
 				}
@@ -43,12 +43,16 @@ var DriftMapAccordian = function(){
 			/* Event listeners */
 			// Click a specific waypoint
 			$('li.waypoint').on('click', function(){
+				var slide_index = $(this).data('slideindex') + 1
+
 				var id = $(this).data('blip')
 				var wp = DriftMapLeaflet.getWayPoint(id);
+
 				if(wp){
+					var wp_route_id = wp.route_id
 					DriftMapLeaflet.setWayPoint(id);
-					// DriftMapTimeline.
 					DriftMapAccordian.focusWayPoint(id);
+					DriftMapTimeline.focusRoute(wp_route_id, slide_index)
 				}
 			});
 
@@ -60,7 +64,6 @@ var DriftMapAccordian = function(){
 				if(r){
 					DriftMapTimeline.focusRoute(id);
 					$('.panel[data-route="'+ id +'"] .blip-title').first().addClass('li-blip-selected')
-					// DriftMapAccordian.focusRoute(id);
 				}
 			});
 		},
@@ -70,7 +73,6 @@ var DriftMapAccordian = function(){
 				$('.li-blip-selected').removeClass('li-blip-selected');
 				$('li.waypoint[data-blip="'+ id +'"] p').addClass('li-blip-selected');
 			} else {
-				console.log('id is undefined')
 				$('.route-content:visible .waypoints-container li p').first().addClass('li-blip-selected')
 			}
 		},
