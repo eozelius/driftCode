@@ -3,35 +3,6 @@
 	margin: 0 0 55px 0;
 	min-height: 635px;
 
-	/* Carousel */
-	.item{
-
-		img {
-			width: 95%;
-			height: auto;
-			margin: 0 auto;
-			display: block;
-			vertical-align: middle ;
-		}
-	}
-
-	.carousel-control {
-		background: none;
-
-		i {
-			position: absolute;
-			top: 44%;
-		}
-
-		i.fa-angle-right {
-			margin-right: -15px;
-		}
-
-		i.fa-angle-left {
-			margin-left: -15px;
-		}
-	}
-
 	/* Blip title author body */
 	.blip-body {
 		margin-left: 3%;
@@ -67,6 +38,7 @@
 			width: 100%;
 		}
 	}
+
 	.driftmap-form-container {
 		width: 70%;
 	}
@@ -79,44 +51,6 @@
 	.waypoints-title {
 		text-align: center;
 		margin:2%;
-	}
-}
-
-/* Accordian */
-.accordian-container {
-	#waypt-accord {
-		cursor: pointer;
-
-		h4 {
-			font-size: 1.4em;
-			color:#552727;
-			font-weight: 400;
-		}
-
-		p {
-			font-size: 1.00em;
-			color:#C2D9EB;
-		}
-
-		.blip-title {
-			font-size: 1.2em;
-			color: #C2D9EB;
-			font-style: italic;
-			margin: 3% 1%;
-			text-align: left;
-		}
-	}
-
-	#waypt-accord,
-	.panel,
-	.panel-default,
-	.panel-group .panel + .panel {
-		margin: 0;
-		border-radius: 0;
-	}
-
-	.panel-collapse.collapse.in {
-		min-height: 200px;
 	}
 }
 
@@ -162,18 +96,6 @@
 				height: 110px;
 			}
 		}
-	}
-
-	.map-container {
-		position: relative;
-		top: 290px;
-	}
-
-	.accordian-container {
-		padding: 10px 0 0 10px;
-		border-radius: 5px 0 0 0;
-		position: relative;
-		top: -375px;
 	}
 }
 

@@ -38,6 +38,34 @@
 		color: #fff;
 		opacity: .8;
 	}
+
+	/* Carousel */
+	.item{
+
+		img {
+			width: 95%;
+			height: auto;
+			margin: 0 auto;
+			display: block;
+			vertical-align: middle ;
+		}
+	}
+	.carousel-control {
+		background: none;
+
+		i {
+			position: absolute;
+			top: 44%;
+		}
+
+		i.fa-angle-right {
+			margin-right: -15px;
+		}
+
+		i.fa-angle-left {
+			margin-left: -15px;
+		}
+	}
 }
 
 .route-header {

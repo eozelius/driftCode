@@ -1,3 +1,33 @@
 #accordian-container {
-	
+	cursor: pointer;
+
+	.panel-collapse.collapse.in {
+		min-height: 200px;
+	}
+
+	.panel-heading{
+
+	}
+
+	#waypt-accord,
+	.panel,
+	.panel-default,
+	.panel-group .panel + .panel {
+		margin: 0;
+		border-radius: 0;
+	}
+
+	.blip-title {
+		font-size: 1.2em;
+		color: #C2D9EB;
+		font-style: italic;
+		margin: 3% 1%;
+		text-align: left; 
+	}
+
+	h4.panel-title {
+		font-size: 1.4em;
+		color: #552727;
+		font-weight: 400;
+	}
 }

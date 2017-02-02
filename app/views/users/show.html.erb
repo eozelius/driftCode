@@ -1,24 +1,4 @@
 <% provide(:title, @user.name) %>
-<div class="container" id="profile">
-	<div id="dm-content-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-
-		<% if @route.nil? %>
-			<%= render 'routes/init_routes_timeline_html' %>
-		<% elsif !@blips.nil? %>
-			<%= render 'blips/carousel' %>
-		<% else %>
-			<%= render 'routes/init_adventure' %>
-		<% end %>
-	</div>
-
-	<div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-		<div class="map-container">
-			<div id='map'></div>
-		</div>
-
-		<%#= render 'routes/waypoints_list' %>
-	</div>
-</div>
 
 <hr style="width:84%; height: 3px;background-color: #ccc; margin: 75px auto 50px;">
 
