@@ -1,10 +1,8 @@
 /* Driftmap form */
 .edit_post,
 .new_post {
-
   margin: 4% 3%;
   padding: 1% 0;
-
 
   input[type="text"],
   textarea {
@@ -164,8 +162,4 @@ div.blip-popup {
       }
     }
   }
-}
-
-@media (min-width: 320px) and (max-width: 479px){
-
 }
