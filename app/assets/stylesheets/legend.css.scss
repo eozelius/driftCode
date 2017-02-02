@@ -82,8 +82,8 @@
 	}
 }
 
-/* Wizard Accordian */
-.view-wizard-container {
+/* Accordian */
+.accordian-container {
 	#waypt-accord {
 		cursor: pointer;
 
@@ -169,7 +169,7 @@
 		top: 290px;
 	}
 
-	.view-wizard-container {
+	.accordian-container {
 		padding: 10px 0 0 10px;
 		border-radius: 5px 0 0 0;
 		position: relative;
@@ -181,7 +181,7 @@
 	#dm-legend .leaflet-popup-content {
 		width:150px;
 	}
-	#dm-legend .markers-container.wizard-step{
+	#dm-legend .markers-container {
 		margin-top: 2px;
 	}
 	#dm-content-container .blip-body {

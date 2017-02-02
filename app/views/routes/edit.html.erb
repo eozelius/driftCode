@@ -83,31 +83,6 @@
 			  </script>
 			</div>
 
-			<div class="view-wizard-container">
-			  <!-- blips -->
-			  <div class="markers-container wizard-step">
-			    <div class="wizard-markers">
-			      <ul>
-							<li class="blip">
-								<p class="blip-title">Blips</p>
-							</li>
-			        <% @blips.each do |blip| %>
-			          <li class="blip" data-blip="<%= blip.id %>" data-initx="<%= blip.x %>" data-inity="<%= blip.y %>">
-			            <p class="blip-title">
-			              <%= blip.title %>
-			              <% if user_is_home(@user) %>
-			              	<%= link_to '<span style="font-style:italic;"> - edit</span>'.html_safe, edit_blip_path(blip) %>
-			              <% end %>
-			            </p>
-			          </li>
-			        <% end %>
-			      </ul>
-			    </div>
-			  </div>
-			</div>
-
-
-
 			<%= link_to user_path(current_user) do %>
 				<span class="normal cancel">cancel</span>
 			<% end %>

@@ -99,12 +99,7 @@ div.readme-container {
 }
 
 @media (max-width: 767px){
-	.wizard-step .wizard-routes li, 
-	.wizard-step .wizard-markers li {
-		padding: 2% 5%;
-	}
-
-	.view-wizard-container {
+	.accordian-container {
 		width: 85%;
 		margin: 30px auto;
 		border-top: 1px solid #000;
