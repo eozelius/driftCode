@@ -43,9 +43,45 @@
 
 /* timeline coverphotos */
 body .tl-media .tl-media-content-container .tl-media-content img {
-	width: 120%;
-	max-width: 120%;
+	width: 555px !important;
+	max-width: none;
+	display: block;
+	margin: 0 auto;
 }
+
+@media (max-width: 1200px){
+	body .tl-media .tl-media-content-container .tl-media-content img {
+		width: 130% !important;
+	}
+}
+
+@media (max-width: 992px){
+	body .tl-media .tl-media-content-container .tl-media-content img {
+		width: 148% !important;
+	}
+}
+
+@media (max-width: 767px){
+	body .tl-media .tl-media-content-container .tl-media-content img {
+		width: 121% !important;
+	}
+
+	/* Timeline container */
+	.tl-storyslider {
+		height: 72% !important;
+
+	}
+}
+
+@media (max-width: 600px){
+	/* Timeline container */
+	.tl-storyslider {
+		height: 57% !important;
+
+	}
+}
+
+
 
 @media (max-width: 480px){
 	.route-content {
