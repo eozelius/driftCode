@@ -57,7 +57,7 @@ var DriftMapTimeline = function(){
 			for(var x in routes){
 				var r = routes[x].route
 				var wps = routes[x].waypoints
-				var coverphoto = typeof r.coverphoto !== 'undefined' ? r.coverphoto.url : '<%= image_path("switzerland10.JPG").html_safe %>';
+				var coverphoto = r.coverphoto.url !== null ? r.coverphoto.url : '<%= image_path("switzerland10.JPG").html_safe %>';
 				var tlEvents = []
 
 				for(var y in wps){
@@ -196,8 +196,6 @@ var DriftMapTimeline = function(){
 			} else {
 				var wp = DriftMapLeaflet.getWayPoint(wp_id)
 				if (wp){
-					console.log("wp is defined, updating title/description")
-
 					// update title and description
 					$('.route-content .route-header:visible').html(wp.title);
 					$('.route-content .route-description:visible').html(wp.body);

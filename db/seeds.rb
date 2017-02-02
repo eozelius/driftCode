@@ -1,15 +1,15 @@
 # Seeds for all Environments
-ethan = User.create!( 
+ethan = User.create( 
   name:     'ethan',
   email:    'e.ozelius@gmail.com',
-  password: 'password',
-  password_confirmation: 'password',
+  password: 'asdfasdf',
+  password_confirmation: 'asdfasdf',
   activated: true,
   activated_at: Time.zone.now,
   admin: true,
-  from: 'concord new hampshire',
+  from: 'concord new hampshire asdf',
   gps: 'queens new york',
-  profile_pic: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/ethan.jpg")
+  profile_pic: open('https://driftmap.s3.amazonaws.com/uploads/user/profile_pic/1/IMG_20161029_192428.jpg')
 )
 
 # Create driftmap for ethan
@@ -18,132 +18,172 @@ ethan.post = Post.create(
   body:   "my adventures and travels as a drifting computer hacker.",
   init_x: 0.924206230200376,
   init_y: -34.2400771379471,
-  init_zoom: 2
+  init_zoom: 2,
 )
 
 # Routes
 colombia = ethan.post.routes.create!(
   title: '2015 - Colombia',
-  description: 'A gonzo style adventure into the heart and fringes of this South American Gem.'
+  description: 'A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.',
+  post_id: ethan.post.id
 )
 
 # Blips
 bogota = colombia.blips.create!(
   title: 'Bogota Colombia',
-  body: 'The Capital and heart of business in Colombia, Bogoat boasts a massive sprawling population of over 9 million inhabitants.  Bogota is a great window into the lives of everyday Colombians, their joy, dance, activism and struggle.'.html_safe,
+  body: 'The Capital and largest city in Colombia, Bogota is home to more than 9 million.  The majority of my time I spent in Chapinero, a neighborhood to the north of the old town, tucked in the foot of the massive mountains that overlook the city, and give Bogota it\'s rainy climate.  My days in Bogota were sometimes energetic, sometimes dreary but always informative.  As the first city I would visit, I dove and stumbled headfirst into the language and culture of Colombians.  Bogota was my introduction into the lives, dance, and struggle everyday Colombians; ground zero for my nomadic travels, where I learned the fundamentals of Spanish and the only logical place to start my journey'.html_safe,
   x: 4.6077624, 
   y: -74.0745113,
-  post_id: ethan.post.id
+  date: DateTime.new(2015, 9, 7),
+  post_id: ethan.post.id,
+  route_id: colombia.id
 )
 
-bogota.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/bogota/bogota_monsarate.jpg"))
-bogota.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/bogota/bogota_plaza_bolivar.jpg"))
-bogota.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/bogota/bogota_candelaria.jpg"))
-bogota.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/bogota/bogota_fut.jpg"))
+bogota.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/66/20150926_113646.jpg"))
+bogota.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/67/20150926_143238.jpg"))
+bogota.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/64/20150912_152042.jpg")) # monserate
+bogota.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/65/20150926_121453.jpg")) # plaza
 bogota.save!
 
 medellin = colombia.blips.create!(
-  title: 'Medellin Colombia',
-  body: "Without a question, Paisas, (the inhabitants of Medellin) are the friendliest people I've come across in all my travels.  In Christmas this wonderland takes on a purple tint, and the entire city lights up as every home dons lights.  Built in the bottom of a valley, every view is spectacular, the city runs up from the river into the walls of the valley that is not to be missed.".html_safe,
+  title: 'Medellin - La Ciudad de la Eterna Primavera',
+  body: "A majority of my time in Colombia was spent in Medellin, the city of eternal spring is renowned for it\'s beautiful weather and mujeres latinas.  A common destination for vacationers, partiers and drifters like myself, Medellin offered paradise to all.  A theory of mine, is that all the greatest cities in the world require you to climb over some garbage to get to the best parts, while this city of Paisas, like every city is not without rough sectors.  Yet almost every single trip, subway ride and party was secure and appealing.  It is unforunate that Medellin has yet again portrayed as a home of the narcos, when in reality, this city is an exemplary example of innovation in the wake of disaster.  Not only has this city become safe for citizens and travelers, it is clean, friendly and damn good fun if you can dance a little.  Without a question, Paisas, (the inhabitants of Medellin) are the friendliest people I've come across in all my travels.  In Christmas this wonderland takes on a purple tint, and the entire city lights up as every home dons lights.  Built in the bottom of a valley, every view is spectacular, the city runs up from the river into the walls of the valley that is not to be missed.".html_safe,
   x: 6.2807872, 
   y: -75.5511055,
-  post_id: ethan.post.id
+  date: DateTime.new(2015, 11, 29),
+  post_id: ethan.post.id,
+  route_id: colombia.id
 )
 
-medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin_itigui.JPG"));
-medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin_night.JPG"));
-medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin_plane.JPG"));
-medellin.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/medellin/medellin.jpg"));
+medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/70/DSCF6360.JPG"));
+medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/72/DSCF6082.JPG"));
+medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/74/DSCF5895.JPG"));
+medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/68/DSCF6097.JPG"));
+medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/69/DSCF6110.JPG"));
+medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/73/DSCF5947.JPG"));
+medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/71/DSCF6184.JPG"));
 medellin.save!
 
 manizales = colombia.blips.create!(
   title: 'Manizales Colombia',
-  body: 'I packed my bag in a hurry to head south to Manizales for the city Feria.  The night I arrived I instantly made friends with a dude from manizales at a salsa concert.',
+  body: 'I packed my bag in a hurry to head south to Manizales for the city Feria.  The night I arrived I instantly made friends with a dude from manizales at a salsa concert.'.html_safe,
   x: 5.1073584, 
   y: -75.5126810,
-  post_id: ethan.post.id
+  date: DateTime.new(2016, 2, 18),
+  post_id: ethan.post.id,
+  route_id: colombia.id
 )
 
-manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/1.JPG"))
-manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/2.JPG"))
-manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/3.JPG"))
-manizales.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/manizales/4.JPG"))
+manizales.blip_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/79/DSCF6410.JPG"))
+manizales.blip_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/80/DSCF6394.JPG"))
+manizales.blip_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/78/DSCF6386.JPG"))
 manizales.save!
-
-pereira = colombia.blips.create!(
-  title: 'Pereira Colombia',
-  body: 'In Pereira, the lower points of the digital nomal lifestyle took a bit of a toll.  Work was excessive and friends were few and far between.  As in, I was literally the only guest at my residency.',
-  x: 4.8564869, 
-  y: -75.6857157,
-  post_id: ethan.post.id
-)
-
-pereira.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/pereira/1.JPG"))
-pereira.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/pereira/2.JPG"))
-pereira.blip_images.create!(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/pereira/3.JPG"))
-pereira.save!
 
 salento = colombia.blips.create!(
   title: 'Salento Colombia',
   body: 'Finally, what Colombia is famous for, the delicious coffee.  If pereira was the place where the digital nomad lifestyle left me feeling like I got hit by a car, in Salento my lack of planning left me feeling like I fell into a Volcano.  Colombias coffee zone is one of the most beautiful places I have ever visited, and staying only an afternoon is an absolute travesty.  In spite of my procrastination, I rented a bicycle and ventured into the hills above the town and it was one of the greatest rides I have ever undertaken.'.html_safe,
   x: 4.6671150, 
   y: -75.5951801,
-  post_id: ethan.post.id
+  date: DateTime.new(2016, 2, 27),
+  post_id: ethan.post.id,
+  route_id: colombia.id
 )
 
-salento.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/salento/DSCF6468.JPG"))
-salento.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/salento/DSCF6487.JPG"))
-salento.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/salento/DSCF6491.JPG"))
-salento.blip_images.build(image: File.open("#{Rails.root}/app/assets/images/blip_images/ethan/salento/DSCF6500.JPG"))
+salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/88/DSCF6480.JPG"))
+salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/89/DSCF6475.JPG"))
+salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/91/DSCF6466.JPG"))
+salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/90/DSCF6470.JPG"))
+salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/87/DSCF6491.JPG"))
+salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/84/DSCF6520.JPG"))
+salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/85/DSCF6487.JPG"))
+salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/86/DSCF6500.JPG"))
+
 salento.save!
-
-cali = colombia.blips.create!(
-  title: 'Cali Colombia',
-  body: 'El tierra de baile salsa.  Cali lives and breathes salse and nothing but.  I quickly relized my preconceptions that learning salsa in two classes was 100% incorrect, so I cut my loses and made some of the greatest friends in the world instead.'.html_safe,
-  x: 3.5644319, 
-  y: -76.5052577,
-  post_id: ethan.post.id
-)
-
-cipriano = colombia.blips.create!(
-  title: 'San Cipriano Colombia',
-  body: 'by far one of the greatest assets is the diversity in region, driving for only a couple hours can bring you from the sweltering heat of the coasts, to the freezing mountains of Bogota.  San Cipriano is not a far drive from Cali Colombia, but the change in scenery is staggering.  San Cipriano is the (only), most dense and genuine jungle I have ever traveled in.'.html_safe,
-  x: 3.8408223, 
-  y: -76.8986596,
-  post_id: ethan.post.id
-)
-
-bogota_2 = colombia.blips.create!(
-  title: 'Returning to Bogota Colombia',
-  body: 'I have visited bogota on many occasions, but this time would be like no other.',
-  x: 4.6501713, 
-  y: -74.0550950,
-  post_id: ethan.post.id
-)
+colombia.save!
 
 europe = ethan.post.routes.create!(
   title: '2016 - Europe',
   description: 'Backpacking across the pond'
 )
 
-europe.route_points.build( x: 55.6895847, y: 12.5706253, order: 0 )
-europe.route_points.build( x: 53.552139,  y: 9.9933014, order: 1 )
-europe.route_points.build( x: 52.5216526, y: 13.3855019, order: 2 )
-europe.route_points.build( x: 52.3786382, y: 4.9043999, order: 3 )
-europe.route_points.build( x: 48.8582776, y: 2.3507652, order: 4 )
-europe.route_points.build( x: 47.3725471, y: 8.5380592, order: 5 )
-europe.route_points.build( x: 46.8667638, y: 8.642395, order: 6 )
-europe.route_points.build( x: 46.4548893, y: 11.3274536, order: 7 )
-europe.route_points.build( x: 47.4503798, y: 18.9975586, order: 8 )
-europe.blips.create(
+copenhagen = europe.blips.create!(
   title: 'Copenhagen Denmark', 
-  body: 'Journey begins Oct 5, 2016.', 
+  body: 'I was much less anxious or nervous for this adventure, as compared to my Colombian journey. Something about being about to not only speak but Understand the language is a game-changer. Although that unforgettable jumpy, fidgety feeling that all drifters exist for never fails to accompany you as you board and exit the plane. There is a lot of beauty in travelling solo. At this moment in the first hour of my journey it is a constant ebb and flow of excitement and anxiety in regards to meeting new faces from all over, like the first day of school walking into the cafeteria, all eyes watching all the other eyes. The Danish people remind me vaguely of the Canadians, their accent is a little funny, but overall good people.'.html_safe, 
   x: 55.6895847, 
   y: 12.5706253,
-  post_id: ethan.post.id
+  date: DateTime.new(2016, 10, 2),
+  post_id: ethan.post.id,
+  route_id: europe.id
 )
+
+copenhagen.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/103/DSCF6591.JPG'))
+copenhagen.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/104/DSCF6580.JPG'))
+copenhagen.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/102/DSCF6592.JPG'))
+copenhagen.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/105/DSCF6562.JPG'))
+copenhagen.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/99/two.jpg'))
+copenhagen.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/101/DSCF6598.JPG'))
+
 europe.save!
 
+berlin = europe.blips.create(
+  title: 'Berlin Germany',
+  body: 'Berlin, was one of my favorite cities that I had the privledge of visiting, I also almost died while going to a club one night.  I never was a huge history buff, bit seeing not only the relics proud and somber, and talking with berliners gives a new twist on this rich city.'.html_safe,
+  x: 52.5479659177324,
+  y: 13.359375,
+  date: DateTime.new(2016, 10, 7),
+  route_id: europe.id,
+  post_id: ethan.post.id
+)
+
+berlin.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/121/14709436_1182611415147266_4934580762092503040_n.jpg'))
+berlin.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/121/14709436_1182611415147266_4934580762092503040_n.jpg'))
+berlin.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/149/DSCF6724.JPG'))
+berlin.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/150/DSCF6730.JPG'))
+berlin.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/122/14723593_1708975159428584_2170602026730258432_n.jpg'))
+
+berlin.save!
+
+paris = europe.blips.create!(
+  title: 'Paris France',
+  body: 'Absinthe is one heck of a concoction.'.html_safe,
+  x: 48.8827795934513,
+  y: 2.2906494140625,
+  date: DateTime.new(2016, 10, 15),
+  route_id: europe.id,
+  post_id: ethan.post.id
+)
+
+paris.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/124/paris4.jpg'))
+paris.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/129/paris7.jpg'))
+paris.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/130/paris6.jpg'))
+paris.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/131/paris1.jpg'))
+paris.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/125/paris5.jpg'))
+
+paris.save!
+
+switzerland = europe.blips.create!(
+  title: 'Park Ela Switzerland',
+  body: 'This could be the greatest place I\'ve been in the entire world. Before I embarked on this trip, I had just one thing that I knew I had to do in Europe, the rest I knew I could figure out on the way. If for whatever reason I missed out on driving a really fast (really slow in reality) car through the Swiss Alps, my journey would have been a failure. The greatest driving roads in the world are in the Alps between here and the Italian border. The hiking and other outdoors stuff is very decent as well'.html_safe,
+  x: 46.2548972628291,
+  y: 12.117919921875,
+  date: DateTime.new(2016, 10, 22),
+  route_id: europe.id,
+  post_id: ethan.post.id
+)
+
+switzerland.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/133/switzerland6.JPG'))
+switzerland.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/135/switzerland11.JPG'))
+switzerland.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/141/switzerland1.JPG'))
+switzerland.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/134/switzerland12.JPG'))
+switzerland.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/136/switzerland10.JPG'))
+switzerland.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/137/switzerland9.JPG'))
+switzerland.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/138/switzerland8.JPG'))
+switzerland.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/139/switzerland7.JPG'))
+switzerland.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/140/switzerland3.JPG'))
+
+switzerland.save!
+
+=begin
 # StandAlone Blips
 queens = ethan.post.blips.create!(
   title: 'Sunnyside Queens',
@@ -243,3 +283,4 @@ if Rails.env.development? || Rails.env.test?
     )
   end
 end
+=end
