@@ -41,6 +41,12 @@
 	}
 }
 
+/* timeline coverphotos */
+body .tl-media .tl-media-content-container .tl-media-content img {
+	width: 120%;
+	max-width: 120%;
+}
+
 @media (max-width: 480px){
 	.route-content {
 		.tl-slide-content-container .tl-slide-content{
