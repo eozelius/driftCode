@@ -15,7 +15,8 @@
 <% end %>
 
 <div class="container">
-  <div id="dm-content-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+  <!-- TIMELINEJS3 -->
+  <div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
     <% if @routes.present? %>
       <!-- Routes -->
       <% @routes.each_with_index do |route, index| %>
@@ -30,13 +31,13 @@
     <% end %>
   </div>
 
+  <!-- LEAFLET & accordian -->
   <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
     <div class="map-container">
       <div id='map'></div>
     </div>
 
     <% if !@routes.nil? %>
-      <!-- Accordian -->
       <div id="accordian-container">
         <h5 class="waypoints-title">journeys</h5>
         <div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true"></div>
