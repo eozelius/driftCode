@@ -130,6 +130,11 @@ body .tl-media .tl-media-content-container .tl-media-content img {
 
 @media (max-width: 480px){
 	.route-content {
+		.tl-timeline.tl-skinny.tl-layout-portrait {
+			height: auto !important;
+			margin-bottom: 30px;
+		}
+
 		.tl-slide-content-container .tl-slide-content{
 			padding: 0 !important;
 			width: 100% !important;
@@ -140,15 +145,22 @@ body .tl-media .tl-media-content-container .tl-media-content img {
 		.tl-slider-container {
 			height: 70% !important;
 		}
-
 		.tl-timeline .tl-storyslider{
-			height: 330px !important;
+			height: 270px !important;
+			overflow: hidden;
 		}
-
+		.tl-menubar {
+			display: none;
+		}
+		.route-header {
+			height: 110px;
+			overflow: hidden;
+			
+		}
 	}
 
 	.tl-slidenav-icon {
 		position: relative;
-		top: 45px;
+		top: 5px;
 	}
 }
