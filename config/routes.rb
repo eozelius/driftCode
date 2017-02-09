@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
 
-  put  'blip_images' => 'blip_images#create'
-  
+  put  'blip_images' => 'blip_images#create'  
   post 'update_route' => 'routes#update'
 
   get    'signup' => 'users#new'
@@ -18,8 +17,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   # API Data Routes
-  post 'get_way_pts' => 'api#get_way_pts'
-  post 'get_routes' => 'api#get_routes'
+  post 'routes_api_home' => 'api#routes_home'
 
   # end API
 

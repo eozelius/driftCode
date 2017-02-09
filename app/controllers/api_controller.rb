@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-	def	get_routes
+	def	routes_home
 		routes 	 = User.find(1).post.routes
 		response = []
 
@@ -38,14 +38,3 @@ class ApiController < ApplicationController
 		render json: response
 	end
 end
-
-=begin
-	routes.each do |route|
-		route.blips.each do |way_pt|
-			wp.push({	id: way_pt.id,
-											title: way_pt.title,
-											body:  way_pt.body,
-											route_id: route.id })
-		end
-	end
-=end
