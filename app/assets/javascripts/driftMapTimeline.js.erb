@@ -58,6 +58,7 @@ var DriftMapTimeline = function(){
 				var r = routes[x].route
 				var wps = routes[x].waypoints
 				var coverphoto
+				var tlEvents = []
 
 				if(r.coverphoto.url !== null) // Route Coverphoto already defined
 					coverphoto = r.coverphoto.url
@@ -65,8 +66,6 @@ var DriftMapTimeline = function(){
 					coverphoto = wps[0].images[0].image.url
 				else  // default: switzerland
 				 	coverphoto = '<%= image_path("switzerland10.JPG").html_safe %>'
-				
-				var tlEvents = []
 
 				for(var y in wps){
 					var wp = wps[y]

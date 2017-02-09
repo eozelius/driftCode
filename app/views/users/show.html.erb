@@ -19,12 +19,11 @@
 	</div>
 <% end %>
 
-
 <% provide(:title, @user.name) %>
 
 <hr style="width:84%; height: 3px;background-color: #ccc; margin: 75px auto 50px;">
 
-<div class="container">
+<div id="profile-page" class="container">
 	<div class="map-details col-lg-8 col-md-8 col-sm-12 col-xs-12">
 		<h3 class="page-title post-title"><%= @post.title %><%= link_to '<span style="font-size: .48em; font-style:italic"> - edit driftmap</span>'.html_safe, edit_post_path(@post) if user_is_home(@user) %></h3>
 
