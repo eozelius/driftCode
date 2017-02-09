@@ -13,10 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require leaflet-src.js
-//= require bootstrap.min.js
 //= require moment.js
+//= require bootstrap.min.js
 //= require bootstrap-datetimepicker.min.js
 //= require driftMapLeaflet.js
 //= require driftMapTimeline.js
 //= require driftMapAccordian.js
-//= require_tree .
