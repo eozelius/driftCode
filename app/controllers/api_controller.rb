@@ -37,4 +37,8 @@ class ApiController < ApplicationController
 
 		render json: response
 	end
+
+	def routes_profile_page
+		render json: true
+	end
 end

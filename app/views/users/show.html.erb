@@ -24,6 +24,7 @@
 <hr style="width:84%; height: 3px;background-color: #ccc; margin: 75px auto 50px;">
 
 <div id="profile-page" class="container">
+	<input type="hidden" value="<%= @user.id %>">
 	<div class="map-details col-lg-8 col-md-8 col-sm-12 col-xs-12">
 		<h3 class="page-title post-title"><%= @post.title %><%= link_to '<span style="font-size: .48em; font-style:italic"> - edit driftmap</span>'.html_safe, edit_post_path(@post) if user_is_home(@user) %></h3>
 
@@ -35,7 +36,7 @@
 			<div class="profile-details-container">
 				<div class="profile-details">
 					<p><%= @user.name %></p>
-					<%= image_tag @user.profile_pic, class: 'pp' if @user.profile_pic %>
+					<%= image_tag @user.profile_pic, class: 'pp' if @user.profile_pic.present? %>
 					<div class="user-info">						
 						<% if @user.from %>
 							<p class="user-from">from: </p>
@@ -131,7 +132,7 @@
 	  <% end %>
 	<% end %>
 
-	init_map('map', driftmap, blips)
+	// init_map('map', driftmap, blips)
 	// End Leaflet Map
 
 	// TimelineJS3
@@ -177,20 +178,7 @@
 		}
 
 		var dmOptions = { timenav_height: 180 }
-		init_timeline(timeLineData, dmOptions );
+		//init_timeline(timeLineData, dmOptions );
 	<% end %>
 	// end TimelineJS3
-
-
-	// edit profile info
-	$('.edit-user-anchor').on('click', function(){
-		$('.alter-user-container').slideDown();
-		$('.profile-details-container').addClass('form-open');
-	});
-
-	// cancel edit user
-	$('.cancel-edit-user').on('click', function(){
-		$('.alter-user-container').slideUp();
-		$('.profile-details-container').removeClass('form-open');
-	});
 </script>

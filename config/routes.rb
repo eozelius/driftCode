@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   # API Data Routes
   post 'routes_api_home' => 'api#routes_home'
-
+  post 'routes_api_profile_page' => 'api#routes_profile_page'
   # end API
 
   get 'ethan', to: redirect('users/1')
