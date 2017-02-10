@@ -37,6 +37,8 @@
 	.carousel-control {
 		color: #fff;
 		opacity: .8;
+		background: none;
+		background-image: none;
 	}
 
 	/* Carousel */
@@ -73,6 +75,8 @@
 }
 
 .route-description {
+	height: 255px;
+	overflow-y: scroll;
 	margin: 4% 5% 25%;
 	color: #C2D9EB;
 	text-align: center;
@@ -109,8 +113,6 @@ body .tl-media .tl-media-content-container .tl-media-content img {
 	}
 
 	.route-description {
-		height: 255px;
-		overflow-y: scroll;
 		margin:4% 5% 4%; 
 		padding: 4% 6%;
 		border-top: 3px solid #ccc;

@@ -3,22 +3,24 @@ $(function(){
 		url: '/routes_api_profile_page',
 		method: 'POST',
 		dataType: 'JSON',
-		data: $('#user_id').val(),
+		data: { 
+			id: $('#user_id').val()
+		},
 		complete: function(response){
 			var r = response.responseJSON
 			window.r = r
 
 			// init Timeline
-			// DriftMapTimeline.init(r);
+			DriftMapTimeline.init(r);
 
 			// init Leaflet
-			//DriftMapLeaflet.init(r);
+			DriftMapLeaflet.init(r);
 
 			// init Accordian
-			// DriftMapAccordian.init(r);
+			DriftMapAccordian.init(r);
 		}
 	});
-
+	// End initial AJAX call
 
 	// DOM event listeners
 

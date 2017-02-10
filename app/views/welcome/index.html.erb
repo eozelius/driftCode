@@ -14,12 +14,12 @@
   </div>
 <% end %>
 
-<div class="container">
+<div id="home-page" class="container">
   <!-- TIMELINEJS3 -->
   <div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
     <% if @routes.present? %>
       <!-- Routes -->
-      <% @routes.each_with_index do |route, index| %>
+      <% @routes.each do |route| %>
         <div class="route-content" data-routecontent="<%= route.id %>">
           <h4 class="route-header"><%= route.title %></h4>
           <div id='dm-timeline-<%= route.id %>' style="width: 100%; height: 600px"></div>

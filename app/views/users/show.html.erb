@@ -24,7 +24,37 @@
 <hr style="width:84%; height: 3px;background-color: #ccc; margin: 75px auto 50px;">
 
 <div id="profile-page" class="container">
-	<input type="hidden" value="<%= @user.id %>">
+	<input id="user_id" type="hidden" value="<%= @user.id %>" >
+	
+	<% if @user.post.routes.any? %>
+		<!-- TIMELINEJS3 -->
+		<div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+			<!-- todo move this into DriftMapTimeline.js -->
+			<% @user.post.routes.each do |route| %>
+        <div class="route-content" data-routecontent="<%= route.id %>">
+          <h4 class="route-header"><%= route.title %></h4>
+          <div id='dm-timeline-<%= route.id %>' style="width: 100%; height: 600px"></div>
+          <div class="route-meta">
+            <p class="route-description"><%= route.description %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- LEAFLET & accordian -->
+    <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+      <div class="map-container">
+        <div id='map'></div>
+      </div>
+
+      <div id="accordian-container">
+        <h5 class="waypoints-title">journeys</h5>
+        <div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true"></div>
+      </div>
+    </div>
+	<% end %><!-- End timeline, leaflet & accordian -->
+
+
 	<div class="map-details col-lg-8 col-md-8 col-sm-12 col-xs-12">
 		<h3 class="page-title post-title"><%= @post.title %><%= link_to '<span style="font-size: .48em; font-style:italic"> - edit driftmap</span>'.html_safe, edit_post_path(@post) if user_is_home(@user) %></h3>
 
@@ -105,6 +135,7 @@
 </div>
 
 <script type="text/javascript">
+if(false){
 	/* Leaflet Map */
 	var driftmap = {
 		init_x: '<%= @post.init_x %>',
@@ -181,4 +212,5 @@
 		//init_timeline(timeLineData, dmOptions );
 	<% end %>
 	// end TimelineJS3
+}
 </script>
