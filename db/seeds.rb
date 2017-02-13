@@ -21,11 +21,10 @@ ethan.post = Post.create(
   init_zoom: 2,
 )
 
-# Routes
-colombia = ethan.post.routes.create!(
+# Journeys
+colombia = ethan.post.journeys.create!(
   title: '2015 - Colombia',
   description: 'A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.',
-  post_id: ethan.post.id
 )
 
 # Blips
@@ -35,8 +34,7 @@ bogota = colombia.blips.create!(
   x: 4.6077624, 
   y: -74.0745113,
   date: DateTime.new(2015, 9, 7),
-  post_id: ethan.post.id,
-  route_id: colombia.id
+  post_id: ethan.post.id
 )
 
 bogota.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/64/20150912_152042.jpg")) # monserate
@@ -52,7 +50,7 @@ medellin = colombia.blips.create!(
   y: -75.5511055,
   date: DateTime.new(2015, 11, 29),
   post_id: ethan.post.id,
-  route_id: colombia.id
+  journey_id: colombia.id
 )
 
 medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/70/DSCF6360.JPG"));
@@ -71,7 +69,7 @@ manizales = colombia.blips.create!(
   y: -75.5126810,
   date: DateTime.new(2016, 2, 18),
   post_id: ethan.post.id,
-  route_id: colombia.id
+  journey_id: colombia.id
 )
 
 manizales.blip_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/79/DSCF6410.JPG"))
@@ -86,7 +84,7 @@ salento = colombia.blips.create!(
   y: -75.5951801,
   date: DateTime.new(2016, 2, 27),
   post_id: ethan.post.id,
-  route_id: colombia.id
+  journey_id: colombia.id
 )
 
 salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/88/DSCF6480.JPG"))
@@ -101,7 +99,7 @@ salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads
 salento.save!
 colombia.save!
 
-europe = ethan.post.routes.create!(
+europe = ethan.post.journeys.create!(
   title: '2016 - Europe',
   description: 'Backpacking across the pond'
 )
@@ -113,7 +111,7 @@ copenhagen = europe.blips.create!(
   y: 12.5706253,
   date: DateTime.new(2016, 10, 2),
   post_id: ethan.post.id,
-  route_id: europe.id
+  journey_id: europe.id
 )
 
 copenhagen.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/103/DSCF6591.JPG'))
@@ -131,7 +129,7 @@ berlin = europe.blips.create(
   x: 52.5479659177324,
   y: 13.359375,
   date: DateTime.new(2016, 10, 7),
-  route_id: europe.id,
+  journey_id: europe.id,
   post_id: ethan.post.id
 )
 
@@ -149,7 +147,7 @@ paris = europe.blips.create!(
   x: 48.8827795934513,
   y: 2.2906494140625,
   date: DateTime.new(2016, 10, 15),
-  route_id: europe.id,
+  journey_id: europe.id,
   post_id: ethan.post.id
 )
 
@@ -167,7 +165,7 @@ switzerland = europe.blips.create!(
   x: 46.2548972628291,
   y: 12.117919921875,
   date: DateTime.new(2016, 10, 22),
-  route_id: europe.id,
+  journey_id: europe.id,
   post_id: ethan.post.id
 )
 

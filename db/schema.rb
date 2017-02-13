@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213161245) do
+ActiveRecord::Schema.define(version: 20160902125452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,23 +30,21 @@ ActiveRecord::Schema.define(version: 20170213161245) do
     t.text     "body"
     t.float    "x"
     t.float    "y"
-    t.integer  "post_id"
-    t.integer  "route_id"
+    t.datetime "date"
+    t.integer  "journey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "date"
   end
 
-  add_index "blips", ["post_id"], name: "index_blips_on_post_id", using: :btree
-  add_index "blips", ["route_id"], name: "index_blips_on_route_id", using: :btree
+  add_index "blips", ["journey_id"], name: "index_blips_on_journey_id", using: :btree
 
   create_table "journeys", force: :cascade do |t|
     t.text     "description"
     t.string   "title"
+    t.string   "coverphoto"
     t.integer  "post_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "coverphoto"
   end
 
   add_index "journeys", ["post_id"], name: "index_journeys_on_post_id", using: :btree
@@ -85,7 +83,6 @@ ActiveRecord::Schema.define(version: 20170213161245) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
   add_foreign_key "blip_images", "blips"
-  add_foreign_key "blips", "journeys", column: "route_id"
-  add_foreign_key "blips", "posts"
+  add_foreign_key "blips", "journeys"
   add_foreign_key "journeys", "posts"
 end

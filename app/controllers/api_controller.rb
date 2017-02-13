@@ -17,7 +17,7 @@ class ApiController < ApplicationController
 			response = []
 
 			journeys.each do |journey|
-				my_route_wps = []
+				my_journey_wps = []
 
 				journey.blips.order(:date).each do |blip|
 					wp_images = []
@@ -25,7 +25,7 @@ class ApiController < ApplicationController
 						wp_images.push(image)
 					end					
 
-					my_route_wps.push({ 
+					my_journey_wps.push({ 
 						id: blip.id,
 						title: blip.title,
 						body: blip.body,
@@ -44,7 +44,7 @@ class ApiController < ApplicationController
 
 				response.push({ 
 					route: journey, 
-					waypoints: my_route_wps 
+					waypoints: my_journey_wps 
 				})
 			end
 
