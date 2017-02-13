@@ -9,10 +9,10 @@ var DriftMapAccordian = function(){
 
 
 		// public methods
-		init: function(routes){
-			for(var x in routes){
-				var r = routes[x].route
-				var wps = routes[x].waypoints
+		init: function(journeys){
+			for(var x in journeys){
+				var r = journeys[x].journey
+				var wps = journeys[x].waypoints
 
 				var a = '<div data-route="'+ r.id +'" class="panel panel-default">' + 
 									'<div id="heading-'+ x +'" class="panel-heading" >' + 
@@ -48,10 +48,10 @@ var DriftMapAccordian = function(){
 				var wp = DriftMapLeaflet.getWayPoint(id);
 
 				if(wp){
-					var wp_route_id = wp.route_id
+					var wp_journey_id = wp.journey_id
 					DriftMapLeaflet.focusWayPoint(id);
 					DriftMapAccordian.focusWayPoint(id);
-					DriftMapTimeline.focusRoute(wp_route_id, slide_index, false)
+					DriftMapTimeline.focusRoute(wp_journey_id, slide_index, false)
 				}
 			});
 
