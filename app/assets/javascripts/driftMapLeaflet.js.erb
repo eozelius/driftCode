@@ -29,7 +29,7 @@ var DriftMapLeaflet = function(){
 
 
 		// public methods
-		init: function(routes, options){
+		init: function(journeys, options){
 			var x = options !== undefined ? options.init_x : 0.924206230200376;
 			var y = options !== undefined ? options.init_y : -40.2400771379471;
 			var z = options !== undefined ? options.init_zoom : 2;
@@ -45,10 +45,10 @@ var DriftMapLeaflet = function(){
 				}).addTo(m);
 
 
-			for(var x in routes){
-				if(routes[x].route !== undefined && routes[x].waypoints !== undefined){
-					var r = routes[x].route
-					var wps = routes[x].waypoints
+			for(var x in journeys){
+				if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){
+					var r = journeys[x].journey
+					var wps = journeys[x].waypoints
 
 					for(var i in wps){
 						/* Add Marker to Map */
@@ -57,7 +57,7 @@ var DriftMapLeaflet = function(){
 						var id = wps[i].id;
 						var title = wps[i].title;
 						var body  = wps[i].body;
-						var r_id  = wps[i].route_id;
+						var j_id  = wps[i].journey_id;
 
 						/* Bind popup to marker */
 						var popupContent = 	'<div class="blip-popup" data-blip="'+ id +'">' + 
@@ -84,7 +84,7 @@ var DriftMapLeaflet = function(){
 							id: 		wps[i].id,
 							title: 	title,
 							body:  	body,
-							route_id: r_id,
+							journey_id: j_id,
 							leaflet: {
 								marker: wpMarker,
 								popup:  wpPopup,
