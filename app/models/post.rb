@@ -1,6 +1,5 @@
 class Post < ActiveRecord::Base
 	belongs_to :user
-	has_many :blips, dependent: :destroy
 	has_many :journeys, dependent: :destroy
 
 	validates :title, 	:presence => true, :length => { minimum: 4, maximum: 40 }
