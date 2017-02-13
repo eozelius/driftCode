@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   # API Data Routes
-  post 'routes_api_home' => 'api#routes_home'
-  post 'routes_api_profile_page' => 'api#routes_profile_page'
+  post 'api_home' => 'api#home'
+  post 'api_profile_page' => 'api#profile_page'
   # end API
 
   get 'ethan', to: redirect('users/1')

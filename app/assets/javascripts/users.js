@@ -1,6 +1,6 @@
 $(function(){
 	$.ajax({
-		url: '/routes_api_profile_page',
+		url: '/api_profile_page',
 		method: 'POST',
 		dataType: 'JSON',
 		data: { 

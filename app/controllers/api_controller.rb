@@ -1,25 +1,25 @@
 class ApiController < ApplicationController
-	def	routes_home
-		routes 	 = User.find(1).post.routes
-		response = responsify routes
+	def	home
+		journeys = User.find(1).post.journeys
+		response = responsify journeys
 		render json: response
 	end
 
-	def routes_profile_page
+	def profile_page
 		user = User.find(params[:id])
-		routes = user.post.routes
-		response = responsify routes
+		journeys = user.post.journeys
+		response = responsify journeys
 		render json: response
 	end
 
 	private
-		def responsify(routes)
+		def responsify(journeys)
 			response = []
 
-			routes.each do |route|
+			journeys.each do |journey|
 				my_route_wps = []
 
-				route.blips.order(:date).each do |blip|
+				journey.blips.order(:date).each do |blip|
 					wp_images = []
 					blip.blip_images.each do |image|
 						wp_images.push(image)
@@ -43,7 +43,7 @@ class ApiController < ApplicationController
 				end
 
 				response.push({ 
-					route: route, 
+					route: journey, 
 					waypoints: my_route_wps 
 				})
 			end
