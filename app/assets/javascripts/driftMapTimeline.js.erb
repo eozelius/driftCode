@@ -27,10 +27,10 @@ var DriftMapTimeline = function(){
 		// public variables
 
 		// public methods
-		init: function(routes){
+		init: function(journeys){
 			/*
 			{
-				route: [{ 
+				journey: [{ 
 					id: 51, 
 					description: "My gonzo adventure into Colombia in…", 
 					title: "2015 - Colombia", 
@@ -48,19 +48,19 @@ var DriftMapTimeline = function(){
 					x: 40.743, 
 					y: -73.922, 
 					post_id: 1, 
-					route_id: 51, 
+					journey_id: 51, 
 					date:  { year: 2016, month: 11, day: 23 } 
 				}, {}, ...]
 			}
 			*/
 
-			for(var x in routes){
-				var r = routes[x].route
-				var wps = routes[x].waypoints
+			for(var x in journeys){
+				var r = journeys[x].journey
+				var wps = journeys[x].waypoints
 				var coverphoto
 				var tlEvents = []
 
-				if(r.coverphoto.url !== null) // Route Coverphoto already defined
+				if(r.coverphoto.url !== null) // Coverphoto already defined
 					coverphoto = r.coverphoto.url
 				else if(wps[0].images.length > 0) // Use first Waypoint's first image
 					coverphoto = wps[0].images[0].image.url

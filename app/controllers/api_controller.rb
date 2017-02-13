@@ -31,9 +31,9 @@ class ApiController < ApplicationController
 						body: blip.body,
 						x: blip.x,
 						y: blip.y,
-						route_id: blip.route_id,
+						journey_id: blip.journey_id,
 						images: wp_images,
-						post_id: blip.post_id,
+						post_id: journey.post_id,
 						date: {
 							year:  blip.date.year,
 							month: blip.date.month,
@@ -43,7 +43,7 @@ class ApiController < ApplicationController
 				end
 
 				response.push({ 
-					route: journey, 
+					journey: journey, 
 					waypoints: my_journey_wps 
 				})
 			end
