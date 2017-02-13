@@ -24,7 +24,7 @@ ethan.post = Post.create(
 # Journeys
 colombia = ethan.post.journeys.create!(
   title: '2015 - Colombia',
-  description: 'A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.',
+  description: 'A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.'
 )
 
 # Blips
@@ -33,8 +33,7 @@ bogota = colombia.blips.create!(
   body: 'The Capital and largest city in Colombia, Bogota is home to more than 9 million.  The majority of my time I spent in Chapinero, a neighborhood to the north of the old town, tucked in the foot of the massive mountains that overlook the city, and give Bogota it\'s rainy climate.  My days in Bogota were sometimes energetic, sometimes dreary but always informative.  As the first city I would visit, I dove and stumbled headfirst into the language and culture of Colombians.  Bogota was my introduction into the lives, dance, and struggle everyday Colombians; ground zero for my nomadic travels, where I learned the fundamentals of Spanish and the only logical place to start my journey'.html_safe,
   x: 4.6077624, 
   y: -74.0745113,
-  date: DateTime.new(2015, 9, 7),
-  post_id: ethan.post.id
+  date: DateTime.new(2015, 9, 7)
 )
 
 bogota.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/64/20150912_152042.jpg")) # monserate
@@ -48,9 +47,7 @@ medellin = colombia.blips.create!(
   body: "A majority of my time in Colombia was spent in Medellin, the city of eternal spring is renowned for it\'s beautiful weather and mujeres latinas.  A common destination for vacationers, partiers and drifters like myself, Medellin offered paradise to all.  A theory of mine, is that all the greatest cities in the world require you to climb over some garbage to get to the best parts, while this city of Paisas, like every city is not without rough sectors.  Yet almost every single trip, subway ride and party was secure and appealing.  It is unforunate that Medellin has yet again portrayed as a home of the narcos, when in reality, this city is an exemplary example of innovation in the wake of disaster.  Not only has this city become safe for citizens and travelers, it is clean, friendly and damn good fun if you can dance a little.  Without a question, Paisas, (the inhabitants of Medellin) are the friendliest people I've come across in all my travels.  In Christmas this wonderland takes on a purple tint, and the entire city lights up as every home dons lights.  Built in the bottom of a valley, every view is spectacular, the city runs up from the river into the walls of the valley that is not to be missed.".html_safe,
   x: 6.2807872, 
   y: -75.5511055,
-  date: DateTime.new(2015, 11, 29),
-  post_id: ethan.post.id,
-  journey_id: colombia.id
+  date: DateTime.new(2015, 11, 29)
 )
 
 medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/70/DSCF6360.JPG"));
@@ -67,9 +64,7 @@ manizales = colombia.blips.create!(
   body: 'I packed my bag in a hurry to head south to Manizales for the city Feria.  The night I arrived I instantly made friends with a dude from manizales at a salsa concert.'.html_safe,
   x: 5.1073584, 
   y: -75.5126810,
-  date: DateTime.new(2016, 2, 18),
-  post_id: ethan.post.id,
-  journey_id: colombia.id
+  date: DateTime.new(2016, 2, 18)
 )
 
 manizales.blip_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/79/DSCF6410.JPG"))
@@ -82,9 +77,7 @@ salento = colombia.blips.create!(
   body: 'Finally, what Colombia is famous for, the delicious coffee.  If pereira was the place where the digital nomad lifestyle left me feeling like I got hit by a car, in Salento my lack of planning left me feeling like I fell into a Volcano.  Colombias coffee zone is one of the most beautiful places I have ever visited, and staying only an afternoon is an absolute travesty.  In spite of my procrastination, I rented a bicycle and ventured into the hills above the town and it was one of the greatest rides I have ever undertaken.'.html_safe,
   x: 4.6671150, 
   y: -75.5951801,
-  date: DateTime.new(2016, 2, 27),
-  post_id: ethan.post.id,
-  journey_id: colombia.id
+  date: DateTime.new(2016, 2, 27)
 )
 
 salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/88/DSCF6480.JPG"))
@@ -109,9 +102,7 @@ copenhagen = europe.blips.create!(
   body: 'I was much less anxious or nervous for this adventure, as compared to my Colombian journey. Something about being about to not only speak but Understand the language is a game-changer. Although that unforgettable jumpy, fidgety feeling that all drifters exist for never fails to accompany you as you board and exit the plane. There is a lot of beauty in travelling solo. At this moment in the first hour of my journey it is a constant ebb and flow of excitement and anxiety in regards to meeting new faces from all over, like the first day of school walking into the cafeteria, all eyes watching all the other eyes. The Danish people remind me vaguely of the Canadians, their accent is a little funny, but overall good people.'.html_safe, 
   x: 55.6895847, 
   y: 12.5706253,
-  date: DateTime.new(2016, 10, 2),
-  post_id: ethan.post.id,
-  journey_id: europe.id
+  date: DateTime.new(2016, 10, 2)
 )
 
 copenhagen.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/103/DSCF6591.JPG'))
@@ -128,9 +119,7 @@ berlin = europe.blips.create(
   body: 'Berlin, was one of my favorite cities that I had the privledge of visiting, I also almost died while going to a club one night.  I never was a huge history buff, bit seeing not only the relics proud and somber, and talking with berliners gives a new twist on this rich city.'.html_safe,
   x: 52.5479659177324,
   y: 13.359375,
-  date: DateTime.new(2016, 10, 7),
-  journey_id: europe.id,
-  post_id: ethan.post.id
+  date: DateTime.new(2016, 10, 7)
 )
 
 berlin.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/121/14709436_1182611415147266_4934580762092503040_n.jpg'))
@@ -146,9 +135,7 @@ paris = europe.blips.create!(
   body: 'Absinthe is one heck of a concoction.'.html_safe,
   x: 48.8827795934513,
   y: 2.2906494140625,
-  date: DateTime.new(2016, 10, 15),
-  journey_id: europe.id,
-  post_id: ethan.post.id
+  date: DateTime.new(2016, 10, 15)
 )
 
 paris.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/124/paris4.jpg'))
@@ -164,9 +151,7 @@ switzerland = europe.blips.create!(
   body: 'This could be the greatest place I\'ve been in the entire world. Before I embarked on this trip, I had just one thing that I knew I had to do in Europe, the rest I knew I could figure out on the way. If for whatever reason I missed out on driving a really fast (really slow in reality) car through the Swiss Alps, my journey would have been a failure. The greatest driving roads in the world are in the Alps between here and the Italian border. The hiking and other outdoors stuff is very decent as well'.html_safe,
   x: 46.2548972628291,
   y: 12.117919921875,
-  date: DateTime.new(2016, 10, 22),
-  journey_id: europe.id,
-  post_id: ethan.post.id
+  date: DateTime.new(2016, 10, 22)
 )
 
 switzerland.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/blip_image/image/133/switzerland6.JPG'))
