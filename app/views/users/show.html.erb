@@ -5,7 +5,7 @@
 
 	  <% if user_is_home(@user) %>
 	    <div class="start-text">
-	      <%= link_to new_route_path do %>
+	      <%= link_to new_journey_path do %>
 	        <p>begin an new adventure now</p>
 	      <% end %>
 	    </div>
@@ -31,11 +31,11 @@
 		<div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
 			<!-- todo move this into DriftMapTimeline.js -->
 			<% @user.post.journeys.each do |journey| %>
-        <div class="route-content" data-routecontent="<%= journey.id %>">
-          <h4 class="route-header"><%= journey.title %></h4>
+        <div class="journey-content" data-journeycontent="<%= journey.id %>">
+          <h4 class="journey-header"><%= journey.title %></h4>
           <div id='dm-timeline-<%= journey.id %>' style="width: 100%; height: 600px"></div>
-          <div class="route-meta">
-            <p class="route-description"><%= journey.description %></p>
+          <div class="journey-meta">
+            <p class="journey-description"><%= journey.description %></p>
           </div>
         </div>
       <% end %>

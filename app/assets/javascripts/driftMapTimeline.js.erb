@@ -145,7 +145,7 @@ var DriftMapTimeline = function(){
 				setTimeout(function(){
 					if(foobar){
 						foobar = false	
-						$('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
+						$('.journey-content').not('.journey-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
 					}
 				}, 500);
 				/* End Initialization */
@@ -163,10 +163,10 @@ var DriftMapTimeline = function(){
 						DriftMapLeaflet.focusWayPoint(id);
 
 						// update title and description
-						$('.route-content .route-header:visible').html(wp.title);
-						$('.route-content .route-description:visible').html(wp.body);
+						$('.journey-content .journey-header:visible').html(wp.title);
+						$('.journey-content .journey-description:visible').html(wp.body);
 					} else {
-						// todo: update title and description to route title
+						// todo: update title and description to journey title
 					}
 				});
 				/* End timeline event listeners */
@@ -182,7 +182,7 @@ var DriftMapTimeline = function(){
 
 		},
 
-		getRoute: function(id){
+		getJourney: function(id){
 			for(var i in indexer)
 				if(id == indexer[i].id)
 					return indexer[i]
@@ -190,22 +190,22 @@ var DriftMapTimeline = function(){
 		},
 
 		/* Setters */
-		focusRoute: function(r_id, wp_id, reset_route){
-			$('.route-content').addClass('hidden')
-			$('.route-content[data-routecontent="'+ r_id +'"]').removeClass('hidden')
+		focusJourney: function(r_id, wp_id, reset_journey){
+			$('.journey-content').addClass('hidden')
+			$('.journey-content[data-journeycontent="'+ r_id +'"]').removeClass('hidden')
 
-			var r = DriftMapTimeline.getRoute(r_id)
+			var r = DriftMapTimeline.getJourney(r_id)
 			if (r){ r.timeline.goTo(wp_id) }
 
-			if(reset_route){
-				$('.route-content .route-header:visible').html(r.title);
-				$('.route-content .route-description:visible').html(r.description);
+			if(reset_journey){
+				$('.journey-content .journey-header:visible').html(r.title);
+				$('.journey-content .journey-description:visible').html(r.description);
 			} else {
 				var wp = DriftMapLeaflet.getWayPoint(wp_id)
 				if (wp){
 					// update title and description
-					$('.route-content .route-header:visible').html(wp.title);
-					$('.route-content .route-description:visible').html(wp.body);
+					$('.journey-content .journey-header:visible').html(wp.title);
+					$('.journey-content .journey-description:visible').html(wp.body);
 				}							
 			}
 		}

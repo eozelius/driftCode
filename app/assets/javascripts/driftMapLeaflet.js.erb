@@ -108,12 +108,6 @@ var DriftMapLeaflet = function(){
 			return false;
 		},
 
-		getWayPointRoute: function(id){
-			for(var i in indexer)
-				if(indexer[i].id == id)
-					return DriftMapTimeline.getRoute(id.route_id)
-		},
-
 		/* Setters */
 		focusWayPoint: function(id){
 			var wp = DriftMapLeaflet.getWayPoint(id)

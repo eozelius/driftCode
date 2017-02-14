@@ -1,5 +1,4 @@
 $(function(){
-	/* Routes */
 	$.ajax({
 		url: '/api_home',
 		method: 'POST',

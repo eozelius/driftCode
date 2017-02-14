@@ -3,11 +3,6 @@
 	margin: 0 auto;
 }
 
-.caro-route-details-container {
-	height: auto;
-	background-color: #ccc;
-}
-
 .tl-slidenav-next,
 .tl-slidenav-previous {
 	top: 15px !important;
@@ -70,11 +65,11 @@
 	}
 }
 
-.route-header {
+.journey-header {
 	margin: 0 0 4%;
 }
 
-.route-description {
+.journey-description {
 	height: 255px;
 	overflow-y: scroll;
 	margin: 4% 5% 25%;
@@ -112,7 +107,7 @@ body .tl-media .tl-media-content-container .tl-media-content img {
 		height: 72% !important;
 	}
 
-	.route-description {
+	.journey-description {
 		margin:4% 5% 4%; 
 		padding: 4% 6%;
 		border-top: 3px solid #ccc;
@@ -131,7 +126,7 @@ body .tl-media .tl-media-content-container .tl-media-content img {
 
 
 @media (max-width: 480px){
-	.route-content {
+	.journey-content {
 		.tl-timeline.tl-skinny.tl-layout-portrait {
 			height: auto !important;
 			margin-bottom: 30px;
@@ -154,7 +149,7 @@ body .tl-media .tl-media-content-container .tl-media-content img {
 		.tl-menubar {
 			display: none;
 		}
-		.route-header {
+		.journey-header {
 			height: 110px;
 			overflow: hidden;
 			

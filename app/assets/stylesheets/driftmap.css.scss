@@ -31,33 +31,9 @@
 .wizard-step {
 
   /* description */
-  .route-info,
+  .journey-info,
   .blip-info {
     display: none;
-  }
-  
-  .wizard-routes,
-  .wizard-markers {
-    text-align: right;
-    ul {
-      padding: 3% 0;
-    }
-
-    li {
-      border-bottom: 1px solid #ccc;
-      padding: 3% 5%;
-      text-align: left;
-      cursor: pointer;
-
-      .route-body {
-        color: #000;
-        cursor: initial;
-        padding: 3%;
-      }
-      .new-route-inputs {
-        margin-top: 10px;
-      }
-    }
   }
 }
 

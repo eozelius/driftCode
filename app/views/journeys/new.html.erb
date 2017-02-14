@@ -1,10 +1,10 @@
-<div id="route" class="new-route">
+<div id="journey" class="new-route">
 	<div class="container">
 		<div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
 			<h4 class="blip-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Create New Journey</h4>
 
 			<%= form_for @route, html: { multipart: true } do |f| %>
-				<div class="route-info">
+				<div class="journey-info">
 					<!-- Journey Cover Photo -->
 					<h4 class="blip-title">Journey Cover Photo</h4>
 					<%= f.file_field :coverphoto, { style: 'margin-left:3%;' } %>
@@ -89,7 +89,7 @@
 
 		// create first stop manually
 		$('.create-first-stop').on('click', function(){
-			$('.route-info, .first-stop-info, .existing-blips, .journey-stops').toggleClass('hidden');
+			$('.journey-info, .first-stop-info, .existing-blips, .journey-stops').toggleClass('hidden');
 			$('form').append('<input type="hidden" name="new_blip" value="true">');
 		});
 
