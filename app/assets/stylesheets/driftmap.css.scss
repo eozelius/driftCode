@@ -59,7 +59,7 @@
 /* popups */
 
 /* Blips */
-div.blip-popup {
+div.waypoint-popup {
   max-height: 400px;
 }
 
@@ -74,14 +74,14 @@ div.blip-popup {
     width: 150px;
     border-radius: 0;
   }
-  .blip-text {
+  .waypoint-text {
     padding: 5px;
   }
   .leaflet-popup-content {
     margin: 0;
     padding: 3px 5px;
   }
-  .blip-popup-body {
+  .waypoint-popup-body {
     margin: 0;
     height: 45px;
     overflow: hidden;
@@ -113,7 +113,7 @@ div.blip-popup {
     .leaflet-popup-content {
       margin: 4%;
     }
-    .blip-popup-body {
+    .waypoint-popup-body {
       margin: 0;
       height: 45px;
       overflow: hidden;

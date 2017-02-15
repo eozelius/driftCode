@@ -28,8 +28,8 @@ var DriftMapAccordian = function(){
 
 				for(var y in wps){
 					var w = wps[y]
-					a += '<li data-slideindex="'+ y +'" class="waypoint" data-blip="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-blipslide="'+ y +'" data-journeyid="'+ r.id +'">' + 
-	  							'<p class="blip-title">'+ w.title +'</p>' +
+					a += '<li data-slideindex="'+ y +'" class="waypoint" data-waypoint="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-waypointslide="'+ y +'" data-journeyid="'+ r.id +'">' + 
+	  							'<p class="waypoint-title">'+ w.title +'</p>' +
 	  						'</li>';
 				}
 
@@ -38,13 +38,13 @@ var DriftMapAccordian = function(){
 			} // end for(var x in journeys)
 
 			$('.panel-default:first-child .panel-collapse').addClass('in');
-			$('.waypoints-container').first().find('.blip-title').first().addClass('li-blip-selected')
+			$('.waypoints-container').first().find('.waypoint-title').first().addClass('li-waypoint-selected')
 
 			/* Event listeners */
 			// Click a specific waypoint
 			$('li.waypoint').on('click', function(){
 				var slide_index = $(this).data('slideindex') + 1
-				var id = $(this).data('blip')
+				var id = $(this).data('waypoint')
 				var wp = DriftMapLeaflet.getWayPoint(id);
 
 				if(wp){
@@ -59,15 +59,15 @@ var DriftMapAccordian = function(){
 			$('.journey-switcher').on('click', function(){
 				var r_id = $(this).data('journey');
 				var r = DriftMapTimeline.getJourney(r_id);
-				var first_wp_id = $('.panel-default[data-journey="'+ r_id +'"] li.waypoint').first().data('blip')
+				var first_wp_id = $('.panel-default[data-journey="'+ r_id +'"] li.waypoint').first().data('waypoint')
 
 				if(r){
 					/* Timeline */
 					DriftMapTimeline.focusJourney(r_id, 0, true);
 
 					/* Waypoints */
-					$('.blip-title').removeClass('li-blip-selected')
-					$('.waypoint[data-slideindex="0"] p').addClass('li-blip-selected')
+					$('.waypoint-title').removeClass('li-waypoint-selected')
+					$('.waypoint[data-slideindex="0"] p').addClass('li-waypoint-selected')
 				}
 
 				/* Leaflet */
@@ -77,10 +77,10 @@ var DriftMapAccordian = function(){
 
 		focusWayPoint: function(id){
 			if(id !== undefined){
-				$('.li-blip-selected').removeClass('li-blip-selected');
-				$('li.waypoint[data-blip="'+ id +'"] p').addClass('li-blip-selected');
+				$('.li-waypoint-selected').removeClass('li-waypoint-selected');
+				$('li.waypoint[data-waypoint="'+ id +'"] p').addClass('li-waypoint-selected');
 			} else {
-				$('.journey-content:visible .waypoints-container li p').first().addClass('li-blip-selected')
+				$('.journey-content:visible .waypoints-container li p').first().addClass('li-waypoint-selected')
 			}
 		},
 

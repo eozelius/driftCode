@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :journeys
-  resources :blips
+  resources :waypoints
   resources :blip_images,  only: [:create, :destroy]
   resources :users
   resources :posts

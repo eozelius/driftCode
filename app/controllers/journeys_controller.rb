@@ -20,7 +20,7 @@ class JourneysController < ApplicationController
 												params[:blip_date].slice(6, 2).to_i);
 
 				@blip = Blip.new(
-					title: params[:blip_title],
+					title: params[:waypoint_title],
 					body:  params[:blip_description],
 					x: 		 params[:blip_x],
 					y:  	 params[:blip_y],
@@ -67,7 +67,7 @@ class JourneysController < ApplicationController
 												params[:blip_date].slice(6, 2).to_i);
 
 				@blip = Blip.new(
-					title: params[:blip_title],
+					title: params[:waypoint_title],
 					body:  params[:blip_description],
 					x: 		 params[:blip_x],
 					y:  	 params[:blip_y],

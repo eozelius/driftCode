@@ -60,13 +60,13 @@ var DriftMapLeaflet = function(){
 						var j_id  = wps[i].journey_id;
 
 						/* Bind popup to marker */
-						var popupContent = 	'<div class="blip-popup" data-blip="'+ id +'">' + 
-																	'<div class="blip-text">' +
-																		'<a href="/blips/'+ id +'">' +
-																			'<h4 class="blip-popup-title instructions">'+ title +'</h4>' + 
+						var popupContent = 	'<div class="waypoint-popup" data-waypoint="'+ id +'">' + 
+																	'<div class="waypoint-text">' +
+																		'<a href="/waypoints/'+ id +'">' +
+																			'<h4 class="waypoint-popup-title instructions">'+ title +'</h4>' + 
 																			'<span> - more</span>' +
 																		'</a>' +
-																		'<p class="blip-popup-body">'+ body +'</p>' + 
+																		'<p class="waypoint-popup-body">'+ body +'</p>' + 
 																	'</div>';
 																	//'<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' +
 																//'</div>';
@@ -74,7 +74,7 @@ var DriftMapLeaflet = function(){
 						if(wps[i].images.length > 0){	popupContent += '<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' }
 						popupContent += '</div>'
 
-						var popupOptions = { className: 'blip-popup' }
+						var popupOptions = { className: 'waypoint-popup' }
 						var wpMarker = L.marker([lat, lng]).addTo(m);
 						var wpPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
 						wpMarker.bindPopup(wpPopup);

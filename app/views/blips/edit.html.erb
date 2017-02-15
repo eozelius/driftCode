@@ -1,7 +1,7 @@
 <div class="container">
 	<!-- Blip title images body -->
 	<div id="driftmap-timeline-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<div class="blip-content" data-blip="<%= @blip.id %>">
+		<div class="blip-content" data-waypoint="<%= @blip.id %>">
 
 			<%= hidden_field_tag :my_blip_date, @blip.date %>
 
@@ -44,21 +44,21 @@
 				<% end %>
 
 				<!-- photos -->
-				<h4 class="blip-title" data-photo-index="0">add photos</h4>
+				<h4 class="waypoint-title" data-photo-index="0">add photos</h4>
 
 				<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
 
 				<!-- title -->
-				<h4 class="blip-title">Title</h4>
+				<h4 class="waypoint-title">Title</h4>
 				<%= f.text_field :title %>
 
 				<!-- body -->
-				<h4 class="blip-title">Description</h4>
+				<h4 class="waypoint-title">Description</h4>
 				<%= f.text_area :body %>
 
 				<!-- date -->
 				<div class='input-group date' id='datetimepicker1'>
-					<h4 class="blip-title" style="margin:10% 0 8% 8%">Date</h4>
+					<h4 class="waypoint-title" style="margin:10% 0 8% 8%">Date</h4>
 					<input id="blip-date" style="margin: 0% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
 					<%= f.hidden_field :date %>
 					<span class="input-group-addon" style="float:left; margin-top:0%; height:38px; padding:10px 0 0 1px; width:30px">
@@ -72,7 +72,7 @@
 	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 		<div class="map-container">
 
-			<h4 class="blip-title">
+			<h4 class="waypoint-title">
 				click and drag the marker to adjust the blip location
 			</h4>
 
