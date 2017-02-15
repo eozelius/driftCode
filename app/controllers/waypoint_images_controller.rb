@@ -1,4 +1,4 @@
-class BlipImagesController < ApplicationController
+class WaypointImagesController < ApplicationController
 	def create
 		@blip = current_user.post.blips.last
 

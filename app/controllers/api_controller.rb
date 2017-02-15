@@ -21,7 +21,7 @@ class ApiController < ApplicationController
 
 				journey.waypoints.order(:date).each do |wp|
 					wp_images = []
-					wp.blip_images.each do |image|
+					wp.waypoint_images.each do |image|
 						wp_images.push(image)
 					end					
 

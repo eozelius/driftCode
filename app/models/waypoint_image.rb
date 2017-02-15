@@ -1,4 +1,4 @@
-class BlipImage < ActiveRecord::Base
+class WaypointImage < ActiveRecord::Base
   belongs_to :waypoint
   mount_uploader :image, PictureUploader
   validate :image_size

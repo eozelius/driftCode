@@ -1,8 +1,8 @@
-class BlipsController < ApplicationController
+class WaypointsController < ApplicationController
 	before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy ]
 
 	def new
-		@blip = Blip.new
+		@waypoint = Waypoint.new
 	end
 
 	def create

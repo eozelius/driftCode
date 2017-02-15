@@ -1,6 +1,6 @@
-class CreateBlipImages < ActiveRecord::Migration
+class CreateWaypointImages < ActiveRecord::Migration
   def change
-    create_table :blip_images do |t|
+    create_table :waypoint_images do |t|
       t.string :image
       t.references :waypoint, index: true, foreign_key: true
 

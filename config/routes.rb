@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :journeys
   resources :waypoints
-  resources :blip_images,  only: [:create, :destroy]
+  resources :waypoint_images,  only: [:create, :destroy]
   resources :users
   resources :driftmap
 

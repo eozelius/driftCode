@@ -16,15 +16,6 @@ ActiveRecord::Schema.define(version: 20160902125452) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "blip_images", force: :cascade do |t|
-    t.string   "image"
-    t.integer  "waypoint_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "blip_images", ["waypoint_id"], name: "index_blip_images_on_waypoint_id", using: :btree
-
   create_table "driftmaps", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -69,6 +60,15 @@ ActiveRecord::Schema.define(version: 20160902125452) do
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
+  create_table "waypoint_images", force: :cascade do |t|
+    t.string   "image"
+    t.integer  "waypoint_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "waypoint_images", ["waypoint_id"], name: "index_waypoint_images_on_waypoint_id", using: :btree
+
   create_table "waypoints", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20160902125452) do
 
   add_index "waypoints", ["journey_id"], name: "index_waypoints_on_journey_id", using: :btree
 
-  add_foreign_key "blip_images", "waypoints"
   add_foreign_key "journeys", "driftmaps"
+  add_foreign_key "waypoint_images", "waypoints"
   add_foreign_key "waypoints", "journeys"
 end
