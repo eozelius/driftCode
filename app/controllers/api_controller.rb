@@ -1,13 +1,13 @@
 class ApiController < ApplicationController
 	def	home
-		journeys = User.find(1).post.journeys
+		journeys = User.find(1).driftmap.journeys
 		response = responsify journeys
 		render json: response
 	end
 
 	def profile_page
 		user = User.find(params[:id])
-		journeys = user.post.journeys
+		journeys = user.driftmap.journeys
 		response = responsify journeys
 		render json: response
 	end
@@ -32,8 +32,8 @@ class ApiController < ApplicationController
 						x: wp.x,
 						y: wp.y,
 						journey_id: wp.journey_id,
+						driftmap_id: journey.driftmap_id,
 						images: wp_images,
-						post_id: journey.post_id,
 						date: {
 							year:  wp.date.year,
 							month: wp.date.month,

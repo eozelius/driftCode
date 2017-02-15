@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
 	def index
 	  	@ethan = User.find(1)
-	  	@journeys = @ethan.post.journeys
+	  	@journeys = @ethan.driftmap.journeys
 	end
 end

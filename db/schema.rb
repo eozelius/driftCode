@@ -25,18 +25,7 @@ ActiveRecord::Schema.define(version: 20160902125452) do
 
   add_index "blip_images", ["waypoint_id"], name: "index_blip_images_on_waypoint_id", using: :btree
 
-  create_table "journeys", force: :cascade do |t|
-    t.text     "description"
-    t.string   "title"
-    t.string   "coverphoto"
-    t.integer  "post_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "journeys", ["post_id"], name: "index_journeys_on_post_id", using: :btree
-
-  create_table "posts", force: :cascade do |t|
+  create_table "driftmaps", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.float    "init_x"
@@ -47,7 +36,18 @@ ActiveRecord::Schema.define(version: 20160902125452) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+  add_index "driftmaps", ["user_id"], name: "index_driftmaps_on_user_id", using: :btree
+
+  create_table "journeys", force: :cascade do |t|
+    t.text     "description"
+    t.string   "title"
+    t.string   "coverphoto"
+    t.integer  "driftmap_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "journeys", ["driftmap_id"], name: "index_journeys_on_driftmap_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -83,6 +83,6 @@ ActiveRecord::Schema.define(version: 20160902125452) do
   add_index "waypoints", ["journey_id"], name: "index_waypoints_on_journey_id", using: :btree
 
   add_foreign_key "blip_images", "waypoints"
-  add_foreign_key "journeys", "posts"
+  add_foreign_key "journeys", "driftmaps"
   add_foreign_key "waypoints", "journeys"
 end

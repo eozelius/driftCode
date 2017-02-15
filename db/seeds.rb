@@ -13,15 +13,15 @@ ethan = User.create(
 )
 
 # Create driftmap for ethan
-ethan.post = Post.create(
+ethan.driftmap = Driftmap.create(
   title:  "./driftmap",
-  body:   "my adventures and travels as a drifting computer hacker.",
+  body:   "just a computer hacker trying to get some more sunshine.",
   init_x: 0.924206230200376,
   init_y: -34.2400771379471,
   init_zoom: 2,
 )
 
-colombia = ethan.post.journeys.create!(
+colombia = ethan.driftmap.journeys.create!(
   title: '2015 - Colombia',
   description: 'A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.'
 )
@@ -90,7 +90,7 @@ salento.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads
 salento.save!
 colombia.save!
 
-europe = ethan.post.journeys.create!(
+europe = ethan.driftmap.journeys.create!(
   title: '2016 - Europe',
   description: 'Backpacking across the pond'
 )

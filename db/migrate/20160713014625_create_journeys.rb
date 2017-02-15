@@ -5,7 +5,7 @@ class CreateJourneys < ActiveRecord::Migration
       t.string :title
       t.string :coverphoto
 
-      t.references :post, index: true, foreign_key: true
+      t.references :driftmap, index: true, foreign_key: true
 
       t.timestamps null: false
     end
