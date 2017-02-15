@@ -24,11 +24,11 @@
 <div id="profile-page" class="container">
 	<input id="user_id" type="hidden" value="<%= @user.id %>" >
 	
-	<% if @user.post.journeys.any? %>
+	<% if @user.driftmap.journeys.any? %>
 		<!-- TIMELINEJS3 -->
 		<div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
 			<!-- todo move this into DriftMapTimeline.js -->
-			<% @user.post.journeys.each do |journey| %>
+			<% @user.driftmap.journeys.each do |journey| %>
         <div class="journey-content" data-journeycontent="<%= journey.id %>">
           <h4 class="journey-header"><%= journey.title %></h4>
           <div id='dm-timeline-<%= journey.id %>' class="dm-timeline" style="width: 100%; height: 600px"></div>
@@ -55,9 +55,9 @@
 
 
 	<div class="map-details col-lg-8 col-md-8 col-sm-12 col-xs-12">
-		<h3 class="page-title post-title"><%= @post.title %><%= link_to '<span style="font-size: .48em; font-style:italic"> - edit driftmap</span>'.html_safe, edit_post_path(@post) if user_is_home(@user) %></h3>
+		<h3 class="page-title driftmap-title"><%= @driftmap.title %><%= link_to '<span style="font-size: .48em; font-style:italic"> - edit driftmap</span>'.html_safe, edit_driftmap_path(@driftmap) if user_is_home(@user) %></h3>
 
-		<p class="post-title"><%= @post.body %></p>
+		<p class="driftmap-title"><%= @driftmap.body %></p>
 	</div>
 
 	<div id="pro-parts-container" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">

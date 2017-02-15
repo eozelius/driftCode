@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       flash[:info] = "welcome to driftMap"
       log_in @user
 
-      post = Post.new(
+      driftmap = Driftmap.new(
         title: 'my driftMap title',
         body:  'my driftMap description',
         init_x: 1,
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         init_zoom: 2
       )
 
-      @user.post = post
+      @user.driftmap = driftmap
       @user.save
 
       redirect_to @user 
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @post = @user.post
+    @driftmap = @user.driftmap
   end
 
   def update
