@@ -19,25 +19,25 @@ class ApiController < ApplicationController
 			journeys.each do |journey|
 				my_journey_wps = []
 
-				journey.blips.order(:date).each do |blip|
+				journey.waypoints.order(:date).each do |wp|
 					wp_images = []
-					blip.blip_images.each do |image|
+					wp.blip_images.each do |image|
 						wp_images.push(image)
 					end					
 
 					my_journey_wps.push({ 
-						id: blip.id,
-						title: blip.title,
-						body: blip.body,
-						x: blip.x,
-						y: blip.y,
-						journey_id: blip.journey_id,
+						id: wp.id,
+						title: wp.title,
+						body: wp.body,
+						x: wp.x,
+						y: wp.y,
+						journey_id: wp.journey_id,
 						images: wp_images,
 						post_id: journey.post_id,
 						date: {
-							year:  blip.date.year,
-							month: blip.date.month,
-							day:   blip.date.day 
+							year:  wp.date.year,
+							month: wp.date.month,
+							day:   wp.date.day 
 						} 
 					})
 				end
