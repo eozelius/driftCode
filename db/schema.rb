@@ -18,25 +18,12 @@ ActiveRecord::Schema.define(version: 20160902125452) do
 
   create_table "blip_images", force: :cascade do |t|
     t.string   "image"
-    t.integer  "blip_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "waypoint_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "blip_images", ["blip_id"], name: "index_blip_images_on_blip_id", using: :btree
-
-  create_table "blips", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.float    "x"
-    t.float    "y"
-    t.datetime "date"
-    t.integer  "journey_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "blips", ["journey_id"], name: "index_blips_on_journey_id", using: :btree
+  add_index "blip_images", ["waypoint_id"], name: "index_blip_images_on_waypoint_id", using: :btree
 
   create_table "journeys", force: :cascade do |t|
     t.text     "description"
@@ -82,7 +69,20 @@ ActiveRecord::Schema.define(version: 20160902125452) do
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
-  add_foreign_key "blip_images", "blips"
-  add_foreign_key "blips", "journeys"
+  create_table "waypoints", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.float    "x"
+    t.float    "y"
+    t.datetime "date"
+    t.integer  "journey_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "waypoints", ["journey_id"], name: "index_waypoints_on_journey_id", using: :btree
+
+  add_foreign_key "blip_images", "waypoints"
   add_foreign_key "journeys", "posts"
+  add_foreign_key "waypoints", "journeys"
 end

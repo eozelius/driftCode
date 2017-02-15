@@ -1,5 +1,5 @@
 class BlipImage < ActiveRecord::Base
-  belongs_to :blip
+  belongs_to :waypoint
   mount_uploader :image, PictureUploader
   validate :image_size
 

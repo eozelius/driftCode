@@ -1,6 +1,6 @@
-class CreateBlips < ActiveRecord::Migration
+class CreateWaypoints < ActiveRecord::Migration
   def change
-    create_table :blips do |t|
+    create_table :waypoints do |t|
       t.string :title
       t.text :body
       t.float :x

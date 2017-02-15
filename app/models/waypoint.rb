@@ -1,4 +1,4 @@
-class Blip < ActiveRecord::Base
+class Waypoint < ActiveRecord::Base
   belongs_to :journey
   has_many :blip_images, dependent: :destroy
 

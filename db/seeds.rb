@@ -21,14 +21,12 @@ ethan.post = Post.create(
   init_zoom: 2,
 )
 
-# Journeys
 colombia = ethan.post.journeys.create!(
   title: '2015 - Colombia',
   description: 'A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.'
 )
 
-# Blips
-bogota = colombia.blips.create!(
+bogota = colombia.waypoints.create!(
   title: 'Bogota Colombia',
   body: 'The Capital and largest city in Colombia, Bogota is home to more than 9 million.  The majority of my time I spent in Chapinero, a neighborhood to the north of the old town, tucked in the foot of the massive mountains that overlook the city, and give Bogota it\'s rainy climate.  My days in Bogota were sometimes energetic, sometimes dreary but always informative.  As the first city I would visit, I dove and stumbled headfirst into the language and culture of Colombians.  Bogota was my introduction into the lives, dance, and struggle everyday Colombians; ground zero for my nomadic travels, where I learned the fundamentals of Spanish and the only logical place to start my journey'.html_safe,
   x: 4.6077624, 
@@ -42,7 +40,7 @@ bogota.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/
 bogota.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/67/20150926_143238.jpg"))
 bogota.save!
 
-medellin = colombia.blips.create!(
+medellin = colombia.waypoints.create!(
   title: 'Medellin - La Ciudad de la Eterna Primavera',
   body: "A majority of my time in Colombia was spent in Medellin, the city of eternal spring is renowned for it\'s beautiful weather and mujeres latinas.  A common destination for vacationers, partiers and drifters like myself, Medellin offered paradise to all.  A theory of mine, is that all the greatest cities in the world require you to climb over some garbage to get to the best parts, while this city of Paisas, like every city is not without rough sectors.  Yet almost every single trip, subway ride and party was secure and appealing.  It is unforunate that Medellin has yet again portrayed as a home of the narcos, when in reality, this city is an exemplary example of innovation in the wake of disaster.  Not only has this city become safe for citizens and travelers, it is clean, friendly and damn good fun if you can dance a little.  Without a question, Paisas, (the inhabitants of Medellin) are the friendliest people I've come across in all my travels.  In Christmas this wonderland takes on a purple tint, and the entire city lights up as every home dons lights.  Built in the bottom of a valley, every view is spectacular, the city runs up from the river into the walls of the valley that is not to be missed.".html_safe,
   x: 6.2807872, 
@@ -59,7 +57,7 @@ medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/upload
 medellin.blip_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/71/DSCF6184.JPG"));
 medellin.save!
 
-manizales = colombia.blips.create!(
+manizales = colombia.waypoints.create!(
   title: 'Manizales Colombia',
   body: 'I packed my bag in a hurry to head south to Manizales for the city Feria.  The night I arrived I instantly made friends with a dude from manizales at a salsa concert.'.html_safe,
   x: 5.1073584, 
@@ -72,7 +70,7 @@ manizales.blip_images.create!(image: open("https://driftmap.s3.amazonaws.com/upl
 manizales.blip_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/blip_image/image/78/DSCF6386.JPG"))
 manizales.save!
 
-salento = colombia.blips.create!(
+salento = colombia.waypoints.create!(
   title: 'Salento Colombia',
   body: 'Finally, what Colombia is famous for, the delicious coffee.  If pereira was the place where the digital nomad lifestyle left me feeling like I got hit by a car, in Salento my lack of planning left me feeling like I fell into a Volcano.  Colombias coffee zone is one of the most beautiful places I have ever visited, and staying only an afternoon is an absolute travesty.  In spite of my procrastination, I rented a bicycle and ventured into the hills above the town and it was one of the greatest rides I have ever undertaken.'.html_safe,
   x: 4.6671150, 
@@ -97,7 +95,7 @@ europe = ethan.post.journeys.create!(
   description: 'Backpacking across the pond'
 )
 
-copenhagen = europe.blips.create!(
+copenhagen = europe.waypoints.create!(
   title: 'Copenhagen Denmark', 
   body: 'I was much less anxious or nervous for this adventure, as compared to my Colombian journey. Something about being about to not only speak but Understand the language is a game-changer. Although that unforgettable jumpy, fidgety feeling that all drifters exist for never fails to accompany you as you board and exit the plane. There is a lot of beauty in travelling solo. At this moment in the first hour of my journey it is a constant ebb and flow of excitement and anxiety in regards to meeting new faces from all over, like the first day of school walking into the cafeteria, all eyes watching all the other eyes. The Danish people remind me vaguely of the Canadians, their accent is a little funny, but overall good people.'.html_safe, 
   x: 55.6895847, 
@@ -114,7 +112,7 @@ copenhagen.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uplo
 
 europe.save!
 
-berlin = europe.blips.create(
+berlin = europe.waypoints.create(
   title: 'Berlin Germany',
   body: 'Berlin, was one of my favorite cities that I had the privledge of visiting, I also almost died while going to a club one night.  I never was a huge history buff, bit seeing not only the relics proud and somber, and talking with berliners gives a new twist on this rich city.'.html_safe,
   x: 52.5479659177324,
@@ -130,7 +128,7 @@ berlin.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/
 
 berlin.save!
 
-paris = europe.blips.create!(
+paris = europe.waypoints.create!(
   title: 'Paris France',
   body: 'Absinthe is one heck of a concoction.'.html_safe,
   x: 48.8827795934513,
@@ -146,7 +144,7 @@ paris.blip_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/b
 
 paris.save!
 
-switzerland = europe.blips.create!(
+switzerland = europe.waypoints.create!(
   title: 'Park Ela Switzerland',
   body: 'This could be the greatest place I\'ve been in the entire world. Before I embarked on this trip, I had just one thing that I knew I had to do in Europe, the rest I knew I could figure out on the way. If for whatever reason I missed out on driving a really fast (really slow in reality) car through the Swiss Alps, my journey would have been a failure. The greatest driving roads in the world are in the Alps between here and the Italian border. The hiking and other outdoors stuff is very decent as well'.html_safe,
   x: 46.2548972628291,
