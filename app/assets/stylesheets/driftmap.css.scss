@@ -1,6 +1,6 @@
 /* Driftmap form */
-.edit_post,
-.new_post {
+.edit_driftmap,
+.new_driftmap {
   margin: 4% 3%;
   padding: 1% 0;
 
@@ -31,33 +31,9 @@
 .wizard-step {
 
   /* description */
-  .route-info,
+  .journey-info,
   .blip-info {
     display: none;
-  }
-  
-  .wizard-routes,
-  .wizard-markers {
-    text-align: right;
-    ul {
-      padding: 3% 0;
-    }
-
-    li {
-      border-bottom: 1px solid #ccc;
-      padding: 3% 5%;
-      text-align: left;
-      cursor: pointer;
-
-      .route-body {
-        color: #000;
-        cursor: initial;
-        padding: 3%;
-      }
-      .new-route-inputs {
-        margin-top: 10px;
-      }
-    }
   }
 }
 
@@ -83,7 +59,7 @@
 /* popups */
 
 /* Blips */
-div.blip-popup {
+div.waypoint-popup {
   max-height: 400px;
 }
 
@@ -98,14 +74,14 @@ div.blip-popup {
     width: 150px;
     border-radius: 0;
   }
-  .blip-text {
+  .waypoint-text {
     padding: 5px;
   }
   .leaflet-popup-content {
     margin: 0;
     padding: 3px 5px;
   }
-  .blip-popup-body {
+  .waypoint-popup-body {
     margin: 0;
     height: 45px;
     overflow: hidden;
@@ -137,7 +113,7 @@ div.blip-popup {
     .leaflet-popup-content {
       margin: 4%;
     }
-    .blip-popup-body {
+    .waypoint-popup-body {
       margin: 0;
       height: 45px;
       overflow: hidden;

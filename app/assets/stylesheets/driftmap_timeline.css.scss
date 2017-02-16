@@ -3,11 +3,6 @@
 	margin: 0 auto;
 }
 
-.caro-route-details-container {
-	height: auto;
-	background-color: #ccc;
-}
-
 .tl-slidenav-next,
 .tl-slidenav-previous {
 	top: 15px !important;
@@ -17,12 +12,19 @@
 	margin-top: 67px;
 }
 
-#waypt-accord .li-blip-selected {
+#waypt-accord .li-waypoint-selected {
 	font-weight: 600;
 	color: #78acd3 !important;
 }
 
-#dm-timeline {
+.carousel-control {
+	color: #fff;
+	opacity: .8;
+	background: none;
+	background-image: none !important;
+}
+
+.dm-timeline {
 	overflow: visible;
 
 	.tl-storyslider {
@@ -39,21 +41,6 @@
 		opacity: .8;
 		background: none;
 		background-image: none;
-	}
-
-	/* Carousel */
-	.item{
-
-		img {
-			width: 95%;
-			height: auto;
-			margin: 0 auto;
-			display: block;
-			vertical-align: middle ;
-		}
-	}
-	.carousel-control {
-		background: none;
 
 		i {
 			position: absolute;
@@ -68,18 +55,37 @@
 			margin-left: -15px;
 		}
 	}
+
+	/* Carousel */
+	.item{
+
+		img {
+			width: 95%;
+			height: auto;
+			margin: 0 auto;
+			display: block;
+			vertical-align: middle ;
+		}
+	}
 }
 
-.route-header {
+.journey-header {
 	margin: 0 0 4%;
 }
 
-.route-description {
-	height: 255px;
+.journey-description {
+	height: 180px;
 	overflow-y: scroll;
-	margin: 4% 5% 25%;
+	margin: 4% 4% 1%;
 	color: #C2D9EB;
-	text-align: center;
+	text-align: left;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	padding: 2% 0 0 2%;
+}
+
+.journey-meta {
+	margin-bottom: 5%;
 }
 
 /* timeline coverphotos */
@@ -112,7 +118,7 @@ body .tl-media .tl-media-content-container .tl-media-content img {
 		height: 72% !important;
 	}
 
-	.route-description {
+	.journey-description {
 		margin:4% 5% 4%; 
 		padding: 4% 6%;
 		border-top: 3px solid #ccc;
@@ -131,7 +137,7 @@ body .tl-media .tl-media-content-container .tl-media-content img {
 
 
 @media (max-width: 480px){
-	.route-content {
+	.journey-content {
 		.tl-timeline.tl-skinny.tl-layout-portrait {
 			height: auto !important;
 			margin-bottom: 30px;
@@ -154,7 +160,7 @@ body .tl-media .tl-media-content-container .tl-media-content img {
 		.tl-menubar {
 			display: none;
 		}
-		.route-header {
+		.journey-header {
 			height: 110px;
 			overflow: hidden;
 			

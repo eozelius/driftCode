@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
-  include PostsHelper
 	
 	private
     # Confirms a logged-in user.

@@ -1,50 +1,50 @@
 class ApiController < ApplicationController
-	def	routes_home
-		routes 	 = User.find(1).post.routes
-		response = responsify routes
+	def	home
+		journeys = User.find(1).driftmap.journeys
+		response = responsify journeys
 		render json: response
 	end
 
-	def routes_profile_page
+	def profile_page
 		user = User.find(params[:id])
-		routes = user.post.routes
-		response = responsify routes
+		journeys = user.driftmap.journeys
+		response = responsify journeys
 		render json: response
 	end
 
 	private
-		def responsify(routes)
+		def responsify(journeys)
 			response = []
 
-			routes.each do |route|
-				my_route_wps = []
+			journeys.each do |journey|
+				my_journey_wps = []
 
-				route.blips.order(:date).each do |blip|
+				journey.waypoints.order(:date).each do |wp|
 					wp_images = []
-					blip.blip_images.each do |image|
+					wp.waypoint_images.each do |image|
 						wp_images.push(image)
 					end					
 
-					my_route_wps.push({ 
-						id: blip.id,
-						title: blip.title,
-						body: blip.body,
-						x: blip.x,
-						y: blip.y,
-						route_id: blip.route_id,
+					my_journey_wps.push({ 
+						id: wp.id,
+						title: wp.title,
+						body: wp.body,
+						x: wp.x,
+						y: wp.y,
+						journey_id: wp.journey_id,
+						driftmap_id: journey.driftmap_id,
 						images: wp_images,
-						post_id: blip.post_id,
 						date: {
-							year:  blip.date.year,
-							month: blip.date.month,
-							day:   blip.date.day 
+							year:  wp.date.year,
+							month: wp.date.month,
+							day:   wp.date.day 
 						} 
 					})
 				end
 
 				response.push({ 
-					route: route, 
-					waypoints: my_route_wps 
+					journey: journey, 
+					waypoints: my_journey_wps 
 				})
 			end
 

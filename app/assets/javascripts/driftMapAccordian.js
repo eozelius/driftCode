@@ -9,15 +9,15 @@ var DriftMapAccordian = function(){
 
 
 		// public methods
-		init: function(routes){
-			for(var x in routes){
-				var r = routes[x].route
-				var wps = routes[x].waypoints
+		init: function(journeys){
+			for(var x in journeys){
+				var r = journeys[x].journey
+				var wps = journeys[x].waypoints
 
-				var a = '<div data-route="'+ r.id +'" class="panel panel-default">' + 
+				var a = '<div data-journey="'+ r.id +'" class="panel panel-default">' + 
 									'<div id="heading-'+ x +'" class="panel-heading" >' + 
 										'<h4 class="panel-title">' +
-											'<a class="route-switcher" role="button" data-toggle="collapse" data-parent="#waypt-accord" href="#collapse-'+ r.id +'" aria-expanded="true" aria-controls="collapse-'+ x +'" data-route="'+ r.id +'">' + 
+											'<a class="journey-switcher" role="button" data-toggle="collapse" data-parent="#waypt-accord" href="#collapse-'+ r.id +'" aria-expanded="true" aria-controls="collapse-'+ x +'" data-journey="'+ r.id +'">' + 
 												r.title +
 											'</a>' + 
 										'</h4>' + 
@@ -28,46 +28,46 @@ var DriftMapAccordian = function(){
 
 				for(var y in wps){
 					var w = wps[y]
-					a += '<li data-slideindex="'+ y +'" class="waypoint" data-blip="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-blipslide="'+ y +'" data-routeid="'+ r.id +'">' + 
-	  							'<p class="blip-title">'+ w.title +'</p>' +
+					a += '<li data-slideindex="'+ y +'" class="waypoint" data-waypoint="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-waypointslide="'+ y +'" data-journeyid="'+ r.id +'">' + 
+	  							'<p class="waypoint-title">'+ w.title +'</p>' +
 	  						'</li>';
 				}
 
 				a += '</ul></div></div></div>';
 				$('#waypt-accord').append(a);
-			} // end for(var x in routes)
+			} // end for(var x in journeys)
 
 			$('.panel-default:first-child .panel-collapse').addClass('in');
-			$('.waypoints-container').first().find('.blip-title').first().addClass('li-blip-selected')
+			$('.waypoints-container').first().find('.waypoint-title').first().addClass('li-waypoint-selected')
 
 			/* Event listeners */
 			// Click a specific waypoint
 			$('li.waypoint').on('click', function(){
 				var slide_index = $(this).data('slideindex') + 1
-				var id = $(this).data('blip')
+				var id = $(this).data('waypoint')
 				var wp = DriftMapLeaflet.getWayPoint(id);
 
 				if(wp){
-					var wp_route_id = wp.route_id
+					var wp_journey_id = wp.journey_id
 					DriftMapLeaflet.focusWayPoint(id);
 					DriftMapAccordian.focusWayPoint(id);
-					DriftMapTimeline.focusRoute(wp_route_id, slide_index, false)
+					DriftMapTimeline.focusJourney(wp_journey_id, slide_index, false)
 				}
 			});
 
-			// Click a specific route
-			$('.route-switcher').on('click', function(){
-				var r_id = $(this).data('route');
-				var r = DriftMapTimeline.getRoute(r_id);
-				var first_wp_id = $('.panel-default[data-route="'+ r_id +'"] li.waypoint').first().data('blip')
+			// Click a specific journey
+			$('.journey-switcher').on('click', function(){
+				var r_id = $(this).data('journey');
+				var r = DriftMapTimeline.getJourney(r_id);
+				var first_wp_id = $('.panel-default[data-journey="'+ r_id +'"] li.waypoint').first().data('waypoint')
 
 				if(r){
 					/* Timeline */
-					DriftMapTimeline.focusRoute(r_id, 0, true);
+					DriftMapTimeline.focusJourney(r_id, 0, true);
 
 					/* Waypoints */
-					$('.blip-title').removeClass('li-blip-selected')
-					$('.waypoint[data-slideindex="0"] p').addClass('li-blip-selected')
+					$('.waypoint-title').removeClass('li-waypoint-selected')
+					$('.waypoint[data-slideindex="0"] p').addClass('li-waypoint-selected')
 				}
 
 				/* Leaflet */
@@ -77,16 +77,16 @@ var DriftMapAccordian = function(){
 
 		focusWayPoint: function(id){
 			if(id !== undefined){
-				$('.li-blip-selected').removeClass('li-blip-selected');
-				$('li.waypoint[data-blip="'+ id +'"] p').addClass('li-blip-selected');
+				$('.li-waypoint-selected').removeClass('li-waypoint-selected');
+				$('li.waypoint[data-waypoint="'+ id +'"] p').addClass('li-waypoint-selected');
 			} else {
-				$('.route-content:visible .waypoints-container li p').first().addClass('li-blip-selected')
+				$('.journey-content:visible .waypoints-container li p').first().addClass('li-waypoint-selected')
 			}
 		},
 
-		focusRoute: function(id){
+		focusJourney: function(id){
 			if(id !== undefined){
-				$('.panel[data-route="'+ id +'"] .panel-collapse').addClass('in');
+				$('.panel[data-journey="'+ id +'"] .panel-collapse').addClass('in');
 			}
 		}
 	}

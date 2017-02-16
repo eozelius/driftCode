@@ -29,7 +29,7 @@ var DriftMapLeaflet = function(){
 
 
 		// public methods
-		init: function(routes, options){
+		init: function(journeys, options){
 			var x = options !== undefined ? options.init_x : 0.924206230200376;
 			var y = options !== undefined ? options.init_y : -40.2400771379471;
 			var z = options !== undefined ? options.init_zoom : 2;
@@ -45,10 +45,10 @@ var DriftMapLeaflet = function(){
 				}).addTo(m);
 
 
-			for(var x in routes){
-				if(routes[x].route !== undefined && routes[x].waypoints !== undefined){
-					var r = routes[x].route
-					var wps = routes[x].waypoints
+			for(var x in journeys){
+				if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){
+					var r = journeys[x].journey
+					var wps = journeys[x].waypoints
 
 					for(var i in wps){
 						/* Add Marker to Map */
@@ -57,16 +57,16 @@ var DriftMapLeaflet = function(){
 						var id = wps[i].id;
 						var title = wps[i].title;
 						var body  = wps[i].body;
-						var r_id  = wps[i].route_id;
+						var j_id  = wps[i].journey_id;
 
 						/* Bind popup to marker */
-						var popupContent = 	'<div class="blip-popup" data-blip="'+ id +'">' + 
-																	'<div class="blip-text">' +
-																		'<a href="/blips/'+ id +'">' +
-																			'<h4 class="blip-popup-title instructions">'+ title +'</h4>' + 
+						var popupContent = 	'<div class="waypoint-popup" data-waypoint="'+ id +'">' + 
+																	'<div class="waypoint-text">' +
+																		'<a href="/waypoints/'+ id +'">' +
+																			'<h4 class="waypoint-popup-title instructions">'+ title +'</h4>' + 
 																			'<span> - more</span>' +
 																		'</a>' +
-																		'<p class="blip-popup-body">'+ body +'</p>' + 
+																		'<p class="waypoint-popup-body">'+ body +'</p>' + 
 																	'</div>';
 																	//'<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' +
 																//'</div>';
@@ -74,7 +74,7 @@ var DriftMapLeaflet = function(){
 						if(wps[i].images.length > 0){	popupContent += '<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' }
 						popupContent += '</div>'
 
-						var popupOptions = { className: 'blip-popup' }
+						var popupOptions = { className: 'waypoint-popup' }
 						var wpMarker = L.marker([lat, lng]).addTo(m);
 						var wpPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
 						wpMarker.bindPopup(wpPopup);
@@ -84,7 +84,7 @@ var DriftMapLeaflet = function(){
 							id: 		wps[i].id,
 							title: 	title,
 							body:  	body,
-							route_id: r_id,
+							journey_id: j_id,
 							leaflet: {
 								marker: wpMarker,
 								popup:  wpPopup,
@@ -106,12 +106,6 @@ var DriftMapLeaflet = function(){
 				if(indexer[i].id == id)
 					return indexer[i];
 			return false;
-		},
-
-		getWayPointRoute: function(id){
-			for(var i in indexer)
-				if(indexer[i].id == id)
-					return DriftMapTimeline.getRoute(id.route_id)
 		},
 
 		/* Setters */

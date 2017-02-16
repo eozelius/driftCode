@@ -1,10 +1,9 @@
-class Blip < ActiveRecord::Base
-  belongs_to :post
-  belongs_to :route
-  has_many :blip_images, dependent: :destroy
+class Waypoint < ActiveRecord::Base
+  belongs_to :journey
+  has_many :waypoint_images, dependent: :destroy
 
   validates :title,   :presence => true, :length => { minimum: 4, maximum: 120 }
-  validates :post_id, :presence => true
+  validates :journey_id, :presence => true
   validates :x,		  :presence => true
   validates :y, 	  :presence => true
 end

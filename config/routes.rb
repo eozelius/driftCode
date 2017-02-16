@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
-  resources :routes
-  resources :route_points, only: [:create, :update, :destroy]
-  resources :blips
-  resources :blip_images,  only: [:create, :destroy]
+  resources :journeys
+  resources :waypoints
+  resources :waypoint_images,  only: [:create, :destroy]
   resources :users
-  resources :posts
+  resources :driftmap
 
   put  'blip_images' => 'blip_images#create'  
   post 'update_route' => 'routes#update'
@@ -17,8 +16,8 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   # API Data Routes
-  post 'routes_api_home' => 'api#routes_home'
-  post 'routes_api_profile_page' => 'api#routes_profile_page'
+  post 'api_home' => 'api#home'
+  post 'api_profile_page' => 'api#profile_page'
   # end API
 
   get 'ethan', to: redirect('users/1')

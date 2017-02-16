@@ -1,6 +1,6 @@
-class CreatePosts < ActiveRecord::Migration
+class CreateDriftmaps < ActiveRecord::Migration
   def change
-    create_table :posts do |t|
+    create_table :driftmaps do |t|
       t.string :title
       t.text :body
       t.float :init_x

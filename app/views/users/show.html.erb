@@ -5,7 +5,7 @@
 
 	  <% if user_is_home(@user) %>
 	    <div class="start-text">
-	      <%= link_to new_route_path do %>
+	      <%= link_to new_journey_path do %>
 	        <p>begin an new adventure now</p>
 	      <% end %>
 	    </div>
@@ -21,21 +21,20 @@
 
 <% provide(:title, @user.name) %>
 
-<hr style="width:84%; height: 3px;background-color: #ccc; margin: 75px auto 50px;">
-
 <div id="profile-page" class="container">
 	<input id="user_id" type="hidden" value="<%= @user.id %>" >
 	
-	<% if @user.post.routes.any? %>
+	<% if @user.driftmap.journeys.any? %>
 		<!-- TIMELINEJS3 -->
 		<div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
 			<!-- todo move this into DriftMapTimeline.js -->
-			<% @user.post.routes.each do |route| %>
-        <div class="route-content" data-routecontent="<%= route.id %>">
-          <h4 class="route-header"><%= route.title %></h4>
-          <div id='dm-timeline-<%= route.id %>' style="width: 100%; height: 600px"></div>
-          <div class="route-meta">
-            <p class="route-description"><%= route.description %></p>
+			<% @user.driftmap.journeys.each do |journey| %>
+        <div class="journey-content" data-journeycontent="<%= journey.id %>">
+          <h4 class="journey-header"><%= journey.title %></h4>
+          <div id='dm-timeline-<%= journey.id %>' class="dm-timeline" style="width: 100%; height: 600px"></div>
+          <div class="journey-meta">
+            <p class="journey-description"><%= journey.description %></p>
+            <%#= link_to '<span style="font-size: .77em; font-style: italic; color: #552727; float:right;"> - more'.html_safe, journey_path(journey) if journey.description.length > 80 %>
           </div>
         </div>
       <% end %>
@@ -56,9 +55,9 @@
 
 
 	<div class="map-details col-lg-8 col-md-8 col-sm-12 col-xs-12">
-		<h3 class="page-title post-title"><%= @post.title %><%= link_to '<span style="font-size: .48em; font-style:italic"> - edit driftmap</span>'.html_safe, edit_post_path(@post) if user_is_home(@user) %></h3>
+		<h3 class="page-title driftmap-title"><%= @driftmap.title %><%= link_to '<span style="font-size: .48em; font-style:italic"> - edit driftmap</span>'.html_safe, edit_driftmap_path(@driftmap) if user_is_home(@user) %></h3>
 
-		<p class="post-title"><%= @post.body %></p>
+		<p class="driftmap-title"><%= @driftmap.body %></p>
 	</div>
 
 	<div id="pro-parts-container" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -133,84 +132,3 @@
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-if(false){
-	/* Leaflet Map */
-	var driftmap = {
-		init_x: '<%= @post.init_x %>',
-		init_y: '<%= @post.init_y %>',
-		init_zoom: '<% @post.init_zoom %>',
-	}
-
-	var blips = [];
-
-	<% if @user.post.blips.any? %>
-		<% @blips.each do |blip| %>
-	    var blipImages = [];
-	    <% blip.blip_images.each do |blip_image| %>
-	      blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
-	    <% end %>
-
-	    blips.push({
-	      id:     "<%= blip.id %>",
-	      x:      "<%= blip.x %>",
-	      y:      "<%= blip.y %>",
-	      title:  "<%= blip.title.to_json %>",
-	      body:   "<%= blip.body.to_json %>",
-	      images: blipImages
-	    })
-	  <% end %>
-	<% end %>
-
-	// init_map('map', driftmap, blips)
-	// End Leaflet Map
-
-	// TimelineJS3
-	<% if !@route.nil? %>
-		<% if @route.coverphoto.present? %>
-			var blip_cover_image = '<%= image_path(@route.coverphoto).html_safe %>';
-		<% else %>
-			var blip_cover_image = '<%= image_path("switzerland10.JPG").html_safe %>';
-		<% end %>
-
-		var events = [];
-
-		<% @route.blips.each do |blip| %>
-			events.push({
-				"media": {
-					url: '',
-					caption: ''
-				},
-				start_date: {
-					month: '<%= blip.date.month %>',
-					day: '<%= blip.date.day %>',
-					year: '<%= blip.date.year %>'
-				},
-				text: {
-					headline: "<%= blip.title %>",
-					text: "<%= blip.body %>"
-				}
-			});
-		<% end %>
-
-		var timeLineData = {
-		  title: {
-		    media: {
-		      url: blip_cover_image,
-		      caption: ""
-		    },
-		    text: {
-		      headline: "",
-		      text: ""
-		    }
-		  },
-		  events: events
-		}
-
-		var dmOptions = { timenav_height: 180 }
-		//init_timeline(timeLineData, dmOptions );
-	<% end %>
-	// end TimelineJS3
-}
-</script>

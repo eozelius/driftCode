@@ -14,7 +14,6 @@ gem 'bcrypt', '~> 3.1.10'
 gem 'therubyracer', '~> 0.12.2'
 gem 'libv8' # 3.16.14.11
 gem 'net-ssh', '~> 3.0', '>= 3.0.1'
-#gem 'puma', 	    '2.11.1'
 gem 'puma', '~> 3.4'
 gem 'byebug',      '3.4.0'
 gem 'json', '~> 1.8', '>= 1.8.3'
@@ -26,7 +25,6 @@ group :development do
   gem 'web-console', '~> 3.0'
   gem 'coveralls',   '0.8.9'
   gem 'sqlite3',     '1.3.9'
-  gem 'tzinfo-data', platforms: [:mingw, :mswin]
   gem 'letter_opener', '~> 1.4', '>= 1.4.1'
 end
 

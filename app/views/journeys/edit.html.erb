@@ -1,19 +1,19 @@
-<div id="route" class="edit-route">
+<div id="journey" class="edit-route">
 	<div class="container">
 		<div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-			<h4 class="blip-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Edit <%= @route.title.html_safe %></h4>
+			<h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Edit <%= @route.title.html_safe %></h4>
 
 			<%= form_for @route, html: { multipart: true } do |f| %>
-				<div class="route-info">
+				<div class="journey-info">
 					<!-- Journey Cover Photo -->
-					<h4 class="blip-title">Journey Cover Photo</h4>
+					<h4 class="waypoint-title">Journey Cover Photo</h4>
 					<%= f.file_field :coverphoto, { style: 'margin-left:3%;' } %>
 
 					<!-- Journey metadata -->
-					<h4 class="blip-title">Journey Title</h4>
+					<h4 class="waypoint-title">Journey Title</h4>
 					<%= f.text_field :title, { style: 'margin-left:3%;' } %>
 
-					<h4 class="blip-title">Journey Description</h4>
+					<h4 class="waypoint-title">Journey Description</h4>
 					<%= f.text_area :description %>
 					<span class="normal add-route-stop" style="margin:3%">Add Blip</span>
 				</div>
@@ -23,17 +23,17 @@
 					<%= hidden_field_tag :blip_x %>
 					<%= hidden_field_tag :blip_y %>
 
-					<h4 class="blip-title" data-photo-index="0">add photos</h4>
+					<h4 class="waypoint-title" data-photo-index="0">add photos</h4>
 					<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
 
-					<h4 class="blip-title">Blip Title</h4>
-					<%= text_field_tag :blip_title %>
+					<h4 class="waypoint-title">Blip Title</h4>
+					<%= text_field_tag :waypoint_title %>
 
-					<h4 class="blip-title">Blip Description</h4>
+					<h4 class="waypoint-title">Blip Description</h4>
 					<%= text_area_tag :blip_description %>
 
 					<div class='input-group date' id='datetimepicker1'>
-						<h4 class="blip-title" style="margin:0% 0 8% 8%">Date</h4>
+						<h4 class="waypoint-title" style="margin:0% 0 8% 8%">Date</h4>
 						<input id="blip-date" style="margin: 3% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
 						<%= hidden_field_tag :blip_date %>
 						<span class="input-group-addon" style="float:left; margin-top:3%; height:38px; padding:10px 0 0 1px; width:30px">
@@ -104,7 +104,7 @@
 		/* Add a stop */
 		$(".add-route-stop").on('click', function(){
 			/* Switch from Route Details to Blip details */
-			$('.route-info, .first-stop-info').toggleClass('hidden');
+			$('.journey-info, .first-stop-info').toggleClass('hidden');
 			$('form').append('<input type="hidden" name="new_blip" value="true">');
 
 			/* Remove all markers/popups from the map */

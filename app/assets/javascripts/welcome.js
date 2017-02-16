@@ -1,8 +1,6 @@
 $(function(){
-	/* Routes */
-	console.log("welcome()")
 	$.ajax({
-		url: '/routes_api_home',
+		url: '/api_home',
 		method: 'POST',
 		dataType: 'JSON',
 		complete: function(response) {

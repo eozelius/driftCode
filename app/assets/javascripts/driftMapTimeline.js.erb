@@ -27,14 +27,14 @@ var DriftMapTimeline = function(){
 		// public variables
 
 		// public methods
-		init: function(routes){
+		init: function(journeys){
 			/*
 			{
-				route: [{ 
+				journey: [{ 
 					id: 51, 
 					description: "My gonzo adventure into Colombia in…", 
 					title: "2015 - Colombia", 
-					post_id: 1, 
+					driftmap_id: 1, 
 					created_at: "2016-12-03T20:05:51.694Z", 
 					updated_at: "2016-12-03T20:05:51.694Z", 
 					coverphoto: {	url: 'assets/asfd.png' },
@@ -47,20 +47,20 @@ var DriftMapTimeline = function(){
 					body: "Queens NY.  From Flushing to Astori…", 
 					x: 40.743, 
 					y: -73.922, 
-					post_id: 1, 
-					route_id: 51, 
+					driftmap_id: 1, 
+					journey_id: 51, 
 					date:  { year: 2016, month: 11, day: 23 } 
 				}, {}, ...]
 			}
 			*/
 
-			for(var x in routes){
-				var r = routes[x].route
-				var wps = routes[x].waypoints
+			for(var x in journeys){
+				var r = journeys[x].journey
+				var wps = journeys[x].waypoints
 				var coverphoto
 				var tlEvents = []
 
-				if(r.coverphoto.url !== null) // Route Coverphoto already defined
+				if(r.coverphoto.url !== null) // Coverphoto already defined
 					coverphoto = r.coverphoto.url
 				else if(wps[0].images.length > 0) // Use first Waypoint's first image
 					coverphoto = wps[0].images[0].image.url
@@ -108,7 +108,7 @@ var DriftMapTimeline = function(){
 					id: r.id,
 					title: r.title,
 					description: r.description,
-					post_id: r.post_id,
+					driftmap_id: r.driftmap_id,
 					coverphoto: r.coverphoto,
 					created_at: r.created_at,
 					updated_at: r.updated_at,
@@ -145,7 +145,7 @@ var DriftMapTimeline = function(){
 				setTimeout(function(){
 					if(foobar){
 						foobar = false	
-						$('.route-content').not('.route-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
+						$('.journey-content').not('.journey-content:first-child').addClass('hidden') // after all timelines have been initialized/render, hide all except first.
 					}
 				}, 500);
 				/* End Initialization */
@@ -163,10 +163,10 @@ var DriftMapTimeline = function(){
 						DriftMapLeaflet.focusWayPoint(id);
 
 						// update title and description
-						$('.route-content .route-header:visible').html(wp.title);
-						$('.route-content .route-description:visible').html(wp.body);
+						$('.journey-content .journey-header:visible').html(wp.title);
+						$('.journey-content .journey-description:visible').html(wp.body);
 					} else {
-						// todo: update title and description to route title
+						// todo: update title and description to journey title
 					}
 				});
 				/* End timeline event listeners */
@@ -182,7 +182,7 @@ var DriftMapTimeline = function(){
 
 		},
 
-		getRoute: function(id){
+		getJourney: function(id){
 			for(var i in indexer)
 				if(id == indexer[i].id)
 					return indexer[i]
@@ -190,22 +190,22 @@ var DriftMapTimeline = function(){
 		},
 
 		/* Setters */
-		focusRoute: function(r_id, wp_id, reset_route){
-			$('.route-content').addClass('hidden')
-			$('.route-content[data-routecontent="'+ r_id +'"]').removeClass('hidden')
+		focusJourney: function(r_id, wp_id, reset_journey){
+			$('.journey-content').addClass('hidden')
+			$('.journey-content[data-journeycontent="'+ r_id +'"]').removeClass('hidden')
 
-			var r = DriftMapTimeline.getRoute(r_id)
+			var r = DriftMapTimeline.getJourney(r_id)
 			if (r){ r.timeline.goTo(wp_id) }
 
-			if(reset_route){
-				$('.route-content .route-header:visible').html(r.title);
-				$('.route-content .route-description:visible').html(r.description);
+			if(reset_journey){
+				$('.journey-content .journey-header:visible').html(r.title);
+				$('.journey-content .journey-description:visible').html(r.description);
 			} else {
 				var wp = DriftMapLeaflet.getWayPoint(wp_id)
 				if (wp){
 					// update title and description
-					$('.route-content .route-header:visible').html(wp.title);
-					$('.route-content .route-description:visible').html(wp.body);
+					$('.journey-content .journey-header:visible').html(wp.title);
+					$('.journey-content .journey-description:visible').html(wp.body);
 				}							
 			}
 		}
