@@ -44,7 +44,6 @@ var DriftMapLeaflet = function(){
 		    	accessToken: "<%= ENV['MAPBOX_SECRET_KEY'] %>"
 				}).addTo(m);
 
-
 			for(var x in journeys){
 				if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){
 					var r = journeys[x].journey
@@ -94,9 +93,11 @@ var DriftMapLeaflet = function(){
 					}					
 				}
 			}
-			indexer[0].leaflet.marker.setIcon(maroonMarker)
-			indexer[0].leaflet.popup.openOn(m)
-
+			
+			if(journeys.length > 1){
+				indexer[0].leaflet.marker.setIcon(maroonMarker)
+				indexer[0].leaflet.popup.openOn(m)
+			}
 			window.leafletIndexer = indexer
 		},
 

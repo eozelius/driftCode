@@ -85,7 +85,7 @@
         </a>
         <p class="tag-line">- journey of exploration</p>
 
-        <% if !logged_in? %>
+        <% if !logged_in? && controller_name == 'welcome' %>
           <div class="login-btns-container">
             <%= link_to login_path do %>
               <button class="normal">Log in</button>

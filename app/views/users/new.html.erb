@@ -54,36 +54,14 @@
 	    </div>
 
 			<p class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-				<%= f.submit %>
-				<span class="normal signup" type="submit">next</button>
+				<%= content_tag :button, 'submit', class: 'normal' %>
 			</p>
 
 			<div class="login-link-container col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<%= link_to login_path do %>
-					<p style="color:#C2D9EB">log in</p>
+					<p style="color:#C2D9EB">already have an account? | log in</p>
 				<% end %>
 			</div>
 	  </div>
 	<% end %>
 </div>
-
-<script type="text/javascript">
-$(function(){
-	// Cannot upload images larger than 3M
-	$('.signup').on('click', function(){
-	  $('#new_user input[type="text"]').each(function(){
-	    $(this).val(xss_trim($(this).val()));
-	  });
-
-	  $('#new_user').submit();
-	});
-
-	$('#user_profile_pic').on('change', function() {
-	  var size_in_megabytes = this.files[0].size/1024/1024;
-	  if (size_in_megabytes > 3){
-	    alert('Maximum file size is 3MB. Please choose a smaller file.');
-	    return false;
-	  }
-	});
-})
-</script>
