@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # API Data Routes
   post 'api_home' => 'api#home'
   post 'api_profile_page' => 'api#profile_page'
+  post 'api_journey_edit' => 'api#journey_edit'
   # end API
 
   get 'ethan', to: redirect('users/1')

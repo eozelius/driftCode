@@ -71,6 +71,14 @@ table {
 	float: none;
 }
 
+.center{
+	margin: 0 auto;
+	display:block;
+	width: 100%;
+	text-align:center !important;
+	float:none !important;
+}
+
 li {
 	list-style-type: none;
 }
