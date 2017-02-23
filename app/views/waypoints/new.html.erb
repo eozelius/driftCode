@@ -1,17 +1,23 @@
-<div class="container">
+<% first_wp = params[:first_wp]  %>
+
+<input id="journey_id" value="<%= params[:journey_id] %>" type="hidden" />
+
+
+<div class="container new_waypoint" id="waypoint">
 	<!-- Blip title images body -->
 	<div id="driftmap-timeline-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<div class="blip-content" data-waypoint="<%= @blip.id %>">
+		<h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:8%;width: -moz-fit-content;"><%= first_wp ? 'create first' : 'create new' %> waypoint</h4>
+		<div class="waypoint-content">
 
-			<%= form_for @blip, html: { multipart: true } do |f| %>
+			<%= form_for @waypoint, html: { multipart: true } do |f| %>
 				<%= f.hidden_field :x %>
 				<%= f.hidden_field :y %>
 
-				<h4 class="waypoint-title" data-photo-index="0">add photos</h4>
-				<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
-
 				<h4 class="waypoint-title">Title</h4>
 				<%= f.text_field :title %>
+
+				<h4 class="waypoint-title" data-photo-index="0">add photos</h4>
+				<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
 
 				<h4 class="waypoint-title">Description</h4>
 				<%= f.text_area :body %>
@@ -40,73 +46,10 @@
 
 			<%= link_to user_path(current_user) do %>
 				<span class="normal cancel">cancel</span>
-			<% end %>
-
-			<script type="text/javascript">
-				var driftmap = {
-					init_x: 15,
-					init_y: -54,
-					init_zoom: 2
-				}
-
-				blips = [];
-
-				init_map('map', driftmap, blips);
-			</script>
+			<% end %>			
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-	$(function(){
-		// init date-picker-calender
-		$('#datetimepicker1').datetimepicker();
-
-		var photo_index = 0;
-		var locationSet = false;
-		
-		// add photos to blip
-		$(document).on('click', '.add-photo', function(){
-			$(this).data('photo-index', ++photo_index)
-			var index = $(this).data('photo-index')
-			var new_img = '<input class="blip-image" name="photo['+ index +']" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="'+ index +'" style="margin: 6% 6% 5% 3%; width:100%;">';
-			$('.add-photo').last().after(new_img);
-		});
-
-		// set location of blip
-		window.map.on('click', function(e){
-			window.map.off('click');
-			locationSet = true;
-			setLatLng(e.latlng.lat, e.latlng.lng);
-
-			var m = L.marker([e.latlng.lat, e.latlng.lng]).addTo(window.map)
-			m.dragging.enable();
-			m.on('dragend', function(e){
-				setLatLng(e.target.getLatLng().lat, e.target.getLatLng().lng)
-			});
-		});
-
-		// submit form
-		$('.commit').on('click', function(){
-			if(locationSet == false) {
-				alert('A location must be set, click anywhere on the map to set your blip.');
-				return false;
-			} else {
-				var date = $('#blip_date').val();
-				var mm = 	 date.slice(0, 2)
-				var dd = 	 date.slice(3, 5)
-				var yyyy = date.slice(6, 10);
-				$('#blip_date').val(yyyy + mm + dd);
-				$('form').submit();
-			}
-		});
-
-		function setLatLng(lat, lng) {
-			$('#blip_x').val(lat);
-			$('#blip_y').val(lng);			
-		}
-	});
-</script>
 
 <style type="text/css">
 	.map-container {

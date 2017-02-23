@@ -3,4 +3,8 @@ class Journey < ActiveRecord::Base
   has_many :waypoints, dependent: :destroy
 
   mount_uploader :coverphoto, PictureUploader
+
+  validates :driftmap_id, :presence => true
+  validates :title, :presence => true
+  validates :description, :presence => true
 end

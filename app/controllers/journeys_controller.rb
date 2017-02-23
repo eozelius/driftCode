@@ -3,46 +3,20 @@ class JourneysController < ApplicationController
 
 	def new
 		@user = current_user
-		@route = @user.driftmap.journeys.new
+		@journey = @user.driftmap.journeys.new
 	end
 
 	def create
 		@user = current_user
-		@post = current_user.post
-		@route = Route.new(route_params)
-		@route.post_id = @post.id
+		@driftmap = @user.driftmap
+		@journey = Journey.new(journey_params)
+		@journey.driftmap_id = @driftmap.id
 
-		if @route.save
-			# user choose to create a new blip
-			if params[:new_blip].present?
- 				date = Date.new(params[:blip_date].slice(0, 4).to_i, 
-												params[:blip_date].slice(4, 2).to_i, 
-												params[:blip_date].slice(6, 2).to_i);
-
-				@blip = Blip.new(
-					title: params[:waypoint_title],
-					body:  params[:blip_description],
-					x: 		 params[:blip_x],
-					y:  	 params[:blip_y],
-					date:  date
-				)
-				@blip.post_id = @post.id
-				@blip.route_id = @route.id
-
-				if params[:photo].present?
-					params[:photo].each do |image|
-						@blip.blip_images.build(image: image[1])
-					end
-				end
-				@blip.save
-			else
-				flash[:danger] = 'whoops, you have to create a new blip, or use an existing one'
-				render 'new'
-			end
-
-			flash[:success] = 'journey created successfully'
-			redirect_to current_user
+		if @journey.save
+			flash[:success] = 'journey created successfully, now create the first waypoint'
+			redirect_to controller: 'waypoints', action: 'new', journey_id: @journey.id, first_wp: true
 		else
+			flash[:danger] = 'whoops, something went wrong, please try again'
 			render 'new'
 		end
 	end
@@ -107,7 +81,7 @@ class JourneysController < ApplicationController
 	end
 
 	private
-		def route_params
-			params.require(:route).permit(:title, :description, :coverphoto)
+		def journey_params
+			params.require(:journey).permit(:title, :description, :coverphoto)
 		end
 end
