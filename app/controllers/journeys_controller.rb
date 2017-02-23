@@ -23,9 +23,9 @@ class JourneysController < ApplicationController
 
 	def edit
 		@user = current_user
-		@post = current_user.post
-		@route = Route.find(params[:id])
-		@blips = @route.blips
+		@driftmap = current_user.driftmap
+		@journey = Journey.find(params[:id])
+		@waypoints = @journey.waypoints
 	end
 
 	def update

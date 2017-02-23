@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :journeys
   resources :waypoints
   resources :waypoint_images,  only: [:create, :destroy]
-  resources :users
-  resources :driftmap
+  resources :users, only: [:new, :create, :update, :destroy]
+  resources :driftmap, only: [:edit, :update, :destroy]
 
   put  'blip_images' => 'blip_images#create'  
   post 'update_route' => 'routes#update'
