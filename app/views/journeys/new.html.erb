@@ -1,82 +1,31 @@
-<div id="journey" class="new-route">
+<div id="journey" class="new-journey">
 	<div class="container">
-		<div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-			<h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Create New Journey</h4>
+		<h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Create New Journey</h4>
 
+		<div id="driftmap-timeline-container" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<%= form_for @route, html: { multipart: true } do |f| %>
 				<div class="journey-info">
 					<!-- Journey Cover Photo -->
-					<h4 class="waypoint-title">Journey Cover Photo</h4>
+					<h4 class="waypoint-title">cover photo</h4>
 					<%= f.file_field :coverphoto, { style: 'margin-left:3%;' } %>
 
 					<!-- Journey metadata -->
-					<h4 class="waypoint-title">Journey Title</h4>
+					<h4 class="waypoint-title">title</h4>
 					<%= f.text_field :title, { style: 'margin-left:3%;' } %>
 
-					<h4 class="waypoint-title">Journey Description</h4>
+					<h4 class="waypoint-title">description</h4>
 					<%= f.text_area :description %>
-					
-					<!-- First blip of Journey -->
-					<h4 class="waypoint-title">First Stop</h4>
-
-					<p style="color:#C2D9EB; margin-left:3%">
-						To create the first stop of this journey, a brand new blip.
-					</p>
-
-					<span class="normal create-first-stop" style="margin:3%">Create New Stop</span>
 				</div>
-
-				<div class="first-stop-info hidden">
-					<%= hidden_field_tag :blip_x %>
-					<%= hidden_field_tag :blip_y %>
-
-					<h4 class="waypoint-title" data-photo-index="0">add photos</h4>
-					<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
-
-					<h4 class="waypoint-title">Blip Title</h4>
-					<%= text_field_tag :waypoint_title %>
-
-					<h4 class="waypoint-title">Blip Description</h4>
-					<%= text_area_tag :blip_description %>
-
-					<div class='input-group date' id='datetimepicker1'>
-						<h4 class="waypoint-title" style="margin:0% 0 8% 8%">Date</h4>
-						<input id="blip-date" style="margin: 3% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
-						<%= hidden_field_tag :blip_date %>
-						<span class="input-group-addon" style="float:left; margin-top:3%; height:38px; padding:10px 0 0 1px; width:30px">
-							<span class="glyphicon glyphicon-calendar"></span>
-						</span>
-					</div>
-				</div>
-			<% end %>
 		</div>
 
-		<div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-		  <div class="map-container">
-		  	<h4 class="waypoint-title" style="font-size: 1.1em;">
-		  		click anywhere on the map to set the location of your blip
-		  	</h4>
-		  	<div id='map'></div>
+			<div id="driftmap-timeline-container" class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+				<%= link_to user_path(current_user) do %>
+					<span class="normal cancel">cancel</span>
+				<% end %>
 
-			  <script type="text/javascript">
-			  	var driftmap = {
-			  	  init_x: 0.924206230200376,
-			  	  init_y: -40.2400771379471,
-			  	  init_zoom: 2,
-			  	}
-
-			  	var blips = [];
-
-			  	init_map('map', driftmap, blips);
-			  </script>
+				<button name="commit" class="normal commit" type="submit" style="margin: 35px 0">save</button>
 			</div>
-
-			<%= link_to user_path(current_user) do %>
-				<span class="normal cancel">cancel</span>
-			<% end %>
-
-			<button name="commit" class="normal commit" type="submit" style="margin: 35px 0">save</button>
-		</div>
+		<% end %>
 	</div>
 </div>
 
@@ -102,7 +51,7 @@
 		});
 
 		// set location of blip
-		window.map.on('click', function(e){
+		/*window.map.on('click', function(e){
 			window.map.off('click');
 			setLatLng(e.latlng.lat, e.latlng.lng);
 
@@ -111,7 +60,7 @@
 			m.on('dragend', function(e){
 				setLatLng(e.target.getLatLng().lat, e.target.getLatLng().lng)
 			});
-		});
+		});*/
 
 		// submit form
 		$('.commit').on('click', function(){

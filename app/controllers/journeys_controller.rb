@@ -3,7 +3,7 @@ class JourneysController < ApplicationController
 
 	def new
 		@user = current_user
-		@route = @user.post.routes.new
+		@route = @user.driftmap.journeys.new
 	end
 
 	def create

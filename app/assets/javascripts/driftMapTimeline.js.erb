@@ -29,8 +29,8 @@ var DriftMapTimeline = function(){
 		// public methods
 		init: function(journeys){
 			/*
-			{
-				journey: [{ 
+			[{
+				journey: { 
 					id: 51, 
 					description: "My gonzo adventure into Colombia in…", 
 					title: "2015 - Colombia", 
@@ -39,7 +39,7 @@ var DriftMapTimeline = function(){
 					updated_at: "2016-12-03T20:05:51.694Z", 
 					coverphoto: {	url: 'assets/asfd.png' },
 					timeline: < timelineJS3 data >
-				}, {}, ...],
+				},
 				
 				waypoints: [{ 
 					id: 10, 
@@ -51,10 +51,12 @@ var DriftMapTimeline = function(){
 					journey_id: 51, 
 					date:  { year: 2016, month: 11, day: 23 } 
 				}, {}, ...]
-			}
+			}, ...]
 			*/
 
-			for(var x in journeys){
+
+
+			for(var x in journeys){				
 				var r = journeys[x].journey
 				var wps = journeys[x].waypoints
 				var coverphoto
@@ -69,7 +71,7 @@ var DriftMapTimeline = function(){
 
 				for(var y in wps){
 					var wp = wps[y]
-
+					
 					tlEvents.push({
 						media: {
 							url: '',
