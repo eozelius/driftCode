@@ -30,6 +30,13 @@ $(function(){
 			}
 		})
 
+		// Change coverphoto
+		$('.change-cover-photo').on('click', function(){
+			console.log('coverphoto')
+			$(this).after('<input name="journey[coverphoto]" style="margin: 2% auto" id="journey_coverphoto" type="file">');
+		});
+
+		// Submit form
 		$('button[type="submit"]').on('click',function(){
 			$('form').submit();
 		})

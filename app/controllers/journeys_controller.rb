@@ -32,7 +32,7 @@ class JourneysController < ApplicationController
 		@journey = Journey.find(params[:id])
 
 		if @journey.update_attributes(journey_params)
-			flash[:success] = 'Journey Updated'
+			flash[:success] = 'Journey updated successfully'
 			redirect_to current_user
 		else
 			render 'edit'
