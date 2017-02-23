@@ -38,9 +38,15 @@ var DriftMapAccordian = function(){
 			} // end for(var x in journeys)
 
 			// if user_is_home, add edit capability
-			if(user_is_home){
-				$('.panel').each(function(index){	$(this).find('.journey-switcher').after('<a href="/journeys/' + $(this).data('journey') + '/edit" style="font-size: .85em; font-style: italic; color: #C2D9EB"> - edit </a>')	});
+			if(user_is_home){	$('.panel').each(function(index){	$(this).find('.journey-switcher').after('<a href="/journeys/' + $(this).data('journey') + '/edit" style="font-size: .85em; font-style: italic; color: #C2D9EB"> - edit </a>')	})	}
+
+			if($('#journey_edit').length){
+				$('ul.waypoints-container p.waypoint-title').each(function(){
+					var id = $(this).parent().data('waypoint')
+					$(this).prepend('<a href="/waypoints/'+ id +'/edit" style="font-size: .75em; font-style: italic; margin-right: 10px">edit - </a>');
+				})
 			}
+
 
 			$('.panel-default:first-child .panel-collapse').addClass('in')
 			$('.waypoints-container').first().find('.waypoint-title').first().addClass('li-waypoint-selected')
