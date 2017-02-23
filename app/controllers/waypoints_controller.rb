@@ -6,24 +6,25 @@ class WaypointsController < ApplicationController
 	end
 
 	def create
-		@blip = Blip.new(blip_params)
-		@post = current_user.post
-		@blip.post_id = @post.id
+		@waypoint = Waypoint.new(waypoint_params)
+		@driftmap = current_user.driftmap
+		@waypoint.journey_id = params[:journey_id]
 
-		date = Date.new(params[:blip][:date].slice(0, 4).to_i,
-										params[:blip][:date].slice(4, 2).to_i,
-										params[:blip][:date].slice(6, 2).to_i);
+		date = Date.new(params[:waypoint][:date].slice(0, 4).to_i,
+										params[:waypoint][:date].slice(4, 2).to_i,
+										params[:waypoint][:date].slice(6, 2).to_i);
 
-		@blip.date = date
+		@waypoint.date = date
 
-		if @blip.save
+		if @waypoint.save
 			if params[:photo].present?
 				params[:photo].each do |image|
-					@blip.blip_images.build(image: image[1])
+					@waypoint.waypoint_images.build(image: image[1])
 				end
-				@blip.save
+				@waypoint.save
 			end
-			flash[:success] = "blip created"
+			@waypoint.save
+			flash[:success] = "waypoint created successfully"
 			redirect_to current_user
 		else
 			flash[:danger] = 'whoops, something went wrong'
@@ -79,7 +80,7 @@ class WaypointsController < ApplicationController
 
 	private
 		# todo, implement strong params
-		def blip_params
-			params.require(:blip).permit(:title, :body, :x, :y)
+		def waypoint_params
+			params.require(:waypoint).permit(:title, :body, :x, :y, :date)
 		end
 end

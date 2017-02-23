@@ -44,7 +44,7 @@ $(function(){
 	});
 
 	function setLatLng(lat, lng) {
-		$('#blip_x').val(lat);
-		$('#blip_y').val(lng);			
+		$('#waypoint_x').val(lat);
+		$('#waypoint_y').val(lng);			
 	}
 });

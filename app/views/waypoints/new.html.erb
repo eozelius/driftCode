@@ -1,7 +1,5 @@
 <% first_wp = params[:first_wp]  %>
 
-<input id="journey_id" value="<%= params[:journey_id] %>" type="hidden" />
-
 <div class="container new_waypoint" id="waypoint">
 	<!-- Blip title images body -->
 	<div id="driftmap-timeline-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
@@ -10,6 +8,8 @@
 			<%= form_for @waypoint, html: { multipart: true } do |f| %>
 				<%= f.hidden_field :x %>
 				<%= f.hidden_field :y %>
+				<input id="journey_id" name="journey_id" value="<%= params[:journey_id] %>" type="hidden" />
+
 
 				<h4 class="waypoint-title">Title</h4>
 				<%= f.text_field :title %>
