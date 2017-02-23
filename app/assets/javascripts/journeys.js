@@ -29,6 +29,10 @@ $(function(){
 				}, 500);
 			}
 		})
+
+		$('button[type="submit"]').on('click',function(){
+			$('form').submit();
+		})
 	}
 
 

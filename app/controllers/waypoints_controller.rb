@@ -84,3 +84,33 @@ class WaypointsController < ApplicationController
 			params.require(:waypoint).permit(:title, :body, :x, :y, :date)
 		end
 end
+
+
+=begin
+
+# user choose to create a new blip
+if params[:new_blip].present?
+	date = Date.new(params[:blip_date].slice(0, 4).to_i, 
+									params[:blip_date].slice(4, 2).to_i, 
+									params[:blip_date].slice(6, 2).to_i);
+
+	@blip = Blip.new(
+		title: params[:waypoint_title],
+		body:  params[:blip_description],
+		x: 		 params[:blip_x],
+		y:  	 params[:blip_y],
+		date:  date
+	)
+	@blip.post_id = @post.id
+	@blip.route_id = @route.id
+
+	# Any Photos to new blip?
+	if params[:photo].present?
+		params[:photo].each do |image|
+			@blip.blip_images.build(image: image[1])
+		end
+	end
+	@blip.save
+end
+
+=end
