@@ -23,6 +23,7 @@
 
 <div id="profile-page" class="container">
 	<input id="user_id" type="hidden" value="<%= @user.id %>" >
+	<%= '<input id="user_is_home" type="hidden" value="1">'.html_safe if user_is_home @user %>
 	
 	<!-- TIMELINEJS3 -->
 	<div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
@@ -56,7 +57,7 @@
 
     <div id="accordian-container">
       <h5 class="waypoints-title">journeys</h5>
-      <div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true"></div>
+      <div id="waypt-accord" class="panel-group" role="tablist" aria-multiselectable="true"></div>
     </div>
   </div><!-- End timeline, leaflet & accordian -->
 

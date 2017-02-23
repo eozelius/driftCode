@@ -9,7 +9,7 @@ var DriftMapAccordian = function(){
 
 
 		// public methods
-		init: function(journeys){
+		init: function(journeys, user_is_home){
 			for(var x in journeys){
 				var r = journeys[x].journey
 				var wps = journeys[x].waypoints
@@ -37,7 +37,18 @@ var DriftMapAccordian = function(){
 				$('#waypt-accord').append(a);
 			} // end for(var x in journeys)
 
-			$('.panel-default:first-child .panel-collapse').addClass('in');
+			// if user_is_home, add edit capability
+			if(user_is_home){
+				$('.panel').each(function(index){
+					console.log("this: " + $(this) + ' index: ' + index)
+					var j_id = $(this).data('journey')
+
+					$(this).find('.journey-switcher').after('<a href="/journeys/' + j_id + '/edit" style="font-size: .85em; font-style: italic; color: #C2D9EB"> - edit </a>')
+
+				});
+			}
+
+			$('.panel-default:first-child .panel-collapse').addClass('in')
 			$('.waypoints-container').first().find('.waypoint-title').first().addClass('li-waypoint-selected')
 
 			/* Event listeners */

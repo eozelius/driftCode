@@ -8,6 +8,7 @@ $(function(){
 		},
 		complete: function(response){
 			var r = response.responseJSON
+			var home = $('#user_is_home').length ? true : false
 			window.r = r
 
 			// init Timeline
@@ -17,7 +18,7 @@ $(function(){
 			DriftMapLeaflet.init(r);
 
 			// init Accordian
-			DriftMapAccordian.init(r);
+			DriftMapAccordian.init(r, home);
 		}
 	});
 	// End initial AJAX call
