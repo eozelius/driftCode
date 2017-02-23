@@ -21,6 +21,8 @@
 
 <% provide(:title, @user.name) %>
 
+<input id="users_show" type="hidden" value="1">
+
 <div id="profile-page" class="container">
 	<input id="user_id" type="hidden" value="<%= @user.id %>" >
 	<%= '<input id="user_is_home" type="hidden" value="1">'.html_safe if user_is_home @user %>
