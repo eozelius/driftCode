@@ -58,6 +58,7 @@
     <div id="accordian-container">
       <h5 class="waypoints-title">journeys</h5>
       <div id="waypt-accord" class="panel-group" role="tablist" aria-multiselectable="true"></div>
+      <%= link_to '<span style="font-size: 1em; margin-top:15px; float:right; font-style:italic"> - create new journey</span>'.html_safe, new_journey_path if user_is_home @user %>
     </div>
   </div><!-- End timeline, leaflet & accordian -->
 

@@ -39,13 +39,7 @@ var DriftMapAccordian = function(){
 
 			// if user_is_home, add edit capability
 			if(user_is_home){
-				$('.panel').each(function(index){
-					console.log("this: " + $(this) + ' index: ' + index)
-					var j_id = $(this).data('journey')
-
-					$(this).find('.journey-switcher').after('<a href="/journeys/' + j_id + '/edit" style="font-size: .85em; font-style: italic; color: #C2D9EB"> - edit </a>')
-
-				});
+				$('.panel').each(function(index){	$(this).find('.journey-switcher').after('<a href="/journeys/' + $(this).data('journey') + '/edit" style="font-size: .85em; font-style: italic; color: #C2D9EB"> - edit </a>')	});
 			}
 
 			$('.panel-default:first-child .panel-collapse').addClass('in')
