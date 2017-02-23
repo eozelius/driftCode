@@ -2,13 +2,11 @@
 
 <input id="journey_id" value="<%= params[:journey_id] %>" type="hidden" />
 
-
 <div class="container new_waypoint" id="waypoint">
 	<!-- Blip title images body -->
 	<div id="driftmap-timeline-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:8%;width: -moz-fit-content;"><%= first_wp ? 'create first' : 'create new' %> waypoint</h4>
 		<div class="waypoint-content">
-
 			<%= form_for @waypoint, html: { multipart: true } do |f| %>
 				<%= f.hidden_field :x %>
 				<%= f.hidden_field :y %>
@@ -16,15 +14,15 @@
 				<h4 class="waypoint-title">Title</h4>
 				<%= f.text_field :title %>
 
-				<h4 class="waypoint-title" data-photo-index="0">add photos</h4>
-				<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
-
 				<h4 class="waypoint-title">Description</h4>
 				<%= f.text_area :body %>
 
+				<h4 class="waypoint-title" data-photo-index="0">add photos</h4>
+				<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
+
 				<div class='input-group date' id='datetimepicker1'>
 					<h4 class="waypoint-title" style="margin:10% 0 8% 8%">Date</h4>
-					<input id="blip-date" style="margin: 0% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
+					<input id="datepicker-input" style="margin: 0% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
 					<%= f.hidden_field :date %>
 					<span class="input-group-addon" style="float:left; margin-top:0%; height:38px; padding:10px 0 0 1px; width:30px">
 						<span class="glyphicon glyphicon-calendar"></span>
@@ -37,7 +35,7 @@
 	<div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 		<div class="map-container">
 			<h4 class="waypoint-title">
-				click anywhere on the map to set the location of your blip
+				click anywhere on the map to set the location of your waypoint
 			</h4>
 
 			<div id='map'></div>
