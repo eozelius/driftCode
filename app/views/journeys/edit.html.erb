@@ -13,7 +13,7 @@
 						<h4 class="waypoint-title center">Journey Title</h4>
 						<%= f.text_field :title, { style: 'margin: 3% auto' } %>
 
-						<h4 class="change-cover-photo waypoint-title center" style="cursor: pointer">Change Journey Coverphoto?</h4>
+						<h4 class="change-cover-photo waypoint-title center" style="cursor: pointer; font-size: 1.35em">Click Here to Change Coverphoto</h4>
 
 						<!-- Timeline -->
 						<div id='dm-timeline-<%= @journey.id %>' style="width: 100%; height: 600px"></div>
@@ -34,7 +34,7 @@
 
 			<!-- Accordian -->
 			<div id="accordian-container">
-			  <h5 class="waypoints-title">waypoints</h5>
+			  <h5 class="waypoints-title">waypoints <a href="/waypoints/new?journey_id=<%= @journey.id %>"><span style="font-size:.6em; font-style:italic"> - add waypoint</span></a></h5>
 			  <div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true"></div>
 			</div>
 
