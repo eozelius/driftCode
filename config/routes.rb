@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :journeys
-  resources :waypoints
+  resources :waypoints,        only: [:new, :create, :edit, :update, :destroy]
   resources :waypoint_images,  only: [:create, :destroy]
-  resources :users, only: [:new, :create, :update, :show, :destroy]
-  resources :driftmap, only: [:edit, :update, :destroy]
+  resources :users,            only: [:new, :create, :update, :show, :destroy]
+  resources :driftmap,         only: [:edit, :update, :destroy]
 
   put  'blip_images' => 'blip_images#create'  
   post 'update_route' => 'routes#update'
