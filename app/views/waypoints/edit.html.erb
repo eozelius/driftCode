@@ -1,65 +1,30 @@
-<div class="container">
-	<!-- Blip title images body -->
+<input type="hidden" value="waypoints_edit" id="waypoints_edit">
+
+<div class="container waypoint_edit">
 	<div id="driftmap-timeline-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<div class="blip-content" data-waypoint="<%= @blip.id %>">
+		<div class="waypoint-content" data-waypoint="<%= @waypoint.id %>">
+			<h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:8%;width: -moz-fit-content;">Edit <%= @waypoint.title.capitalize %></h4>
 
-			<%= hidden_field_tag :my_blip_date, @blip.date %>
+			<%= hidden_field_tag :my_waypoint_date, @waypoint.date %>
 
-			<%= form_for @blip, html: { multipart: true } do |f| %>
-				<%= f.hidden_field :x, value: @blip.x %>
-				<%= f.hidden_field :y, value: @blip.y %>
+			<%= form_for @waypoint, html: { multipart: true } do |f| %>
+				<%= f.hidden_field :x, value: @waypoint.x %>
+				<%= f.hidden_field :y, value: @waypoint.y %>
 
-				<% if @blip.blip_images.any? %>
-					<!-- carousel -->
-					<div class="form-blip-images">
-						<div id="images-carousel" class="carousel slide" data-ride="carousel">
-							<div class="carousel-inner" role="listbox">
-							  <% @blip.blip_images.each_with_index do |image, i| %>
-							    <div class="item <%= 'active' if i == 0 %>">
-							      <%= image_tag image.image %>
-							    </div>
-							  <% end %>
+				<h4 class="waypoint-title">Waypoint Title</h4>
+				<%= f.text_field :title %>
 
-							  <% if @blip.blip_images.count > 1 %>
-						    	<!-- Indicators -->
-						    	<ol class="carousel-indicators">
-						    	  <% @blip.blip_images.count.times do |b| %>
-						    	    <li data-target="#images-carousel" data-slide-to="<%= b %>" class="active"></li>
-						    	  <% end %>
-						    	</ol>
-
-							    <!-- Controls -->
-							    <a class="left carousel-control" href="#images-carousel" role="button" data-slide="prev">
-							      <i class="fa fa-angle-left fa-3x" aria-hidden="true"></i>
-							      <span class="sr-only">Previous</span>
-							    </a>
-							    <a class="right carousel-control" href="#images-carousel" role="button" data-slide="next">
-							      <i class="fa fa-angle-right fa-3x" aria-hidden="true"></i>
-							      <span class="sr-only">Next</span>
-							    </a>
-						    <% end %>
-							</div>
-						</div>
-					</div>
-				<% end %>
+				<h4 class="waypoint-title">Waypoint Description</h4>
+				<%= f.text_area :body %>
 
 				<!-- photos -->
 				<h4 class="waypoint-title" data-photo-index="0">add photos</h4>
-
 				<span class="normal add-photo" style="margin: 0 0 35px 3%;"><i class="fa fa-plus"></i> photo</span>
-
-				<!-- title -->
-				<h4 class="waypoint-title">Title</h4>
-				<%= f.text_field :title %>
-
-				<!-- body -->
-				<h4 class="waypoint-title">Description</h4>
-				<%= f.text_area :body %>
 
 				<!-- date -->
 				<div class='input-group date' id='datetimepicker1'>
 					<h4 class="waypoint-title" style="margin:10% 0 8% 8%">Date</h4>
-					<input id="blip-date" style="margin: 0% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
+					<input id="datepicker-input" style="margin: 0% 0 8% 8%; font-size:18px; width:80%; height:38px; padding:4px;" type='text' class="form-control" />
 					<%= f.hidden_field :date %>
 					<span class="input-group-addon" style="float:left; margin-top:0%; height:38px; padding:10px 0 0 1px; width:30px">
 						<span class="glyphicon glyphicon-calendar"></span>
@@ -73,7 +38,7 @@
 		<div class="map-container">
 
 			<h4 class="waypoint-title">
-				click and drag the marker to adjust the blip location
+				click and drag the marker to adjust the waypoint location
 			</h4>
 
 			<div id='map'></div>
@@ -84,85 +49,15 @@
 				<span class="normal cancel">cancel</span>
 			<% end %>
 
-			<%= link_to @blip, method: :delete, data: { confirm: "Are you Sure?" } do %>
-				<span class="pull-right" style="margin: 14% 0 0; color:red" rel="nofollow" data-method="delete" data-confirm="Are you sure">delete</span>
-			<% end %>
-
-			<script type="text/javascript">
-				var blips = [];
-				var blipImages = [];
-
-				<% @blip.blip_images.each do |blip_image| %>
-					blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
-				<% end %>
-
-				var driftmap = {
-					init_x: '<%= @blip.x %>',
-					init_y: '<%= @blip.y %>',
-					init_zoom: 10,
-				}
-
-				blips.push({
-					id: 		"<%= @blip.id %>",
-					x: 			"<%= @blip.x %>",
-					y: 			"<%= @blip.y %>",
-					title: 	"<%= @blip.title.to_json %>",
-					body: 	"<%= @blip.body.to_json %>",
-					images: blipImages
-				});
-
-				init_map('map', driftmap, blips);
-			</script>
+			<%#= link_to @blip, method: :delete, data: { confirm: "Are you Sure?" } do %>
+				<!-- <span class="pull-right" style="margin: 14% 0 0; color:red" rel="nofollow" data-method="delete" data-confirm="Are you sure">delete</span> -->
+			<%# end %>
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-	$(function(){
-		// init date-picker-calender, then populate with existing @blip.date
-		var myDate = $('#my_blip_date').val();
-		var yy = myDate.slice(0, 4);
-		var mm = myDate.slice(5, 7) - 1;
-		var dd = myDate.slice(8, 10);
-
-		var blipDate = new Date(yy, mm, dd);
-		$('#datetimepicker1').datetimepicker({ defaultDate: blipDate });
-
-		// add photos
-		var photo_index = 0;
-		$(document).on('click', '.add-photo', function(){
-			$(this).data('photo-index', ++photo_index)
-			var index = $(this).data('photo-index')
-			var new_img = '<input class="blip-image" name="photo['+ index +']" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="'+ index +'" style="margin: 6% 6% 5% 3%; width:100%;">';
-			$('.add-photo').last().after(new_img);
-		});
-
-		// enable dragging for the marker
-		var b = window.blipsIndexer[0].marker; // this works because the index will only have one entry.  This is not always the case.
-		b.dragging.enable();
-		b.on('dragend', function(e){
-			setLatLng(e.target.getLatLng().lat, e.target.getLatLng().lng);
-		});
-
-		// save edit
-		$('.commit').on('click', function(){
-			var date = $('#blip_date').val();
-			var mm = 	 date.slice(0, 2)
-			var dd = 	 date.slice(3, 5)
-			var yyyy = date.slice(6, 10);
-			$('#blip_date').val(yyyy + mm + dd);
-			$('form').submit();
-		});
-
-		function setLatLng(lat, lng) {
-			$('#blip_x').val(lat);
-			$('#blip_y').val(lng);			
-		}
-	});
-</script>
-
 <style type="text/css">
 	.map-container {
 		top: 0;
 	}
 </style>
+

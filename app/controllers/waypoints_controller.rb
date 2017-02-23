@@ -32,25 +32,30 @@ class WaypointsController < ApplicationController
 		end
 	end
 
+	def edit
+		@waypoint = Waypoint.find(params[:id])
+		@user = current_user
+	end
+
 	def update
-		@blip = Blip.find(params[:id])
+		@waypoint = Waypoint.find(params[:id])
 
-		if @blip.update_attributes(blip_params)
+		if @waypoint.update_attributes(waypoint_params)
 			# update date
-			date = Date.new(params[:blip][:date].slice(0, 4).to_i,
-											params[:blip][:date].slice(4, 2).to_i,
-											params[:blip][:date].slice(6, 2).to_i);
+			date = Date.new(params[:waypoint][:date].slice(0, 4).to_i,
+											params[:waypoint][:date].slice(4, 2).to_i,
+											params[:waypoint][:date].slice(6, 2).to_i);
 
-			@blip.date = date
-			@blip.save
+			@waypoint.date = date
+			@waypoint.save
 
 			if params[:photo].present?
 				params[:photo].each do |image|
-					@blip.blip_images.build(image: image[1])
+					@waypoint.waypoint_images.build(image: image[1])
 				end
-				@blip.save
+				@waypoint.save
 			end
-			flash[:success] = 'blip successfully updated'
+			flash[:success] = "#{@waypoint.title} successfully updated"
 			redirect_to current_user
 		else
 			flash[:danger] = 'whoops, something went wrong'
@@ -63,10 +68,6 @@ class WaypointsController < ApplicationController
 		@user = User.find(Post.find(@blip.post_id).user_id);
 	end
 
-	def edit
-		@blip = Blip.find(params[:id])
-		@user = current_user
-	end
 
 	def destroy
 		blip = Blip.find(params[:id])
