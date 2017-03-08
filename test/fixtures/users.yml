@@ -1,26 +1,30 @@
 barack:
-  name: Barack Obama
+  first_name: Barack
+  last_name: Obama
   email: bigO@whitehouse.gov
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
 
 irene:
-  name: Grandma irene
+  first_name: Grandma
+  last_name: irene
   email: gma@gmail.com
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
 
 tex:
-  name: Confederate Tex
+  first_name: Confederate
+  last_name: Tex
   email: usa_all_the_way@aol.com
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
 
 ethan:
-  name: Ethan Ozelius
+  first_name: Ethan
+  last_name: Ozelius
   email: e.ozelius@gmail.com
   password_digest: <%= User.digest('password') %>
   activated: true
