@@ -26,6 +26,6 @@ config/database.yml
 /coverage/*
 /coverage/*.json
 
+/v2.sql
 
-# Ignore images
-/app/assets/images/blip_images/*
+
