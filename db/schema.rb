@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902125452) do
+ActiveRecord::Schema.define(version: 20170308140416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,22 @@ ActiveRecord::Schema.define(version: 20160902125452) do
 
   add_index "driftmaps", ["user_id"], name: "index_driftmaps_on_user_id", using: :btree
 
+  create_table "friends", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "photo"
+    t.text     "description"
+    t.float    "x"
+    t.float    "y"
+    t.boolean  "member",      default: false
+    t.boolean  "visible"
+    t.integer  "waypoint_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "friends", ["waypoint_id"], name: "index_friends_on_waypoint_id", using: :btree
+
   create_table "journeys", force: :cascade do |t|
     t.text     "description"
     t.string   "title"
@@ -41,7 +57,7 @@ ActiveRecord::Schema.define(version: 20160902125452) do
   add_index "journeys", ["driftmap_id"], name: "index_journeys_on_driftmap_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
+    t.string   "first_name"
     t.string   "email"
     t.string   "gps"
     t.string   "from"
@@ -56,6 +72,7 @@ ActiveRecord::Schema.define(version: 20160902125452) do
     t.datetime "reset_sent_at"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
@@ -82,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160902125452) do
 
   add_index "waypoints", ["journey_id"], name: "index_waypoints_on_journey_id", using: :btree
 
+  add_foreign_key "friends", "waypoints"
   add_foreign_key "journeys", "driftmaps"
   add_foreign_key "waypoint_images", "waypoints"
   add_foreign_key "waypoints", "journeys"
