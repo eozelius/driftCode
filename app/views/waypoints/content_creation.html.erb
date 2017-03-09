@@ -3,10 +3,12 @@
 
   <!-- PHOTOS/VIDEOS -->
   <div class="cc-wrapper col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    <p>Photos &amp Videos</p>
-    <div class="cc content-photo">
-      <i class="fa fa-camera"></i>
-    </div>
+    <%= link_to new_waypoint_image_path(journey_id: params[:journey_id], waypoint_id: @waypoint.id) do %>
+      <p>Photos &amp; Videos</p>
+      <div class="cc content-photo">
+        <i class="fa fa-camera"></i>
+      </div>
+    <% end %>
   </div>
 
   <!-- FRIENDS -->

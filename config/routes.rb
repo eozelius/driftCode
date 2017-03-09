@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :journeys
   resources :waypoints,        only: [:new, :create, :edit, :update, :destroy]
-  resources :waypoint_images,  only: [:create, :destroy]
+  resources :waypoint_images,  only: [:new, :create, :edit, :update, :destroy]
   resources :users,            only: [:new, :create, :update, :show, :destroy]
   resources :driftmap,         only: [:edit, :update, :destroy]
 

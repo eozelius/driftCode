@@ -1,21 +1,21 @@
-/* NEW ACTION */
 $(function(){
+  /* NEW ACTION */
   if($('#waypoints_new').length){
     DriftMapLeaflet.defaultInit()
 
     // init date-picker-calender
     $('#datetimepicker1').datetimepicker();
 
-    var photo_index = 0;
+    // var photo_index = 0;
     var locationSet = false;
     
     // add photos to blip
-    $(document).on('click', '.add-photo', function(){
+    /*$(document).on('click', '.add-photo', function(){
       $(this).data('photo-index', ++photo_index)
       var index = $(this).data('photo-index')
       var new_img = '<input class="blip-image" name="photo['+ index +']" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="'+ index +'" style="margin: 6% 6% 5% 3%; width:100%;">';
       $('.add-photo').last().after(new_img);
-    });
+    });*/
 
     // set location of blip
     window.leafletIndexer[0].leaflet.map.on('click', function(e){
@@ -105,13 +105,13 @@ $(function(){
     $('#datetimepicker1').datetimepicker({ defaultDate: wpDate });
 
     // add photos
-    var photo_index = 0;
+    /*var photo_index = 0;
     $(document).on('click', '.add-photo', function(){
       $(this).data('photo-index', ++photo_index)
       var index = $(this).data('photo-index')
       var new_img = '<input class="blip-image" name="photo['+ index +']" accept="image/jpeg, image/gif, image/png, image/jpg" type="file" data-image="'+ index +'" style="margin: 6% 6% 5% 3%; width:100%;">';
       $('.add-photo').last().after(new_img);
-    });
+    });*/
 
     // enable dragging for the marker
     var marker = window.leafletIndexer[0].leaflet.marker; // this works because the index will only have one entry.  This is not always the case.
