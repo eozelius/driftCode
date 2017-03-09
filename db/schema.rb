@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309163452) do
+ActiveRecord::Schema.define(version: 20170309221636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20170309163452) do
     t.integer  "waypoint_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.text     "description"
   end
 
   add_index "waypoint_images", ["waypoint_id"], name: "index_waypoint_images_on_waypoint_id", using: :btree
