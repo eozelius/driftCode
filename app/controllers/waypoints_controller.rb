@@ -82,7 +82,7 @@ class WaypointsController < ApplicationController
 	private
 		# todo, implement strong params
 		def waypoint_params
-			params.require(:waypoint).permit(:title, :body, :x, :y, :date)
+			params.require(:waypoint).permit(:title, :body, :x, :y, :date, :coverphoto)
 		end
 end
 

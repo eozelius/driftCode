@@ -37,37 +37,7 @@
   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
     <div id="map"></div>
 
-    <script type="text/javascript">
-      var driftmap = {
-        init_x: '<%= @post.init_x %>',
-        init_y: '<%= @post.init_y %>',
-        init_zoom: '<%= @post.init_zoom %>',
-      }
-
-      var blips = [];
-
-      <% if @post.blips.any? %> 
-        <% @post.blips.each do |blip| %>
-
-          var blipImages = [];
-          <% blip.blip_images.each do |blip_image| %>
-            blipImages.push('<%= image_tag(blip_image.image).html_safe %>');
-          <% end %>
-
-          blips.push({
-            id:   "<%= blip.id %>",
-            x:    "<%= blip.x %>",
-            y:    "<%= blip.y %>",
-            title:  "<%= blip.title.to_json %>",
-            body:   "<%= blip.body.to_json %>",
-            images: blipImages
-          })
-
-        <% end %>
-      <% end %>
-
-      init_map('map', driftmap, blips)
-    </script>
+    
   </div>
 </div>
 
