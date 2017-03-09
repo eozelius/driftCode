@@ -1,9 +1,9 @@
 <div class="container" id="content_creation">
-  <h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin: 3% 15% 4%;">Tell a Story about <%= params[:waypoint][:title].html_safe.capitalize %></h4>
+  <h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin: 3% 15% 4%;">Tell a Story about <%= params[:title].html_safe.capitalize %></h4>
 
   <!-- PHOTOS/VIDEOS -->
   <div class="cc-wrapper col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    <%= link_to new_waypoint_image_path(journey_id: params[:journey_id], waypoint_id: @waypoint.id) do %>
+    <%= link_to new_waypoint_image_path(journey_id: params[:journey_id], waypoint_id: params[:waypoint_id]) do %>
       <p>Photos &amp; Videos</p>
       <div class="cc content-photo">
         <i class="fa fa-camera"></i>

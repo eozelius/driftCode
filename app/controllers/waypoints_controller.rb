@@ -26,7 +26,8 @@ class WaypointsController < ApplicationController
 			#@waypoint.save
 
 			flash.now[:success] = "waypoint created successfully, now add some photos, friends, or writing"
-			render 'waypoints/content_creation'
+			# redirect_to '/waypoints/content_creation', 
+			redirect_to controller: 'waypoints', action: 'content_creation', waypoint_id: @waypoint.id, title: @waypoint.title, journey_id: params[:journey_id]
 		else
 			flash[:danger] = 'whoops, something went wrong'
 			render 'new'
@@ -78,6 +79,10 @@ class WaypointsController < ApplicationController
 		user.reload
 		flash[:success] = "Blip deleted"
 		redirect_to user
+	end
+
+	def content_creation
+		render 'waypoints/content_creation'
 	end
 
 	private

@@ -7,9 +7,7 @@ Rails.application.routes.draw do
   resources :users,            only: [:new, :create, :update, :show, :destroy]
   resources :driftmap,         only: [:edit, :update, :destroy]
 
-  put  'blip_images' => 'blip_images#create'  
-  post 'update_route' => 'routes#update'
-
+  get    'waypoints/content_creation' => 'waypoints#content_creation'
   get    'signup' => 'users#new'
   get    'login'  => 'sessions#new'
   post   'login'  => 'sessions#create'
