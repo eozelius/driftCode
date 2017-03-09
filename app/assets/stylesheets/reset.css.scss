@@ -323,7 +323,8 @@ ul.errors-list li p {
 
 /* buttons */
 span.normal,
-button.normal {
+button.normal,
+input.normal {
 	cursor: pointer;
 	line-height: 30px;
 	width: 150px;
@@ -340,7 +341,8 @@ button.normal {
 }
 
 span.normal:hover,
-button.normal:hover{
+button.normal:hover,
+input.normal:hover{
 	background: #fff;
 	border: 2px solid $light-blue;
 	font-size: .8em;

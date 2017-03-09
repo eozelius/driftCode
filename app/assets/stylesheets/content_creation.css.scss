@@ -1,0 +1,53 @@
+#content_creation {
+  height: 500px;
+  
+  h4.waypoint-title {
+    text-align: center;
+  }
+
+  i {
+    color: #fff;
+    font-size: 4.5em;
+    line-height: 300px;
+  }
+
+  .cc-wrapper {
+    p {
+      text-align: center;
+      color: #C2D9EB;
+      margin-bottom: 5%;
+      font-size: 1.55em;
+      border-bottom: 1px solid #552727;
+      padding-bottom: 10px;
+    }
+  
+    .cc {
+      cursor: pointer;
+      opacity: .8;
+      height: 300px;
+    }
+
+    .cc:hover {
+      opacity: 1
+    }
+  }
+
+
+  .content-photo {
+    background-color: #C2D9EB;
+  }
+
+  .content-friend {
+    background-color: #755151;
+    
+  }
+
+  .content-trek {
+    background-color: #84C77B;
+    
+  }
+
+  .content-essay {
+    background-color: #CEA5D4;
+  }
+}

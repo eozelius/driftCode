@@ -17,15 +17,16 @@ class WaypointsController < ApplicationController
 		@waypoint.date = date
 
 		if @waypoint.save
-			if params[:photo].present?
-				params[:photo].each do |image|
-					@waypoint.waypoint_images.build(image: image[1])
-				end
-				@waypoint.save
-			end
-			@waypoint.save
-			flash[:success] = "waypoint created successfully"
-			redirect_to current_user
+			#if params[:photo].present?
+			#	params[:photo].each do |image|
+			#		@waypoint.waypoint_images.build(image: image[1])
+			#	end
+			#	@waypoint.save
+			#end
+			#@waypoint.save
+
+			flash.now[:success] = "waypoint created successfully, now add some photos, friends, or writing"
+			render 'waypoints/content_creation'
 		else
 			flash[:danger] = 'whoops, something went wrong'
 			render 'new'
