@@ -2,7 +2,6 @@
 <input type="hidden" value="<%= @journey.id %>" id="journey_id">
 <input type="hidden" value="1" id="journey_edit">
 
-
 <div id="journey" class="edit-journey">
 	<div class="container">
 	<h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content; margin: 0 auto 2%;">edit <%= @journey.title.html_safe %></h4>
@@ -36,8 +35,9 @@
 
 			<!-- Accordian -->
 			<div id="accordian-container">
-			  <h5 class="waypoints-title">waypoints <a href="/waypoints/new?journey_id=<%= @journey.id %>"><span style="font-size:.6em; font-style:italic"> - add waypoint</span></a></h5>
+			  <h5 class="waypoints-title">waypoints</h5>
 			  <div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true"></div>
+			  <%= link_to '<span style="font-size: 1em; margin: 15px 10px 0 0; float:right; font-style:italic"> - add waypoint</span>'.html_safe, new_waypoint_path if user_is_home @user %><div class="clearfix" style="margin-bottom:15px;"></div>
 			</div>
 
 			<!-- Cancel Save Delete -->
@@ -47,11 +47,11 @@
 				<% end %>
 
 				<button name="commit" class="normal commit" type="submit" style="margin: 30px 0; float: right">save</button>
+			</div><div class="clearfix"></div>
 
-				<%#= link_to @journey, method: :delete, data: { confirm: "Are you Sure?" } do %>
-					<!-- <span class="pull-right" style="margin: 2% 0 0; color:red" rel="nofollow" data-method="delete" data-confirm="Are you sure">delete</span> -->
-				<%# end %>
-			</div>
+			<%= link_to @journey, method: :delete, data: { confirm: "Are you Sure?" } do %>
+				<span class="pull-right" style="margin: 2% 0 0; color:red" rel="nofollow" data-method="delete" data-confirm="Are you sure">delete</span>
+			<% end %>
 		</div>
 	</div>
 </div>

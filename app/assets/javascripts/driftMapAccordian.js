@@ -43,7 +43,7 @@ var DriftMapAccordian = function(){
 			if($('#journey_edit').length){
 				$('ul.waypoints-container p.waypoint-title').each(function(){
 					var id = $(this).parent().data('waypoint')
-					$(this).prepend('<a href="/waypoints/'+ id +'/edit" style="font-size: .75em; font-style: italic; margin-right: 10px">edit - </a>');
+					$(this).prepend('<a href="/waypoints/'+ id +'/edit" style="font-size: .75em; font-style: italic; margin-right: 4px">edit - </a>');
 				})
 			}
 
