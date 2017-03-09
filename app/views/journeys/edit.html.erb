@@ -37,7 +37,7 @@
 			<div id="accordian-container">
 			  <h5 class="waypoints-title">waypoints</h5>
 			  <div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true"></div>
-			  <%= link_to '<span style="font-size: 1em; margin: 15px 10px 0 0; float:right; font-style:italic"> - add waypoint</span>'.html_safe, new_waypoint_path if user_is_home @user %><div class="clearfix" style="margin-bottom:15px;"></div>
+			  <%= link_to '<span style="font-size: 1em; margin: 15px 10px 0 0; float:right; font-style:italic"> - add waypoint</span>'.html_safe, new_waypoint_path(journey_id: @journey.id) if user_is_home @user %><div class="clearfix" style="margin-bottom:15px;"></div>
 			</div>
 
 			<!-- Cancel Save Delete -->
