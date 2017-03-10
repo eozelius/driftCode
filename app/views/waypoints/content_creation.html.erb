@@ -37,9 +37,13 @@
     </div>
   </div>
 
-  <div class="col-xs-12">
-    <%= link_to(controller: 'waypoints', action: 'edit', id: params[:waypoint_id]) do %>
-      <button class="normal" style="margin-top: 30px">back</button>
+  <div class="col-xs-12" style="margin-top: 7%">
+    <%= link_to({ controller: 'waypoints', action: 'edit', id: params[:waypoint_id] }, { style: 'margin:0'}) do %>
+      <button class="normal" style="float:left;margin:0">back</button>
     <% end %>
-  </div>
+
+    <%= link_to current_user do %>
+      <button class="normal" style="float:right; margin:0">skip</button>
+    <% end %>
+  </div><div class="clearfix"></div>
 </div>
