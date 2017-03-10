@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170310181437) do
+ActiveRecord::Schema.define(version: 20170310201547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,19 @@ ActiveRecord::Schema.define(version: 20170310181437) do
   end
 
   add_index "friends", ["waypoint_id"], name: "index_friends_on_waypoint_id", using: :btree
+
+  create_table "galleries", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "coverphoto"
+    t.float    "x"
+    t.float    "y"
+    t.integer  "waypoint_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "galleries", ["waypoint_id"], name: "index_galleries_on_waypoint_id", using: :btree
 
   create_table "journeys", force: :cascade do |t|
     t.text     "description"
@@ -128,6 +141,7 @@ ActiveRecord::Schema.define(version: 20170310181437) do
 
   add_foreign_key "essays", "waypoints"
   add_foreign_key "friends", "waypoints"
+  add_foreign_key "galleries", "waypoints"
   add_foreign_key "journeys", "driftmaps"
   add_foreign_key "treks", "waypoints"
   add_foreign_key "waypoint_images", "waypoints"
