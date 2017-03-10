@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :waypoint_images,  only: [:new, :create, :edit, :update, :destroy]
   resources :users,            only: [:new, :create, :update, :show, :destroy]
   resources :driftmap,         only: [:edit, :update, :destroy]
+  resources :friends,          only: [:new, :create, :edit, :update, :destroy]
+
 
   get    'waypoints/content_creation' => 'waypoints#content_creation'
   get    'signup' => 'users#new'

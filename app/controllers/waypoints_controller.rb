@@ -27,7 +27,7 @@ class WaypointsController < ApplicationController
 
 			flash.now[:success] = "waypoint created successfully, now add some photos, friends, or writing"
 			# redirect_to '/waypoints/content_creation', 
-			redirect_to controller: 'waypoints', action: 'content_creation', waypoint_id: @waypoint.id, title: @waypoint.title, journey_id: params[:journey_id]
+			redirect_to controller: 'waypoints', action: 'content_creation', waypoint_id: @waypoint.id, journey_id: params[:journey_id]
 		else
 			flash[:danger] = 'whoops, something went wrong'
 			render 'new'
