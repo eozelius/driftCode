@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :driftmap,         only: [:edit,:update, :destroy]
   resources :friends,          only: [:new, :create, :edit, :update, :destroy]
   resources :essays,           only: [:new, :create, :edit, :update, :destroy]
+  resources :treks,            only: [:new, :create, :edit, :update, :destroy]
 
   get    'waypoints/content_creation' => 'waypoints#content_creation'
   get    'signup' => 'users#new'

@@ -23,10 +23,12 @@
 
   <!-- TREKS -->
   <div class="cc-wrapper col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    <p>Treks</p>
-    <div class="cc content-trek">
-      <i class="fa fa-compass"></i>
-    </div>
+    <%= link_to new_trek_path journey_id: params[:journey_id], waypoint_id: params[:waypoint_id] do %>
+      <p>Treks</p>
+      <div class="cc content-trek">
+        <i class="fa fa-compass"></i>
+      </div>
+    <% end %>
   </div>
 
   <!-- ESSAYS -->
