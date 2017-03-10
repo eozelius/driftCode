@@ -295,6 +295,39 @@ form {
 	min-height: 395px;
 }
 
+form,
+form.edit_driftmap,
+form.new_waypoint,
+form.edit_waypoint,
+#friends > form,
+#journey form {
+	input[type="text"] {
+		height: 2em;
+		margin-top:24px;
+	}
+
+	textarea {
+		margin: 0 0 7% 3%;
+	}
+
+	input[type="text"],
+	textarea {
+		padding: 4px;
+		border-radius: 0;
+		background: #fff;
+		border: 1px solid #ccc;
+		
+	}
+
+	h4.waypoint-title{
+		width: -moz-fit-content;
+	}
+
+	#waypoint_title {
+		margin: 3% 0 8% 3%;
+	}
+}
+
 p.title{
 	margin-bottom: 10px;
 	font-size: 1.45em;

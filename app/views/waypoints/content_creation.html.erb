@@ -31,12 +31,15 @@
 
   <!-- ESSAYS -->
   <div class="cc-wrapper col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    <p>Essays</p>
-    <div class="cc content-essay">
-      <i class="fa fa-pencil-square-o"></i>
-    </div>
+    <%= link_to new_essay_path(journey_id: params[:journey_id], waypoint_id: params[:waypoint_id]) do %>
+      <p>Essays</p>
+      <div class="cc content-essay">
+        <i class="fa fa-pencil-square-o"></i>
+      </div>
+    <% end %>
   </div>
 
+  <!-- Back/skip -->
   <div class="col-xs-12" style="margin-top: 7%">
     <%= link_to({ controller: 'waypoints', action: 'edit', id: params[:waypoint_id] }, { style: 'margin:0'}) do %>
       <button class="normal" style="float:left;margin:0">back</button>

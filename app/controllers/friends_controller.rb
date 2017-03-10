@@ -8,6 +8,14 @@ class FriendsController < ApplicationController
     if @waypoint.present?
       @friend = @waypoint.friends.create(friendly_params)
       if @friend.valid?
+        @friend.visible = true
+
+        #email = Friend.find_by @friend.email
+        #if email.nil? 
+        #  send email an awesome invitition to use driftmaps.com
+        #end
+
+
         flash[:success] = "friend successfully created"
         redirect_to current_user
       else

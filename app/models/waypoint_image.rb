@@ -1,5 +1,7 @@
 class WaypointImage < ActiveRecord::Base
   belongs_to :waypoint
+  belongs_to :essay
+
   mount_uploader :image, PictureUploader
   validate :image_size
 

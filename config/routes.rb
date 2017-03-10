@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   resources :journeys
   resources :waypoints,        only: [:new, :create, :edit, :update, :destroy]
   resources :waypoint_images,  only: [:new, :create, :edit, :update, :destroy]
-  resources :users,            only: [:new, :create, :update, :show, :destroy]
-  resources :driftmap,         only: [:edit, :update, :destroy]
+  resources :users,            only: [:new, :create, :edit, :update, :show, :destroy]
+  resources :driftmap,         only: [:edit,:update, :destroy]
   resources :friends,          only: [:new, :create, :edit, :update, :destroy]
-
+  resources :essays,           only: [:new, :create, :edit, :update, :destroy]
 
   get    'waypoints/content_creation' => 'waypoints#content_creation'
   get    'signup' => 'users#new'
