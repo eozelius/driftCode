@@ -1,6 +1,6 @@
 /* INDEX ACTION */
 $(function(){
-  $.ajax({
+  /*$.ajax({
     url: '/api_home',
     method: 'POST',
     dataType: 'JSON',
@@ -17,6 +17,6 @@ $(function(){
       // init Accordian
       DriftMapAccordian.init(r);
     }
-  });
+  });*/
 });
 

@@ -7,7 +7,7 @@ $(function(){
 
 	/* EDIT ACTION */
 	if($('#journeys_edit').length){
-		$.ajax({
+		/*$.ajax({
 			url: '/api_journey_edit',
 			method: 'POST',
 			dataType: 'JSON',
@@ -28,7 +28,7 @@ $(function(){
 					}
 				}, 500);
 			}
-		})
+		})*/
 
 		// Change coverphoto
 		$('.change-cover-photo').on('click', function(){

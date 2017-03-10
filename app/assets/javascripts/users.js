@@ -25,7 +25,7 @@ $(function(){
 
 /* SHOW ACTION */
   if($('#users_show').length){
-    $.ajax({
+    /*$.ajax({
       url: '/api_profile_page',
       method: 'POST',
       dataType: 'JSON',
@@ -46,7 +46,7 @@ $(function(){
         // init Accordian
         DriftMapAccordian.init(r, home);
       }
-    });
+    });*/
 
     // End initial AJAX call
 
