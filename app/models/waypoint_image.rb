@@ -1,5 +1,5 @@
 class WaypointImage < ActiveRecord::Base
-  belongs_to :waypoint
+  belongs_to :gallery
   belongs_to :essay
   belongs_to :trek
 

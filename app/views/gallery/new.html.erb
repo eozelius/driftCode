@@ -1,0 +1,8 @@
+<% wp = Waypoint.find(params[:waypoint_id]) %>
+<input type="hidden" value="1" id="galleries_new">
+
+<div id="essays" class="container new-essay">
+  <%= form_for @gallery, html: {multipart: true} do |f| %>
+    <input type="hidden" name="waypoint_id" value="<%= params[:waypoint_id] %>">
+  <% end %>
+</div>
