@@ -1,6 +1,6 @@
 /* INDEX ACTION */
 $(function(){
-  /*$.ajax({
+  $.ajax({
     url: '/api_home',
     method: 'POST',
     dataType: 'JSON',
@@ -9,7 +9,7 @@ $(function(){
       window.r = r
 
       // init Timeline
-      DriftMapTimeline.init(r);
+      // DriftMapTimeline.init(r);
 
       // init Leaflet
       DriftMapLeaflet.init(r);
@@ -17,6 +17,5 @@ $(function(){
       // init Accordian
       DriftMapAccordian.init(r);
     }
-  });*/
-});
-
+  })
+})

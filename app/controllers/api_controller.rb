@@ -29,9 +29,9 @@ class ApiController < ApplicationController
 
         journey.waypoints.order(:date).each do |wp|
           wp_images = []
-          wp.waypoint_images.each do |image|
-            wp_images.push(image)
-          end         
+          # wp.waypoint_images.each do |image|
+          #   wp_images.push(image)
+          # end
 
           my_journey_wps.push({ 
             id: wp.id,
@@ -41,7 +41,11 @@ class ApiController < ApplicationController
             y: wp.y,
             journey_id: wp.journey_id,
             driftmap_id: journey.driftmap_id,
-            images: wp_images,
+            galleries: {},
+            treks: {},
+            friends: {},
+            essays: {},
+            coverphoto: wp.coverphoto,
             date: {
               year:  wp.date.year,
               month: wp.date.month,

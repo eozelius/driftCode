@@ -1,3 +1,4 @@
+/* begin nav */
 nav#main {
 	width: 60px;
 	background: #dadce8; // $light-grey;
@@ -30,22 +31,7 @@ nav#main ul li i {
 nav#main ul li p {
 	font-size: .9em;
 }
-
-#dash-container {
-	h3.page-title {
-		padding: 1%;
-	}
-
-	h4 {
-		text-align: left;
-	}
-
-	.img-user-container {
-		height: 315px;
-		margin-left: 0;
-		padding-left: 0;
-	}
-}
+/* end nav */
 
 /* Color 
 $light-blue: #C2D9EB;
@@ -87,7 +73,6 @@ div.readme-container {
 	div.readme-container {
 		margin:15px 0;
 		height: auto;
-
 
 		button {
 			margin: 10px 5px;

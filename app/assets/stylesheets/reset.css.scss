@@ -190,11 +190,6 @@ article {
 	margin-bottom: 10%;
 }
 
-span.ago {
-	font-size: .9em;
-	color: #777;
-}
-
 input, textarea {
 	font-family: 'ubuntu', sans-serif;
 	margin-bottom: 4%;
@@ -315,8 +310,7 @@ form.edit_waypoint,
 		padding: 4px;
 		border-radius: 0;
 		background: #fff;
-		border: 1px solid #ccc;
-		
+		border: 1px solid #ccc;	
 	}
 
 	h4.waypoint-title{
@@ -389,13 +383,9 @@ input.normal:hover{
 /* Leaflet generic components */
 #map {
 	width: 100%;
-	height: 365px;
 	margin: 0 auto;
+	height: 600px;
 	padding-bottom: 3%;
-}
-
-.leaflet-container {
-	height: 500px;
 }
 
 @media (max-width: 480px){

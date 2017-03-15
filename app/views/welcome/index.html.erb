@@ -15,24 +15,14 @@
 <% end %>
 
 <div id="home-page" class="container">
-  <!-- TIMELINEJS3 -->
-  <div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-    <% @journeys.each do |journey| %>
-      <div class="journey-content" data-journeycontent="<%= journey.id %>">
-        <h4 class="journey-header"><%= journey.title %></h4>
-        <div id='dm-timeline-<%= journey.id %>' style="width: 100%; height: 600px"></div>
-        <div class="journey-meta">
-          <p class="journey-description"><%= journey.description %></p>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
   <!-- LEAFLET & accordian -->
-  <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+  <div class="mastermap">
     <div class="map-container">
       <div id='map'></div>
     </div>
+  </div>
+
+  <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 
     <div id="accordian-container">
       <h5 class="waypoints-title">journeys</h5>
