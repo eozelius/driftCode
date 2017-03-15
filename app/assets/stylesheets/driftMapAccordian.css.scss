@@ -13,10 +13,14 @@
 
 		.content-icons-container {
 			float: right;
-			
+
 			i.fa {
 				color: $maroon;
+				margin-right:  7px;
 				opacity: .8;
+			}
+			i.fa:hover {
+				opacity: 1;
 			}
 		}
 

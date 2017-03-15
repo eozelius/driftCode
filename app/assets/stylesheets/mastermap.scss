@@ -3,12 +3,13 @@
 /* MasterMap */
 .master-map {
   width: 100%;
-  height: 600px;
+  height: 700px;
+  overflow: hidden;
   background-color: $light-blue;
 
   #map,
   .map-container {
-    top: -580px;
+    top: -680px;
   }
 
 }
@@ -16,8 +17,8 @@
 /* MasterLegend */
 .master-map {
   .master-legend {
-    width: 35%;
-    height: 580px;
+    width: 22%;
+    height: 680px;
     position: relative;
     left: 10px;
     top: 10px;
