@@ -24,7 +24,7 @@
     bottom: 10px;
     background-color: #47505e;
     z-index: 2;
-    opacity: .8;
+    opacity: 1;
     padding: 5px 0;
 
 
@@ -33,11 +33,26 @@
       height: 100%;
       margin: 0 auto;
       background-color: #fff;
+
+      p.waypoint-title {
+        margin: 3px 3% 1%;
+      }
+
+      h4.waypoint-title {
+        margin: 0 0 1% 2%;
+        width: -moz-fit-content;
+      }
+
+      .legend-waypoints-container {
+        margin-bottom: 10px;
+      }
     }
+
+
 
   }
 
   .master-legend:hover {
-    opacity: .94;
+    opacity: 1;
   }
 }

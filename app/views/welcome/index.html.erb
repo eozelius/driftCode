@@ -19,28 +19,15 @@
     <!-- LEGEND -->
     <div class="master-legend">
       <div class="legend-container">
-        <% @journeys.each do |journey| %>
-          <div class="legend-journey">
-            <h4 class="waypoint-title"><%= journey.title %></h4>
-            <% journey.waypoints.each do |wp| %>
-              <p><%= wp.title %></p>
-            <% end %>
-          </div>
-        <% end %>
+        <div id="accordian-container">
+          <div id="waypt-accord" class="panel-group " role="tablist" aria-multiselectable="true"></div>
+        </div>
       </div>
     </div>
 
     <!-- MAP -->
     <div class="map-container">
       <div id='map'></div>
-    </div>
-  </div>
-
-  <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-
-    <div id="accordian-container">
-      <h5 class="waypoints-title">journeys</h5>
-      <div id="waypt-accord" class="panel-group markers-container wizard-step" role="tablist" aria-multiselectable="true"></div>
     </div>
   </div>
 </div>

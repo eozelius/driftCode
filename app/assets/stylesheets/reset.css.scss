@@ -380,6 +380,20 @@ input.normal:hover{
 	cursor: pointer;
 }
 
+/* Fonts */
+p.waypoint-title {
+	font-size: 1.2em;
+	color: #C2D9EB;
+	font-style: italic;
+	margin: 3% 1%;
+	text-align: left;
+	cursor: pointer;
+}
+
+h4.waypoint-title {
+
+}
+
 /* Leaflet generic components */
 #map {
 	width: 100%;
