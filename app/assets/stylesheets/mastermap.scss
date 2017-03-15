@@ -1,59 +1,78 @@
 @import 'colors';
 
-/* MasterMap */
-.master-map {
-  width: 100%;
-  height: 700px;
-  overflow: hidden;
-  background-color: $light-blue;
-
-  #map,
+#home-page {
+  overflow: hidden; 
+  
+  /*#map,
   .map-container {
     top: -680px;
+  }*/
+}
+
+/* MasterMap */
+.master-container {
+  width: 100%;
+  height: 730px;
+  overflow: hidden
+}
+
+/* Guide */
+.master-guide {
+  width: 47%;
+  height: 680px;
+  background-color: $maroon;
+  position: relative;
+  left: 2%;
+  top: 2%;
+  bottom: 2%;
+  z-index: 2;
+  padding: .45% .45%;  
+  margin-top: 10px;
+  
+  /* MasterLegend */
+  /* tabs */
+  .master-legend,
+  .master-content {
+    width: 49%;
+    background-color: #47505e;
+    height: 660px;
+    padding: 1% 0;
+    display: inline-block;  
   }
+}
+
+.master-legend {
+  .legend-container {
+    width: 95%;
+    margin: 0 auto;
+    background-color: #fff;
+
+    p.waypoint-title {
+      margin: 3px 3% 1%;
+    }
+
+    h4.waypoint-title {
+      margin: 0 0 1% 2%;
+      width: -moz-fit-content;
+    }
+
+    .legend-waypoints-container {
+      margin-bottom: 10px;
+    }
+  }
+}
+.master-legend:hover {
+  opacity: 1;
+}
+
+/* MasterContent */
+.master-content {
 
 }
 
-/* MasterLegend */
-.master-map {
-  .master-legend {
-    width: 22%;
-    height: 680px;
-    position: relative;
-    left: 10px;
-    top: 10px;
-    bottom: 10px;
-    background-color: #47505e;
-    z-index: 2;
-    opacity: 1;
-    padding: 5px 0;
 
-
-    .legend-container {
-      width: 95%;
-      height: 100%;
-      margin: 0 auto;
-      background-color: #fff;
-
-      p.waypoint-title {
-        margin: 3px 3% 1%;
-      }
-
-      h4.waypoint-title {
-        margin: 0 0 1% 2%;
-        width: -moz-fit-content;
-      }
-
-      .legend-waypoints-container {
-        margin-bottom: 10px;
-      }
-    }
-
-
-
-  }
-
-  .master-legend:hover {
-    opacity: 1;
-  }
+/* master-leaflet */
+.master-leaflet {
+  position: relative;
+  top: -700px;
 }
