@@ -31,7 +31,7 @@ var DriftMapLeaflet = function(){
 		// public methods
 		init: function(journeys, options, myDefault){
 			var x = options !== undefined ? options.init_x : 0.924206230200376;
-			var y = options !== undefined ? options.init_y : -40.2400771379471;
+			var y = options !== undefined ? options.init_y : -40.2400771379471 - 30;
 			var z = options !== undefined ? options.init_zoom : 4;
 
 			m = L.map('map').setView([x, y], z);
@@ -43,6 +43,9 @@ var DriftMapLeaflet = function(){
 		    	id: 'eozelius77.j4hekake',
 		    	accessToken: "<%= ENV['MAPBOX_SECRET_KEY'] %>"
 				}).addTo(m);
+
+			// Zoom in/out buttons should be in top right, instead of top left.
+			$('.leaflet-control-container .leaflet-top.leaflet-left').removeClass('leaflet-left').addClass('leaflet-right')
 
 			for(var x in journeys){
 				if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){

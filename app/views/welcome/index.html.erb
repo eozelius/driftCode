@@ -15,8 +15,22 @@
 <% end %>
 
 <div id="home-page" class="container">
-  <!-- LEAFLET & accordian -->
-  <div class="mastermap">
+  <div class="master-map">
+    <!-- LEGEND -->
+    <div class="master-legend">
+      <div class="legend-container">
+        <% @journeys.each do |journey| %>
+          <div class="legend-journey">
+            <h4 class="waypoint-title"><%= journey.title %></h4>
+            <% journey.waypoints.each do |wp| %>
+              <p><%= wp.title %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- MAP -->
     <div class="map-container">
       <div id='map'></div>
     </div>
