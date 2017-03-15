@@ -215,7 +215,7 @@ textarea {
 	width:100%;
 	display: block;
 	margin: 0 auto;
-	padding: 0 10px 0 65px;
+	padding: 0;
 
 }
 
@@ -240,13 +240,14 @@ hr.blue-spacer {
 }
 
 /* Fake Header */
-div.fake-header {
-	margin: 0 auto 15px;
+.fake-header {
+	margin: 0 20px 15px 8%;
 	border-bottom: 2px solid #C2D9EB;
 	height: 66px;
 
 	.login-btns-container {
 		float: right;
+		width:500px;
 	}
 	button {
 		margin: 0 5px 0;
