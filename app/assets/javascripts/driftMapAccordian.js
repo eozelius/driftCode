@@ -29,7 +29,14 @@ var DriftMapAccordian = function(){
 				for(var y in wps){
 					var w = wps[y]
 					a += '<li data-slideindex="'+ y +'" class="waypoint" data-waypoint="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-waypointslide="'+ y +'" data-journeyid="'+ r.id +'">' + 
-	  							'<p class="waypoint-title">'+ w.title +'</p>' +
+	  							'<p class="waypoint-title">'+ w.title + '</p>' +
+	  							'<div class="content-icons-container">' +
+		  							'<i class="fa fa-book"></i>' +
+		  							'<i class="fa fa-camera"></i>' +
+		  							'<i class="fa fa-user-circle"></i>' + 
+		  							'<i class="fa fa-pencil-square-o"></i>' + 
+		  							'<i class="fa fa-compass"></i>'+ 
+		  						'</div>' +
 	  						'</li>';
 				}
 

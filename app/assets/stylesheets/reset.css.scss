@@ -314,10 +314,6 @@ form.edit_waypoint,
 		border: 1px solid #ccc;	
 	}
 
-	h4.waypoint-title{
-		width: -moz-fit-content;
-	}
-
 	#waypoint_title {
 		margin: 3% 0 8% 3%;
 	}
@@ -382,7 +378,8 @@ input.normal:hover{
 }
 
 /* Fonts */
-p.waypoint-title {
+p.waypoint-title,
+span.waypoint-title {
 	font-size: 1.2em;
 	color: #C2D9EB;
 	font-style: italic;

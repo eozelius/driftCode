@@ -1,5 +1,26 @@
+@import 'colors';
+
 #accordian-container {
 	cursor: pointer;
+
+	li {
+		text-align:left;
+
+		p.waypoint-title {
+			display: inline-block;
+			width: 40%;
+		}
+
+		.content-icons-container {
+			float: right;
+			
+			i.fa {
+				color: $maroon;
+				opacity: .8;
+			}
+		}
+
+	}
 
 	.panel-collapse.collapse.in {
 		min-height: 200px;
