@@ -6,6 +6,10 @@ $(function(){
     dataType: 'JSON',
     complete: function(response) {
       var r = response.responseJSON;
+
+      console.log(JSON.stringify(r))
+
+
       window.r = r
 
       // init Timeline

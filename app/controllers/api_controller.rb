@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
   def home
-    journeys = User.find(1).driftmap.journeys
+    journeys = [User.find(1).driftmap.journeys.third, User.find(1).driftmap.journeys.last]
     response = responsify journeys
     render json: response
   end
@@ -25,26 +25,83 @@ class ApiController < ApplicationController
       response = []
 
       journeys.each do |journey|
-        my_journey_wps = []
+        wps = Array.new, galleries = [], friends = [], essays = [], treks = []
 
         journey.waypoints.order(:date).each do |wp|
-          wp_images = []
-          # wp.waypoint_images.each do |image|
-          #   wp_images.push(image)
-          # end
+=begin
+          # galleries
+          if wp.galleries.any?
+            wp.galleries.each do |g|
+              galleries.push({
+                title: g.title,
+                description: g.description,
+                coverphoto: g.coverphoto,
+                x: g.x,
+                y: g.y,
+                waypoint_id: g.waypoint_id
+              })
+            end
+          end
 
-          my_journey_wps.push({ 
+          # friends  
+          if wp.friends.any?
+            wp.friends.each do |f|
+              friends.push({
+                first_name: f.first_name,
+                last_name: f.last_name,
+                photo: f.photo,
+                description: f.description,
+                x: f.x,
+                y: f.y,
+                member: f.member,
+                visible: f.visible,
+                email: f.email,
+                waypoint_id: f.waypoint_id
+              })
+            end
+          end
+          
+          # Essays
+          if wp.essays.any?
+            wp.essays.each do |e|
+              essays.push({
+                title: e.title,
+                body: e.body,
+                coverphoto: e.coverphoto,
+                x: e.x,
+                y: e.y,
+                waypoint_id: e.waypoint_id
+              })
+            end
+          end
+
+          # treks
+          if wp.treks.any?
+            wp.treks.each do |t|
+              treks.push({
+                title: t.title,
+                description: t.description,
+                coverphoto: t.coverphoto,
+                waypoint_id: t.waypoint_id
+              })
+            end
+          end
+=end
+=begin
+          wps.push({ 
             id: wp.id,
             title: wp.title,
             body: wp.body,
             x: wp.x,
             y: wp.y,
+            content: {
+              galleries: galleries,
+              friends: friends,
+              essays: essays,
+              treks: treks,
+            },
             journey_id: wp.journey_id,
             driftmap_id: journey.driftmap_id,
-            galleries: {},
-            treks: {},
-            friends: {},
-            essays: {},
             coverphoto: wp.coverphoto,
             date: {
               year:  wp.date.year,
@@ -52,11 +109,14 @@ class ApiController < ApplicationController
               day:   wp.date.day 
             } 
           })
+=end
         end
+
+        Rails.logger.debug " >>>> wps: #{wps}" 
 
         response.push({ 
           journey: journey, 
-          waypoints: my_journey_wps 
+          waypoints: wps 
         })
       end
 

@@ -94,6 +94,17 @@ var DriftMapAccordian = function(){
 				/* Leaflet */
 				if(first_wp_id !== undefined){ DriftMapLeaflet.focusWayPoint(first_wp_id) }
 			});
+
+			// Click a content-icon (story, friend, essay, gallery, trek)
+			$('li.waypoint i.fa').on('click', function(){
+				var j_id  = $(this).parent().parent().data('journeyid');
+				var wp_id = $(this).parent().parent().data('waypoint')
+
+				// console.log("j_id: " + j_id)
+				// console.log("wp_id: " + wp_id)
+
+
+			});
 		},
 
 		focusWayPoint: function(id){

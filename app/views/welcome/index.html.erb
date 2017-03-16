@@ -42,40 +42,48 @@
             <% if journey.waypoints.any? %>
               <% journey.waypoints.each do |waypoint| %>
                 <!-- GALLERIES -->
-                <% if waypoint.galleries.any? %>
-                  <% waypoint.galleries.each do |gallery| %>
-                    <p><%= gallery.title %>!</p>
+                <div class="master-content-container master-galleries" data-journey="<%= journey.id %>" data-waypoint="<%= waypoint.id %>">
+                  <% if waypoint.galleries.any? %>
+                    <% waypoint.galleries.each do |gallery| %>
+                      <p><%= gallery.title %>!</p>
+                    <% end %>
+                  <% else %>
+                    <p>no images.</p>
                   <% end %>
-                <% else %>
-                  <p>no images.</p>
-                <% end %>
+                </div>
 
                 <!-- FRIENDS -->
-                <% if waypoint.friends.any? %>
-                  <% waypoint.friends.each do |friend| %>
-                    <p><%= "#{friend.first_name} #{friend.last_name}" %></p>
+                <div class="master-content-container master-friends hidden" data-journey="<%= journey.id %>" data-waypoint="<%= waypoint.id %>">
+                  <% if waypoint.friends.any? %>
+                    <% waypoint.friends.each do |friend| %>
+                      <p><%= "#{friend.first_name} #{friend.last_name}" %></p>
+                    <% end %>
+                  <% else %>
+                    <p>no friends</p>
                   <% end %>
-                <% else %>
-                  <p>no friends</p>
-                <% end %>
+                </div>
 
                 <!-- Treks -->
-                <% if waypoint.treks.any? %>
-                  <% waypoint.treks.each do |trek| %>
-                    <p><%= trek.title %></p>
+                <div class="master-content-container master-treks hidden" data-journey="<%= journey.id %>" data-waypoint="<%= waypoint.id %>">
+                  <% if waypoint.treks.any? %>
+                    <% waypoint.treks.each do |trek| %>
+                      <p><%= trek.title %></p>
+                    <% end %>
+                  <% else %>
+                    <p>no treks</p>
                   <% end %>
-                <% else %>
-                  <p>no treks</p>
-                <% end %>
+                </div>
 
                 <!-- Essays -->
-                <% if waypoint.essays.any? %>
-                  <% waypoint.essays.each do |essay| %>
-                    <p><%= essay.title %></p>
+                <div class="master-content-container master-essays hidden" data-journey="<%= journey.id %>" data-waypoint="<%= waypoint.id %>">
+                  <% if waypoint.essays.any? %>
+                    <% waypoint.essays.each do |essay| %>
+                      <p><%= essay.title %></p>
+                    <% end %>
+                  <% else %>
+                    <p>no essays</p>
                   <% end %>
-                <% else %>
-                  <p>no essays</p>
-                <% end %>
+                </div>
               <% end %>
             <% end %>
           <%# end %>
