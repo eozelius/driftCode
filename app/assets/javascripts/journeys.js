@@ -7,7 +7,7 @@ $(function(){
 
 	/* EDIT ACTION */
 	if($('#journeys_edit').length){
-		/*$.ajax({
+		$.ajax({
 			url: '/api_journey_edit',
 			method: 'POST',
 			dataType: 'JSON',
@@ -16,9 +16,9 @@ $(function(){
 				var r = response.responseJSON
 				window.edit_r = r
 
-				DriftMapTimeline.init(r)
-				DriftMapLeaflet.init(r)
-				DriftMapAccordian.init(r)
+				//DriftMapTimeline.init(r)
+				//DriftMapLeaflet.init(r)
+				DriftMapAccordian.init(r, true)
 
 				var foobar = true
 				setTimeout(function(){
@@ -28,7 +28,7 @@ $(function(){
 					}
 				}, 500);
 			}
-		})*/
+		})
 
 		// Change coverphoto
 		$('.change-cover-photo').on('click', function(){

@@ -25,7 +25,7 @@ $(function(){
 
 /* SHOW ACTION */
   if($('#users_show').length){
-    /*$.ajax({
+    $.ajax({
       url: '/api_profile_page',
       method: 'POST',
       dataType: 'JSON',
@@ -38,15 +38,15 @@ $(function(){
         window.r = r
 
         // init Timeline
-        DriftMapTimeline.init(r);
+        //DriftMapTimeline.init(r);
 
         // init Leaflet
-        DriftMapLeaflet.init(r);
+       // DriftMapLeaflet.init(r);
 
         // init Accordian
         DriftMapAccordian.init(r, home);
       }
-    });*/
+    });
 
     // End initial AJAX call
 

@@ -47,7 +47,7 @@ var DriftMapAccordian = function(){
 			// if user_is_home, add edit capability to journeys and waypoints
 			if(user_is_home){	$('.panel').each(function(index){	$(this).find('.journey-switcher').after('<a href="/journeys/' + $(this).data('journey') + '/edit" style="font-size: .85em; font-style: italic; color: #C2D9EB"> - edit </a>')	})	}
 
-			if($('#journey_edit').length && user_is_home){
+			if($('#journey_edit').length){
 				$('ul.waypoints-container p.waypoint-title').each(function(){
 					var id = $(this).parent().data('waypoint')
 					var editWaypoint = '<a href="/waypoints/'+ id +'/edit" style="font-size: .75em; font-style: italic; margin-right: 4px">edit - </a>'

@@ -12,6 +12,12 @@
       <% end %>
     </div>
   </div>
+
+<% else %>
+  <div class="container">
+    <div class="readme-container">
+    </div>
+  </div>  
 <% end %>
 
 <div id="home-page">
@@ -31,12 +37,12 @@
       <div class="master-content">
         <div class="content-container">
           <h4 class="waypoint-title">Galleries</h4>
-          <% @journeys.each do |journey| %>
+          <%# @journeys.each do |journey| %>
+            <% journey = @journeys %>
             <% if journey.waypoints.any? %>
               <% journey.waypoints.each do |waypoint| %>
                 <!-- GALLERIES -->
-                <h6 class="waypoint-title">Galleries</h6>
-                <% if waypoint.galleries.any? && false %>
+                <% if waypoint.galleries.any? %>
                   <% waypoint.galleries.each do |gallery| %>
                     <p><%= gallery.title %>!</p>
                   <% end %>
@@ -45,8 +51,7 @@
                 <% end %>
 
                 <!-- FRIENDS -->
-                <h6 class="waypoint-title">Friends</h6>
-                <% if waypoint.friends.any? && false %>
+                <% if waypoint.friends.any? %>
                   <% waypoint.friends.each do |friend| %>
                     <p><%= "#{friend.first_name} #{friend.last_name}" %></p>
                   <% end %>
@@ -55,8 +60,7 @@
                 <% end %>
 
                 <!-- Treks -->
-                <h6 class="waypoint-title">Treks</h6>
-                <% if waypoint.treks.any? && false %>
+                <% if waypoint.treks.any? %>
                   <% waypoint.treks.each do |trek| %>
                     <p><%= trek.title %></p>
                   <% end %>
@@ -65,8 +69,7 @@
                 <% end %>
 
                 <!-- Essays -->
-                <h6 class="waypoint-title">Essays</h6>              
-                <% if waypoint.essays.any? && false %>
+                <% if waypoint.essays.any? %>
                   <% waypoint.essays.each do |essay| %>
                     <p><%= essay.title %></p>
                   <% end %>
@@ -75,7 +78,7 @@
                 <% end %>
               <% end %>
             <% end %>
-          <% end %>
+          <%# end %>
         </div>
       </div>
     </div>
