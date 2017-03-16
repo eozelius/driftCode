@@ -1,16 +1,16 @@
 <% if !logged_in? %>
   <div class="container">
-  <div class="readme-container">
-    <h4>Welcome to driftMap</h4>
-    <p>driftMap is a backpacking and travelling platform that allows you to share a map of your journeys, adventures and wild experiences. </p>
-    <%= link_to signup_path do %>
-      <button class="normal">Sign up</button>
-    <% end %>
+    <div class="readme-container">
+      <h4>Welcome to driftMap</h4>
+      <p>driftMap is a backpacking and travelling platform that allows you to share a map of your journeys, adventures and wild experiences. </p>
+      <%= link_to signup_path do %>
+        <button class="normal">Sign up</button>
+      <% end %>
 
-    <%= link_to login_path do %>
-      <button class="normal">Log in</button>
-    <% end %>
-  </div>
+      <%= link_to login_path do %>
+        <button class="normal">Log in</button>
+      <% end %>
+    </div>
   </div>
 <% end %>
 
@@ -30,7 +30,52 @@
       <!-- CONTENT -->
       <div class="master-content">
         <div class="content-container">
-          <h4 class="waypoint-title">Content</h4>
+          <h4 class="waypoint-title">Galleries</h4>
+          <% @journeys.each do |journey| %>
+            <% if journey.waypoints.any? %>
+              <% journey.waypoints.each do |waypoint| %>
+                <!-- GALLERIES -->
+                <h6 class="waypoint-title">Galleries</h6>
+                <% if waypoint.galleries.any? && false %>
+                  <% waypoint.galleries.each do |gallery| %>
+                    <p><%= gallery.title %>!</p>
+                  <% end %>
+                <% else %>
+                  <p>no images.</p>
+                <% end %>
+
+                <!-- FRIENDS -->
+                <h6 class="waypoint-title">Friends</h6>
+                <% if waypoint.friends.any? && false %>
+                  <% waypoint.friends.each do |friend| %>
+                    <p><%= "#{friend.first_name} #{friend.last_name}" %></p>
+                  <% end %>
+                <% else %>
+                  <p>no friends</p>
+                <% end %>
+
+                <!-- Treks -->
+                <h6 class="waypoint-title">Treks</h6>
+                <% if waypoint.treks.any? && false %>
+                  <% waypoint.treks.each do |trek| %>
+                    <p><%= trek.title %></p>
+                  <% end %>
+                <% else %>
+                  <p>no treks</p>
+                <% end %>
+
+                <!-- Essays -->
+                <h6 class="waypoint-title">Essays</h6>              
+                <% if waypoint.essays.any? && false %>
+                  <% waypoint.essays.each do |essay| %>
+                    <p><%= essay.title %></p>
+                  <% end %>
+                <% else %>
+                  <p>no essays</p>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
