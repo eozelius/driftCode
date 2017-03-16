@@ -1,8 +1,6 @@
 @import 'colors';
 
 #home-page {
-  overflow: hidden; 
-  
   /*#map,
   .map-container {
     top: -680px;
@@ -22,7 +20,7 @@
   height: 680px;
   background-color: $maroon;
   position: relative;
-  left: 2%;
+  left: 1%;
   top: 2%;
   bottom: 2%;
   z-index: 2;
@@ -37,11 +35,17 @@
     background-color: #47505e;
     height: 660px;
     padding: 1% 0;
-    display: inline-block;  
   }
 }
 
 .master-legend {
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin-left:2px;
+
   .legend-container {
     width: 95%;
     margin: 0 auto;
@@ -67,12 +71,16 @@
 
 /* MasterContent */
 .master-content {
-
+  float: right;
+  position: relative;
+  top: -660px;
+  margin-right: 2px;
 }
 
 
 /* master-leaflet */
 .master-leaflet {
   position: relative;
-  top: -700px;
+  //top: -700px;
+  top: -1329px;
 }
