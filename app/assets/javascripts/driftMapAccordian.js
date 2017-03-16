@@ -31,11 +31,11 @@ var DriftMapAccordian = function(){
 					a += '<li data-slideindex="'+ y +'" class="waypoint" data-waypoint="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-waypointslide="'+ y +'" data-journeyid="'+ r.id +'">' + 
 	  							'<p class="waypoint-title">'+ w.title + '</p>' +
 	  							'<div class="content-icons-container">' +
-		  							'<i class="fa fa-book"></i>| ' +
-		  							'<i class="fa fa-camera"></i>' +
-		  							'<i class="fa fa-user-circle"></i>' + 
-		  							'<i class="fa fa-pencil-square-o"></i>' + 
-		  							'<i class="fa fa-compass"></i>'+ 
+		  							'<i class="fa fa-book" 	 		  		title="stories"></i>| ' +
+		  							'<i class="fa fa-camera" 					title="galleries"></i>' +
+		  							'<i class="fa fa-user-circle" 		title="friends"></i>' + 
+		  							'<i class="fa fa-pencil-square-o" title="essays"></i>' + 
+		  							'<i class="fa fa-compass" 				title="treks"></i>'+ 
 		  						'</div>' +
 	  						'</li>';
 				}
@@ -44,10 +44,10 @@ var DriftMapAccordian = function(){
 				$('#waypt-accord').append(a);
 			} // end for(var x in journeys)
 
-			// if user_is_home, add edit capability
+			// if user_is_home, add edit capability to journeys and waypoints
 			if(user_is_home){	$('.panel').each(function(index){	$(this).find('.journey-switcher').after('<a href="/journeys/' + $(this).data('journey') + '/edit" style="font-size: .85em; font-style: italic; color: #C2D9EB"> - edit </a>')	})	}
 
-			if($('#journey_edit').length){
+			if($('#journey_edit').length && user_is_home){
 				$('ul.waypoints-container p.waypoint-title').each(function(){
 					var id = $(this).parent().data('waypoint')
 					var editWaypoint = '<a href="/waypoints/'+ id +'/edit" style="font-size: .75em; font-style: italic; margin-right: 4px">edit - </a>'
@@ -55,7 +55,6 @@ var DriftMapAccordian = function(){
 					$(this).prepend(editWaypoint).append(addContent)
 				})
 			}
-
 
 			$('.panel-default:first-child .panel-collapse').addClass('in')
 			$('.waypoints-container').first().find('.waypoint-title').first().addClass('li-waypoint-selected')
@@ -71,7 +70,7 @@ var DriftMapAccordian = function(){
 					var wp_journey_id = wp.journey_id
 					DriftMapLeaflet.focusWayPoint(id);
 					DriftMapAccordian.focusWayPoint(id);
-					DriftMapTimeline.focusJourney(wp_journey_id, slide_index, false)
+					// DriftMapTimeline.focusJourney(wp_journey_id, slide_index, false)
 				}
 			});
 
@@ -80,15 +79,17 @@ var DriftMapAccordian = function(){
 				var r_id = $(this).data('journey');
 				var r = DriftMapTimeline.getJourney(r_id);
 				var first_wp_id = $('.panel-default[data-journey="'+ r_id +'"] li.waypoint').first().data('waypoint')
+				$('.waypoint-title').removeClass('li-waypoint-selected')
+				$('.waypoint[data-slideindex="0"] p').addClass('li-waypoint-selected')
 
-				if(r){
+				//if(r){
 					/* Timeline */
-					DriftMapTimeline.focusJourney(r_id, 0, true);
+					// DriftMapTimeline.focusJourney(r_id, 0, true);
 
 					/* Waypoints */
-					$('.waypoint-title').removeClass('li-waypoint-selected')
-					$('.waypoint[data-slideindex="0"] p').addClass('li-waypoint-selected')
-				}
+					// $('.waypoint-title').removeClass('li-waypoint-selected')
+					// $('.waypoint[data-slideindex="0"] p').addClass('li-waypoint-selected')
+				//}
 
 				/* Leaflet */
 				if(first_wp_id !== undefined){ DriftMapLeaflet.focusWayPoint(first_wp_id) }
