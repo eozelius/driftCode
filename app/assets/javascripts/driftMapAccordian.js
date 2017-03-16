@@ -30,15 +30,44 @@ var DriftMapAccordian = function(){
 					var w = wps[y]
 					a += '<li data-slideindex="'+ y +'" class="waypoint" data-waypoint="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-waypointslide="'+ y +'" data-journeyid="'+ r.id +'">' + 
 	  							'<p class="waypoint-title">'+ w.title + '</p>' +
-	  							'<div class="content-icons-container">' +
-		  							'<i class="fa fa-book" 	 		  		title="stories"></i>| ' +
-		  							'<i class="fa fa-camera" 					title="galleries"></i>' +
-		  							'<i class="fa fa-user-circle" 		title="friends"></i>' + 
-		  							'<i class="fa fa-pencil-square-o" title="essays"></i>' + 
-		  							'<i class="fa fa-compass" 				title="treks"></i>'+ 
-		  						'</div>' +
-	  						'</li>';
+	  							'<div class="content-icons-container">';
+
+	  			// Add geft icons
+	  			if(w.content.galleries.length > 1){ a += '<i class="fa fa-camera" title="galleries"></i>' }
+	  			if(w.content.friends.length > 1){	  a += '<i class="fa fa-user-circle" title="friends"></i>' }
+	  			if(w.content.essays.length > 1){    a += '<i class="fa fa-pencil-square-o" title="essays"></i>' }
+	  			if(w.content.treks.length > 1){ 		a += '<i class="fa fa-compass" title="treks"></i>' }
+
+		  		a += '</div></li1>'
 				}
+
+
+				/*{
+					"id":1,
+					"title":"bogota",
+					"body":"...",
+					"x":4.6077624,
+					"y":-74.0745113,
+					"content":{
+						"galleries":[],
+						"friends":[],
+						"essays":[],
+						"treks":[]
+					},
+					"journey_id":1,
+					"driftmap_id":1,
+					"coverphoto":{
+						"url":null
+					},
+					"date":{
+						"year":2015,
+						"month":9,
+						"day":7
+					}
+				}*/
+
+
+
 
 				a += '</ul></div></div></div>';
 				$('#waypt-accord').append(a);
