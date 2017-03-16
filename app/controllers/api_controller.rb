@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
   def home
-    journeys = [User.find(1).driftmap.journeys.third, User.find(1).driftmap.journeys.last]
+    journeys = User.find(1).driftmap.journeys
     response = responsify journeys
     render json: response
   end
@@ -25,10 +25,13 @@ class ApiController < ApplicationController
       response = []
 
       journeys.each do |journey|
-        wps = Array.new, galleries = [], friends = [], essays = [], treks = []
+        waypoints = [] 
+        galleries = []
+        friends = []
+        essays = []
+        treks = []
 
         journey.waypoints.order(:date).each do |wp|
-=begin
           # galleries
           if wp.galleries.any?
             wp.galleries.each do |g|
@@ -86,9 +89,8 @@ class ApiController < ApplicationController
               })
             end
           end
-=end
-=begin
-          wps.push({ 
+
+          waypoints.push({ 
             id: wp.id,
             title: wp.title,
             body: wp.body,
@@ -109,14 +111,11 @@ class ApiController < ApplicationController
               day:   wp.date.day 
             } 
           })
-=end
         end
-
-        Rails.logger.debug " >>>> wps: #{wps}" 
 
         response.push({ 
           journey: journey, 
-          waypoints: wps 
+          waypoints: waypoints 
         })
       end
 
