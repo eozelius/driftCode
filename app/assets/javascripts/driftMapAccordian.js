@@ -32,41 +32,13 @@ var DriftMapAccordian = function(){
 	  							'<p class="waypoint-title">'+ w.title + '</p>' +
 	  							'<div class="content-icons-container">';
 
-	  			if(w.content.galleries.length > 0){ a += '<i class="fa fa-camera" title="galleries">|gal|</i>' }
-	  			if(w.content.friends.length > 0){	  a += '<i class="fa fa-user-circle" title="friends">|fri|</i>' }
-	  			if(w.content.essays.length > 0){    a += '<i class="fa fa-pencil-square-o" title="essays">|ess|</i>' }
-	  			if(w.content.treks.length > 0){ 		a += '<i class="fa fa-compass" title="treks">|tre|</i>' }
+	  			if(w.content.galleries.length > 0){ a += '<i class="fa fa-camera" title="galleries"></i>' }
+	  			if(w.content.friends.length > 0){	  a += '<i class="fa fa-user-circle" title="friends"></i>' }
+	  			if(w.content.essays.length > 0){    a += '<i class="fa fa-pencil-square-o" title="essays"></i>' }
+	  			if(w.content.treks.length > 0){ 		a += '<i class="fa fa-compass" title="treks"></i>' }
 
 		  		a += '</div></li1>'
 				}
-
-
-				/*{
-					"id":1,
-					"title":"bogota",
-					"body":"...",
-					"x":4.6077624,
-					"y":-74.0745113,
-					"content":{
-						"galleries":[],
-						"friends":[],
-						"essays":[],
-						"treks":[]
-					},
-					"journey_id":1,
-					"driftmap_id":1,
-					"coverphoto":{
-						"url":null
-					},
-					"date":{
-						"year":2015,
-						"month":9,
-						"day":7
-					}
-				}*/
-
-
-
 
 				a += '</ul></div></div></div>';
 				$('#waypt-accord').append(a);
@@ -79,8 +51,9 @@ var DriftMapAccordian = function(){
 				$('ul.waypoints-container p.waypoint-title').each(function(){
 					var id = $(this).parent().data('waypoint')
 					var editWaypoint = '<a href="/waypoints/'+ id +'/edit" style="font-size: .75em; font-style: italic; margin-right: 4px">edit - </a>'
-					var addContent = '<a href="/waypoints/content_creation?journey_id='+ $(this).parent().data('journeyid') +'&title='+ encodeURIComponent($(this).text()) +'&waypoint_id='+ id +'" style="font-style: normal; font-size: .75em; margin-left: 4px; color: #552727; margin-top: -2px;"> - [ add content ]</a>'
-					$(this).prepend(editWaypoint).append(addContent)
+					var addContent = '<a href="/waypoints/content_creation?journey_id='+ $(this).parent().data('journeyid') +'&title='+ encodeURIComponent($(this).text()) +'&waypoint_id='+ id +'" style="font-style: normal; font-size: .75em; margin-left: 4px; color: #552727; margin-top: -2px;"> - [add content]</a>';
+					$(this).prepend(editWaypoint);
+					$(this).parent().find('i.fa').last().after(addContent)
 				})
 			}
 

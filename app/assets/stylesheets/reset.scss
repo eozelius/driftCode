@@ -171,6 +171,17 @@ p {
 	text-align: left;
 }
 
+span {
+	font-size: 1em;
+	font-family: 'ubuntu', sans-serif;
+}
+
+span.edit {
+	font-size: .9em;
+	font-style: italic;
+	color: #78acd3;
+}
+
 a {
 	cursor: pointer;
 }

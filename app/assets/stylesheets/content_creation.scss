@@ -1,8 +1,13 @@
+@import 'colors';
+
 #content_creation {
-  height: 500px;
-  
+  /* new conent */  
   h4.waypoint-title {
     text-align: center;
+  }
+
+  p.content-description {
+    color: $maroon;
   }
 
   i {
@@ -12,7 +17,7 @@
   }
 
   .cc-wrapper {
-    p {
+     p.new-content-title {
       text-align: center;
       color: #C2D9EB;
       margin-bottom: 5%;
@@ -42,7 +47,6 @@
     }
   }
 
-
   .content-photo {
     background-color: #C2D9EB;
   }
@@ -59,4 +63,25 @@
   .content-essay {
     background-color: #755151;
   }
+
+  /* Begin Exisiting Content */
+  .existing-container {
+    margin: 2% 0 0;
+
+    ul {
+      li {
+        margin: 1% 0% 6%;
+
+        p {
+          text-align: center;
+          cursor: pointer;
+        }
+
+
+
+      }
+    }
+  }
+
+  /* End Exisiting Content */
 }
