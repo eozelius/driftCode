@@ -9,7 +9,7 @@ class Waypoint < ActiveRecord::Base
   validates :journey_id, presence: true
   validates :x,          presence: true
   validates :y,          presence: true
-  validates :coverphoto, presence: true
+  #validates :coverphoto, presence: true
 
   mount_uploader :coverphoto, PictureUploader
 end

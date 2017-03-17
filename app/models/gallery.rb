@@ -1,6 +1,6 @@
 class Gallery < ActiveRecord::Base
   belongs_to :waypoint
-  has_many :waypoint_photos, dependent: :destroy
+  has_many :waypoint_images, dependent: :destroy
   
   
 
