@@ -32,11 +32,10 @@ var DriftMapAccordian = function(){
 	  							'<p class="waypoint-title">'+ w.title + '</p>' +
 	  							'<div class="content-icons-container">';
 
-	  			// Add geft icons
-	  			if(w.content.galleries.length > 1){ a += '<i class="fa fa-camera" title="galleries"></i>' }
-	  			if(w.content.friends.length > 1){	  a += '<i class="fa fa-user-circle" title="friends"></i>' }
-	  			if(w.content.essays.length > 1){    a += '<i class="fa fa-pencil-square-o" title="essays"></i>' }
-	  			if(w.content.treks.length > 1){ 		a += '<i class="fa fa-compass" title="treks"></i>' }
+	  			if(w.content.galleries.length > 0){ a += '<i class="fa fa-camera" title="galleries">|gal|</i>' }
+	  			if(w.content.friends.length > 0){	  a += '<i class="fa fa-user-circle" title="friends">|fri|</i>' }
+	  			if(w.content.essays.length > 0){    a += '<i class="fa fa-pencil-square-o" title="essays">|ess|</i>' }
+	  			if(w.content.treks.length > 0){ 		a += '<i class="fa fa-compass" title="treks">|tre|</i>' }
 
 		  		a += '</div></li1>'
 				}

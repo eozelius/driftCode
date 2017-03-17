@@ -26,12 +26,13 @@ class ApiController < ApplicationController
 
       journeys.each do |journey|
         waypoints = [] 
-        galleries = []
-        friends = []
-        essays = []
-        treks = []
 
         journey.waypoints.order(:date).each do |wp|
+          galleries = []
+          friends = []
+          essays = []
+          treks = []
+          
           # galleries
           if wp.galleries.any?
             wp.galleries.each do |g|
