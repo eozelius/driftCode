@@ -9,13 +9,16 @@ $(function(){
       window.r = r
 
       // init Timeline
-      // DriftMapTimeline.init(r);
+      // DriftMapTimeline.init(r)
 
       // init Leaflet
-      DriftMapLeaflet.init(r);
+      DriftMapLeaflet.init(r)
 
       // init Accordian
-      DriftMapAccordian.init(r);
+      DriftMapAccordian.init(r)
+
+      // init Content
+      DriftMapContent.init(r)
     }
   })
 })

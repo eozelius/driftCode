@@ -18,4 +18,5 @@
 //= require bootstrap-datetimepicker.min.js
 //= require driftMapLeaflet.js
 //= require driftMapTimeline.js
+//= require driftMapContent.js
 //= require driftMapAccordian.js

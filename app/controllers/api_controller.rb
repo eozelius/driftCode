@@ -37,6 +37,7 @@ class ApiController < ApplicationController
           if wp.galleries.any?
             wp.galleries.each do |g|
               galleries.push({
+                id: g.id,
                 title: g.title,
                 description: g.description,
                 coverphoto: g.coverphoto,
@@ -51,6 +52,7 @@ class ApiController < ApplicationController
           if wp.friends.any?
             wp.friends.each do |f|
               friends.push({
+                id: f.id,
                 first_name: f.first_name,
                 last_name: f.last_name,
                 photo: f.photo,
@@ -69,6 +71,7 @@ class ApiController < ApplicationController
           if wp.essays.any?
             wp.essays.each do |e|
               essays.push({
+                id: e,
                 title: e.title,
                 body: e.body,
                 coverphoto: e.coverphoto,
@@ -83,6 +86,7 @@ class ApiController < ApplicationController
           if wp.treks.any?
             wp.treks.each do |t|
               treks.push({
+                id: t.id,
                 title: t.title,
                 description: t.description,
                 coverphoto: t.coverphoto,

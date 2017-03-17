@@ -75,12 +75,53 @@
   top: -660px;
   margin-right: 2px;
   padding: 2%;
-}
 
+  .content-type {
+    height: 580px;
+    overflow: scroll;
+  }
+
+  .content-item {
+    width: 97%;
+    margin: 0 auto 5%;
+    border: 1px solid #ccc;
+    padding: 1% 3%;
+  }
+
+  p.content-name {
+    color: $maroon;
+    margin: 3% 0;
+  }
+
+  p.content-description {
+    color: $maroon;
+    margin: 3% 0 5%;
+  }
+
+  img.content-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .master-galleries-container {
+
+  }
+
+  .master-friends-container {
+
+  }
+
+  .master-essays-container {
+
+  }
+
+  .master-treks-container {
+
+  }
+}
 
 /* master-leaflet */
 .master-leaflet {
   position: relative;
-  //top: -700px;
   top: -1329px;
 }
