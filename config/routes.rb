@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
+  resources :users,            only: [:new, :create, :edit, :update, :show, :destroy]
   resources :journeys
   resources :waypoints,        only: [:new, :create, :edit, :update, :destroy]
-  resources :waypoint_images,  only: [:new, :create, :edit, :update, :destroy]
-  resources :users,            only: [:new, :create, :edit, :update, :show, :destroy]
+  resources :galleries,        only: [:new, :create, :edit, :update, :destroy ]
   resources :driftmap,         only: [:edit,:update, :destroy]
   resources :friends,          only: [:new, :create, :edit, :update, :destroy]
   resources :essays,           only: [:new, :create, :edit, :update, :destroy]
   resources :treks,            only: [:new, :create, :edit, :update, :destroy]
+  resources :waypoint_images,  only: [:create, :update, :destroy]
 
   get    'waypoints/content_creation' => 'waypoints#content_creation'
   get    'signup' => 'users#new'

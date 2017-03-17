@@ -15,8 +15,8 @@ $(function(){
         id: 0,
         title: '',
         body: '',
-        x: $("#essay_x").val(),
-        y: $("#essay_y").val(),
+        x: $("#gallery_x").val(),
+        y: $("#gallery_y").val(),
         driftmap_id: 0,
         date: { 
           year: 2017,
@@ -28,8 +28,8 @@ $(function(){
     }]
 
     var opt = {
-      init_x: $("#essay_x").val(),
-      init_y: $("#essay_y").val(),
+      init_x: $("#gallery_x").val(),
+      init_y: $("#gallery_y").val(),
       init_zoom: 6
     }
 
@@ -42,14 +42,18 @@ $(function(){
     marker.dragging.enable();
     marker.on('dragend', function(e){
       setLatLng(e.target.getLatLng().lat, e.target.getLatLng().lng)
-    });
-    
-    function setLatLng(lat, lng) {
-      $('#friend_x').val(lat);
-      $('#friend_y').val(lng);      
-    }
-    
-
-
+    }); 
   }
+  
+  function setLatLng(lat, lng) {
+    $('#friend_x').val(lat);
+    $('#friend_y').val(lng);      
+  }
+
+  // EDIT
+  if($('#galleries_edit').length){
+    alert('edit')
+  }
+
+
 })
