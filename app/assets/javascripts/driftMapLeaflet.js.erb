@@ -29,31 +29,25 @@ var DriftMapLeaflet = function(){
 
 
 		// public methods
-		init: function(journeys, options, myDefault){
-
-
-
+		init: function(data, options, myDefault){
 			var x = options !== undefined ? options.init_x : 0.924206230200376;
 			var y = options !== undefined ? options.init_y : -40.2400771379471 - 50;
 			var z = options !== undefined ? options.init_zoom : 5;
-			var mapbox_color
 
-			m = L.map('map').setView([x, y], z);
+			var driftmap = data[1]
+			var journeys = data[0]
+
+			m = L.map('map').setView([driftmap.init_x, driftmap.init_y], driftmap.init_zoom);
 
 			// color scheme
-			if(options !== undefined){
-				switch (options.color_scheme) {
-				  case 'dark':
-				    mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}'
-				    break;
-				  default:
-				  	
-				    break;
-				}
-			} else {
-				mapbox_color = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png' // default offwhite on blue
+			switch (driftmap.color_scheme) {
+			  case 'dark':
+			    mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}';
+			    break;
+			  default:
+					mapbox_color = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png'; // default offwhite on blue
+			    break;
 			}
-
 			// end color scheme
 
 			L.tileLayer(mapbox_color + '?access_token={accessToken}', 

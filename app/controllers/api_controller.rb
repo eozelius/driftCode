@@ -1,23 +1,25 @@
 class ApiController < ApplicationController
   def home
     journeys = User.find(1).driftmap.journeys
+    driftmap = User.find(1).driftmap
     response = responsify journeys
-    render json: response
+    render json: [response, driftmap]
   end
 
   def profile_page
     user = User.find(params[:id])
     journeys = user.driftmap.journeys
     response = responsify journeys
-    render json: response
+    render json: [response, user.driftmap]
   end
 
   def journey_edit
-    journeys = []
-    journeys.push(Journey.find params[:id])
+    journey = Journey.find(params[:id])
+    driftmap = Driftmap.find(journey.driftmap_id)
+    journeys = [journey]
 
     response = responsify journeys
-    render json: response
+    render json: [response, driftmap]
   end
 
   private
@@ -120,7 +122,7 @@ class ApiController < ApplicationController
 
         response.push({ 
           journey: journey, 
-          waypoints: waypoints 
+          waypoints: waypoints
         })
       end
 

@@ -9,7 +9,8 @@ var DriftMapAccordian = function(){
 
 
 		// public methods
-		init: function(journeys, user_is_home){
+		init: function(data, user_is_home){
+			var journeys = data[0]
 			for(var x in journeys){
 				var r = journeys[x].journey
 				var wps = journeys[x].waypoints

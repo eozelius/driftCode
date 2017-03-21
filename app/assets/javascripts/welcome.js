@@ -10,16 +10,8 @@ $(function(){
 
       // init Timeline
       // DriftMapTimeline.init(r)
-
-      // init Leaflet
-      var opts = {
-        init_x: r[0].waypoints[0].x,
-        init_y: r[0].waypoints[0].y + 40,
-        init_zoom: 6,
-        color_scheme: 'dark'
-      }
-
-      DriftMapLeaflet.init(r, opts)
+      
+      DriftMapLeaflet.init(r)
 
       // init Accordian
       DriftMapAccordian.init(r)
