@@ -1,8 +1,9 @@
 /* INDEX ACTION */
 $(function(){
   $.ajax({
-    url: '/api_home',
+    url: '/get_driftmap',
     method: 'POST',
+    data: { driftmap_id: $('#driftmap_id').val() },
     dataType: 'JSON',
     complete: function(response) {
       var r = response.responseJSON;

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'welcome#index'
+  post 'get_driftmap' => 'api#get_driftmap'
 
   resources :users,            only: [:new, :create, :edit, :update, :show, :destroy]
   resources :journeys
@@ -17,14 +18,7 @@ Rails.application.routes.draw do
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  # API Data Routes
-  post 'api_home' => 'api#home'
-  post 'api_profile_page' => 'api#profile_page'
-  post 'api_journey_edit' => 'api#journey_edit'
-  # end API
-
-  get 'ethan', to: redirect('users/1')
-  
+  get 'ethan', to: redirect('users/1')  
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
 end

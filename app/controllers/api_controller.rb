@@ -1,29 +1,13 @@
 class ApiController < ApplicationController
-  def home
-    journeys = User.find(1).driftmap.journeys
-    driftmap = User.find(1).driftmap
-    response = responsify journeys
-    render json: { driftmap: driftmap, journeys: response }
-  end
-
-  def profile_page
-    user = User.find(params[:id])
-    journeys = user.driftmap.journeys
-    response = responsify journeys
-    render json: { driftmap: user.driftmap, journeys: response }
-  end
-
-  def journey_edit
-    journey = Journey.find(params[:id])
-    driftmap = Driftmap.find(journey.driftmap_id)
-    journeys = [journey]
-
-    response = responsify journeys
-    render json: { driftmap: driftmap, journeys: response }
+  def get_driftmap
+    driftmap = Driftmap.find(params[:driftmap_id])
+    journeys = format_journeys(driftmap.journeys)
+    render json: { driftmap: driftmap,
+                   journeys: journeys }
   end
 
   private
-    def responsify(journeys)
+    def format_journeys(journeys)
       response = []
 
       journeys.each do |journey|
