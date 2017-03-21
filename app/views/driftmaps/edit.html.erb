@@ -14,13 +14,22 @@
       <h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Edit <%= @driftmap.title.html_safe %></h4>
 
       <!-- title -->
-      <h4 class="waypoint-title" style="margin-top:-4px; width: 15%">Title</h4>
+      <h4 class="waypoint-title">Title</h4>
       <%= f.text_field :title, autofocus: true, style: 'margin-left:3%;' %>
 
       <!-- driftmap description -->
-      <h4 class="waypoint-title" style="display:inline; float:left;margin-top:0">Description</h4>
-
+      <h4 class="waypoint-title">Description</h4>
       <%= f.text_area :body %>
+
+      <h4 class="waypoint-title">Color Scheme</h4>
+      <!-- default color-scheme -->
+
+      <input value="default" name="driftmap[color_scheme]" style="float:left; margin-top: 0" id="driftmap_color_scheme_default" type="radio">
+      <p class="waypoint-title" style="display: inline; float:left; margin-top: 0">default</p><div class="clear-fix"></div>
+
+      <!-- dark color-scheme -->
+      <input value="dark" name="driftmap[color_scheme]" id="driftmap_color_scheme_dark" style="float:left; margin-top: 0" type="radio">
+      <p class="waypoint-title" style="display: inline; float:left; margin-top: 0">dark</p><div class="clear-fix"></div>
     </div>
 
     <div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">

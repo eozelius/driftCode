@@ -30,14 +30,33 @@ var DriftMapLeaflet = function(){
 
 		// public methods
 		init: function(journeys, options, myDefault){
+
+
+
 			var x = options !== undefined ? options.init_x : 0.924206230200376;
 			var y = options !== undefined ? options.init_y : -40.2400771379471 - 50;
 			var z = options !== undefined ? options.init_zoom : 5;
+			var mapbox_color
 
 			m = L.map('map').setView([x, y], z);
-			// indexer['map'] = m;
 
-			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
+			// color scheme
+			if(options !== undefined){
+				switch (options.color_scheme) {
+				  case 'dark':
+				    mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}'
+				    break;
+				  default:
+				  	
+				    break;
+				}
+			} else {
+				mapbox_color = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png' // default offwhite on blue
+			}
+
+			// end color scheme
+
+			L.tileLayer(mapbox_color + '?access_token={accessToken}', 
 				{	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		    	maxZoom: 18,
 		    	id: 'eozelius77.j4hekake',
