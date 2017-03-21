@@ -9,7 +9,7 @@ var DriftMapContent = function(){
 
     // public methods
     init: function(data){
-      var journeys = data[0]
+      var journeys = data.journeys
       for(var x in journeys){
         var j = journeys[x].journey
         var wps = journeys[x].waypoints
