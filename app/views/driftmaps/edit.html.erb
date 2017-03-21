@@ -1,3 +1,44 @@
 <% provide(:title, 'edit driftmap') %>
 
-<%= render 'form' %>
+<input type="hidden" value="1" id="driftmaps_edit">
+
+<div class="container">
+  <%= form_for @driftmap do |f| %>
+    <%= f.hidden_field :init_x %>
+    <%= f.hidden_field :init_y %>
+    <%= f.hidden_field :init_zoom %>
+    <%= f.hidden_field :driftmap_id, value: @driftmap.id %>
+    
+    <div id="driftmap-timeline-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+      <h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Edit <%= @driftmap.title.html_safe %></h4>
+
+      <!-- title -->
+      <h4 class="waypoint-title" style="margin-top:-4px; width: 15%">Title</h4>
+      <%= f.text_field :title, autofocus: true, style: 'margin-left:3%;' %>
+
+      <!-- driftmap description -->
+      <h4 class="waypoint-title" style="display:inline; float:left;margin-top:0">Description</h4>
+
+      <%= f.text_area :body %>
+    </div>
+
+    <div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+      <div class="map-container">
+        <h4 class="waypoint-title">
+          To customize the location and zoom, and click save.
+        </h4>
+
+        <div id="map"></div>    
+      </div>
+
+      <div class="commit-buttons-container" style="width: 100%; margin-top 5%">
+        <%= link_to(controller: 'waypoints', action: 'content_creation', waypoint_id: params[:waypoint_id], journey_id: params[:journey_id]) do %>
+
+          <span class="normal cancel" style="display: inline-block; margin: 30px 0; float: left">cancel</span>
+        <% end %>
+
+        <button name="commit" class="normal commit" type="submit" style="margin: 30px 0; float: right">save</button>      
+      </div><div class="clearfix"></div>
+    </div>
+  <% end %>
+</div>

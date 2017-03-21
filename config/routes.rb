@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :journeys
   resources :waypoints,        only: [:new, :create, :edit, :update, :destroy]
   resources :galleries,        only: [:new, :create, :edit, :update, :destroy ]
-  resources :driftmap,         only: [:edit,:update, :destroy]
+  resources :driftmaps,        only: [:edit,:update, :destroy]
   resources :friends,          only: [:new, :create, :edit, :update, :destroy]
   resources :essays,           only: [:new, :create, :edit, :update, :destroy]
   resources :treks,            only: [:new, :create, :edit, :update, :destroy]
