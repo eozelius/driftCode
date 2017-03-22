@@ -19,5 +19,12 @@ $(function(){
       $('#driftmap_init_zoom').val(zoom)
       $('form').submit();
     });
+
+    // Click a theme title ex: dark/blue
+    $('.color-schemes p').on('click', function(){
+      var color = $(this).text()
+      $('#driftmap_color_scheme_' + color).click()
+
+    })
   }
 })

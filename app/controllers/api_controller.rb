@@ -113,3 +113,40 @@ class ApiController < ApplicationController
       return response
     end
 end
+
+=begin
+  JSON FORMAT:
+
+  {
+    "driftmap":{
+      "id":1,
+      "title":"./driftmap",
+      "body":"just a computer hacker trying to get some more sunshine.",
+      "init_x":0.924206230200376,
+      "init_y":-34.2400771379471,
+      "init_zoom":2,
+      "user_id":1,
+      "created_at":"2017-03-17T00:25:53.942Z",
+      "updated_at":"2017-03-21T13:01:25.402Z",
+      "color_scheme":"default"
+    },
+
+    "journeys":[{
+      "journey":{
+        "id":1,
+        "description":"A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.",
+        "title":"2015 - Colombia",
+        "coverphoto":{
+          "url":null
+        },
+        "driftmap_id":1,
+        "created_at":"2017-03-17T00:25:53.962Z",
+        "updated_at":"2017-03-17T00:25:53.962Z"
+      },
+
+      "waypoints":[{
+        "id":1,
+        "title":"bogota",
+        "body":"The Capital and largest city in Colombia..."  
+
+=end

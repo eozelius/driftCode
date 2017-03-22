@@ -1,6 +1,8 @@
 <% provide(:title, @user.first_name) %>
 
 <input id="users_show" type="hidden" value="1">
+<input id="driftmap_id" type="hidden" value="<%= @driftmap.id %>">
+
 
 <div id="profile-page" class="container">
 	<input id="user_id" type="hidden" value="<%= @user.id %>" >

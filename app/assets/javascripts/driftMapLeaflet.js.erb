@@ -29,7 +29,7 @@ var DriftMapLeaflet = function(){
 
 
 		// public methods
-		init: function(data, options, myDefault){
+		init: function(data, myDefault){
 			/*var x = options !== undefined ? options.init_x : 0.924206230200376;
 			var y = options !== undefined ? options.init_y : -40.2400771379471 - 50;
 			var z = options !== undefined ? options.init_zoom : 5;*/
@@ -41,6 +41,15 @@ var DriftMapLeaflet = function(){
 
 			// color scheme
 			switch (driftmap.color_scheme) {
+			  case 'normal':
+			  	mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}';
+			  	break;
+			  case 'satellite':
+			  	mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}';
+			  	break;
+			  case 'gray':
+			  	mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}';
+			  	break;
 			  case 'dark':
 			    mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}';
 			    break;

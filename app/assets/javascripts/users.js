@@ -26,11 +26,11 @@ $(function(){
 /* SHOW ACTION */
   if($('#users_show').length){
     $.ajax({
-      url: '/api_profile_page',
+      url: '/get_driftmap',
       method: 'POST',
       dataType: 'JSON',
       data: { 
-        id: $('#user_id').val()
+        driftmap_id: $('#driftmap_id').val()
       },
       complete: function(response){
         var r = response.responseJSON
