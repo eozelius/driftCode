@@ -6,7 +6,7 @@ $(function(){
   
   // EDIT ////
   if($('#driftmaps_edit').length){
-    DriftMapLeaflet.defaultInit();
+    // DriftMapLeaflet.defaultInit();
 
     // submit form
     $('span.normal.save').on('click', function(){

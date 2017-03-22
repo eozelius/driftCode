@@ -22,14 +22,28 @@
       <%= f.text_area :body %>
 
       <h4 class="waypoint-title">Color Scheme</h4>
-      <!-- default color-scheme -->
 
-      <input value="default" name="driftmap[color_scheme]" style="float:left; margin-top: 0" id="driftmap_color_scheme_default" type="radio">
-      <p class="waypoint-title" style="display: inline; float:left; margin-top: 0">default</p><div class="clear-fix"></div>
+      <div class="color-schemes">
+        <!-- normal -->
+        <input value="normal" name="driftmap[color_scheme]" style="float:left; margin-top: 0" id="driftmap_color_scheme_normal" type="radio">
+        <p class="waypoint-title">normal</p><div class="clear-fix"></div>
+        
+        <!-- default color-scheme -->
+        <input value="default" name="driftmap[color_scheme]" style="float:left; margin-top: 0" id="driftmap_color_scheme_default" type="radio">
+        <p class="waypoint-title">blue</p><div class="clear-fix"></div>
 
-      <!-- dark color-scheme -->
-      <input value="dark" name="driftmap[color_scheme]" id="driftmap_color_scheme_dark" style="float:left; margin-top: 0" type="radio">
-      <p class="waypoint-title" style="display: inline; float:left; margin-top: 0">dark</p><div class="clear-fix"></div>
+        <!-- Satellite -->
+        <input value="satellite" name="driftmap[color_scheme]" style="float:left; margin-top: 0" id="driftmap_color_scheme_satellite" type="radio">
+        <p class="waypoint-title">satellite</p><div class="clear-fix"></div>
+
+        <!-- dark color-scheme -->
+        <input value="dark" name="driftmap[color_scheme]" id="driftmap_color_scheme_dark" style="float:left; margin-top: 0" type="radio">
+        <p class="waypoint-title">dark</p><div class="clear-fix"></div>
+
+        <!-- gray -->
+        <input value="gray" name="driftmap[color_scheme]" style="float:left; margin-top: 0" id="driftmap_color_scheme_gray" type="radio">
+        <p class="waypoint-title">gray</p><div class="clear-fix"></div>
+      </div>
     </div>
 
     <div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">

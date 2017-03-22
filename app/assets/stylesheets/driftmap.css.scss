@@ -1,36 +1,11 @@
-/* Driftmap form */
-/*.edit_driftmap,
-.new_driftmap {
-  input[type="text"],
-  textarea {
-    background-color: #fff;
-    border-radius: 2px;
-    border: 1px solid #ccc;
-    width: 96%;
-  }
-  textarea {
-    height: 130px;
-    position: relative;
-    padding: 3%;
-    bottom: 0;
-    margin-left: 0 !important;
-  }
-}*/
-
-.driftmap-form-container {
-  width: 184px;
-  padding: 3%;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.wizard-step {
-
-  /* description */
-  .journey-info,
-  .blip-info {
-    display: none;
+/* EDIT */
+.edit_driftmap {
+  .color-schemes {
+    p {
+      margin-top: -2px;
+      display: inline;
+      float:left;
+    }
   }
 }
 
@@ -52,8 +27,6 @@
 .marker-box .leaflet-popup-tip {
   display: none;
 }
-
-/* popups */
 
 /* Blips */
 div.waypoint-popup {
@@ -83,22 +56,6 @@ div.waypoint-popup {
     height: 45px;
     overflow: hidden;
   }
-  .blip-images {
-    height: 100px;
-
-    .carousel-inner {
-      height: 100px;
-
-      .item {
-        display: block;
-      }
-    }
-
-    img {
-      width: 139px;
-      height: 120px;
-    }
-  }
 }
 
 @media (min-width: 480px) and (max-width: 767px){
@@ -114,25 +71,6 @@ div.waypoint-popup {
       margin: 0;
       height: 45px;
       overflow: hidden;
-    }
-    .blip-images {
-      height: 135px;
-      margin-top: 5px;
-
-      .carousel-inner {
-        height: 140px;
-
-        .item {
-          display: block;
-        }
-      }
-
-      img {
-        width: 240px;
-        height: 140px;
-        display: block;
-        margin: 0 auto;
-      }
     }
   }
 }
