@@ -23,8 +23,13 @@ $(function(){
     // Click a theme title ex: dark/blue
     $('.color-schemes p').on('click', function(){
       var color = $(this).text()
-      $('#driftmap_color_scheme_' + color).click()
 
+      if(color == 'blue'){ 
+        $('#driftmap_color_scheme_default').click()
+        return
+      } else {
+        $('#driftmap_color_scheme_' + color).click()
+      }
     })
   }
 })

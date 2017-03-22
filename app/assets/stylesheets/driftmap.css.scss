@@ -6,6 +6,11 @@
       display: inline;
       float:left;
     }
+
+    input[type="radio"] {
+      float:left; 
+      margin-top: 0;
+    }
   }
 }
 
