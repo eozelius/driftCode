@@ -23,27 +23,17 @@
     <div id='map'></div>
   </div>
 
-
-
-  <div class="master-container">
-    <!-- Guide -->
-    <div class="master-guide hidden">
-      <!-- LEGEND -->
-      <div class="master-legend">
-        <div class="legend-container">
-          <div id="accordian-container">
-            <div id="waypt-accord" class="panel-group " role="tablist" aria-multiselectable="true"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONTENT -->
-      <div class="master-content">
-        <div class="content-container"></div>
-      </div>
+  <div class="hud-container">
+    <div class="hud-content">
     </div>
 
+    <div class="hud-journeys">
+      <% @journeys.each_with_index do |journey, i| %>
+        <p class="title"><%= journey.title %></p>
+        <div class="waypts">
+          <p class="wp-title <%= 'active' if i == 0 %>"><%= journey.waypoints.first.title %></p>      
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
-
-<style type="text/css"> body #page-wrapper { margin-bottom: 0; } </style>
