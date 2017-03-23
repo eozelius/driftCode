@@ -97,35 +97,17 @@ var DriftMapLeaflet = function(){
                                     '</div>' +
                                     '<div class="waypoint-content-container">' + 
                                       '<div class="waypoint-content">' + 
-                                        '<ul>';
-                                          // friends?
-                                          if(wps[i].content.friends.length > 0){
-                                            popupContent += '<li class="friends"><i class="fa fa-user-circle"></i></li>';
-                                          }
-
-                                          // galleries
-                                          if(wps[i].content.galleries.length > 0){
-                                            popupContent += '<li class="galleries"><i class="fa fa-camera"></i></li>';
-                                          }
-
-                                          // essays
-                                          if(wps[i].content.essays.length > 0){
-                                            popupContent += '<li class="essays"><i class="fa fa-pencil-square-o"></i></li>';
-                                          }
-
-                                          // treks
-                                          if(wps[i].content.treks.length > 0){
-                                            popupContent += '<li class="treks"><i class="fa fa-compass"></i></li>';
-                                          }
-
-                                        popupContent += '</ul>' +
+                                        '<ul>' + 
+                                          '<li class="galleries"><i class="fa fa-camera"></i></li>' + 
+                                          '<li class="friends"><i class="fa fa-user-circle"></i></li>' +
+                                          '<li class="essays"><i class="fa fa-pencil-square-o"></i></li>' + 
+                                          '<li class="treks"><i class="fa fa-compass"></i></li>' + 
+                                        '<ul>' +
                                       '</div>' +
                                     '</div>' +
                                   '</div>';
 
               // if(wps[i].images.length > 0){  popupContent += '<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' }
-              popupContent += '</div>'
-
               var popupOptions = { className: 'waypoint-popup' }
               var wpMarker = L.marker([lat, lng]).addTo(m);
               var wpPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
