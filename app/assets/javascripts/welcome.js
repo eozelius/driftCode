@@ -15,10 +15,10 @@ $(function(){
       DriftMapLeaflet.init(r)
 
       // init Accordian
-      DriftMapAccordian.init(r)
+      // DriftMapAccordian.init(r)
 
       // init Content
-      DriftMapContent.init(r)
+      // DriftMapContent.init(r)
     }
   })
 })

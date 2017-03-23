@@ -5,12 +5,6 @@ div.pro-part {
 	padding-top: 10px;
 }
 
-/* Maps */
-div.map-container {
-	padding-bottom: 15px;
-	border-bottom: 3px solid #C2D9EB;
-}
-
 /* map details */
 div.map-details {
 	p {
@@ -128,15 +122,6 @@ div.new-blip-container {
 	}
 }
 
-
-
-/* Color 
-$light-blue: #ADCDDB;
-$dark-maroon: #552727;
-$light-maroon: #8C565B;
-$dark-grey: #353535;
-$white-grey: #E9EEF0;
-*/
 
 @media (max-width: 480px){
 	div.profile {

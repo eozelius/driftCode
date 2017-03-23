@@ -18,9 +18,16 @@
 <input type="hidden" id="driftmap_id" value="<%= @ethan.driftmap.id %>">
 
 <div id="home-page">
+  <!-- MAP -->
+  <div class="map-container">
+    <div id='map'></div>
+  </div>
+
+
+
   <div class="master-container">
     <!-- Guide -->
-    <div class="master-guide">
+    <div class="master-guide hidden">
       <!-- LEGEND -->
       <div class="master-legend">
         <div class="legend-container">
@@ -36,12 +43,6 @@
       </div>
     </div>
 
-    <!-- MAP -->
-    <div class="master-leaflet">
-      <div class="map-container">
-        <div id='map'></div>
-      </div>
-    </div>
   </div>
 </div>
 

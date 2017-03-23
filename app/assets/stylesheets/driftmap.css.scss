@@ -20,10 +20,6 @@
 }
 
 #map {  
-  p {
-    font-size: 1.3em;
-  }
-
   .leaflet-popup-content-wrapper {
     margin: 0;
     width: 302px;
@@ -31,6 +27,7 @@
     overflow: hidden;
 
     p.waypoint-popup-body {
+      font-size: 1.3em;
       max-height: 260px;
       overflow: hidden;
     }

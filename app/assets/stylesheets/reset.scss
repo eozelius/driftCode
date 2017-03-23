@@ -87,12 +87,6 @@ li {
 	display: none;
 }
 
-div.center {
-	width: 100%;
-	display: block;
-	margin: 0 auto;
-}
-
 .hidden {
 	display:none;
 }
@@ -227,7 +221,6 @@ textarea {
 	display: block;
 	margin: 0 auto;
 	padding: 0;
-
 }
 
 #page-wrapper {
@@ -404,15 +397,15 @@ h4.waypoint-title {
 }
 
 /* Leaflet generic components */
+.map-container,
 #map {
-	width: 100%;
-	margin: 0 auto;
-	height: 720px;
-	padding-bottom: 3%;
-}
+	background: #C2D9EB;
 
-form #map {
-	height: 298px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
 }
 
 @media (max-width: 480px){
