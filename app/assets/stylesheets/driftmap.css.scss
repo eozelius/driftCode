@@ -35,19 +35,43 @@
     }
 
     .waypoint-popup {
-       img.waypoint-popup-coverphoto {
-        width: 44%;
-        height:auto;
-        margin: 2%;
-        float: left;
-      }
-
+      // description & coverphoto
       p.waypoint-popup-body {
         font-size: 1.3em;
         max-height: 165px;
         overflow: hidden;
-        // color: $light-blue;
-      }      
+        
+        img.waypoint-popup-coverphoto {
+          width: 44%;
+          height:auto;
+          margin: 2%;
+          float: left;
+        }
+      }
+
+      // geft content
+      .waypoint-content-container {
+        padding: 3% 25%;
+
+        .waypoint-content {
+          border-top: 1px solid $maroon;
+          padding: 3% 0 2%;
+        }
+        
+        li {
+          width: 45px;
+          display: inline-block;
+          height: 45px;
+          background: #ccc;
+          cursor: pointer;
+          margin: 0 2%;
+        }
+
+        li.friends   { background-color: #84C77B; }
+        li.galleries { background-color: $light-blue; }
+        li.treks     { background-color: #CEA5D4; }
+        li.essays    { background-color: #755151; }
+      }
     }
   }
 }
