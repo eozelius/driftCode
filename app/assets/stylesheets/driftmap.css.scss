@@ -14,68 +14,37 @@
   }
 }
 
-/* Marker */
-.marker-box {
-  width: 600px;
-}
-
-.marker-box .leaflet-popup-content-wrapper {
-  height: 400px;
-  border-radius: 0;
-  padding: 3%;
-}
-
+/* popup */
 .marker-box a.leaflet-popup-close-button {
   padding: 15px 30px 0 0;
 }
 
-.marker-box .leaflet-popup-tip {
-  display: none;
-}
-
-/* Blips */
-div.waypoint-popup {
-  max-height: 400px;
-}
-
-/* new code todo clean the above shit. */
-/* popups */
 #map {  
   p {
     font-size: 1.3em;
   }
 
   .leaflet-popup-content-wrapper {
-    width: 150px;
+    margin: 0;
+    width: 302px;
     border-radius: 0;
-  }
-  .waypoint-text {
-    padding: 5px;
-  }
-  .leaflet-popup-content {
-    margin: 0;
-    padding: 3px 5px;
-  }
-  .waypoint-popup-body {
-    margin: 0;
-    height: 45px;
     overflow: hidden;
+
+    p.waypoint-popup-body {
+      max-height: 260px;
+      overflow: hidden;
+    }
   }
 }
 
 @media (min-width: 480px) and (max-width: 767px){
   #map {
     .leaflet-popup-content-wrapper {
-      width: 275px;
-      margin: 0;
+      
     }
     .leaflet-popup-content {
-      margin: 4%;
     }
     .waypoint-popup-body {
-      margin: 0;
-      height: 45px;
-      overflow: hidden;
     }
   }
 }
