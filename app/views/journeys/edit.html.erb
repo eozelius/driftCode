@@ -1,6 +1,6 @@
 <input type="hidden" value="1" id="journeys_edit">
 <input type="hidden" value="<%= @journey.id %>" id="journey_id">
-<input type="hidden" value="1" id="journey_edit">
+<input type="hidden" value="<%= @driftmap.id %>" id="driftmap_id">
 
 <div id="journey" class="edit-journey">
 	<div class="container">
@@ -29,7 +29,7 @@
 
 		<div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 			<!-- Leaflet -->
-			<div class="map-container">
+			<div class="map-container hidden">
 		  	<div id='map'></div>
 			</div>
 

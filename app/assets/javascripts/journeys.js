@@ -7,11 +7,14 @@ $(function(){
 
 	/* EDIT ACTION */
 	if($('#journeys_edit').length){
+		console.log("$('#driftmap_id').val(): " + $('#driftmap_id').val())
+
+
 		$.ajax({
-			url: '/api_journey_edit',
+			url: '/get_driftmap',
 			method: 'POST',
 			dataType: 'JSON',
-			data: { id: $('#journey_id').val() },
+			data: { driftmap_id: $('#driftmap_id').val() },
 			complete: function(response){
 				var r = response.responseJSON
 				window.edit_r = r

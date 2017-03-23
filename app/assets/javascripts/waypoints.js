@@ -98,7 +98,7 @@ $(function(){
       init_zoom: 6
     }
 
-    DriftMapLeaflet.init(data, myOpts)
+    // DriftMapLeaflet.init(data, myOpts)
     /* End Leaflet */
 
     // Datepicker
@@ -114,11 +114,11 @@ $(function(){
     });*/
 
     // enable dragging for the marker
-    var marker = window.leafletIndexer[0].leaflet.marker; // this works because the index will only have one entry.  This is not always the case.
+    /*var marker = window.leafletIndexer[0].leaflet.marker; // this works because the index will only have one entry.  This is not always the case.
     marker.dragging.enable();
     marker.on('dragend', function(e){
       setLatLng(e.target.getLatLng().lat, e.target.getLatLng().lng);
-    });
+    });*/
 
     // save edit
     $('.commit').on('click', function(){

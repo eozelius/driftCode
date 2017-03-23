@@ -88,13 +88,14 @@ var DriftMapLeaflet = function(){
               var popupContent =  '<div class="waypoint-popup" data-waypoint="'+ id +'">' + 
                                     '<div class="waypoint-text">' +
                                       '<h4 class="waypoint-popup-title instructions">'+ title +'</h4>' + 
-                                      /*'<a href="/waypoints/'+ id +'">' +
-                                        '<span> - more</span>' +
-                                      '</a>' +*/
-                                      '<p class="waypoint-popup-body">'+ body +'</p>' + 
-                                    '</div>';
-                                    //'<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' +
-                                  //'</div>';
+                                      '<p class="waypoint-popup-body">';
+
+                                        // Waypoint-coverphoto
+                                        if(wps[i].coverphoto.url != null){ popupContent += '<img class="waypoint-popup-coverphoto" src="'+ wps[i].coverphoto.url +'">' }
+                                        popupContent += body +
+                                      '</p>' + 
+                                    '</div>' +
+                                  '</div>';
 
               // if(wps[i].images.length > 0){  popupContent += '<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' }
               popupContent += '</div>'
