@@ -95,6 +95,35 @@ var DriftMapLeaflet = function(){
                                         popupContent += body +
                                       '</p>' + 
                                     '</div>' +
+                                    '<div class="waypoint-content-container">' + 
+                                      '<div class="waypoint-content">'; 
+                                        // friends?
+                                        if(wps[i].content.friends.length > 0){
+                                          console.log(wps[i].title + ' has friends!')
+                                          popupContent += '<p>friends</p>'
+                                        }
+
+                                        // galleries
+                                        if(wps[i].content.galleries.length > 0){
+                                          console.log(wps[i].title + ' has galleries!')
+                                          popupContent += '<p>galleries</p>'
+                                        }
+
+                                        // essays
+                                        if(wps[i].content.essays.length > 0){
+                                          console.log(wps[i].title + ' has essays!')
+                                          popupContent += '<p>essays</p>' 
+                                        }
+
+                                        // treks
+                                        if(wps[i].content.treks.length > 0){
+                                          console.log(wps[i].title + ' has treks!')
+                                          popupContent += '<p>treks</p>'
+                                        }
+
+                                        popupContent += 
+                                      '</div>' +
+                                    '</div>' +
                                   '</div>';
 
               // if(wps[i].images.length > 0){  popupContent += '<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' }
