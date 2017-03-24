@@ -7,12 +7,19 @@
   bottom: 5%;
   width: 210px;
 
+  h6.journey-title {
+    font-size: 1.45em;
+    color: $maroon;
+    margin: 0;
+  }
+
   .hud-top {
     position: absolute;
     top: 1%;
     right: 5%;
     bottom: 50%;
-    width: 200px;    
+    width: 200px; 
+
   }
 
   .hud-bottom {
@@ -22,13 +29,6 @@
     bottom: 1%;
     width: 200px;
     cursor: pointer;
-
-
-    h6.journey-title {
-      font-size: 1.6em;
-      color: $maroon;
-      margin: 15px 0 4px;
-    }
 
     p.active {
       color: #424242;
