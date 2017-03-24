@@ -116,14 +116,10 @@ var DriftMapLeaflet = function(){
               for(var y in wps[i].content.galleries){
                 var g = wps[i].content.galleries[y]
                 var g_popup_content = '<div class="gallery-popup" data-gallery="'+ g.id +'" data-waypoint="'+ id +'">' + 
-                                        '<div class="gallery">';
-
-                                // add images
-                                for(var j in g.images){ 
-                                  g_popup_content += '<img src="'+ g.images[j].url +'" />'; 
-                                }
-                                
-                                g_popup_content += '</div></div>';
+                                        '<div class="gallery">' +
+                                          '<h4 class="waypoint-title">'+ g.title +'</h4>';
+                                          for(var j in g.images){ g_popup_content += '<img src="'+ g.images[j].url +'" />' }
+                                      g_popup_content += '</div></div>';
 
                 var g_popup_opts = { className: 'g_popup' }
                 var g_marker = L.marker([g.x, g.y]).addTo(m)
@@ -136,9 +132,23 @@ var DriftMapLeaflet = function(){
               }
 
               // Friends
+              var friends_index = []
               for(var y in wps[i].content.friends){
                 var f = wps[i].content.friends[y]
+                var f_popup_content = '<div class="friend-popup" data-friend="'+ f.id +'" data-waypoint="'+ id +'">' + 
+                                        '<div class="friend">' +
+                                          '<h4 class="waypoint-title">'+ f.first_name + ' ' + f.last_name +'</h4>' + 
+                                          '<img src="'+ f.photo.url +'">' + 
+                                        '</div>' + 
+                                      '</div>';
+                var f_popup_opts = { className: 'f_popup' }
+                var f_marker = L.marker([f.x, f.y]).addTo(m)
+                var f_popup  = L.popup(f_popup_opts).setLatLng([f.x, f.y]).setContent(f_popup_content)
 
+                friends_index.push({
+                  marker: f_marker,
+                  popup:  f_popup
+                })
               }
 
               // essays
@@ -163,7 +173,9 @@ var DriftMapLeaflet = function(){
                 marker: wpMarker,
                 popup:  wpPopup,
                 content: {
-                  galleries: gallery_index
+                  galleries: gallery_index,
+                  friends:   friends_index
+
                 }                
               }
             });
@@ -172,8 +184,8 @@ var DriftMapLeaflet = function(){
       }
     
       if(journeys.length > 1){
-        indexer[0].leaflet.content.galleries[0].marker.setIcon(maroonMarker)
-        indexer[0].leaflet.content.galleries[0].popup.openOn(m)
+        indexer[0].leaflet.content.friends[0].marker.setIcon(maroonMarker)
+        indexer[0].leaflet.content.friends[0].popup.openOn(m)
 
         // indexer[0].leaflet.marker.setIcon(maroonMarker)
         // indexer[0].leaflet.popup.openOn(m)
