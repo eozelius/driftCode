@@ -7,7 +7,7 @@
   bottom: 5%;
   width: 210px;
 
-  .hud-content {
+  .hud-top {
     position: absolute;
     top: 1%;
     right: 5%;
@@ -15,24 +15,35 @@
     width: 200px;    
   }
 
-  .hud-journeys {
+  .hud-bottom {
     position: absolute;
     top: 51%;
     right: 5%;
     bottom: 1%;
     width: 200px;
+    cursor: pointer;
 
-    p {
+
+    h6.journey-title {
+      font-size: 1.6em;
       color: $maroon;
+      margin: 15px 0 4px;
     }
 
     p.active {
       color: #424242;
-      font-weight: 500;
+      font-weight: 600;
+    }
+
+    .journey {
+      margin:0 0 10% 0;
     }
 
     .waypts {
       margin: 0 0 5% 10%; 
     }
+
+
+
   }
 }

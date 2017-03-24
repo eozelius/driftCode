@@ -24,14 +24,55 @@
   </div>
 
   <div class="hud-container">
-    <div class="hud-content">
+    <!-- TOP HUD -->
+    <div class="hud-top">
+      <% @journeys.each_with_index do |journey, i| %>
+        <div class="<%= 'hidden' unless i == 0 %> content-<%= journey.id %>">
+          <h5><%= journey.title %></h5>
+
+          <% journey.waypoints.each_with_index do |waypoint, j| %>
+            <div class="waypoint-content <%= 'hidden' unless j == 0 %>">
+              <h6><%= waypoint.title %></h6>
+
+              <!-- Galleries -->
+              <div class="hud-galleries">
+                <% if waypoint.galleries.any? %>
+                  <p class="hud-waypoint-title">Galleries</p>
+                <% end %>
+              </div>
+              
+              <!-- Friends -->
+              <div class="hud-friends">
+                <% if waypoint.friends.any? %>
+                  <p class="hud-waypoint-title">Friends</p>
+                <% end %>
+              </div>
+
+              <!-- Essays -->
+              <div class="hud-essays">
+                <% if waypoint.essays.any? %>
+                  <p class="hud-waypoint-title">Essays</p>
+                <% end %>
+              </div>
+
+              <!-- treks -->
+              <div class="hud-treks">
+                <% if waypoint.treks.any? %>
+                  <p class="hud-waypoint-title">Treks</p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>   
+      <% end %>
     </div>
 
-    <div class="hud-journeys">
+    <!-- BOTTOM HUD -->
+    <div class="hud-bottom">
       <% @journeys.each_with_index do |journey, i| %>
-        <p class="title"><%= journey.title %></p>
-        <div class="waypts">
-          <p class="wp-title <%= 'active' if i == 0 %>"><%= journey.waypoints.first.title %></p>      
+        <div class="journey journey-<%= journey.id %>">
+          <h6 class="<%= 'active' if i == 0 %>"><%= journey.title %></h6>
+          <p class="wp-title"><%= journey.waypoints.first.title %></p>
         </div>
       <% end %>
     </div>
