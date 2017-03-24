@@ -30,10 +30,6 @@ var DriftMapLeaflet = function(){
 
     // public methods
     init: function(data, myDefault){
-      /*var x = options !== undefined ? options.init_x : 0.924206230200376;
-      var y = options !== undefined ? options.init_y : -40.2400771379471 - 50;
-      var z = options !== undefined ? options.init_zoom : 5;*/
-
       var driftmap = data.driftmap
       var journeys = data.journeys
 
@@ -74,15 +70,17 @@ var DriftMapLeaflet = function(){
           var r = journeys[x].journey
           var wps = journeys[x].waypoints
 
+
           for(var i in wps){
             if(!myDefault){
               /* Add Marker to Map */
               var lat = wps[i].x;
               var lng = wps[i].y;
-              var id = wps[i].id;
+              var id  = wps[i].id;
               var title = wps[i].title;
               var body  = wps[i].body;
               var j_id  = wps[i].journey_id;
+              var wps_data = []
 
               /* Bind popup to marker */
               var popupContent =  '<div class="waypoint-popup" data-waypoint="'+ id +'">' + 
@@ -107,11 +105,52 @@ var DriftMapLeaflet = function(){
                                     '</div>' +
                                   '</div>';
 
-              // if(wps[i].images.length > 0){  popupContent += '<img src="'+ wps[i].images[0].image.url +'" style="width: 100%; height:auto;">' }
               var popupOptions = { className: 'waypoint-popup' }
               var wpMarker = L.marker([lat, lng]).addTo(m);
               var wpPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
               wpMarker.bindPopup(wpPopup);
+              // End waypoint Popup
+
+              // Galleries
+              var gallery_index = []
+              for(var y in wps[i].content.galleries){
+                var g = wps[i].content.galleries[y]
+                var g_popup_content = '<div class="gallery-popup" data-gallery="'+ g.id +'" data-waypoint="'+ id +'">' + 
+                                        '<div class="gallery">';
+
+                                // add images
+                                for(var j in g.images){ 
+                                  g_popup_content += '<img src="'+ g.images[j].url +'" />'; 
+                                }
+                                
+                                g_popup_content += '</div></div>';
+
+                var g_popup_opts = { className: 'g_popup' }
+                var g_marker = L.marker([g.x, g.y]).addTo(m)
+                var g_popup  = L.popup(g_popup_opts).setLatLng([g.x, g.y]).setContent(g_popup_content)
+
+                gallery_index.push({
+                  marker: g_marker,
+                  popup: g_popup
+                })
+              }
+
+              // Friends
+              for(var y in wps[i].content.friends){
+                var f = wps[i].content.friends[y]
+
+              }
+
+              // essays
+              for(var y in wps[i].content.essays){
+                var e = wps[i].content.essays[y]
+              }
+
+              // treks
+              for(var y in wps[i].content.treks){
+                var t = wps[i].content.treks[y]
+
+              }
             }
 
             /* Add wayPoint to indexer */
@@ -123,7 +162,9 @@ var DriftMapLeaflet = function(){
               leaflet: {
                 marker: wpMarker,
                 popup:  wpPopup,
-                map: m
+                content: {
+                  galleries: gallery_index
+                }                
               }
             });
           }         
@@ -131,8 +172,11 @@ var DriftMapLeaflet = function(){
       }
     
       if(journeys.length > 1){
-        indexer[0].leaflet.marker.setIcon(maroonMarker)
-        indexer[0].leaflet.popup.openOn(m)
+        indexer[0].leaflet.content.galleries[0].marker.setIcon(maroonMarker)
+        indexer[0].leaflet.content.galleries[0].popup.openOn(m)
+
+        // indexer[0].leaflet.marker.setIcon(maroonMarker)
+        // indexer[0].leaflet.popup.openOn(m)
       }
       window.leafletIndexer = indexer
     },

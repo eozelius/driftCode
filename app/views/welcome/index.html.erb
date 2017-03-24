@@ -35,16 +35,6 @@
               <div class="hud-galleries">
                 <% if waypoint.galleries.any? %>
                   <p class="hud-waypoint-title">Galleries</p>
-                  <% if false %>
-                    <% waypoint.galleries.each do |g| %>
-                      <span class="content-title"><%= g.title %></span>
-                      <% g.waypoint_images.each do |g_img| %>
-                        <div class="gallery gallery-<%= g.id %>">
-                          <%= image_tag g_img.image %>
-                        </div>
-                      <% end %>
-                    <% end %>
-                  <% end %>
                 <% end %>
               </div>
               

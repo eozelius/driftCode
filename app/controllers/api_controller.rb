@@ -22,11 +22,23 @@ class ApiController < ApplicationController
           # galleries
           if wp.galleries.any?
             wp.galleries.each do |g|
+            
+              gallery_images = []
+
+              if g.waypoint_images.any?
+                g.waypoint_images.each do |img|
+                  gallery_images.push(img.image)
+                end
+              end
+            
+
+
               galleries.push({
                 id: g.id,
                 title: g.title,
                 description: g.description,
                 coverphoto: g.coverphoto,
+                images: gallery_images,
                 x: g.x,
                 y: g.y,
                 waypoint_id: g.waypoint_id
