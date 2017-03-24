@@ -48,7 +48,7 @@ class WaypointsController < ApplicationController
 				end
 				@waypoint.save
 			end
-			flash[:success] = "#{@waypoint.title} successfully updated"
+			flash[:success] = "#{@waypoint.title.html_safe} successfully updated"
 			redirect_to current_user
 		else
 			flash[:danger] = 'whoops, something went wrong'

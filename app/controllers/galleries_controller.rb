@@ -9,6 +9,8 @@ class GalleriesController < ApplicationController
       @gallery = @waypoint.galleries.create(gallery_params)
 
       if @gallery.valid?
+        new_photos @gallery if params[:photo].present?
+        
         flash[:success] = "gallery successfully created"
         redirect_to current_user
       else
@@ -24,7 +26,18 @@ class GalleriesController < ApplicationController
   end
 
   def update
+    @gallery = Gallery.find(params[:id])
 
+    if @gallery.update_attributes(gallery_params)
+      @gallery.save
+      new_photos @gallery if params[:photo].present?
+
+      flash[:success] = "#{@gallery.title.html_safe} successfully updated"
+      redirect_to current_user
+    else
+      flash[:danger] = 'whoops, something went wrong'
+      render 'edit'
+    end
   end
 
   def destroy
@@ -34,5 +47,12 @@ class GalleriesController < ApplicationController
   private
     def gallery_params
       params.require(:gallery).permit(:title, :description, :x, :y, :coverphoto)
+    end
+
+    def new_photos gallery
+      params[:photo].each do |image|
+        gallery.waypoint_images.build(image: image[1])
+      end
+      gallery.save
     end
 end
