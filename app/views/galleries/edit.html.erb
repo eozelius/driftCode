@@ -1,14 +1,13 @@
 <input type="hidden" id="galleries_edit" value="1">
-<% wp = Waypoint.find(params[:waypoint_id]) %>
 
-<div id="galleries" class="container new-gallery">
+<div id="galleries" class="container edit-gallery">
   <%= form_for @gallery, html: { multipart: true } do |f| %>
     <input type="hidden" name="waypoint_id" value="<%= params[:waypoint_id] %>">
-    <%= f.hidden_field :x, value: wp.x %>
-    <%= f.hidden_field :y, value: wp.y %>
+    <%= f.hidden_field :x, value: @waypoint.x %>
+    <%= f.hidden_field :y, value: @waypoint.y %>
 
     <div id="driftmap-timeline-container" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-      <h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Create New Gallery</h4>
+      <h4 class="waypoint-title" style="color:#C2D9EB;font-size:2.5em;margin-bottom:35px;width: -moz-fit-content;">Edit <%= @gallery.title.html_safe %></h4>
 
       <div class="gallery-info">
         <h4 class="waypoint-title">Gallery Title</h4>
@@ -23,7 +22,7 @@
     </div>
 
     <div id="dm-legend" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-      <div class="map-container">
+      <div class="map-container hidden">
         <h4 class="waypoint-title">
           click anywhere on the map to adjust the location of your gallery
         </h4>

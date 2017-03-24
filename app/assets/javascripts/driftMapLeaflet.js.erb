@@ -67,7 +67,7 @@ var DriftMapLeaflet = function(){
         }).addTo(m);
 
       // Zoom in/out buttons should be in top right, instead of top left.
-      $('.leaflet-control-container .leaflet-top.leaflet-left').removeClass('leaflet-left').addClass('leaflet-right')
+      $('.leaflet-control-container .leaflet-top.leaflet-left').removeClass('leaflet-top').addClass('leaflet-bottom')
 
       for(var x in journeys){
         if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){

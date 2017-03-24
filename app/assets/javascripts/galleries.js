@@ -52,8 +52,6 @@ $(function(){
 
   // EDIT
   if($('#galleries_edit').length){
-    alert('edit')
+
   }
-
-
 })

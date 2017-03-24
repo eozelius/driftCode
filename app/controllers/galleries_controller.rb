@@ -20,6 +20,7 @@ class GalleriesController < ApplicationController
 
   def edit
     @gallery = Gallery.find(params[:id])
+    @waypoint = Waypoint.find(@gallery.waypoint_id)
   end
 
   def update
