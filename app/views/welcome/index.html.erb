@@ -30,18 +30,19 @@
         <div class="<%= 'hidden' unless i == 0 %> content-<%= journey.id %>">
           <% journey.waypoints.each_with_index do |waypoint, j| %>
             <div class="waypoint-content <%= 'hidden' unless j == 0 %>">
-              <h5><%= waypoint.title %></h5>
 
               <!-- Galleries -->
               <div class="hud-galleries">
                 <% if waypoint.galleries.any? %>
                   <p class="hud-waypoint-title">Galleries</p>
-                  <% waypoint.galleries.each do |g| %>
-                    <span class="content-title"><%= g.title %></span>
-                    <% g.waypoint_images.each do |g_img| %>
-                      <div class="gallery gallery-<%= g.id %>">
-                        <%= image_tag g_img.image %>
-                      </div>
+                  <% if false %>
+                    <% waypoint.galleries.each do |g| %>
+                      <span class="content-title"><%= g.title %></span>
+                      <% g.waypoint_images.each do |g_img| %>
+                        <div class="gallery gallery-<%= g.id %>">
+                          <%= image_tag g_img.image %>
+                        </div>
+                      <% end %>
                     <% end %>
                   <% end %>
                 <% end %>
