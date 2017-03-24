@@ -152,13 +152,46 @@ var DriftMapLeaflet = function(){
               }
 
               // essays
+              var essays_index = []
               for(var y in wps[i].content.essays){
                 var e = wps[i].content.essays[y]
+                var e_popup_content = '<div class="essay-popup" data-essay="'+ e.id +'" data-waypoint="'+ id +'">' + 
+                                        '<div class="essay">' +
+                                          '<h4 class="waypoint-title">'+ essay.title +'</h4>' + 
+                                          '<img src="'+ e.coverphoto.url +'">' + 
+                                          '<div class="essay-body">' + 
+                                            '<p>'+ e.body +'</p>'
+                                          '</div>' + 
+                                        '</div>' + 
+                                      '</div>';
+                var e_popup_opts = { className: 'e_popup' }
+                var e_marker = L.marker([e.x, e.y]).addTo(m)
+                var e_popup  = L.popup(e_popup_opts).setLatLng([e.x, e.y]).setContent(e_popup_content)
+
+                essays_index.push({
+                  marker: e_marker,
+                  popup:  e_popup
+                })
               }
 
               // treks
+              treks_index = []
               for(var y in wps[i].content.treks){
                 var t = wps[i].content.treks[y]
+                var t_popup_content = '<div class="trek-popup" data-trek="'+ t.id +'" data-waypoint="'+ id +'">' + 
+                                        '<div class="trek">' +
+                                          '<h4 class="waypoint-title">'+ t.title +'</h4>' + 
+                                          // '<img src="'+ t.coverphoto.url +'">' + 
+                                        '</div>' + 
+                                      '</div>';
+                var t_popup_opts = { className: 't_popup' }
+                var t_marker = L.marker([t.x, t.y]).addTo(m)
+                var t_popup  = L.popup(t_popup_opts).setLatLng([t.x, t.y]).setContent(t_popup_content)
+
+                treks_index.push({
+                  marker: t_marker,
+                  popup:  t_popup
+                })
 
               }
             }
@@ -174,8 +207,9 @@ var DriftMapLeaflet = function(){
                 popup:  wpPopup,
                 content: {
                   galleries: gallery_index,
-                  friends:   friends_index
-
+                  friends:   friends_index,
+                  essays:    essays_index,
+                  treks:     treks_index
                 }                
               }
             });
