@@ -157,7 +157,7 @@ var DriftMapLeaflet = function(){
                 var e = wps[i].content.essays[y]
                 var e_popup_content = '<div class="essay-popup" data-essay="'+ e.id +'" data-waypoint="'+ id +'">' + 
                                         '<div class="essay">' +
-                                          '<h4 class="waypoint-title">'+ essay.title +'</h4>' + 
+                                          '<h4 class="waypoint-title">'+ e.title +'</h4>' + 
                                           '<img src="'+ e.coverphoto.url +'">' + 
                                           '<div class="essay-body">' + 
                                             '<p>'+ e.body +'</p>'
@@ -185,8 +185,8 @@ var DriftMapLeaflet = function(){
                                         '</div>' + 
                                       '</div>';
                 var t_popup_opts = { className: 't_popup' }
-                var t_marker = L.marker([t.x, t.y]).addTo(m)
-                var t_popup  = L.popup(t_popup_opts).setLatLng([t.x, t.y]).setContent(t_popup_content)
+                var t_marker = L.marker([wps[i].x, wps[i].y]).addTo(m)
+                var t_popup  = L.popup(t_popup_opts).setLatLng([wps[i].x, wps[i].y]).setContent(t_popup_content)
 
                 treks_index.push({
                   marker: t_marker,
@@ -218,8 +218,8 @@ var DriftMapLeaflet = function(){
       }
     
       if(journeys.length > 1){
-        indexer[0].leaflet.content.friends[0].marker.setIcon(maroonMarker)
-        indexer[0].leaflet.content.friends[0].popup.openOn(m)
+        indexer[0].leaflet.content.treks[0].marker.setIcon(maroonMarker)
+        indexer[0].leaflet.content.treks[0].popup.openOn(m)
 
         // indexer[0].leaflet.marker.setIcon(maroonMarker)
         // indexer[0].leaflet.popup.openOn(m)

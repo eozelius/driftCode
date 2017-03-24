@@ -83,25 +83,6 @@
       <% end %>
     </div>
 
-    <!-- TREKS -->
-    <div class="cc-wrapper col-lg-3 col-md-3 col-sm-3 col-xs-12">
-      <% if @treks.any? %>
-        <div class="existing-treks">
-          <ul>
-            <% @treks.each do |t| %>
-              <%= link_to edit_trek_path t do %>
-                <li><p class="content-description"><%= t.title %><span class="edit"> - edit</span></p></li>
-              <% end %>
-            <% end %>
-          </ul>
-        </div>
-      <% else %>
-        <%= link_to new_trek_path journey_id: @journey.id, waypoint_id: @waypoint.id do %>
-          <span class="edit">new trek</span>
-        <% end %>
-      <% end %>
-    </div>
-
     <!-- ESSAYS -->
     <div class="cc-wrapper col-lg-3 col-md-3 col-sm-3 col-xs-12">
       <% if @essays.any? %>
@@ -118,6 +99,25 @@
       <% else %>
         <%= link_to new_essay_path journey_id: @journey.id, waypoint_id: @waypoint.id do %>
           <span class="edit">new essay</span>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- TREKS -->
+    <div class="cc-wrapper col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <% if @treks.any? %>
+        <div class="existing-treks">
+          <ul>
+            <% @treks.each do |t| %>
+              <%= link_to edit_trek_path t do %>
+                <li><p class="content-description"><%= t.title %><span class="edit"> - edit</span></p></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% else %>
+        <%= link_to new_trek_path journey_id: @journey.id, waypoint_id: @waypoint.id do %>
+          <span class="edit">new trek</span>
         <% end %>
       <% end %>
     </div>
