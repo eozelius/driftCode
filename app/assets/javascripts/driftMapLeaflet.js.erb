@@ -24,6 +24,26 @@ var DriftMapLeaflet = function(){
 
   /* Event Listeners */
 
+  // Goto First content
+  $(document).on('click', '.waypoint-content li', function(){
+    var wp_id = $(this).data('waypoint');
+    var type  = $(this).data('request-type');
+    console.log('wp_id: ' + wp_id + '     type: ' + type)
+
+
+    var gallery = DriftMapLeaflet.getGallery(wp_id, type, 0)
+
+    window.wp = wp
+
+
+    // window.leafletIndexer[]
+
+
+
+    // window.leafletIndexer[0].leaflet.content.galleries[0].popup
+
+  });
+
   return {
     // public variables
 
@@ -67,9 +87,8 @@ var DriftMapLeaflet = function(){
 
       for(var x in journeys){
         if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){
-          var r = journeys[x].journey
+          var r   = journeys[x].journey
           var wps = journeys[x].waypoints
-
 
           for(var i in wps){
             if(!myDefault){
@@ -96,10 +115,10 @@ var DriftMapLeaflet = function(){
                                     '<div class="waypoint-content-container">' + 
                                       '<div class="waypoint-content">' + 
                                         '<ul>' + 
-                                          '<li class="galleries"><i class="fa fa-camera"></i></li>' + 
-                                          '<li class="friends"><i class="fa fa-user-circle"></i></li>' +
-                                          '<li class="essays"><i class="fa fa-pencil-square-o"></i></li>' + 
-                                          '<li class="treks"><i class="fa fa-compass"></i></li>' + 
+                                          '<li class="galleries" data-request-type="galleries" data-waypoint="'+ id +'"><i class="fa fa-camera"></i></li>' + 
+                                          '<li class="friends"   data-request-type="friends"   data-waypoint="'+ id +'"><i class="fa fa-user-circle"></i></li>' +
+                                          '<li class="essays"    data-request-type="essays"    data-waypoint="'+ id +'"><i class="fa fa-pencil-square-o"></i></li>' + 
+                                          '<li class="treks"     data-request-type="treks"     data-waypoint="'+ id +'"><i class="fa fa-compass"></i></li>' + 
                                         '<ul>' +
                                       '</div>' +
                                     '</div>' +
@@ -122,11 +141,11 @@ var DriftMapLeaflet = function(){
                                       g_popup_content += '</div></div>';
 
                 var g_popup_opts = { className: 'g_popup' }
-                var g_marker = L.marker([g.x, g.y]).addTo(m)
+                // var g_marker = L.marker([g.x, g.y]).addTo(m)
                 var g_popup  = L.popup(g_popup_opts).setLatLng([g.x, g.y]).setContent(g_popup_content)
 
                 gallery_index.push({
-                  marker: g_marker,
+                  // marker: g_marker,
                   popup: g_popup
                 })
               }
@@ -142,11 +161,11 @@ var DriftMapLeaflet = function(){
                                         '</div>' + 
                                       '</div>';
                 var f_popup_opts = { className: 'f_popup' }
-                var f_marker = L.marker([f.x, f.y]).addTo(m)
+                // var f_marker = L.marker([f.x, f.y]).addTo(m)
                 var f_popup  = L.popup(f_popup_opts).setLatLng([f.x, f.y]).setContent(f_popup_content)
 
                 friends_index.push({
-                  marker: f_marker,
+                  // marker:  f_marker,
                   popup:  f_popup
                 })
               }
@@ -165,11 +184,11 @@ var DriftMapLeaflet = function(){
                                         '</div>' + 
                                       '</div>';
                 var e_popup_opts = { className: 'e_popup' }
-                var e_marker = L.marker([e.x, e.y]).addTo(m)
+                // var e_marker = L.marker([e.x, e.y]).addTo(m)
                 var e_popup  = L.popup(e_popup_opts).setLatLng([e.x, e.y]).setContent(e_popup_content)
 
                 essays_index.push({
-                  marker: e_marker,
+                  //marker: e_marker,
                   popup:  e_popup
                 })
               }
@@ -185,14 +204,13 @@ var DriftMapLeaflet = function(){
                                         '</div>' + 
                                       '</div>';
                 var t_popup_opts = { className: 't_popup' }
-                var t_marker = L.marker([wps[i].x, wps[i].y]).addTo(m)
+                // var t_marker = L.marker([wps[i].x, wps[i].y]).addTo(m)
                 var t_popup  = L.popup(t_popup_opts).setLatLng([wps[i].x, wps[i].y]).setContent(t_popup_content)
 
                 treks_index.push({
-                  marker: t_marker,
+                  // marker: t_marker,
                   popup:  t_popup
                 })
-
               }
             }
 
@@ -218,11 +236,11 @@ var DriftMapLeaflet = function(){
       }
     
       if(journeys.length > 1){
-        indexer[0].leaflet.content.treks[0].marker.setIcon(maroonMarker)
-        indexer[0].leaflet.content.treks[0].popup.openOn(m)
+        // indexer[0].leaflet.content.friends[0].marker.setIcon(maroonMarker)
+        // indexer[0].leaflet.content.friends[0].popup.openOn(m)
 
-        // indexer[0].leaflet.marker.setIcon(maroonMarker)
-        // indexer[0].leaflet.popup.openOn(m)
+        indexer[0].leaflet.marker.setIcon(maroonMarker)
+        indexer[0].leaflet.popup.openOn(m)
       }
       window.leafletIndexer = indexer
     },
@@ -273,6 +291,15 @@ var DriftMapLeaflet = function(){
         if(indexer[i].id == id)
           return indexer[i];
       return false;
+    },
+
+    getContent: function(waypointId, type, contentId){
+      var wp = DriftMapLeaflet.getWayPoint(waypointId)
+
+      for(var i in wp.leaflet.content[type.toString()])
+        if(wp.leaflet.content[type.toString()][i].id == galleryId)
+          return wp.leaflet.content.galleries[i];
+      return false; 
     },
 
     /* Setters */

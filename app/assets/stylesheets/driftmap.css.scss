@@ -70,6 +70,12 @@
         li.galleries { background-color: $light-blue; }
         li.treks     { background-color: #CEA5D4; }
         li.essays    { background-color: #755151; }
+
+        i {
+          font-size: 2em;
+          line-height: 45px;
+          color: #444;
+        }
       }
     }
 

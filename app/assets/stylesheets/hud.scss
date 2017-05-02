@@ -8,9 +8,25 @@
   width: 15%;
 
   h6.journey-title {
-    font-size: 1.45em;
+    font-size: 1.55em;
+    font-weight: 500;
     color: $maroon;
     margin: 0;
+  }
+
+  p.wp-title {
+    font-size: 1em;
+  }
+
+  .hud-top,
+  .hud-bottom {
+    background-color: #EAEAEA;
+    opacity: .8;
+    padding: 1% 3%;
+
+    .hud-content-container {
+      margin:0 0 10% 0;
+    }
   }
 
   .hud-top {
@@ -19,8 +35,6 @@
     right: 5%;
     bottom: 50%;
     width: 100%;
-
-    padding: 1% 3%;
 
     .hud-waypoint-title {
       cursor: pointer;
@@ -43,14 +57,11 @@
     }
 
     .journey {
-      margin:0 0 10% 0;
+      
     }
 
     .waypts {
       margin: 0 0 5% 10%; 
     }
-
-
-
   }
 }
