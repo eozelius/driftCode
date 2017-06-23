@@ -9,7 +9,8 @@ var DriftMapAccordian = function(){
 
 
 		// public methods
-		init: function(journeys, user_is_home){
+		init: function(data, user_is_home){
+			var journeys = data.journeys
 			for(var x in journeys){
 				var r = journeys[x].journey
 				var wps = journeys[x].waypoints
@@ -29,24 +30,33 @@ var DriftMapAccordian = function(){
 				for(var y in wps){
 					var w = wps[y]
 					a += '<li data-slideindex="'+ y +'" class="waypoint" data-waypoint="'+ w.id +'" data-initx="'+ w.x +'" data-inity="'+ w.y +'" data-waypointslide="'+ y +'" data-journeyid="'+ r.id +'">' + 
-	  							'<p class="waypoint-title">'+ w.title +'</p>' +
-	  						'</li>';
+	  							'<p class="waypoint-title">'+ w.title + '</p>' +
+	  							'<div class="content-icons-container">';
+
+	  			if(w.content.galleries.length > 0){ a += '<i class="fa fa-camera" title="galleries"></i>' }
+	  			if(w.content.friends.length > 0){	  a += '<i class="fa fa-user-circle" title="friends"></i>' }
+	  			if(w.content.essays.length > 0){    a += '<i class="fa fa-pencil-square-o" title="essays"></i>' }
+	  			if(w.content.treks.length > 0){ 		a += '<i class="fa fa-compass" title="treks"></i>' }
+
+		  		a += '</div></li1>'
 				}
 
 				a += '</ul></div></div></div>';
 				$('#waypt-accord').append(a);
 			} // end for(var x in journeys)
 
-			// if user_is_home, add edit capability
+			// if user_is_home, add edit capability to journeys and waypoints
 			if(user_is_home){	$('.panel').each(function(index){	$(this).find('.journey-switcher').after('<a href="/journeys/' + $(this).data('journey') + '/edit" style="font-size: .85em; font-style: italic; color: #C2D9EB"> - edit </a>')	})	}
 
-			if($('#journey_edit').length){
+			if($('#journeys_edit').length){
 				$('ul.waypoints-container p.waypoint-title').each(function(){
 					var id = $(this).parent().data('waypoint')
-					$(this).prepend('<a href="/waypoints/'+ id +'/edit" style="font-size: .75em; font-style: italic; margin-right: 10px">edit - </a>');
+					var editWaypoint = '<a href="/waypoints/'+ id +'/edit" style="font-size: .75em; font-style: italic; margin-right: 4px">edit - </a>'
+					var addContent = '<a href="/waypoints/content_creation?journey_id='+ $(this).parent().data('journeyid') +'&title='+ encodeURIComponent($(this).text()) +'&waypoint_id='+ id +'" style="font-style: normal; font-size: .75em; margin-left: 4px; color: #552727; margin-top: -2px;"> - [add content]</a>';
+					$(this).prepend(editWaypoint);
+					$(this).parent().find('i.fa').last().after(addContent)
 				})
 			}
-
 
 			$('.panel-default:first-child .panel-collapse').addClass('in')
 			$('.waypoints-container').first().find('.waypoint-title').first().addClass('li-waypoint-selected')
@@ -62,7 +72,7 @@ var DriftMapAccordian = function(){
 					var wp_journey_id = wp.journey_id
 					DriftMapLeaflet.focusWayPoint(id);
 					DriftMapAccordian.focusWayPoint(id);
-					DriftMapTimeline.focusJourney(wp_journey_id, slide_index, false)
+					// DriftMapTimeline.focusJourney(wp_journey_id, slide_index, false)
 				}
 			});
 
@@ -71,18 +81,31 @@ var DriftMapAccordian = function(){
 				var r_id = $(this).data('journey');
 				var r = DriftMapTimeline.getJourney(r_id);
 				var first_wp_id = $('.panel-default[data-journey="'+ r_id +'"] li.waypoint').first().data('waypoint')
+				$('.waypoint-title').removeClass('li-waypoint-selected')
+				$('.waypoint[data-slideindex="0"] p').addClass('li-waypoint-selected')
 
-				if(r){
+				//if(r){
 					/* Timeline */
-					DriftMapTimeline.focusJourney(r_id, 0, true);
+					// DriftMapTimeline.focusJourney(r_id, 0, true);
 
 					/* Waypoints */
-					$('.waypoint-title').removeClass('li-waypoint-selected')
-					$('.waypoint[data-slideindex="0"] p').addClass('li-waypoint-selected')
-				}
+					// $('.waypoint-title').removeClass('li-waypoint-selected')
+					// $('.waypoint[data-slideindex="0"] p').addClass('li-waypoint-selected')
+				//}
 
 				/* Leaflet */
 				if(first_wp_id !== undefined){ DriftMapLeaflet.focusWayPoint(first_wp_id) }
+			});
+
+			// Click a content-icon (story, friend, essay, gallery, trek)
+			$('li.waypoint i.fa').on('click', function(){
+				var j_id  = $(this).parent().parent().data('journeyid');
+				var wp_id = $(this).parent().parent().data('waypoint')
+
+				// console.log("j_id: " + j_id)
+				// console.log("wp_id: " + wp_id)
+
+
 			});
 		},
 

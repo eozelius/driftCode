@@ -1,27 +1,8 @@
-<% if false %>
-	<!-- Start new Adventure -->
-	<div class="start-new">
-	  <%= image_tag 'switzerland10.JPG' %>
-
-	  <% if user_is_home(@user) %>
-	    <div class="start-text">
-	      <%= link_to new_journey_path do %>
-	        <p>begin an new adventure now</p>
-	      <% end %>
-	    </div>
-	  <% else %>
-	    <div class="start-text">
-	      <p>
-	        <%= @user.name %> has not added any content yet.
-	      </p>
-	    </div>
-	  <% end %>
-	</div>
-<% end %>
-
-<% provide(:title, @user.name) %>
+<% provide(:title, @user.first_name) %>
 
 <input id="users_show" type="hidden" value="1">
+<input id="driftmap_id" type="hidden" value="<%= @driftmap.id %>">
+
 
 <div id="profile-page" class="container">
 	<input id="user_id" type="hidden" value="<%= @user.id %>" >
@@ -53,9 +34,9 @@
 
   <!-- LEAFLET & accordian -->
   <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-    <div class="map-container">
+    <!-- <div class="map-container">
       <div id='map'></div>
-    </div>
+    </div> -->
 
     <div id="accordian-container">
       <h5 class="waypoints-title">journeys</h5>
@@ -75,7 +56,7 @@
 		<div class="pro-part profile">
 			<div class="profile-details-container">
 				<div class="profile-details">
-					<p><%= @user.name %></p>
+					<p><%= @user.first_name %></p>
 					<%= image_tag @user.profile_pic, class: 'pp' if @user.profile_pic.present? %>
 					<div class="user-info">						
 						<% if @user.from %>
@@ -102,9 +83,14 @@
 									<%= f.file_field :profile_pic, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
 								</p>
 								<p>
-									<%= f.label :name %>
-									<%= f.text_field :name %>
+									<%= f.label :first_name %>
+									<%= f.text_field :first_name %>
 								</p>
+
+                <p>
+                  <%= f.label :last_name %>
+                  <%= f.text_field :last_name %>
+                </p>
 
 								<p>
 									<%= f.label :email %>

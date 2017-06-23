@@ -8,7 +8,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 	end  
 
 	test "unsuccessful edit" do
-		old_name = @user.name
+		old_name = @user.first_name
 		old_email = @user.email
 
 		log_in_as(@user)
@@ -18,7 +18,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 																		password_confirmation: '' }
 		assert_not flash.empty?
 		@user.reload
-		assert_equal old_name,  @user.name
+		assert_equal old_name,  @user.first_name
 		assert_equal old_email, @user.email
 	end
 
@@ -50,7 +50,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 		}
 
 		@user.reload
-		assert_equal new_user_name,  @user.name
+		assert_equal new_user_name,  @user.first_name
 		assert_equal new_user_email, @user.email
 	
 	end

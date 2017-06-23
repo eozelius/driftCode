@@ -49,7 +49,8 @@ var DriftMapTimeline = function(){
 					y: -73.922, 
 					driftmap_id: 1, 
 					journey_id: 51, 
-					date:  { year: 2016, month: 11, day: 23 } 
+					date:  { year: 2016, month: 11, day: 23 },
+					images: {todo: fill this in} 
 				}, {}, ...]
 			}, ...]
 			*/
@@ -64,8 +65,8 @@ var DriftMapTimeline = function(){
 
 				if(r.coverphoto.url !== null) // Coverphoto already defined
 					coverphoto = r.coverphoto.url
-				else if(wps[0].images.length > 0) // Use first Waypoint's first image
-					coverphoto = wps[0].images[0].image.url
+				else if(wps[0].coverphoto !== null) // Use first Waypoint's first image
+					coverphoto = wps[0].coverphoto
 				else  // default: switzerland
 				 	coverphoto = '<%= image_path("switzerland10.JPG").html_safe %>'
 
@@ -122,7 +123,7 @@ var DriftMapTimeline = function(){
 					var wp = wps[i]
 					var c
 
-					if(wp.images.length > 0){
+					/*if(wp.images.length > 0){
 						// Carousel Wrapper
 						c = '<div id="images-carousel-'+ i +'" class=" carousel slide" data-ride="carousel"><div class="carousel-inner" role="listbox">';
 
@@ -131,9 +132,9 @@ var DriftMapTimeline = function(){
 
 						// Carousel indicators
 						if(wp.images.length > 1) { c +=  '<a class="left carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="right carousel-control" href="#images-carousel-'+ i +'" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><span class="sr-only">Next</span></a></div></div>' }
-					} else {
+					} else {*/
 						c = 'no images'
-					}
+					// }
 
 				  $('#'+ wp.id).empty()
 				  $('#'+ wp.id).html(c)

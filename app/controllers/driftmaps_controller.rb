@@ -1,14 +1,14 @@
-class PostsController < ApplicationController
+class DriftmapsController < ApplicationController
 	before_action :logged_in_user,	only: [:create,  :update, :destroy]
-	before_action :correct_user,	only: [:destroy, :update]
+	before_action :correct_user,	  only: [:destroy, :update]
 
 	def create
 		@user = current_user
-		@post = Post.create(post_params)
-		@post.user_id = @user.id
+		@driftmap = Driftmap.create(driftmap_params)
+		@driftmap.user_id = @user.id
 
-		if @user.valid? && @post.valid?
-			@user.post = @post
+		if @user.valid? && @driftmap.valid?
+			@user.driftmap = @driftmap
 			@user.save
 			flash[:success] = "driftmap created successfully"
 			redirect_to @user
@@ -19,14 +19,14 @@ class PostsController < ApplicationController
 	end
 
 	def edit
-		@post = Post.find(params[:id])
+		@driftmap = Driftmap.find(params[:id])
 	end
 
 	def update
-		@post = Post.find(params[:id])
-		@user = User.find(@post.user_id)
+		@driftmap = Driftmap.find(params[:id])
+		@user = User.find(@driftmap.user_id)
 
-		if @post.update_attributes(post_params)
+		if @driftmap.update_attributes(driftmap_params)
 			flash[:success] = "driftmap successfully updated"
 			redirect_to @user
 		else
@@ -51,8 +51,8 @@ class PostsController < ApplicationController
 			end
 		end
 
-		def post_params
-			params.require(:post).permit(:title, :body, :init_x, :init_y, :init_zoom)
+		def driftmap_params
+			params.require(:driftmap).permit(:title, :body, :init_x, :init_y, :init_zoom, :color_scheme)
 		end
 
 		def correct_user
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
 			post = Post.find(params[:id])
 
 			if post.nil? || post.user_id != current_user.id
-				flash.now[:danger] = "you do not have permission do that.  wwjd?"
+				flash.now[:danger] = "you do not have permission do that"
 				redirect_to root_url				
 			end
 		end

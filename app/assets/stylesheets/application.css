@@ -11,11 +11,10 @@
  * file per style scope.
  *
  *= require bootstrap.min.css
- *= require leaflet.css
- *= require login.css.scss
- *= require signup.css.scss
- *= require legend.css.scss
- *= require blip_form.css.scss
+ *= require leaflet
+ *= require login
+ *= require signup
+ *= require legend
  *= require_tree .
  *= require_self
  */

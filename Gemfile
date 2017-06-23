@@ -9,7 +9,7 @@ gem 'jbuilder',     '2.2.3'
 gem 'sdoc',         '0.4.0', group: :doc
 gem 'carrierwave' 
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
-gem 'fog', '~> 1.38'
+gem 'fog-aws'
 gem 'bcrypt', '~> 3.1.10'
 gem 'therubyracer', '~> 0.12.2'
 gem 'libv8' # 3.16.14.11
@@ -24,7 +24,6 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 group :development do
   gem 'web-console', '~> 3.0'
   gem 'coveralls',   '0.8.9'
-  gem 'sqlite3',     '1.3.9'
   gem 'letter_opener', '~> 1.4', '>= 1.4.1'
 end
 

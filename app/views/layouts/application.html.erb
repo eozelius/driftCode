@@ -2,7 +2,6 @@
 <html>
   <head>
     <title><%= full_title(yield(:title)) %></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="description" content="mapping platform for backpackers and travelers">
@@ -15,14 +14,18 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= csrf_meta_tags %>
 
-    <!-- TimeLineJS -->
-    <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
-    <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
-      </script>
-    <![endif]-->
+    <% if false %>
+      <!-- TimeLineJS -->
+      <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+      <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+      <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+        </script>
+      <![endif]-->
+    <% end %>
+
 
   </head>
   <body>
@@ -92,7 +95,7 @@
             <% end %>
 
             <%= link_to signup_path do %>
-              <button class="normal">Sign up</button>
+              <button class="normal" style="margin-right:13px;">Sign up</button>
             <% end %>
           </div>
         <% end %>
@@ -115,9 +118,7 @@
 
     ga('create', 'UA-83676035-1', 'auto');
     ga('send', 'pageview');
-
   </script>
-
 <% end %>
 
 <script type="text/javascript">

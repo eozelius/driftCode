@@ -47,8 +47,8 @@ class JourneysController < ApplicationController
 	end
 
 	def destroy
-		route = Route.find(params[:id])
-		route.destroy
+		j = Journey.find(params[:id])
+		j.destroy
 
 		redirect_to current_user
 	end

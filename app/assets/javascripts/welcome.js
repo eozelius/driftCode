@@ -1,22 +1,24 @@
 /* INDEX ACTION */
 $(function(){
   $.ajax({
-    url: '/api_home',
+    url: '/get_driftmap',
     method: 'POST',
+    data: { driftmap_id: $('#driftmap_id').val() },
     dataType: 'JSON',
     complete: function(response) {
       var r = response.responseJSON;
       window.r = r
 
       // init Timeline
-      DriftMapTimeline.init(r);
-
-      // init Leaflet
-      DriftMapLeaflet.init(r);
+      // DriftMapTimeline.init(r)
+      
+      DriftMapLeaflet.init(r)
 
       // init Accordian
-      DriftMapAccordian.init(r);
-    }
-  });
-});
+      // DriftMapAccordian.init(r)
 
+      // init Content
+      // DriftMapContent.init(r)
+    }
+  })
+})

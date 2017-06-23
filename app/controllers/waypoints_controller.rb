@@ -17,15 +17,8 @@ class WaypointsController < ApplicationController
 		@waypoint.date = date
 
 		if @waypoint.save
-			if params[:photo].present?
-				params[:photo].each do |image|
-					@waypoint.waypoint_images.build(image: image[1])
-				end
-				@waypoint.save
-			end
-			@waypoint.save
-			flash[:success] = "waypoint created successfully"
-			redirect_to current_user
+			flash.now[:success] = "waypoint created successfully, now add some photos, friends, or writing"
+			redirect_to controller: 'waypoints', action: 'content_creation', waypoint_id: @waypoint.id, journey_id: params[:journey_id]
 		else
 			flash[:danger] = 'whoops, something went wrong'
 			render 'new'
@@ -33,8 +26,8 @@ class WaypointsController < ApplicationController
 	end
 
 	def edit
-		@waypoint = Waypoint.find(params[:id])
 		@user = current_user
+		@waypoint = Waypoint.find(params[:id])
 	end
 
 	def update
@@ -55,7 +48,7 @@ class WaypointsController < ApplicationController
 				end
 				@waypoint.save
 			end
-			flash[:success] = "#{@waypoint.title} successfully updated"
+			flash[:success] = "#{@waypoint.title.html_safe} successfully updated"
 			redirect_to current_user
 		else
 			flash[:danger] = 'whoops, something went wrong'
@@ -79,10 +72,22 @@ class WaypointsController < ApplicationController
 		redirect_to user
 	end
 
+	def content_creation
+		@journey  = Journey.find(params[:journey_id])
+		@waypoint = Waypoint.find(params[:waypoint_id])
+
+		@galleries = @waypoint.galleries
+		@friends   = @waypoint.friends
+		@essays    = @waypoint.essays
+		@treks     = @waypoint.treks
+		
+		render 'waypoints/content_creation'
+	end
+
 	private
 		# todo, implement strong params
 		def waypoint_params
-			params.require(:waypoint).permit(:title, :body, :x, :y, :date)
+			params.require(:waypoint).permit(:title, :body, :x, :y, :date, :coverphoto)
 		end
 end
 

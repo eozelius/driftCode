@@ -3,12 +3,12 @@
 	<%= form_for :session, url: login_path do |f| %>
 		<p>
 			<%= f.label :email %>
-			<%= f.text_field :email, autofocus: true %>
+			<%= f.text_field :email, autofocus: true, style: 'margin-top:0; height: 1.3em;' %>
 		</p>	
 
 		<p>
 			<%= f.label :password %>
-			<%= f.password_field :password %>
+			<%= f.password_field :password, style: 'margin-top:0; height: 1.3em;' %>
 		</p>
 
 		<p>

@@ -1,3 +1,4 @@
+/* begin nav */
 nav#main {
 	width: 60px;
 	background: #dadce8; // $light-grey;
@@ -30,32 +31,9 @@ nav#main ul li i {
 nav#main ul li p {
 	font-size: .9em;
 }
+/* end nav */
 
-#dash-container {
-	h3.page-title {
-		padding: 1%;
-	}
-
-	h4 {
-		text-align: left;
-	}
-
-	.img-user-container {
-		height: 315px;
-		margin-left: 0;
-		padding-left: 0;
-	}
-}
-
-/* Color 
-$light-blue: #C2D9EB;
-$dark-maroon: #552727;
-$dark-grey: #353535;
-$light-maroon: #A00505;
-$light-pink: #FCD1D8;
-$light-grey: #dadce8;
-*/
-
+/* Readme/intro driftmap is a platform... */
 div.readme-container {
 	width: 100%;
 	margin: 0 auto;
@@ -73,6 +51,15 @@ div.readme-container {
 		margin: 20px 5px;
 	}
 }
+/* end readme/intro */
+
+#home-page {
+	position: absolute;
+	top: 350px;
+	bottom: 0;	
+	right: 0;	
+	left: 0;
+}
 
 @media (max-width: 767px){
 	.accordian-container {
@@ -88,44 +75,8 @@ div.readme-container {
 		margin:15px 0;
 		height: auto;
 
-
 		button {
 			margin: 10px 5px;
 		}
 	}
 }
-
-
-/* image optimization - do not touch */
-/*@media (min-width: 701px) and (max-width: 992px){
-	#map {
-		height: 270px;
-	}
-	#driftmap-timeline-container .item img {
-		height: 336px;
-	}
-	#driftmap-timeline-container .carousel-inner {
-		height: 350px;
-	}
-}*/
-
-/*@media (max-width: 700px){
-	#driftmap-timeline-container .item img,
-	#driftmap-timeline-container .carousel-inner {
-		height: 300px;
-	}
-}
-
-@media (max-width: 480px){
-	#driftmap-timeline-container .item img,
-	#driftmap-timeline-container .carousel-inner {
-		height: 280px;
-	}	
-}
-
-@media (max-width: 400px){
-	#driftmap-timeline-container .item img,
-	#driftmap-timeline-container .carousel-inner {
-		height: 230px;
-	}
-}*/
