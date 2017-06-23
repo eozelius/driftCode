@@ -50,7 +50,7 @@
                   <h6 class="journey-title">Friends</h6>
 
                   <% waypoint.friends.each_with_index do |friend, f_index| %>
-                    <div class="hud-friend <%= 'hidden' unless f_index == 0 %>">
+                    <div class="hud-friend <%= 'hidden' unless f_index == 0 %>" data-friend="<%= friend.id %>">
                       <p class="wp-title"><%= "#{friend.first_name} #{friend.last_name}" %></p>                
                     </div>
                   <% end %>
@@ -63,7 +63,7 @@
                   <h6 class="journey-title">Essays</h6>
 
                   <% waypoint.essays.each_with_index do |essay, e_index| %>
-                    <div class="hud-essay <%= 'hidden' unless e_index == 0 %>">
+                    <div class="hud-essay <%= 'hidden' unless e_index == 0 %>" data-essay="<%= essay.id %>">
                       <p class="wp-title"><%= essay.title %></p>
                     </div>
                   <% end %>
@@ -76,7 +76,7 @@
                   <h6 class="journey-title">Treks</h6>
 
                   <% waypoint.treks.each_with_index do |trek, t_index| %>
-                    <div class="hud-trek <%= 'hidden' unless t_index == 0 %>">
+                    <div class="hud-trek <%= 'hidden' unless t_index == 0 %>" data-trek="<%= trek.id %>">
                       <p class="wp-title"><%= trek.title %></p>
                     </div>
                   <% end %>

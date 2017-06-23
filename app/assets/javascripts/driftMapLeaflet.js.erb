@@ -27,21 +27,11 @@ var DriftMapLeaflet = function(){
   // Goto First content
   $(document).on('click', '.waypoint-content li', function(){
     var wp_id = $(this).data('waypoint');
-    var type  = $(this).data('request-type');
+    var type  = $(this).data('request-type').toString();
     console.log('wp_id: ' + wp_id + '     type: ' + type)
 
-
-    var gallery = DriftMapLeaflet.getGallery(wp_id, type, 0)
-
-    window.wp = wp
-
-
-    // window.leafletIndexer[]
-
-
-
-    // window.leafletIndexer[0].leaflet.content.galleries[0].popup
-
+    var wp = DriftMapLeaflet.getWayPoint(wp_id)
+    var gallery = DriftMapLeaflet.getGallery(wp_id, type)
   });
 
   return {
@@ -84,6 +74,29 @@ var DriftMapLeaflet = function(){
 
       // Zoom in/out buttons should be in top right, instead of top left.
       $('.leaflet-control-container .leaflet-top.leaflet-left').removeClass('leaflet-top').addClass('leaflet-bottom')
+
+      // BEGIN WTF
+      journeys.forEach(function(journey){
+        // Journies
+        window.j = journey
+
+        // Waypoints
+        journey.waypoints.forEach(function(waypoint){
+          window.w = waypoint
+
+          // Content
+          for(var c in waypoint.content){
+            console.log("content: " + waypoint.content[c])
+          }
+
+          console.log(JSON.stringify(waypoint.content))
+        })
+      })
+
+      // END WTF
+
+
+
 
       for(var x in journeys){
         if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){
@@ -131,7 +144,7 @@ var DriftMapLeaflet = function(){
               // End waypoint Popup
 
               // Galleries
-              var gallery_index = []
+              var galleries = []
               for(var y in wps[i].content.galleries){
                 var g = wps[i].content.galleries[y]
                 var g_popup_content = '<div class="gallery-popup" data-gallery="'+ g.id +'" data-waypoint="'+ id +'">' + 
@@ -141,17 +154,18 @@ var DriftMapLeaflet = function(){
                                       g_popup_content += '</div></div>';
 
                 var g_popup_opts = { className: 'g_popup' }
-                // var g_marker = L.marker([g.x, g.y]).addTo(m)
-                var g_popup  = L.popup(g_popup_opts).setLatLng([g.x, g.y]).setContent(g_popup_content)
+                var g_marker = L.marker([g.x + .05, g.y + .05]).addTo(m)
+                var g_popup  = L.popup(g_popup_opts).setLatLng([g.x + .05, g.y + .05]).setContent(g_popup_content)
+                g_marker.bindPopup(g_popup)
 
-                gallery_index.push({
-                  // marker: g_marker,
+                galleries.push({
+                  marker: g_marker,
                   popup: g_popup
                 })
               }
 
               // Friends
-              var friends_index = []
+              var friends = []
               for(var y in wps[i].content.friends){
                 var f = wps[i].content.friends[y]
                 var f_popup_content = '<div class="friend-popup" data-friend="'+ f.id +'" data-waypoint="'+ id +'">' + 
@@ -161,17 +175,18 @@ var DriftMapLeaflet = function(){
                                         '</div>' + 
                                       '</div>';
                 var f_popup_opts = { className: 'f_popup' }
-                // var f_marker = L.marker([f.x, f.y]).addTo(m)
-                var f_popup  = L.popup(f_popup_opts).setLatLng([f.x, f.y]).setContent(f_popup_content)
+                var f_marker = L.marker([f.x - .05, f.y + .05]).addTo(m)
+                var f_popup  = L.popup(f_popup_opts).setLatLng([f.x + .05, f.y + .05]).setContent(f_popup_content)
+                f_marker.bindPopup(f_popup)
 
-                friends_index.push({
-                  // marker:  f_marker,
+                friends.push({
+                  marker:  f_marker,
                   popup:  f_popup
                 })
               }
 
               // essays
-              var essays_index = []
+              var essays = []
               for(var y in wps[i].content.essays){
                 var e = wps[i].content.essays[y]
                 var e_popup_content = '<div class="essay-popup" data-essay="'+ e.id +'" data-waypoint="'+ id +'">' + 
@@ -184,17 +199,18 @@ var DriftMapLeaflet = function(){
                                         '</div>' + 
                                       '</div>';
                 var e_popup_opts = { className: 'e_popup' }
-                // var e_marker = L.marker([e.x, e.y]).addTo(m)
-                var e_popup  = L.popup(e_popup_opts).setLatLng([e.x, e.y]).setContent(e_popup_content)
+                var e_marker = L.marker([e.x + .05, e.y - .05]).addTo(m)
+                var e_popup  = L.popup(e_popup_opts).setLatLng([e.x + .05, e.y + .05]).setContent(e_popup_content)
+                e_marker.bindPopup(e_popup)                
 
-                essays_index.push({
-                  //marker: e_marker,
+                essays.push({
+                  marker: e_marker,
                   popup:  e_popup
                 })
               }
 
               // treks
-              treks_index = []
+              treks = []
               for(var y in wps[i].content.treks){
                 var t = wps[i].content.treks[y]
                 var t_popup_content = '<div class="trek-popup" data-trek="'+ t.id +'" data-waypoint="'+ id +'">' + 
@@ -204,11 +220,12 @@ var DriftMapLeaflet = function(){
                                         '</div>' + 
                                       '</div>';
                 var t_popup_opts = { className: 't_popup' }
-                // var t_marker = L.marker([wps[i].x, wps[i].y]).addTo(m)
-                var t_popup  = L.popup(t_popup_opts).setLatLng([wps[i].x, wps[i].y]).setContent(t_popup_content)
+                var t_marker = L.marker([wps[i].x - .05, wps[i].y - .05]).addTo(m)
+                var t_popup  = L.popup(t_popup_opts).setLatLng([wps[i].x + .05, wps[i].y + .05]).setContent(t_popup_content)
+                t_marker.bindPopup(t_popup)
 
-                treks_index.push({
-                  // marker: t_marker,
+                treks.push({
+                  marker: t_marker,
                   popup:  t_popup
                 })
               }
@@ -220,15 +237,15 @@ var DriftMapLeaflet = function(){
               title:  title,
               body:   body,
               journey_id: j_id,
+              content: {
+                galleries: galleries,
+                friends:   friends,
+                essays:    essays,
+                treks:     treks
+              },
               leaflet: {
                 marker: wpMarker,
-                popup:  wpPopup,
-                content: {
-                  galleries: gallery_index,
-                  friends:   friends_index,
-                  essays:    essays_index,
-                  treks:     treks_index
-                }                
+                popup:  wpPopup,                
               }
             });
           }         
@@ -236,9 +253,6 @@ var DriftMapLeaflet = function(){
       }
     
       if(journeys.length > 1){
-        // indexer[0].leaflet.content.friends[0].marker.setIcon(maroonMarker)
-        // indexer[0].leaflet.content.friends[0].popup.openOn(m)
-
         indexer[0].leaflet.marker.setIcon(maroonMarker)
         indexer[0].leaflet.popup.openOn(m)
       }
@@ -293,11 +307,11 @@ var DriftMapLeaflet = function(){
       return false;
     },
 
-    getContent: function(waypointId, type, contentId){
+    getGallery: function(waypointId, type, contentId){
       var wp = DriftMapLeaflet.getWayPoint(waypointId)
 
-      for(var i in wp.leaflet.content[type.toString()])
-        if(wp.leaflet.content[type.toString()][i].id == galleryId)
+      for(var i in wp.leaflet.content[type])
+        if(wp.leaflet.content[type][i].id == contentId)
           return wp.leaflet.content.galleries[i];
       return false; 
     },
