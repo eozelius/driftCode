@@ -21,16 +21,14 @@ var DriftMapLeaflet = function(){
   /* Event Listeners */
 
   // Goto First content
-  $(document).on('click', '.waypoint-content li', function(){
+  $(document).on('click', '.content-icons-menu li', function(){
       var wp_id = $(this).data('waypoint');
       var type  = $(this).data('request-type').toString();
       console.log('wp_id: ' + wp_id + '     type: ' + type)
 
-      $('.waypoint-view-content .view-content').removeClass('active')
+      $('.waypoint-content .view-content').removeClass('active')
 
-      $('.waypoint-view-content .' + type).addClass('active')
-
-
+      $('.waypoint-content .' + type).addClass('active')
   });
 
   return {
@@ -86,7 +84,7 @@ var DriftMapLeaflet = function(){
             var j_popupContent = '<div class="waypoint-popup" data-waypoint="'+ j.id +'">' +
                                   '<div class="waypoint-text">' +
                                     '<h4 class="waypoint-popup-title instructions">'+ j.title +'</h4>' +
-                                    '<p class="waypoint-popup-body">';
+                                    '<p class="waypoint-popup-body ">';
                                       if(j.coverphoto.url != null){
                                           j_popupContent += '<img class="waypoint-popup-coverphoto" src="'+ j.coverphoto.url +'">';
                                       }
@@ -117,7 +115,6 @@ var DriftMapLeaflet = function(){
 
             // Leaflet Components for WAYPOINTS
             for(var i in wps){
-            if(!myDefault){
               /* Add Marker to Map */
               var lat = wps[i].x;
               var lng = wps[i].y;
@@ -127,31 +124,34 @@ var DriftMapLeaflet = function(){
               var j_id  = wps[i].journey_id;
 
               /* Bind popup to marker */
-              var popupContent =  '' +
+              var popupContent =
                 '<div class="waypoint-popup" data-waypoint="'+ id +'">' +
-                  '<div class="waypoint-text">' +
-                    '<h4 class="waypoint-popup-title instructions">'+ title +'</h4>' +
-                    '<div class="waypoint-content-container">' +
-                    '<div class="waypoint-content">' +
-                      '<ul>' +
-                        '<li class="galleries" data-request-type="galleries" data-waypoint="'+ id +'"><i class="fa fa-camera"></i></li>' +
-                        '<li class="friends"   data-request-type="friends"   data-waypoint="'+ id +'"><i class="fa fa-user-circle"></i></li>' +
-                        '<li class="essays"    data-request-type="essays"    data-waypoint="'+ id +'"><i class="fa fa-pencil-square-o"></i></li>' +
-                        '<li class="treks"     data-request-type="treks"     data-waypoint="'+ id +'"><i class="fa fa-compass"></i></li>' +
-                      '<ul><div class="clear-fix">' +
-                    '<p class="waypoint-popup-body">';
-
-                      // Waypoint-coverphoto
-                      if(wps[i].coverphoto.url != null){ popupContent += '<img class="waypoint-popup-coverphoto" src="'+ wps[i].coverphoto.url +'">' }
-                      popupContent += body +
-                    '</p>' +
-                  '</div>' +
+                  '<h4 class="waypoint-popup-title instructions">'+ title +'</h4>' +
+                  // Content Icons Menu
+                  '<ul class="content-icons-menu">' +
+                    '<li class="galleries" data-request-type="galleries" data-waypoint="'+ id +'"><i class="fa fa-camera"></i></li>' +
+                    '<li class="friends"   data-request-type="friends"   data-waypoint="'+ id +'"><i class="fa fa-user-circle"></i></li>' +
+                    '<li class="essays"    data-request-type="essays"    data-waypoint="'+ id +'"><i class="fa fa-pencil-square-o"></i></li>' +
+                    '<li class="treks"     data-request-type="treks"     data-waypoint="'+ id +'"><i class="fa fa-compass"></i></li>' +
+                  '<ul><div class="clear-fix">' +
                   '<div class="waypoint-content-container">' +
                     '<div class="waypoint-content">' +
-                      '<div class="waypoint-view-content">';
+
+                      // Waypoint Body
+                      '<div class="view-content active">' +
+                        '<p class="waypoint-popup-body">';
+
+                        if(wps[i].coverphoto.url != null){
+                            popupContent += '<img class="waypoint-popup-coverphoto" src="'+ wps[i].coverphoto.url +'">';
+                        }
+                        popupContent += body +
+                        '</p>' +
+                      '</div>';
+
+
 
                       // Galleries
-                      popupContent += '<div class="galleries view-content active">';
+                      popupContent += '<div class="galleries view-content">';
                       for (var y in wps[i].content.galleries) {
                           var g = wps[i].content.galleries[y];
 
@@ -197,7 +197,7 @@ var DriftMapLeaflet = function(){
               var wpPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
               wpMarker.bindPopup(wpPopup);
               // End waypoint Popup
-            }
+
 
             /* Add wayPoint to indexer */
             indexer.push({

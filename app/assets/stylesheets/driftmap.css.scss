@@ -34,6 +34,25 @@
       width: 100% !important;
     }
 
+    li {
+      width: 45px;
+      display: inline-block;
+      height: 45px;
+      cursor: pointer;
+      margin: 0 2%;
+    }
+
+    li.friends   { background-color: #84C77B; }
+    li.galleries { background-color: $light-blue; }
+    li.treks     { background-color: #CEA5D4; }
+    li.essays    { background-color: #755151; }
+
+    i {
+      font-size: 2em;
+      line-height: 45px;
+      color: #444;
+    }
+
     .waypoint-popup {
       height: 300px;
       overflow-y: scroll;
@@ -51,66 +70,40 @@
       }
 
       /* geft content */
-      .waypoint-content-container {
-        padding: 3% 15%;
+      .waypoint-content {
+        padding: 3% 5%;
+        border-top: 1px solid $maroon;
+        padding: 3% 0 2%;
 
-        .waypoint-content {
-          border-top: 1px solid $maroon;
-          padding: 3% 0 2%;
-        }
-        
-        li {
-          width: 45px;
-          display: inline-block;
-          height: 45px;
-          cursor: pointer;
-          margin: 0 2%;
+        .view-content {
+          display: none;
         }
 
-        li.friends   { background-color: #84C77B; }
-        li.galleries { background-color: $light-blue; }
-        li.treks     { background-color: #CEA5D4; }
-        li.essays    { background-color: #755151; }
-
-        i {
-          font-size: 2em;
-          line-height: 45px;
-          color: #444;
+        .view-content.active {
+          display: block;
         }
 
-
-      }
-    }
-
-    .waypoint-view-content {
-      .view-content {
-        display: none;
-      }
-      
-      .view-content.active {
-        display: block;
-      }
-
-      // Galleries
-      .galleries {
-        img {
-          width: 100%;
-          margin: 0;
+        // Galleries
+        .galleries {
+          img {
+            width: 100%;
+            margin: 0;
+          }
         }
-      }
 
-      // Friends
-      .friends {
-        img {
-          width: 100%;
-          margin: 0;
+        // Friends
+        .friends {
+          img {
+            width: 100%;
+            margin: 0;
+          }
         }
-      }
 
-      .essays {
-        img{
-          width: 100%;
-          margin: 0;
+        .essays {
+          img{
+            width: 100%;
+            margin: 0;
+          }
         }
       }
     }
