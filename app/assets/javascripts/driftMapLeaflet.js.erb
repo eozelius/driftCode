@@ -20,14 +20,20 @@ var DriftMapLeaflet = function(){
 
   /* Event Listeners */
 
+  // Goto Waypoint from Journey Popup
+  $(document).on('click', '.waypoints-preview li', function () {
+      var wp = DriftMapLeaflet.getWayPoint($(this).data('waypoint'))
+      console.log('wp: ' + wp.title)
+
+      wp.leaflet.popup.openOn(m)
+
+  })
+
   // Goto First content
   $(document).on('click', '.content-icons-menu li', function(){
       var wp_id = $(this).data('waypoint');
       var type  = $(this).data('request-type').toString();
-      console.log('wp_id: ' + wp_id + '     type: ' + type)
-
       $('.waypoint-content .view-content').removeClass('active')
-
       $('.waypoint-content .' + type).addClass('active')
   });
 
@@ -95,33 +101,14 @@ var DriftMapLeaflet = function(){
                 '<div class="waypoints-preview">' +
                     '<ul>';
                       for(var w in wps){
-                          j_popupContent += '<li>' +
-                            '<a href="#">' +
-                              '<p class="waypoint-title">' + wps[w].title + '</p>' +
-                            '</a>';
+                          j_popupContent += '<li data-waypoint="'+ wps[w].id +'">' +
+                            '<p class="waypoint-title">' + wps[w].title + '</p>';
                       }
                     j_popupContent += '</ul></div></div>';
 
             var jMarker = L.marker([j_lat, j_lng]).addTo(m);
             var jPopup  = L.popup({ className: 'waypoint-popup' }).setLatLng([j_lat, j_lng]).setContent(j_popupContent);
             jMarker.bindPopup(jPopup);
-
-            indexer.push({
-                id:     j.id,
-                title:  j.title,
-                body:   j.description,
-                journey_id: j.id,
-                content: {
-                    galleries: [],
-                    friends:   [],
-                    essays:    [],
-                    treks:     []
-                },
-                leaflet: {
-                    marker: jMarker,
-                    popup:  jPopup
-                }
-            });
 
             // Leaflet Components for WAYPOINTS
             for(var i in wps){
@@ -230,8 +217,10 @@ var DriftMapLeaflet = function(){
       }
     
       if(journeys.length > 1){
-        indexer[0].leaflet.marker.setIcon(maroonMarker)
-        indexer[0].leaflet.popup.openOn(m)
+        // indexer[0].leaflet.marker.setIcon(maroonMarker)
+        // indexer[0].leaflet.popup.openOn(m)
+        jMarker.setIcon(maroonMarker)
+        jPopup.openOn(m)
       }
       window.leafletIndexer = indexer
     },
