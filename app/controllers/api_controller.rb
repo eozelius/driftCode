@@ -11,9 +11,6 @@ class ApiController < ApplicationController
       response = []
 
       journeys.each do |j|
-
-        byebug
-
         my_journey = {}
 
         waypoints = []
@@ -109,7 +106,7 @@ class ApiController < ApplicationController
               treks: treks,
             },
             journey_id: wp.journey_id,
-            driftmap_id: journey.driftmap_id,
+            driftmap_id: j.driftmap_id,
             coverphoto: wp.coverphoto,
             date: {
               year:  wp.date.year,
