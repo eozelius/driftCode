@@ -35,6 +35,9 @@
     }
 
     .waypoint-popup {
+      height: 300px;
+      overflow-y: scroll;
+
       /* description & coverphoto */
       p.waypoint-popup-body {
         font-size: 1.3em;
@@ -76,6 +79,15 @@
           line-height: 45px;
           color: #444;
         }
+
+
+      }
+    }
+
+    .waypoint-view-content {
+      img {
+        width: 100%;
+        margin: 0;
       }
     }
 
