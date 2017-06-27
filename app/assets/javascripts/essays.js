@@ -8,7 +8,7 @@ $(function(){
         description: '',
         title: '',
         driftmap_id: 0,
-        coverphoto: { url: null },
+        coverphoto: { url: null }
       },
 
       waypoints: [{
@@ -25,17 +25,17 @@ $(function(){
         },
         images: []
       }]
-    }]
+    }];
 
     var opt = {
       init_x: $("#essay_x").val(),
       init_y: $("#essay_y").val(),
       init_zoom: 6
-    }
+    };
 
-    var myDefault = false
+    var myDefault = false;
 
-    DriftMapLeaflet.init(j, opt, myDefault)
+    DriftMapLeaflet.init(j, opt, myDefault);
 
     // make the marker draggable
     var marker = window.leafletIndexer[0].leaflet.marker;
@@ -49,4 +49,4 @@ $(function(){
       $('#friend_y').val(lng);      
     }
   }
-})
+});
