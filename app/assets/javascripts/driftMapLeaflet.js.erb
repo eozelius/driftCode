@@ -1,6 +1,5 @@
 var DriftMapLeaflet = function(){
   // Private Variables
-  var currentMarker
   var indexer = []
 
   L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
@@ -23,12 +22,15 @@ var DriftMapLeaflet = function(){
 
   // Goto First content
   $(document).on('click', '.waypoint-content li', function(){
-    var wp_id = $(this).data('waypoint');
-    var type  = $(this).data('request-type').toString();
-    console.log('wp_id: ' + wp_id + '     type: ' + type)
+      var wp_id = $(this).data('waypoint');
+      var type  = $(this).data('request-type').toString();
+      console.log('wp_id: ' + wp_id + '     type: ' + type)
 
-    var wp = DriftMapLeaflet.getWayPoint(wp_id)
-    var gallery = DriftMapLeaflet.getGallery(wp_id, type)
+      $('.waypoint-view-content .view-content').removeClass('active')
+
+      $('.waypoint-view-content .' + type).addClass('active')
+
+
   });
 
   return {
@@ -81,19 +83,19 @@ var DriftMapLeaflet = function(){
             // Leaflet for JOURNEY
             var j_lat = wps[0].x;
             var j_lng = wps[0].y;
-            var j_popupConent = '<div class="waypoint-popup" data-waypoint="'+ j.id +'">' +
+            var j_popupContent = '<div class="waypoint-popup" data-waypoint="'+ j.id +'">' +
                                   '<div class="waypoint-text">' +
                                     '<h4 class="waypoint-popup-title instructions">'+ j.title +'</h4>' +
                                     '<p class="waypoint-popup-body">';
                                       if(j.coverphoto.url != null){
-                                          j_popupConent += '<img class="waypoint-popup-coverphoto" src="'+ j.coverphoto.url +'">';
+                                          j_popupContent += '<img class="waypoint-popup-coverphoto" src="'+ j.coverphoto.url +'">';
                                       }
-                                      j_popupConent += j.description +
+                                      j_popupContent += j.description +
                                     '</p>' +
                                   '</div>';
 
             var jMarker = L.marker([j_lat, j_lng]).addTo(m);
-            var jPopup  = L.popup({ className: 'waypoint-popup' }).setLatLng([j_lat, j_lng]).setContent(j_popupConent);
+            var jPopup  = L.popup({ className: 'waypoint-popup' }).setLatLng([j_lat, j_lng]).setContent(j_popupContent);
             jMarker.bindPopup(jPopup);
 
             indexer.push({
@@ -147,7 +149,7 @@ var DriftMapLeaflet = function(){
                       '<div class="waypoint-view-content">';
 
                       // Galleries
-                      popupContent += '<div class="galleries">';
+                      popupContent += '<div class="galleries view-content active">';
                       for (var y in wps[i].content.galleries) {
                           var g = wps[i].content.galleries[y];
 
@@ -161,20 +163,20 @@ var DriftMapLeaflet = function(){
                       popupContent += '</div>';
 
                       // Friends
-                      popupContent += '<div class="friends">';
+                      popupContent += '<div class="friends view-content">';
                       for(var y in wps[i].content.friends){
                         var f = wps[i].content.friends[y];
-                        console.log('f: ' + f.first_name)
+
+                        window.f = f
+                        // console.log('f: ' + f.photo.url)
                         popupContent +=
                             '<h4 class="waypoint-title">' + f.first_name + ' ' + f.last_name + '</h4>' +
-                            '<p>'+ f.description +'</p>'
-
-
+                            '<p><img src="'+ f.photo.url + '" />' + f.description +'</p>'
                       }
                       popupContent += '</div>';
 
                       // Essays
-                      popupContent += '<div class="essays">' +
+                      popupContent += '<div class="essays view-content">' +
                       '<h4 class="waypoint-title">Essays</h4>';
                       for(var y in wps[i].content.essays){
                           var e = wps[i].content.essays[y]
@@ -202,10 +204,10 @@ var DriftMapLeaflet = function(){
               body:   body,
               journey_id: j_id,
               content: {
-                galleries: galleries,
-                friends:   friends,
-                essays:    essays,
-                treks:     treks
+                galleries: [],
+                friends:   [],
+                essays:    [],
+                treks:     []
               },
               leaflet: {
                 marker: wpMarker,

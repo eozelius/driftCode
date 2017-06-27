@@ -85,9 +85,35 @@
     }
 
     .waypoint-view-content {
-      img {
-        width: 100%;
-        margin: 0;
+      .view-content {
+        display: none;
+      }
+      
+      .view-content.active {
+        display: block;
+      }
+
+      // Galleries
+      .galleries {
+        img {
+          width: 100%;
+          margin: 0;
+        }
+      }
+
+      // Friends
+      .friends {
+        img {
+          width: 100%;
+          margin: 0;
+        }
+      }
+
+      .essays {
+        img{
+          width: 100%;
+          margin: 0;
+        }
       }
     }
 
