@@ -81,16 +81,26 @@ var DriftMapLeaflet = function(){
             // Leaflet for JOURNEY
             var j_lat = wps[0].x;
             var j_lng = wps[0].y;
-            var j_popupContent = '<div class="waypoint-popup" data-waypoint="'+ j.id +'">' +
-                                  '<div class="waypoint-text">' +
-                                    '<h4 class="waypoint-popup-title instructions">'+ j.title +'</h4>' +
-                                    '<p class="waypoint-popup-body ">';
-                                      if(j.coverphoto.url != null){
-                                          j_popupContent += '<img class="waypoint-popup-coverphoto" src="'+ j.coverphoto.url +'">';
-                                      }
-                                      j_popupContent += j.description +
-                                    '</p>' +
-                                  '</div>';
+            var j_popupContent =
+              '<div class="waypoint-popup" data-waypoint="'+ j.id +'">' +
+                '<div class="waypoint-text">' +
+                  '<h4 class="waypoint-popup-title instructions">'+ j.title +'</h4>' +
+                  '<p class="waypoint-popup-body ">';
+                    if(j.coverphoto.url != null){
+                      j_popupContent += '<img class="waypoint-popup-coverphoto" src="'+ j.coverphoto.url +'">';
+                    }
+                    j_popupContent += j.description +
+                  '</p>' +
+                '</div>' +
+                '<div class="waypoints-preview">' +
+                    '<ul>';
+                      for(var w in wps){
+                          j_popupContent += '<li>' +
+                            '<a href="#">' +
+                              '<p class="waypoint-title">' + wps[w].title + '</p>' +
+                            '</a>';
+                      }
+                    j_popupContent += '</ul></div></div>';
 
             var jMarker = L.marker([j_lat, j_lng]).addTo(m);
             var jPopup  = L.popup({ className: 'waypoint-popup' }).setLatLng([j_lat, j_lng]).setContent(j_popupContent);
@@ -127,13 +137,14 @@ var DriftMapLeaflet = function(){
               var popupContent =
                 '<div class="waypoint-popup" data-waypoint="'+ id +'">' +
                   '<h4 class="waypoint-popup-title instructions">'+ title +'</h4>' +
+
                   // Content Icons Menu
                   '<ul class="content-icons-menu">' +
                     '<li class="galleries" data-request-type="galleries" data-waypoint="'+ id +'"><i class="fa fa-camera"></i></li>' +
                     '<li class="friends"   data-request-type="friends"   data-waypoint="'+ id +'"><i class="fa fa-user-circle"></i></li>' +
                     '<li class="essays"    data-request-type="essays"    data-waypoint="'+ id +'"><i class="fa fa-pencil-square-o"></i></li>' +
                     '<li class="treks"     data-request-type="treks"     data-waypoint="'+ id +'"><i class="fa fa-compass"></i></li>' +
-                  '<ul><div class="clear-fix">' +
+                  '</ul><div class="clear-fix">' +
                   '<div class="waypoint-content-container">' +
                     '<div class="waypoint-content">' +
 
@@ -147,8 +158,6 @@ var DriftMapLeaflet = function(){
                         popupContent += body +
                         '</p>' +
                       '</div>';
-
-
 
                       // Galleries
                       popupContent += '<div class="galleries view-content">';
@@ -221,8 +230,8 @@ var DriftMapLeaflet = function(){
       }
     
       if(journeys.length > 1){
-        indexer[1].leaflet.marker.setIcon(maroonMarker)
-        indexer[1].leaflet.popup.openOn(m)
+        indexer[0].leaflet.marker.setIcon(maroonMarker)
+        indexer[0].leaflet.popup.openOn(m)
       }
       window.leafletIndexer = indexer
     },

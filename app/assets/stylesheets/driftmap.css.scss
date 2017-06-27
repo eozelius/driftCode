@@ -34,12 +34,12 @@
       width: 100% !important;
     }
 
-    li {
+    .content-icons-menu li {
       width: 45px;
       display: inline-block;
       height: 45px;
       cursor: pointer;
-      margin: 0 2%;
+      margin: 2% 2%;
     }
 
     li.friends   { background-color: #84C77B; }
@@ -86,23 +86,23 @@
         // Galleries
         .galleries {
           img {
-            width: 100%;
-            margin: 0;
+            width: 95%;
+            margin: 0 auto;
           }
         }
 
         // Friends
         .friends {
           img {
-            width: 100%;
-            margin: 0;
+            width: 95%;
+            margin: 0 auto;
           }
         }
 
         .essays {
           img{
-            width: 100%;
-            margin: 0;
+            width: 95%;
+            margin: 0 auto;
           }
         }
       }
