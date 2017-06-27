@@ -1,3 +1,5 @@
+# require 'open-uri'
+
 # Seeds for all Environments
 ethan = User.create( 
   first_name: 'ethan',
@@ -13,6 +15,8 @@ ethan = User.create(
   profile_pic: open('https://driftmap.s3.amazonaws.com/uploads/user/profile_pic/1/20160120_154421.jpg')
 )
 
+ethan.save
+
 # Create driftmap for ethan
 ethan.driftmap = Driftmap.create(
   title:  "./driftmap",
@@ -21,6 +25,8 @@ ethan.driftmap = Driftmap.create(
   init_y: -34.2400771379471,
   init_zoom: 2,
 )
+
+ethan.driftmap.save!
 
 colombia = ethan.driftmap.journeys.create!(
   title: '2015 - Colombia',
