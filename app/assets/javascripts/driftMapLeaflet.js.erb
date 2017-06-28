@@ -40,6 +40,20 @@ var DriftMapLeaflet = function(){
     return color;
   }
 
+  function drawMap(driftmap){
+    var mapColor = getColorScheme(driftmap.color)
+    m = L.map('map').setView([driftmap.init_x, driftmap.init_y], driftmap.init_zoom);
+    L.tileLayer(mapColor + '?access_token={accessToken}',
+      { attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'eozelius77.j4hekake',
+        accessToken: "<%= ENV['MAPBOX_SECRET_KEY'] %>"
+      }).addTo(m);
+
+    // Zoom in/out buttons should be in top right, instead of top left.
+    $('.leaflet-control-container .leaflet-top.leaflet-left').removeClass('leaflet-top').addClass('leaflet-bottom')
+  }
+
   /* Event Listeners */
 
   // Goto Journey from Right Hud
@@ -66,20 +80,8 @@ var DriftMapLeaflet = function(){
 
     // public methods
     init: function(data){
-      var driftmap = data.driftmap
       var journeys = data.journeys
-      m = L.map('map').setView([driftmap.init_x, driftmap.init_y], driftmap.init_zoom);
-      var mapbox_color = getColorScheme(driftmap.color_scheme)
-
-      L.tileLayer(mapbox_color + '?access_token={accessToken}', 
-        { attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-          maxZoom: 18,
-          id: 'eozelius77.j4hekake',
-          accessToken: "<%= ENV['MAPBOX_SECRET_KEY'] %>"
-        }).addTo(m);
-
-      // Zoom in/out buttons should be in top right, instead of top left.
-      $('.leaflet-control-container .leaflet-top.leaflet-left').removeClass('leaflet-top').addClass('leaflet-bottom')
+      drawMap(data.driftmap);
 
       for(var x in journeys){
         if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){
