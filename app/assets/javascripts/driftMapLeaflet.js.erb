@@ -223,18 +223,6 @@ var DriftMapLeaflet = function(){
     });
   }
 
-  function drawLeafletComponents(journeys){
-    for(var j in journeys){
-      if(journeys[j].journey !== undefined && journeys[j].waypoints !== undefined){
-        constructJourneyPopup(journeys[j].journey, journeys[j].waypoints)
-
-        for(var w in journeys[j].waypoints){
-          constructWaypointPopup(journeys[j].waypoints[w])
-        }
-      }
-    }
-  }
-
   /* Event Listeners */
 
   // Goto Journey from Right Hud
@@ -262,7 +250,15 @@ var DriftMapLeaflet = function(){
     // public methods
     init: function(data){
       drawMap(data.driftmap);
-      drawLeafletComponents(data.journeys)
+
+      // Plot Journey & Waypoint Popups/Markers
+      for(var j in data.journeys){
+        var journeys = data.journeys
+        if(journeys[j].journey !== undefined && journeys[j].waypoints !== undefined){
+          constructJourneyPopup(journeys[j].journey, journeys[j].waypoints)
+          for(var w in journeys[j].waypoints){ constructWaypointPopup(journeys[j].waypoints[w]) }
+        }
+      }
 
       if(data.journeys.length > 1){
         journeyIndexer[0].leaflet.marker.setIcon(maroonMarker)
