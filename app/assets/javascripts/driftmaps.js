@@ -25,10 +25,10 @@ $(function(){
       var color = $(this).text()
 
       if(color == 'blue'){ 
-        $('#driftmap_color_scheme_default').click()
-        return
+        $('#driftmap_color_scheme_default').click();
+        return;
       } else {
-        $('#driftmap_color_scheme_' + color).click()
+        $('#driftmap_color_scheme_' + color).click();
       }
     })
   }
