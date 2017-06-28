@@ -3,7 +3,7 @@ var DriftMapLeaflet = function(){
   var indexer = []
   var journeyIndexer = []
 
-  L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
+  L.Icon.Default.imagePath = '<%= (Rails.root + '/assets/leaflet').to_s %>';
   /* Custom Makers */
   var maroonMarker = L.icon({ 
     iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
@@ -29,26 +29,22 @@ var DriftMapLeaflet = function(){
 
   // Goto Waypoint from Journey Leaflet Popup or Right Hud
   $(document).on('click', '.waypoints-preview li, .hud-bottom p', function () {
-      var wp = DriftMapLeaflet.getWayPoint($(this).data('waypoint'))
-      console.log('wp: ' + wp.title)
-      wp.leaflet.popup.openOn(m)
-
-
+    var wp = DriftMapLeaflet.getWayPoint($(this).data('waypoint'))
+    wp.leaflet.popup.openOn(m)
   })
 
   // Goto First content
   $(document).on('click', '.content-icons-menu li', function(){
-      var wp_id = $(this).data('waypoint');
-      var type  = $(this).data('request-type').toString();
-      $('.waypoint-content .view-content').removeClass('active')
-      $('.waypoint-content .' + type).addClass('active')
-  });
+    var type  = $(this).data('request-type').toString();
+    $('.waypoint-content .view-content').removeClass('active')
+    $('.waypoint-content .' + type).addClass('active')
+  })
 
   return {
     // public variables
 
     // public methods
-    init: function(data, myDefault){
+    init: function(data){
       var driftmap = data.driftmap
       var journeys = data.journeys
       m = L.map('map').setView([driftmap.init_x, driftmap.init_y], driftmap.init_zoom);
@@ -181,9 +177,6 @@ var DriftMapLeaflet = function(){
                       popupContent += '<div class="friends view-content">';
                       for(var y in wps[i].content.friends){
                         var f = wps[i].content.friends[y];
-
-                        window.f = f
-                        // console.log('f: ' + f.photo.url)
                         popupContent +=
                             '<h4 class="waypoint-title">' + f.first_name + ' ' + f.last_name + '</h4>' +
                             '<p><img src="'+ f.photo.url + '" />' + f.description +'</p>'
@@ -272,14 +265,13 @@ var DriftMapLeaflet = function(){
         }]
       }]
 
-      var myDefault = true
-      var myOpts = {
+      /*var myOpts = {
         init_x: 0.924206230200376,
         init_y: -40.2400771379471,
         init_zoom: 2
-      }
+      }*/
 
-      DriftMapLeaflet.init(data, myOpts, myDefault)
+      DriftMapLeaflet.init(data)
     },
 
     /* Getters */
