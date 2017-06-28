@@ -18,6 +18,27 @@ var DriftMapLeaflet = function(){
   });
 
   // Private Methods
+  var getColorScheme = function(color_scheme){
+    var color =''
+    switch (color_scheme) {
+      case 'normal':
+        color = 'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}';
+        break;
+      case 'satellite':
+        color = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}';
+        break;
+      case 'gray':
+        color = 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}';
+        break;
+      case 'dark':
+        color = 'https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}';
+        break;
+      default:
+        color = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png'; // default offwhite on blue
+        break;
+    }
+    return color;
+  }
 
   /* Event Listeners */
 
@@ -48,26 +69,7 @@ var DriftMapLeaflet = function(){
       var driftmap = data.driftmap
       var journeys = data.journeys
       m = L.map('map').setView([driftmap.init_x, driftmap.init_y], driftmap.init_zoom);
-
-      // color scheme
-      switch (driftmap.color_scheme) {
-        case 'normal':
-          mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}';
-          break;
-        case 'satellite':
-          mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}';
-          break;
-        case 'gray':
-          mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}';
-          break;
-        case 'dark':
-          mapbox_color = 'https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}';
-          break;
-        default:
-          mapbox_color = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png'; // default offwhite on blue
-          break;
-      }
-      // end color scheme
+      var mapbox_color = getColorScheme(driftmap.color_scheme)
 
       L.tileLayer(mapbox_color + '?access_token={accessToken}', 
         { attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -141,25 +143,21 @@ var DriftMapLeaflet = function(){
                   '<ul class="content-icons-menu">';
                     // Gallery
                     if(wps[i].content.galleries.length > 0){
-                      console.log(title + ' has a gallery')
                       popupContent += '<li class="galleries" data-request-type="galleries" data-waypoint="'+ id +'"><i class="fa fa-camera"></i></li>';
                     }
 
                     // Friends
                     if(wps[i].content.friends.length > 0){
-                      console.log(title + ' has a friend')
                       popupContent += '<li class="friends"   data-request-type="friends"   data-waypoint="'+ id +'"><i class="fa fa-user-circle"></i></li>';
                     }
 
                     // Essays
                     if(wps[i].content.essays.length > 0) {
-                      console.log(title + " has an essay")
                       popupContent += '<li class="essays"    data-request-type="essays"    data-waypoint="' + id + '"><i class="fa fa-pencil-square-o"></i></li>';
                     }
 
                     // Treks
                     if(wps[i].content.treks.length > 0) {
-                      console.log(title + ' has a trek')
                       popupContent += '<li class="treks"     data-request-type="treks"     data-waypoint="' + id + '"><i class="fa fa-compass"></i></li>';
                     }
 
