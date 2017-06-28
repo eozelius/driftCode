@@ -5,6 +5,15 @@ div.pro-part {
 	padding-top: 10px;
 }
 
+img.pp {
+  width: 100%;
+  height: auto;
+  max-width: 265px;
+  float: left;
+  margin-top: 11px;
+  margin-right: 5px;
+}
+
 /* Edit User Profile */
 .profile-details-container {
 	width: 95%;
@@ -18,26 +27,12 @@ div.pro-part {
 		width: 95%;
 	}
 
-	img.pp {
-		width: 100%;
-		height: auto;
-		max-width: 265px;
-		float: left;
-		margin-top: 11px;
-		margin-right: 5px;
-	}
-
 	.user-info p {
 		line-height: 30px;
 		&:first-child {
 			border-bottom: 1px solid #ADCDDB;
 			font-style: italic;
 		}
-	}
-
-	p.user-from,
-	p.user-gps {
-		color: #ccc;
 	}
 }
 

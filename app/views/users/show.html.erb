@@ -5,20 +5,33 @@
 <input id="user_id" type="hidden" value="<%= @user.id %>" >
 
 <div class="container">
-  <div class="readme-container">
-    <h4>Welcome to driftMap</h4>
-    <p style="line-height: 40px;">driftMap is a platform that allows you to share a map of your journeys and adventures, comprised of all your photos, treks, writing and of course all the friends you have made along the way. </p>
+    <div class="profile-picture-container col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <%= image_tag @user.profile_pic, class: 'pp' %>
+    </div>
 
-    <% unless logged_in? %>
-        <%= link_to signup_path do %>
-            <button class="normal">Sign up</button>
-        <% end %>
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+      <h4><%= @user.first_name %> - <span style="font-size: .7em; color: #C2D9EB; "><%= @driftmap.body %></span></h4>
 
-        <%= link_to login_path do %>
-            <button class="normal">Log in</button>
-        <% end %>
-    <% end %>
-  </div>
+
+      <div class="pro-part profile">
+        <div class="profile-details-container">
+          <div class="profile-details">
+            <!-- From -->
+            <%= "<p class='user-from'>from: <span style='color: #C2D9EB; float: right'>#{@user.from}</span></p>".html_safe if @user.from %>
+
+            <!-- Current Location -->
+            <%= "<p class='user-from'>current location: <span style='color: #C2D9EB; float: right;'>#{@user.gps}</span></p>".html_safe if @user.gps %>
+
+            <div style="margin-top:4%; border-top: 1px solid #ccc; width: 80%; margin: 4% auto 0; padding-top: 1%;">
+              <% if user_is_home(@user) || admin_user %>
+                <p>email: <%= @user.email %></p><div class="clear-fix"></div>
+                <p><a class="edit-user-anchor">edit my info</a></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
 <div id="profile-page">
@@ -49,22 +62,13 @@
 		<p class="driftmap-title"><%= @driftmap.body %></p>
 	</div>-->
 
-	<div id="pro-parts-container" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 		<div class="pro-part profile">
 			<div class="profile-details-container">
 				<div class="profile-details">
 					<p><%= @user.first_name %></p>
 					<%= image_tag @user.profile_pic, class: 'pp' if @user.profile_pic.present? %>
 					<div class="user-info">						
-						<% if @user.from %>
-							<p class="user-from">from: </p>
-							<p><%= @user.from %></p>
-						<% end %>			
 
-						<% if @user.gps %>
-							<p class="user-gps">current location: </p>
-							<p><%= @user.gps %></p>
-						<% end %>
 						
 						<% if user_is_home(@user) || admin_user %>
 							<p><%= @user.email %></p>
