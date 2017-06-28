@@ -25,6 +25,7 @@
 
   <div class="hud-container">
     <!-- TOP HUD -->
+    <% if false %>
     <div class="hud-top">
       <% @journeys.each_with_index do |journey, i| %>
         <div class="<%= 'hidden' unless i == 0 %>" data-journey="<%= journey.id %>">
@@ -87,13 +88,16 @@
         </div>   
       <% end %>
     </div>
+    <% end %>
 
     <!-- BOTTOM HUD -->
     <div class="hud-bottom">
       <% @journeys.each_with_index do |journey, i| %>
         <div class="journey journey-<%= journey.id %> hud-content-container">
           <h6 class="journey-title <%= 'active' if i == 0 %>"><%= journey.title %></h6>
-          <p class="wp-title"><%= journey.waypoints.first.title %></p>
+          <% journey.waypoints.each do |wp| %>
+            <p class="wp-title " data-waypoint="<%= wp.id %>"><%= wp.title %></p>
+          <% end %>
         </div>
       <% end %>
     </div>

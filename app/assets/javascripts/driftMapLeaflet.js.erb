@@ -20,11 +20,10 @@ var DriftMapLeaflet = function(){
 
   /* Event Listeners */
 
-  // Goto Waypoint from Journey Popup
-  $(document).on('click', '.waypoints-preview li', function () {
+  // Goto Waypoint from Journey Leaflet Popup or Right Hud
+  $(document).on('click', '.waypoints-preview li, .hud-bottom p', function () {
       var wp = DriftMapLeaflet.getWayPoint($(this).data('waypoint'))
       console.log('wp: ' + wp.title)
-
       wp.leaflet.popup.openOn(m)
 
   })
