@@ -33,7 +33,7 @@ var DriftMapLeaflet = function(){
     wp.leaflet.popup.openOn(m)
   })
 
-  // Goto First content
+  // Goto Waypoint content
   $(document).on('click', '.content-icons-menu li', function(){
     var type  = $(this).data('request-type').toString();
     $('.waypoint-content .view-content').removeClass('active')
@@ -91,7 +91,7 @@ var DriftMapLeaflet = function(){
           var j_popupContent =
             '<div class="waypoint-popup" data-waypoint="'+ j.id +'">' +
               '<div class="waypoint-text">' +
-                '<h4 class="waypoint-popup-title instructions">'+ j.title +'</h4>' +
+                '<h4 class="waypoint-popup-title">'+ j.title +'</h4>' +
                 '<p class="waypoint-popup-body ">';
                   if(j.coverphoto.url != null){
                     j_popupContent += '<img class="waypoint-popup-coverphoto" src="'+ j.coverphoto.url +'">';
@@ -134,15 +134,36 @@ var DriftMapLeaflet = function(){
 
               /* Bind popup to marker */
               var popupContent =
-                '<div class="waypoint-popup" data-waypoint="'+ id +'">' +
-                  '<h4 class="waypoint-popup-title instructions">'+ title +'</h4>' +
+                '<div class="waypoint-popup">' +
+                  '<h4 class="waypoint-popup-title">'+ title +'</h4>' +
 
                   // Content Icons Menu
-                  '<ul class="content-icons-menu">' +
-                    '<li class="galleries" data-request-type="galleries" data-waypoint="'+ id +'"><i class="fa fa-camera"></i></li>' +
-                    '<li class="friends"   data-request-type="friends"   data-waypoint="'+ id +'"><i class="fa fa-user-circle"></i></li>' +
-                    '<li class="essays"    data-request-type="essays"    data-waypoint="'+ id +'"><i class="fa fa-pencil-square-o"></i></li>' +
-                    '<li class="treks"     data-request-type="treks"     data-waypoint="'+ id +'"><i class="fa fa-compass"></i></li>' +
+                  '<ul class="content-icons-menu">';
+                    // Gallery
+                    if(wps[i].content.galleries.length > 0){
+                      console.log(title + ' has a gallery')
+                      popupContent += '<li class="galleries" data-request-type="galleries" data-waypoint="'+ id +'"><i class="fa fa-camera"></i></li>';
+                    }
+
+                    // Friends
+                    if(wps[i].content.friends.length > 0){
+                      console.log(title + ' has a friend')
+                      popupContent += '<li class="friends"   data-request-type="friends"   data-waypoint="'+ id +'"><i class="fa fa-user-circle"></i></li>';
+                    }
+
+                    // Essays
+                    if(wps[i].content.essays.length > 0) {
+                      console.log(title + " has an essay")
+                      popupContent += '<li class="essays"    data-request-type="essays"    data-waypoint="' + id + '"><i class="fa fa-pencil-square-o"></i></li>';
+                    }
+
+                    // Treks
+                    if(wps[i].content.treks.length > 0) {
+                      console.log(title + ' has a trek')
+                      popupContent += '<li class="treks"     data-request-type="treks"     data-waypoint="' + id + '"><i class="fa fa-compass"></i></li>';
+                    }
+
+                  popupContent +=
                   '</ul><div class="clear-fix">' +
                   '<div class="waypoint-content-container">' +
                     '<div class="waypoint-content">' +
