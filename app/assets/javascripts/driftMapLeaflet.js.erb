@@ -1,6 +1,7 @@
 var DriftMapLeaflet = function(){
   // Private Variables
   var indexer = []
+  var journeyIndexer = []
 
   L.Icon.Default.imagePath = '<%= (Rails.root + "/assets/leaflet").to_s %>';
   /* Custom Makers */
@@ -20,11 +21,18 @@ var DriftMapLeaflet = function(){
 
   /* Event Listeners */
 
+  // Goto Journey from Right Hud
+  $(document).on('click', '.hud-bottom h6', function () {
+    var j = DriftMapLeaflet.getJourney($(this).data('journey'))
+    j.leaflet.popup.openOn(m)
+  })
+
   // Goto Waypoint from Journey Leaflet Popup or Right Hud
   $(document).on('click', '.waypoints-preview li, .hud-bottom p', function () {
       var wp = DriftMapLeaflet.getWayPoint($(this).data('waypoint'))
       console.log('wp: ' + wp.title)
       wp.leaflet.popup.openOn(m)
+
 
   })
 
@@ -109,8 +117,18 @@ var DriftMapLeaflet = function(){
             var jPopup  = L.popup({ className: 'waypoint-popup' }).setLatLng([j_lat, j_lng]).setContent(j_popupContent);
             jMarker.bindPopup(jPopup);
 
+            journeyIndexer.push({
+              id: j.id,
+              leaflet: {
+                marker: jMarker,
+                popup: jPopup
+              }
+            });
+
+            window.j = journeyIndexer
+
             // Leaflet Components for WAYPOINTS
-            for(var i in wps){
+          for(var i in wps){
               /* Add Marker to Map */
               var lat = wps[i].x;
               var lng = wps[i].y;
@@ -272,14 +290,14 @@ var DriftMapLeaflet = function(){
       return false;
     },
 
-    getGallery: function(waypointId, type, contentId){
+    /*getGallery: function(waypointId, type, contentId){
       var wp = DriftMapLeaflet.getWayPoint(waypointId)
 
       for(var i in wp.leaflet.content[type])
         if(wp.leaflet.content[type][i].id == contentId)
           return wp.leaflet.content.galleries[i];
       return false; 
-    },
+    },*/
 
     /* Setters */
     focusWayPoint: function(id){
@@ -293,6 +311,13 @@ var DriftMapLeaflet = function(){
         wp.leaflet.marker.setIcon(maroonMarker)
         wp.leaflet.popup.openOn(m)
       }     
+    },
+
+    getJourney: function (id) {
+      for(var i in journeyIndexer)
+        if(journeyIndexer[i].id == id)
+          return journeyIndexer[i];
+        return false;
     }
   }
 }();

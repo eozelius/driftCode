@@ -94,7 +94,7 @@
     <div class="hud-bottom">
       <% @journeys.each_with_index do |journey, i| %>
         <div class="journey journey-<%= journey.id %> hud-content-container">
-          <h6 class="journey-title <%= 'active' if i == 0 %>"><%= journey.title %></h6>
+          <h6 data-journey="<%= journey.id %>" class="journey-title <%= 'active' if i == 0 %>"><%= journey.title %></h6>
           <% journey.waypoints.each do |wp| %>
             <p class="wp-title " data-waypoint="<%= wp.id %>"><%= wp.title %></p>
           <% end %>
