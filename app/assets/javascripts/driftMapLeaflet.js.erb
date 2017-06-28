@@ -110,9 +110,13 @@ var DriftMapLeaflet = function(){
           var j_id  = wps[i].journey_id;
 
           /* Bind popup to marker */
-          var popupContent =
-            '<div class="waypoint-popup">' +
-            '<h4 class="waypoint-popup-title">'+ title +'</h4>' +
+          var popupContent = '<div class="waypoint-popup">';
+
+          if(wps[i].coverphoto.url != null){
+            popupContent += '<img class="waypoint-popup-coverphoto" src="'+ wps[i].coverphoto.url +'" />';
+          }
+
+          popupContent += '<h4 class="waypoint-popup-title">'+ title +'</h4>' +
 
             // Content Icons Menu
             '<ul class="content-icons-menu">';
@@ -144,9 +148,7 @@ var DriftMapLeaflet = function(){
             // Waypoint Body
             '<div class="view-content active">' +
             '<p class="waypoint-popup-body">';
-          if(wps[i].coverphoto.url != null){
-            popupContent += '<img class="waypoint-popup-coverphoto" src="'+ wps[i].coverphoto.url +'">';
-          }
+
           popupContent += body +
             '</p>' +
             '</div>';
@@ -246,7 +248,7 @@ var DriftMapLeaflet = function(){
     init: function(data){
       drawMap(data.driftmap);
       drawLeafletComponents(data.journeys)
-    
+
       if(data.journeys.length > 1){
         journeyIndexer[0].leaflet.marker.setIcon(maroonMarker)
         journeyIndexer[0].leaflet.popup.openOn(m)
@@ -298,29 +300,6 @@ var DriftMapLeaflet = function(){
         if(indexer[i].id == id)
           return indexer[i];
       return false;
-    },
-
-    /*getGallery: function(waypointId, type, contentId){
-      var wp = DriftMapLeaflet.getWayPoint(waypointId)
-
-      for(var i in wp.leaflet.content[type])
-        if(wp.leaflet.content[type][i].id == contentId)
-          return wp.leaflet.content.galleries[i];
-      return false; 
-    },*/
-
-    /* Setters */
-    focusWayPoint: function(id){
-      var wp = DriftMapLeaflet.getWayPoint(id)
-
-      if(wp){
-        // reset all waypoint to blue
-        for(var i in indexer)
-          indexer[i].leaflet.marker.setIcon(blueMarker)
-
-        wp.leaflet.marker.setIcon(maroonMarker)
-        wp.leaflet.popup.openOn(m)
-      }     
     },
 
     getJourney: function (id) {

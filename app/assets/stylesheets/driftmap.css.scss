@@ -57,21 +57,20 @@
       height: 300px;
       overflow-y: scroll;
 
+      img.waypoint-popup-coverphoto {
+        width: 44%;
+        height:auto;
+        margin: 2%;
+        float: left;
+      }
+
       /* description & coverphoto */
       p.waypoint-popup-body {
         font-size: 1.3em;
-        
-        img.waypoint-popup-coverphoto {
-          width: 44%;
-          height:auto;
-          margin: 2%;
-          float: left;
-        }
       }
 
       /* geft content */
       .waypoint-content {
-        padding: 3% 5%;
         border-top: 1px solid $maroon;
         padding: 3% 0 2%;
 
