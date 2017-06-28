@@ -4,16 +4,17 @@ var DriftMapLeaflet = function(){
   var journeyIndexer = []
 
   L.Icon.Default.imagePath = '<%= (Rails.root + '/assets/leaflet').to_s %>';
+
   /* Custom Makers */
   var maroonMarker = L.icon({ 
-    iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-maroon-icon.png").to_s %>',
-    shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+    iconUrl: '<%= (Rails.root + '/assets/leaflet/marker-maroon-icon.png').to_s %>',
+    shadowUrl: '<%= (Rails.root + '/assets/leaflet/marker-shadow.png').to_s %>',
     popupAnchor:  [0, -35]
   });
 
   var blueMarker = L.icon({
-    iconUrl: '<%= (Rails.root + "/assets/leaflet/marker-icon.png").to_s %>',
-    shadowUrl: '<%= (Rails.root + "/assets/leaflet/marker-shadow.png").to_s %>',
+    iconUrl: '<%= (Rails.root + '/assets/leaflet/marker-icon.png').to_s %>',
+    shadowUrl: '<%= (Rails.root + '/assets/leaflet/marker-shadow.png').to_s %>',
     popupAnchor:  [0, -35]
   });
 
@@ -54,6 +55,169 @@ var DriftMapLeaflet = function(){
     $('.leaflet-control-container .leaflet-top.leaflet-left').removeClass('leaflet-top').addClass('leaflet-bottom')
   }
 
+  function drawLeafletComponents(journeys){
+    for(var x in journeys){
+      if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){
+        // Set initial Journey and Waypoints
+        var j  = journeys[x].journey
+        var wps = journeys[x].waypoints
+
+        // Leaflet for JOURNEY
+        var j_lat = wps[0].x;
+        var j_lng = wps[0].y;
+        var j_popupContent =
+          '<div class="waypoint-popup" data-waypoint="'+ j.id +'">' +
+          '<div class="waypoint-text">' +
+          '<h4 class="waypoint-popup-title">'+ j.title +'</h4>' +
+          '<p class="waypoint-popup-body ">';
+        if(j.coverphoto.url != null){
+          j_popupContent += '<img class="waypoint-popup-coverphoto" src="'+ j.coverphoto.url +'">';
+        }
+        j_popupContent += j.description +
+          '</p>' +
+          '</div>' +
+          '<div class="waypoints-preview">' +
+          '<ul>';
+        for(var w in wps){
+          j_popupContent += '<li data-waypoint="'+ wps[w].id +'">' +
+            '<p class="waypoint-title">' + wps[w].title + '</p>';
+        }
+        j_popupContent +=
+          '</ul>' +
+          '</div>' +
+          '</div>';
+
+        var jMarker = L.marker([j_lat, j_lng]).addTo(m);
+        var jPopup  = L.popup({ className: 'waypoint-popup' }).setLatLng([j_lat, j_lng]).setContent(j_popupContent);
+        jMarker.bindPopup(jPopup);
+
+        journeyIndexer.push({
+          id: j.id,
+          leaflet: {
+            marker: jMarker,
+            popup: jPopup
+          }
+        });
+
+        // Leaflet Components for WAYPOINTS
+        for(var i in wps){
+          /* Add Marker to Map */
+          var lat = wps[i].x;
+          var lng = wps[i].y;
+          var id  = wps[i].id;
+          var title = wps[i].title;
+          var body  = wps[i].body;
+          var j_id  = wps[i].journey_id;
+
+          /* Bind popup to marker */
+          var popupContent =
+            '<div class="waypoint-popup">' +
+            '<h4 class="waypoint-popup-title">'+ title +'</h4>' +
+
+            // Content Icons Menu
+            '<ul class="content-icons-menu">';
+          // Gallery
+          if(wps[i].content.galleries.length > 0){
+            popupContent += '<li class="galleries" data-request-type="galleries" data-waypoint="'+ id +'"><i class="fa fa-camera"></i></li>';
+          }
+
+          // Friends
+          if(wps[i].content.friends.length > 0){
+            popupContent += '<li class="friends"   data-request-type="friends"   data-waypoint="'+ id +'"><i class="fa fa-user-circle"></i></li>';
+          }
+
+          // Essays
+          if(wps[i].content.essays.length > 0) {
+            popupContent += '<li class="essays"    data-request-type="essays"    data-waypoint="' + id + '"><i class="fa fa-pencil-square-o"></i></li>';
+          }
+
+          // Treks
+          if(wps[i].content.treks.length > 0) {
+            popupContent += '<li class="treks"     data-request-type="treks"     data-waypoint="' + id + '"><i class="fa fa-compass"></i></li>';
+          }
+
+          popupContent +=
+            '</ul><div class="clear-fix">' +
+            '<div class="waypoint-content-container">' +
+            '<div class="waypoint-content">' +
+
+            // Waypoint Body
+            '<div class="view-content active">' +
+            '<p class="waypoint-popup-body">';
+          if(wps[i].coverphoto.url != null){
+            popupContent += '<img class="waypoint-popup-coverphoto" src="'+ wps[i].coverphoto.url +'">';
+          }
+          popupContent += body +
+            '</p>' +
+            '</div>';
+
+          // Galleries
+          popupContent += '<div class="galleries view-content">';
+          for (var y in wps[i].content.galleries) {
+            var g = wps[i].content.galleries[y];
+
+            if(g.images.length > 0){
+              popupContent += '<h4 class="waypoint-title">' + g.title + '</h4>';
+              for (var gallery_image in g.images) {
+                popupContent += '<img src ="' + g.images[gallery_image].url + '" />';
+              }
+            }
+          }
+          popupContent += '</div>';
+
+          // Friends
+          popupContent += '<div class="friends view-content">';
+          for(var y in wps[i].content.friends){
+            var f = wps[i].content.friends[y];
+            popupContent +=
+              '<h4 class="waypoint-title">' + f.first_name + ' ' + f.last_name + '</h4>' +
+              '<p><img src="'+ f.photo.url + '" />' + f.description +'</p>'
+          }
+          popupContent += '</div>';
+
+          // Essays
+          popupContent += '<div class="essays view-content">' +
+            '<h4 class="waypoint-title">Essays</h4>';
+          for(var y in wps[i].content.essays){
+            var e = wps[i].content.essays[y]
+            popupContent += '<img src="'+ e.coverphoto.url +'">' +
+              '<h4 class="waypoint-title">'+ e.title +'</h4>' +
+              '<p>'+ e.body +'</p>';
+          }
+          popupContent += '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+          var popupOptions = { className: 'waypoint-popup' }
+          var wpMarker = L.marker([lat, lng]).addTo(m);
+          var wpPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
+          wpMarker.bindPopup(wpPopup);
+          // End waypoint Popup
+
+          /* Add wayPoint to indexer */
+          indexer.push({
+            id:     wps[i].id,
+            title:  title,
+            body:   body,
+            journey_id: j_id,
+            content: {
+              galleries: [],
+              friends:   [],
+              essays:    [],
+              treks:     []
+            },
+            leaflet: {
+              marker: wpMarker,
+              popup:  wpPopup
+            }
+          });
+        }
+      }
+    }
+  }
+
   /* Event Listeners */
 
   // Goto Journey from Right Hud
@@ -80,175 +244,13 @@ var DriftMapLeaflet = function(){
 
     // public methods
     init: function(data){
-      var journeys = data.journeys
       drawMap(data.driftmap);
-
-      for(var x in journeys){
-        if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){
-          // Set initial Journey and Waypoints
-          var j  = journeys[x].journey
-          var wps = journeys[x].waypoints
-
-          // Leaflet for JOURNEY
-          var j_lat = wps[0].x;
-          var j_lng = wps[0].y;
-          var j_popupContent =
-            '<div class="waypoint-popup" data-waypoint="'+ j.id +'">' +
-              '<div class="waypoint-text">' +
-                '<h4 class="waypoint-popup-title">'+ j.title +'</h4>' +
-                '<p class="waypoint-popup-body ">';
-                  if(j.coverphoto.url != null){
-                    j_popupContent += '<img class="waypoint-popup-coverphoto" src="'+ j.coverphoto.url +'">';
-                  }
-                  j_popupContent += j.description +
-                '</p>' +
-              '</div>' +
-              '<div class="waypoints-preview">' +
-                '<ul>';
-                  for(var w in wps){
-                    j_popupContent += '<li data-waypoint="'+ wps[w].id +'">' +
-                      '<p class="waypoint-title">' + wps[w].title + '</p>';
-                  }
-                  j_popupContent +=
-                '</ul>' +
-              '</div>' +
-            '</div>';
-
-            var jMarker = L.marker([j_lat, j_lng]).addTo(m);
-            var jPopup  = L.popup({ className: 'waypoint-popup' }).setLatLng([j_lat, j_lng]).setContent(j_popupContent);
-            jMarker.bindPopup(jPopup);
-
-            journeyIndexer.push({
-              id: j.id,
-              leaflet: {
-                marker: jMarker,
-                popup: jPopup
-              }
-            });
-
-            // Leaflet Components for WAYPOINTS
-            for(var i in wps){
-              /* Add Marker to Map */
-              var lat = wps[i].x;
-              var lng = wps[i].y;
-              var id  = wps[i].id;
-              var title = wps[i].title;
-              var body  = wps[i].body;
-              var j_id  = wps[i].journey_id;
-
-              /* Bind popup to marker */
-              var popupContent =
-                '<div class="waypoint-popup">' +
-                  '<h4 class="waypoint-popup-title">'+ title +'</h4>' +
-
-                  // Content Icons Menu
-                  '<ul class="content-icons-menu">';
-                    // Gallery
-                    if(wps[i].content.galleries.length > 0){
-                      popupContent += '<li class="galleries" data-request-type="galleries" data-waypoint="'+ id +'"><i class="fa fa-camera"></i></li>';
-                    }
-
-                    // Friends
-                    if(wps[i].content.friends.length > 0){
-                      popupContent += '<li class="friends"   data-request-type="friends"   data-waypoint="'+ id +'"><i class="fa fa-user-circle"></i></li>';
-                    }
-
-                    // Essays
-                    if(wps[i].content.essays.length > 0) {
-                      popupContent += '<li class="essays"    data-request-type="essays"    data-waypoint="' + id + '"><i class="fa fa-pencil-square-o"></i></li>';
-                    }
-
-                    // Treks
-                    if(wps[i].content.treks.length > 0) {
-                      popupContent += '<li class="treks"     data-request-type="treks"     data-waypoint="' + id + '"><i class="fa fa-compass"></i></li>';
-                    }
-
-                  popupContent +=
-                  '</ul><div class="clear-fix">' +
-                  '<div class="waypoint-content-container">' +
-                    '<div class="waypoint-content">' +
-
-                      // Waypoint Body
-                      '<div class="view-content active">' +
-                        '<p class="waypoint-popup-body">';
-                          if(wps[i].coverphoto.url != null){
-                            popupContent += '<img class="waypoint-popup-coverphoto" src="'+ wps[i].coverphoto.url +'">';
-                          }
-                          popupContent += body +
-                        '</p>' +
-                      '</div>';
-
-                      // Galleries
-                      popupContent += '<div class="galleries view-content">';
-                      for (var y in wps[i].content.galleries) {
-                        var g = wps[i].content.galleries[y];
-
-                        if(g.images.length > 0){
-                          popupContent += '<h4 class="waypoint-title">' + g.title + '</h4>';
-                          for (var gallery_image in g.images) {
-                            popupContent += '<img src ="' + g.images[gallery_image].url + '" />';
-                          }
-                        }
-                      }
-                      popupContent += '</div>';
-
-                      // Friends
-                      popupContent += '<div class="friends view-content">';
-                      for(var y in wps[i].content.friends){
-                        var f = wps[i].content.friends[y];
-                        popupContent +=
-                          '<h4 class="waypoint-title">' + f.first_name + ' ' + f.last_name + '</h4>' +
-                          '<p><img src="'+ f.photo.url + '" />' + f.description +'</p>'
-                      }
-                      popupContent += '</div>';
-
-                      // Essays
-                      popupContent += '<div class="essays view-content">' +
-                      '<h4 class="waypoint-title">Essays</h4>';
-                      for(var y in wps[i].content.essays){
-                          var e = wps[i].content.essays[y]
-                          popupContent += '<img src="'+ e.coverphoto.url +'">' +
-                              '<h4 class="waypoint-title">'+ e.title +'</h4>' +
-                          '<p>'+ e.body +'</p>';
-                      }
-                      popupContent += '</div>' +
-                      '</div>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>';
-
-              var popupOptions = { className: 'waypoint-popup' }
-              var wpMarker = L.marker([lat, lng]).addTo(m);
-              var wpPopup  = L.popup(popupOptions).setLatLng([lat, lng]).setContent(popupContent);
-              wpMarker.bindPopup(wpPopup);
-              // End waypoint Popup
-
-              /* Add wayPoint to indexer */
-              indexer.push({
-                id:     wps[i].id,
-                title:  title,
-                body:   body,
-                journey_id: j_id,
-                content: {
-                  galleries: [],
-                  friends:   [],
-                  essays:    [],
-                  treks:     []
-                },
-                leaflet: {
-                  marker: wpMarker,
-                  popup:  wpPopup
-                }
-              });
-            }
-        }
-      }
+      drawLeafletComponents(data.journeys)
     
-      if(journeys.length > 1){
+      if(data.journeys.length > 1){
         journeyIndexer[0].leaflet.marker.setIcon(maroonMarker)
         journeyIndexer[0].leaflet.popup.openOn(m)
       }
-      window.leafletIndexer = indexer
     },
 
     defaultInit: function(){
