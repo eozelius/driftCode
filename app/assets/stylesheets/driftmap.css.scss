@@ -21,11 +21,11 @@
   padding: 15px 30px 0 0;
 }
 
-#map {  
+#map {
   .leaflet-popup-content-wrapper {
     margin: 0;
     padding: 1.5% 2.5%;
-    width: 402px;
+    width: 666px;
     border-radius: 0;
     overflow: hidden;
 
@@ -54,7 +54,7 @@
     }
 
     .waypoint-popup {
-      height: 300px;
+      height: 410px;
       overflow-y: scroll;
 
       img.waypoint-popup-coverphoto {
