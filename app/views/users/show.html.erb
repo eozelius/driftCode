@@ -2,55 +2,52 @@
 
 <input id="users_show" type="hidden" value="1">
 <input id="driftmap_id" type="hidden" value="<%= @driftmap.id %>">
+<input id="user_id" type="hidden" value="<%= @user.id %>" >
 
+<div class="container">
+  <div class="readme-container">
+    <h4>Welcome to driftMap</h4>
+    <p style="line-height: 40px;">driftMap is a platform that allows you to share a map of your journeys and adventures, comprised of all your photos, treks, writing and of course all the friends you have made along the way. </p>
 
-<div id="profile-page" class="container">
-	<input id="user_id" type="hidden" value="<%= @user.id %>" >
-	<%= '<input id="user_is_home" type="hidden" value="1">'.html_safe if user_is_home @user %>
-	
-	<!-- TIMELINEJS3 -->
-	<div id="driftmap-timeline-container" class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-		<!-- todo move this into DriftMapTimeline.js -->
-		<% if @user.driftmap.journeys.any? %>
-			<% @user.driftmap.journeys.each do |journey| %>
-        <div class="journey-content" data-journeycontent="<%= journey.id %>">
-          <h4 class="journey-header"><%= journey.title %></h4>
-          <div id='dm-timeline-<%= journey.id %>' class="dm-timeline" style="width: 100%; height: 600px"></div>
-          <div class="journey-meta">
-            <p class="journey-description"><%= journey.description %></p>
-            <%#= link_to '<span style="font-size: .77em; font-style: italic; color: #552727; float:right;"> - more'.html_safe, journey_path(journey) if journey.description.length > 80 %>
-          </div>
-        </div>
-      <% end %>
-    <% else %>
-		  <div class="journey-content" data-journeycontent="-1">
-		  	<%= link_to new_journey_path do %>
-		    	<h4 class="journey-header">start my adventure</h4>
-		    <% end %>
-		    <div id='dm-timeline--1' class="dm-timeline" style="width: 100%; height: 600px"></div>
-		  </div>
+    <% unless logged_in? %>
+        <%= link_to signup_path do %>
+            <button class="normal">Sign up</button>
+        <% end %>
+
+        <%= link_to login_path do %>
+            <button class="normal">Log in</button>
+        <% end %>
     <% end %>
   </div>
+</div>
 
-  <!-- LEAFLET & accordian -->
-  <div id="dm-legend" class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-    <!-- <div class="map-container">
-      <div id='map'></div>
-    </div> -->
+<div id="profile-page">
+	<%#= '<input id="user_is_home" type="hidden" value="1">'.html_safe if user_is_home @user %>
 
-    <div id="accordian-container">
-      <h5 class="waypoints-title">journeys</h5>
-      <div id="waypt-accord" class="panel-group" role="tablist" aria-multiselectable="true"></div>
-      <%= link_to '<span style="font-size: 1em; margin: 15px 10px 0 0; float:right; font-style:italic"> - create new journey</span>'.html_safe, new_journey_path if user_is_home @user %>
+  <!-- LEAFLET -->
+  <div class="map-container">
+    <div id='map'></div>
+  </div>
+
+  <div class="hud-container">
+    <!-- BOTTOM HUD -->
+    <div class="hud-bottom">
+      <% @journeys.each_with_index do |journey, i| %>
+          <div class="journey journey-<%= journey.id %> hud-content-container">
+            <h6 data-journey="<%= journey.id %>" class="journey-title <%= 'active' if i == 0 %>"><%= journey.title %></h6>
+            <% journey.waypoints.each do |wp| %>
+                <p class="wp-title " data-waypoint="<%= wp.id %>"><%= wp.title %></p>
+            <% end %>
+          </div>
+      <% end %>
     </div>
-  </div><!-- End timeline, leaflet & accordian -->
+  </div>
 
-
-	<div class="map-details col-lg-8 col-md-8 col-sm-12 col-xs-12">
+	<!--<div class="map-details col-lg-8 col-md-8 col-sm-12 col-xs-12">
 		<h3 class="page-title driftmap-title"><%= @driftmap.title %><%= link_to '<span style="font-size: .48em; font-style:italic"> - edit driftmap</span>'.html_safe, edit_driftmap_path(@driftmap) if user_is_home(@user) %></h3>
 
 		<p class="driftmap-title"><%= @driftmap.body %></p>
-	</div>
+	</div>-->
 
 	<div id="pro-parts-container" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 		<div class="pro-part profile">

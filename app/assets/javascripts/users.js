@@ -34,17 +34,11 @@ $(function(){
       },
       complete: function(response){
         var r = response.responseJSON
-        var home = $('#user_is_home').length ? true : false
-        window.r = r
-
-        // init Timeline
-        //DriftMapTimeline.init(r);
+        var home = $('#user_is_home').length ? true : false;
+        // window.r = r
 
         // init Leaflet
-       // DriftMapLeaflet.init(r);
-
-        // init Accordian
-        DriftMapAccordian.init(r, home);
+        DriftMapLeaflet.init(r);
       }
     });
 

@@ -1,3 +1,5 @@
+<input type="hidden" id="driftmap_id" value="<%= @ethan.driftmap.id %>">
+
 <div class="container">
   <div class="readme-container">
     <h4>Welcome to driftMap</h4>
@@ -15,8 +17,6 @@
   </div>
 </div>
 
-<input type="hidden" id="driftmap_id" value="<%= @ethan.driftmap.id %>">
-
 <div id="home-page">
   <!-- MAP -->
   <div class="map-container">
@@ -24,72 +24,6 @@
   </div>
 
   <div class="hud-container">
-    <!-- TOP HUD -->
-    <% if false %>
-    <div class="hud-top">
-      <% @journeys.each_with_index do |journey, i| %>
-        <div class="<%= 'hidden' unless i == 0 %>" data-journey="<%= journey.id %>">
-          <% journey.waypoints.each_with_index do |waypoint, j| %>
-            <div class="waypoint-content <%= 'hidden' unless j == 0 %>">
-
-              <!-- Galleries -->
-              <% if waypoint.galleries.any? %>
-                <div class="hud-galleries-container hud-content-container">
-                  <h6 class="journey-title">Galleries</h6>
-
-                  <% waypoint.galleries.each_with_index do |gallery, g_index| %>
-                    <div class="hud-gallery <%= 'hidden' unless g_index == 0 %>" data-gallery='<%= gallery.id %>'>
-                      <p class="wp-title"><%= gallery.title %></p>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-              
-              <!-- Friends -->
-              <% if waypoint.friends.any? %>
-                <div class="hud-friends-container  hud-content-container">
-                  <h6 class="journey-title">Friends</h6>
-
-                  <% waypoint.friends.each_with_index do |friend, f_index| %>
-                    <div class="hud-friend <%= 'hidden' unless f_index == 0 %>" data-friend="<%= friend.id %>">
-                      <p class="wp-title"><%= "#{friend.first_name} #{friend.last_name}" %></p>                
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-
-              <!-- Essays -->
-              <% if waypoint.essays.any? %>
-                <div class="hud-essays-container  hud-content-container">
-                  <h6 class="journey-title">Essays</h6>
-
-                  <% waypoint.essays.each_with_index do |essay, e_index| %>
-                    <div class="hud-essay <%= 'hidden' unless e_index == 0 %>" data-essay="<%= essay.id %>">
-                      <p class="wp-title"><%= essay.title %></p>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-
-              <!-- treks -->
-              <% if waypoint.treks.any? %>
-                <div class="hud-treks-container  hud-content-container">
-                  <h6 class="journey-title">Treks</h6>
-
-                  <% waypoint.treks.each_with_index do |trek, t_index| %>
-                    <div class="hud-trek <%= 'hidden' unless t_index == 0 %>" data-trek="<%= trek.id %>">
-                      <p class="wp-title"><%= trek.title %></p>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>   
-      <% end %>
-    </div>
-    <% end %>
-
     <!-- BOTTOM HUD -->
     <div class="hud-bottom">
       <% @journeys.each_with_index do |journey, i| %>

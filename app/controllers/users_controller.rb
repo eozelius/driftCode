@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @driftmap = @user.driftmap
+    @journeys = @driftmap.journeys
   end
 
   def update
