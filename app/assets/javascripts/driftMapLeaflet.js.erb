@@ -56,49 +56,68 @@ var DriftMapLeaflet = function(){
     $('.leaflet-control-container .leaflet-top.leaflet-left').removeClass('leaflet-top').addClass('leaflet-bottom')
   }
 
+  function constructJourneyPopup(journey, waypoints){
+    var journeyPopupContent = ''
+    var lat = journey.x;
+    var lng = journey.y;
+    var j_popupContent =  '<div class="waypoint-popup" data-waypoint="'+ journey.id +'">' +
+                            '<div class="waypoint-text">' +
+                              '<h4 class="waypoint-popup-title">'+ journey.title +'</h4>' +
+                              '<p class="waypoint-popup-body ">';
+    // Coverphoto
+    if(journey.coverphoto.url != null){
+      j_popupContent += '<img class="waypoint-popup-coverphoto" src="'+ journey.coverphoto.url +'">';
+    }
+
+    // Description
+    j_popupContent += journey.description +
+
+    // Closing Tags
+      '</p>' +
+      '</div>' +
+
+    // Waypoints Preview
+      '<div class="waypoints-preview">' +
+      '<ul>';
+      for(var w in waypoints){
+        j_popupContent += '<li data-waypoint="'+ waypoints[w].id +'">' +
+                            '<p class="waypoint-title">' + waypoints[w].title + '</p>';
+      }
+
+    // Closing Tags
+    j_popupContent +=
+      '</ul>' +
+      '</div>' +
+      '</div>';
+
+    // Add Marker & Popup to LeafletMap
+    var jMarker = L.marker([lat, lng]).addTo(m);
+    var jPopup  = L.popup({ className: 'waypoint-popup' }).setLatLng([lat, lng]).setContent(j_popupContent);
+    jMarker.bindPopup(jPopup);
+
+    journeyIndexer.push({
+      id: journey.id,
+      leaflet: {
+        marker: jMarker,
+        popup: jPopup
+      }
+    });
+    return journeyPopupContent;
+  }
+
   function drawLeafletComponents(journeys){
     for(var x in journeys){
       if(journeys[x].journey !== undefined && journeys[x].waypoints !== undefined){
+        var popupContent = constructJourneyPopup(journeys[x].journey, journeys[x].waypoints)
+
+        popupContent += ''
+
+
         // Set initial Journey and Waypoints
-        var j  = journeys[x].journey
+        // var j  = journeys[x].journey
         var wps = journeys[x].waypoints
 
-        // Leaflet for JOURNEY
-        var j_lat = wps[0].x;
-        var j_lng = wps[0].y;
-        var j_popupContent =
-          '<div class="waypoint-popup" data-waypoint="'+ j.id +'">' +
-          '<div class="waypoint-text">' +
-          '<h4 class="waypoint-popup-title">'+ j.title +'</h4>' +
-          '<p class="waypoint-popup-body ">';
-        if(j.coverphoto.url != null){
-          j_popupContent += '<img class="waypoint-popup-coverphoto" src="'+ j.coverphoto.url +'">';
-        }
-        j_popupContent += j.description +
-          '</p>' +
-          '</div>' +
-          '<div class="waypoints-preview">' +
-          '<ul>';
-        for(var w in wps){
-          j_popupContent += '<li data-waypoint="'+ wps[w].id +'">' +
-            '<p class="waypoint-title">' + wps[w].title + '</p>';
-        }
-        j_popupContent +=
-          '</ul>' +
-          '</div>' +
-          '</div>';
 
-        var jMarker = L.marker([j_lat, j_lng]).addTo(m);
-        var jPopup  = L.popup({ className: 'waypoint-popup' }).setLatLng([j_lat, j_lng]).setContent(j_popupContent);
-        jMarker.bindPopup(jPopup);
-
-        journeyIndexer.push({
-          id: j.id,
-          leaflet: {
-            marker: jMarker,
-            popup: jPopup
-          }
-        });
 
         // Leaflet Components for WAYPOINTS
         for(var i in wps){

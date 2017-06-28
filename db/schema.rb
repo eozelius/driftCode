@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170321111830) do
+ActiveRecord::Schema.define(version: 20170628190931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20170321111830) do
     t.integer  "driftmap_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.float    "x"
+    t.float    "y"
   end
 
   add_index "journeys", ["driftmap_id"], name: "index_journeys_on_driftmap_id", using: :btree

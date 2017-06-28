@@ -30,7 +30,10 @@ ethan.driftmap.save!
 
 colombia = ethan.driftmap.journeys.create!(
   title: '2015 - Colombia',
-  description: 'A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.'
+  description: 'A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.',
+  coverphoto: open('https://driftmap.s3.amazonaws.com/uploads/user/profile_pic/1/20160120_154421.jpg'),
+  x: 4.6077624,
+  y: -74.0745113
 )
 
 bogota = colombia.waypoints.create!(
@@ -216,7 +219,9 @@ colombia.save!
 europe = ethan.driftmap.journeys.create!(
   title: '2016 - Europe',
   description: 'Backpacking across the pond',
-  coverphoto: open('https://driftmap.s3.amazonaws.com/uploads/journey/coverphoto/2/DSCF7104.JPG')
+  coverphoto: open('https://driftmap.s3.amazonaws.com/uploads/journey/coverphoto/2/DSCF7104.JPG'),
+  x: 55.6895847,
+  y: 12.5706253
 )
 
 copenhagen = europe.waypoints.create!(
