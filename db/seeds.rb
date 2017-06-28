@@ -52,6 +52,7 @@ bogota_gallery = bogota.galleries.create!(
 bogota_gallery.waypoint_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/19/bogota_plaza_bolivar.jpg"))
 bogota_gallery.waypoint_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/20/bogota_fut.jpg"))
 bogota_gallery.waypoint_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/21/bogota_monsarate.jpg"))
+bogota_gallery.save!
 bogota.save!
 
 medellin = colombia.waypoints.create!(
@@ -73,6 +74,7 @@ medellin_gallery = medellin.galleries.create!(
 medellin_gallery.waypoint_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/59/DSCF6108.JPG"));
 medellin_gallery.waypoint_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/60/DSCF6103.JPG"));
 medellin_gallery.waypoint_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/25/DSCF5895.JPG"));
+medellin_gallery.save!
 medellin.save!
 
 laureles = colombia.waypoints.create!(
@@ -94,6 +96,7 @@ laureles_gallery = laureles.galleries.create!(
 laureles_gallery.waypoint_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/29/DSCF5897.JPG"))
 laureles_gallery.waypoint_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/31/DSCF6157.JPG"))
 laureles_gallery.waypoint_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/30/DSCF5933.JPG"))
+laureles_gallery.save!
 laureles.save!
 
 estrella = colombia.waypoints.create!(
@@ -114,6 +117,7 @@ estrella_gallery = estrella.galleries.create!(
 estrella_gallery.waypoint_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/33/DSCF6365.JPG"))
 estrella_gallery.waypoint_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/34/DSCF6378.JPG"))
 estrella_gallery.waypoint_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/35/DSCF6360.JPG"))
+estrella_gallery.save!
 estrella.save!
 
 manizales = colombia.waypoints.create!(
@@ -134,6 +138,7 @@ manizales_gallery = manizales.galleries.create!(
 manizales_gallery.waypoint_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/33/DSCF6365.JPG"))
 manizales_gallery.waypoint_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/34/DSCF6378.JPG"))
 manizales_gallery.waypoint_images.create!(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/36/DSCF6384.JPG"))
+manizales_gallery.save!
 manizales.save!
 
 pereira = colombia.waypoints.create!(
@@ -154,6 +159,7 @@ pereira_gallery = pereira.galleries.create!(
 pereira_gallery.waypoint_images.create!(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/42/DSCF6431.JPG'))
 pereira_gallery.waypoint_images.create!(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/41/DSCF6436.JPG'))
 pereira_gallery.waypoint_images.create!(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/44/DSCF6458.JPG'))
+pereira_gallery.save!
 pereira.save!
 
 salento = colombia.waypoints.create!(
@@ -174,6 +180,7 @@ salento_gallery = salento.galleries.create!(
 salento_gallery.waypoint_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/50/DSCF6479.JPG"))
 salento_gallery.waypoint_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/51/DSCF6473.JPG"))
 salento_gallery.waypoint_images.build(image: open("https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/58/DSCF6496.JPG"))
+salento_gallery.save!
 salento.save!
 
 cali = colombia.waypoints.create!(
@@ -194,6 +201,7 @@ cali_gallery = cali.galleries.create!(
 cali_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/65/160127-115556.jpg'))
 cali_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/66/20160123_182401.jpg'))
 cali_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/70/20160123_192435.jpg'))
+cali_gallery.save!
 cali.save!
 colombia.save!
 
@@ -221,6 +229,7 @@ copenhagen_gallery = copenhagen.galleries.create(
 copenhagen_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/2/DSCF6643.JPG'))
 copenhagen_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/4/DSCF6614.JPG'))
 copenhagen_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/5/DSCF6600.JPG'))
+copenhagen_gallery.save!
 copenhagen.save!
 
 berlin = europe.waypoints.create!(
@@ -241,6 +250,7 @@ berlin_gallery = berlin.galleries.create!(
 berlin_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/15/DSCF6709.JPG'))
 berlin_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/10/DSCF6683.JPG'))
 berlin_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/11/14709436_1182611415147266_4934580762092503040_n.jpg'))
+berlin_gallery.save!
 berlin.save!
 
 amsterdam = europe.waypoints.create!(
@@ -261,6 +271,7 @@ amsterdam_gallery = amsterdam.galleries.create!(
 amsterdam_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/72/14714435_307114913002993_4977066067483426816_n.jpg'))
 amsterdam_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/73/DSCF6781.JPG'))
 amsterdam_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/71/14723694_1805654773024700_269774381989756928_n.jpg'))
+amsterdam_gallery.save!
 amsterdam.save!
 
 paris = europe.waypoints.create!(
@@ -281,6 +292,7 @@ paris_gallery = paris.galleries.create!(
 paris_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/75/DSCF7010.JPG'))
 paris_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/78/DSCF7032.JPG'))
 paris_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/79/DSCF7013.JPG'))
+paris_gallery.save!
 paris.save!
 
 switzerland = europe.waypoints.create!(
@@ -301,5 +313,6 @@ switzerland_gallery = switzerland.galleries.create!(
 switzerland_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/90/DSCF7223.JPG'))
 switzerland_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/91/DSCF7123.JPG'))
 switzerland_gallery.waypoint_images.build(image: open('https://driftmap.s3.amazonaws.com/uploads/waypoint_image/image/92/DSCF7070.JPG'))
+switzerland_gallery.save!
 switzerland.save!
 europe.save!
