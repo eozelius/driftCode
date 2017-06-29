@@ -219,6 +219,7 @@ textarea {
 	height: 150px;
 	display: block;
 }
+/*
 .application-container {
 	width:100%;
 	display: block;
@@ -230,6 +231,7 @@ textarea {
 	min-height: 600px;
 	margin-bottom: 30px;
 }
+*/
 
 hr.gray-spacer {
 	width: 94%;
@@ -244,31 +246,6 @@ hr.blue-spacer {
 	height: 7px;
 	background: #C2D9EB;
 
-}
-
-/* Fake Header */
-.fake-header {
-	margin: 0 20px 15px 8%;
-	border-bottom: 2px solid #C2D9EB;
-	height: 66px;
-
-	.login-btns-container {
-		float: right;
-		width:500px;
-	}
-	button {
-		margin: 0 5px 0;
-		display: inline;
-		float:right;
-	}
-	h2 {
-		display: inline;
-		float: left;
-	}
-}
-
-button.toggle-sidenav.normal {
-	display: none;
 }
 
 /* flash messages */
@@ -391,75 +368,29 @@ h4.waypoint-title {
 
 }
 
+// NavBar ////
+#driftmap-navbar {
+  font-family: 'Roboto' !important;
+}
+
 @media (max-width: 480px){
 	.application-container {
 		width: 100%;
 		padding: 0 3%;
-	}
-	button.toggle-sidenav.normal {
-		display: inline;
-		width: 47px;
-		float: right;
-		height: 40px;
-		margin: 0 5px 0 0;
 	}
 	.mobile-only {
 		display: block;
 	}	
 }
 
-/* Header - don't fucking touch this */
-@media (min-width: 821px){
-	.login-btns-container {
-		margin-top: -24px;
-	}
-}
-
 @media (max-width: 821px){
-	p.tag-line {
-		top: 60px;
-		left: -26%;
-	}
-	.application-container div.fake-header {
-		height: 90px;
-	}
 	div.flash-messages {
 		margin: 0 0 1% 15%;
 		width: 80%
 	}
 }
 
-@media (max-width: 615px){
-	div.fake-header {
-		height: 55px;
-
-		.login-btns-container {
-			display: none;
-		}
-		p {
-			left: -38%;
-		}
-	}
-}
-
 @media (max-width: 480px){
-	div.fake-header p.tag-line {
-		line-height: 24px;
-		display: block;
-		width: 100%;
-		left: 0;
-		top: 0;
-		float: left;
-	}	
-	div.fake-header .login-btns-container {
-		display: none;
-	}
-	div.fake-header {
-		h2 {
-			margin-bottom: 0;
-		padding-bottom: 5px;
-		}
-	}
 	div.flash-messages {
 		margin: 0 0 1% 7%;
 		width: 90%
