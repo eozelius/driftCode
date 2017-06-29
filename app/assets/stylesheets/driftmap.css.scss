@@ -34,9 +34,15 @@
       width: 100% !important;
     }
 
+    .content-icons-menu {
+      width: 50px;
+      display: inline;
+      float: left;
+    }
+
     .content-icons-menu li {
       width: 45px;
-      display: inline-block;
+      display: block;
       height: 45px;
       cursor: pointer;
       margin: 2% 2%;
@@ -51,6 +57,12 @@
       font-size: 2em;
       line-height: 45px;
       color: #444;
+    }
+
+    .waypoint-content-container {
+      float: right;
+      width: 570px;
+      margin: 5% 0 0;
     }
 
     .waypoint-popup {
@@ -71,8 +83,7 @@
 
       /* geft content */
       .waypoint-content {
-        border-top: 1px solid $maroon;
-        padding: 3% 0 2%;
+        padding: 0 0 2%;
 
         .view-content {
           display: none;
