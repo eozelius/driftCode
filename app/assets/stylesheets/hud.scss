@@ -19,7 +19,6 @@
     padding-left: 5%;
   }
 
-  //.hud-top,
   .hud-bottom {
     background-color: #EAEAEA;
     opacity: .8;
@@ -29,20 +28,6 @@
       margin:0 0 10% 0;
     }
   }
-
-  /*.hud-top {
-    position: absolute;
-    top: 1%;
-    right: 5%;
-    bottom: 50%;
-    width: 100%;
-
-    .hud-waypoint-title {
-      cursor: pointer;
-      font-style: italic;
-      margin: 1% 0 3%;
-    }
-  }*/
 
   .hud-bottom {
     position: absolute;
@@ -56,13 +41,15 @@
       color: #424242;
       font-weight: 600;
     }
-
-    .journey {
-      
-    }
-
-    .waypts {
-      margin: 0 0 5% 10%; 
-    }
   }
+}
+
+#timeline-hud {
+  position: absolute;
+  bottom: 2%;
+  right: 5%;
+  left: 5%;
+  height: 45px;
+  background-color: #78acd3;
+  opacity: .8;
 }

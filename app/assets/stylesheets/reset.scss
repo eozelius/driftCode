@@ -391,22 +391,7 @@ h4.waypoint-title {
 
 }
 
-/* Leaflet generic components */
-.map-container,
-#map {
-	background: #C2D9EB;
-    height: 700px;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-}
-
 @media (max-width: 480px){
-	nav {
-		display: none;
-	}
 	.application-container {
 		width: 100%;
 		padding: 0 3%;

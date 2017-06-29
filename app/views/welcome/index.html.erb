@@ -1,22 +1,5 @@
 <input type="hidden" id="driftmap_id" value="<%= @ethan.driftmap.id %>">
 
-<div class="container">
-  <div class="readme-container">
-    <h4>Welcome to driftMap</h4>
-    <p style="line-height: 40px;">driftMap is a platform that allows you to share a map of your journeys and adventures, comprised of all your photos, treks, writing and of course all the friends you have made along the way. </p>
-    
-    <% unless logged_in? %>
-      <%= link_to signup_path do %>
-        <button class="normal">Sign up</button>
-      <% end %>
-
-      <%= link_to login_path do %>
-        <button class="normal">Log in</button>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
 <div id="home-page">
   <!-- MAP -->
   <div class="map-container">
@@ -35,5 +18,10 @@
         </div>
       <% end %>
     </div>
+  </div>
+
+  <!-- Timeline Display -->
+  <div id="timeline-hud">
+
   </div>
 </div>
