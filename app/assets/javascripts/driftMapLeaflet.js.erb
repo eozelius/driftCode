@@ -61,13 +61,15 @@ var DriftMapLeaflet = function(){
     var lng = journey.y;
     var coverphoto = journey.coverphoto.url == null ? '' : '<img class="waypoint-popup-coverphoto" src="'+ journey.coverphoto.url +'">'
     var journey_waypoints = ''
-    for(var w in waypoints){ journey_waypoints += '<li data-waypoint="'+ waypoints[w].id +'"><p class="waypoint-title">' + waypoints[w].title + '</p>' }
+    for(var w in waypoints){ journey_waypoints += '<li data-waypoint="'+ waypoints[w].id +'"><p class="waypoint-title" >' + waypoints[w].title + '</p>' }
 
     var j_popupContent =  '<div class="waypoint-popup" data-waypoint="'+ journey.id +'">' +
                             '<div class="waypoint-text">' +
+                              '<div class="waypoint-popup-coverphoto-container">' +
+                                coverphoto +
+                              '</div>' +
                               '<h4 class="waypoint-popup-title">'+ journey.title +'</h4>' +
                               '<p class="waypoint-popup-body ">' +
-                                coverphoto +
                                 journey.description +
                               '</p>' +
                             '</div>' +
@@ -143,7 +145,7 @@ var DriftMapLeaflet = function(){
                             '<div class="waypoint-content">' +
                               '<div class="view-content active">' +
                                 coverphoto +
-      '<h4 class="waypoint-popup-title">'+ title +'</h4>' +
+                                '<h4 class="waypoint-popup-title">'+ title +'</h4>' +
                                 '<p class="waypoint-popup-body">' +
                                   body +
                                 '</p>' +
