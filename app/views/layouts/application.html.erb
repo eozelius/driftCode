@@ -52,6 +52,16 @@
         </div>
 
         <div class="collapse navbar-collapse" id="driftmap-nav">
+          <!-- Nav Left -->
+          <ul class="nav navbar-nav">
+            <li data-toggle="modal" data-target="#readme-modal">
+              <a>
+                read me
+              </a>
+            </li>
+          </ul>
+
+          <!-- Nav Right -->
           <ul class="nav navbar-nav navbar-right">
             <% if logged_in? %>
               <li>
@@ -66,79 +76,13 @@
               </li>
             <% end %>
           </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        </div>
+      </div>
     </nav>
 
     <div class="app-container">
       <%= yield %>
     </div>
-
-    <% if false %>
-      
-    <!-- side Navigation -->
-    <nav id="main">
-      <ul>
-        <li>
-          <%= link_to root_url do %>
-            <i class="fa fa-3x fa-globe"></i>
-            <p class="nav-legend">home</p>
-          <% end %>
-        </li>
-       
-        <% if logged_in? %>
-          <li style="height: 75px">
-            <%= link_to user_path(current_user) do %>
-              <i class="fa fa-3x fa-map-o"></i>
-              <p class="nav-legend">drift map</p>
-            <% end %>
-          </li>
-          <li style="margin-bottom:0; height:60px;">
-            <%= link_to(logout_path, method: :delete) do %>
-              <i class="fa fa-3x fa-sign-out"></i>
-              <p class="nav-legend">logout</p>
-            <% end %>
-          </li>
-        <% else %>
-          <li style="margin-bottom:0; height:60px;">
-            <%= link_to(login_path) do %>
-              <i class="fa fa-3x fa-key fa-rotate-180"></i>
-              <p class="nav-legend">login</p>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    </nav>
-
-    <div class="application-container">
-
-      <div class="fake-header">
-        <a href="/">
-          <h2 class="page-title" style="border:none;">driftMap</h2>
-        </a>
-        <p class="tag-line">- journey of exploration</p>
-
-        <% if !logged_in? && controller_name == 'welcome' %>
-          <div class="login-btns-container">
-            <%= link_to login_path do %>
-              <button class="normal">Log in</button>
-            <% end %>
-
-            <%= link_to signup_path do %>
-              <button class="normal" style="margin-right:13px;">Sign up</button>
-            <% end %>
-          </div>
-        <% end %>
-
-      </div>
-
-
-      <div id="page-wrapper">
-        <%= yield %>
-      </div>  
-    </div>
-
-      <% end %>
   </body>
 </html>
 
@@ -153,3 +97,34 @@
     ga('send', 'pageview');
   </script>
 <% end %>
+
+<div class="modal fade" id="readme-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Welcome to driftMaps</h4>
+      </div>
+      <div class="modal-body">
+        <div style="margin: 3% 0 4%">
+          <h5 style="font-style: italic;">What is driftMaps.com?</h5>
+          <p style="padding-left: 4%;">driftMaps.com integrates all the adventures of world exploration into an expressive cartographic experience.</p>
+        </div>
+
+        <div style="margin: 3% 0 4%">
+          <h5 style="font-style: italic;">How does it work?</h5>
+          <p style="padding-left: 4%;">driftMaps.com is organized into Journey's, for example a 1 month backpacking trek across Peru (for example), and way points, which could be each city you visited in Peru, Lima, Cusco, Aquas Calientes and finally Machu Picchu.</p>
+        </div>
+
+        <div style="margin: 3% 0 4%">
+          <h5 style="font-style: italic;">What kind of stuff should I create?</h5>
+          <p style="padding-left: 4%;">Content creation is organized into 3 categories:<br> Photos, Friends and Essays. </p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
