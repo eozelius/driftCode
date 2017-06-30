@@ -219,19 +219,6 @@ textarea {
 	height: 150px;
 	display: block;
 }
-/*
-.application-container {
-	width:100%;
-	display: block;
-	margin: 0 auto;
-	padding: 0;
-}
-
-#page-wrapper {
-	min-height: 600px;
-	margin-bottom: 30px;
-}
-*/
 
 hr.gray-spacer {
 	width: 94%;
@@ -268,6 +255,10 @@ div.flash-success {
 
 p.flash {
 	line-height: 50px;
+}
+
+a.carousel-control {
+  background: none !important;
 }
 
 /* forms */
