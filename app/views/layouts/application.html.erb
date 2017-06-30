@@ -54,7 +54,7 @@
         <div class="collapse navbar-collapse" id="driftmap-nav">
           <!-- Nav Left -->
           <ul class="nav navbar-nav">
-            <li data-toggle="modal" data-target="#readme-modal">
+            <li class="readme" data-toggle="modal" data-target="#readme-modal">
               <a>
                 read me
               </a>
@@ -113,18 +113,29 @@
 
         <div style="margin: 3% 0 4%">
           <h5 style="font-style: italic;">How does it work?</h5>
-          <p style="padding-left: 4%;">driftMaps.com is organized into Journey's, for example a 1 month backpacking trek across Peru (for example), and way points, which could be each city you visited in Peru, Lima, Cusco, Aquas Calientes and finally Machu Picchu.</p>
+          <p style="padding-left: 4%;">driftMaps.com is organized into <span style="font-style: italic;">Journeys</span> and <span style="font-style: italic;">Way Points.</span>  For example a trek across South America, will have many stops along the way in cities, towns or parks.</p>
         </div>
 
         <div style="margin: 3% 0 4%">
-          <h5 style="font-style: italic;">What kind of stuff should I create?</h5>
-          <p style="padding-left: 4%;">Content creation is organized into 3 categories:<br> Photos, Friends and Essays. </p>
+          <h5 style="font-style: italic;">What kind of stuff will a Way Point include?</h5>
+          <p style="padding-left: 4%;">For starters, Way Point content creation is organized into 3 categories: Photos, Friends and Essays. </p>
         </div>
+
+        <div style="margin: 3% 0 4%">
+          <h5 style="font-style: italic;">Interested in contributing to driftMaps.com?</h5>
+          <p style="padding-left: 4%;">Great! Check out the <a href="https://github.com/eozelius/driftMap">github repo</a> and send me an email at <a href="mailto:e.ozelius@gmail.com?Subject=I%20Would%20Love%20To%20Contribute%20To%20driftMaps" target="_top">e.ozelius@gmail.com</a> </p>
+        </div>        
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.readme').click();
+  })
+</script>
