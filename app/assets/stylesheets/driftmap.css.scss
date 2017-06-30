@@ -45,7 +45,7 @@
       display: block;
       height: 45px;
       cursor: pointer;
-      margin: 2% 2%;
+      margin: 30% 2%;
     }
 
     li.friends   { background-color: #84C77B; }
@@ -66,8 +66,7 @@
     }
 
     .waypoint-popup {
-      max-height: 410px;
-      min-height: 270px;
+      height: 410px;
       overflow-y: scroll;
       
       .waypoint-popup-coverphoto-container {
@@ -125,15 +124,17 @@
         // Friends
         .friends {
           img {
-            width: 95%;
-            margin: 0 auto;
+            width: 44%;
+            margin: 0 4% 4%;
+            float:left;
           }
         }
 
         .essays {
           img{
-            width: 95%;
-            margin: 0 auto;
+            width: 44%;
+            margin: 4% 4% 4% 0;
+            float:left;
           }
         }
       }

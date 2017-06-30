@@ -80,6 +80,7 @@ var DriftMapLeaflet = function(){
 
     var jMarker = L.marker([lat, lng]).addTo(m);
     var jPopup  = L.popup({ className: 'waypoint-popup' }).setLatLng([lat, lng]).setContent(j_popupContent);
+    m.panTo([lat, lng])
     jMarker.bindPopup(jPopup);
 
     journeyIndexer.push({
@@ -133,9 +134,11 @@ var DriftMapLeaflet = function(){
     for(var e in waypoint.content.essays){
       var currentEssay = waypoint.content.essays[e]
       essays += '<div>' +
-                  '<img src="'+ currentEssay.coverphoto.url +'">' +
                   '<h4 class="waypoint-title">'+ currentEssay.title +'</h4>' +
-                  '<p>'+ currentEssay.body +'</p>' +
+                  '<p>' +
+                    '<img src="'+ currentEssay.coverphoto.url +'">' +
+                    currentEssay.body +
+                  '</p>' +
                 '</div>'
     }
 
