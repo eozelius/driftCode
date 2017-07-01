@@ -3,18 +3,18 @@ var DriftMapLeaflet = function(){
   var indexer = []
   var journeyIndexer = []
 
-  L.Icon.Default.imagePath = '<%= (Rails.root + '/assets/leaflet').to_s %>';
+  L.Icon.Default.imagePath = "<%= (Rails.root + '/assets/leaflet').to_s %>";
 
   /* Custom Makers */
   var maroonMarker = L.icon({ 
-    iconUrl: '<%= (Rails.root + '/assets/leaflet/marker-maroon-icon.png').to_s %>',
-    shadowUrl: '<%= (Rails.root + '/assets/leaflet/marker-shadow.png').to_s %>',
+    iconUrl: "<%= (Rails.root + '/assets/leaflet/marker-maroon-icon.png').to_s %>",
+    shadowUrl: "<%= (Rails.root + '/assets/leaflet/marker-shadow.png').to_s %>",
     popupAnchor:  [0, -35]
   });
 
   var blueMarker = L.icon({
-    iconUrl: '<%= (Rails.root + '/assets/leaflet/marker-icon.png').to_s %>',
-    shadowUrl: '<%= (Rails.root + '/assets/leaflet/marker-shadow.png').to_s %>',
+    iconUrl: "<%= (Rails.root + '/assets/leaflet/marker-icon.png').to_s %>",
+    shadowUrl: "<%= (Rails.root + '/assets/leaflet/marker-shadow.png').to_s %>",
     popupAnchor:  [0, -35]
   });
 
