@@ -25,3 +25,11 @@
 
   </div>
 </div>
+
+<% if Rails.env.production? %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.readme').click();
+    })
+  </script>
+<% end %>
