@@ -9,7 +9,7 @@ gem 'jbuilder',     '2.2.3'
 gem 'sdoc',         '0.4.0', group: :doc
 gem 'carrierwave' 
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
-gem 'fog-aws'
+gem 'fog'
 gem 'bcrypt', '~> 3.1.10'
 gem 'therubyracer', '~> 0.12.2'
 gem 'libv8' # 3.16.14.11
