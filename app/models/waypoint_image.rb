@@ -8,8 +8,9 @@ class WaypointImage < ActiveRecord::Base
 
   private
   	def image_size
-  		if image.size > 3.megabytes
-  			errors.add(:image, "Photo must be less than 5MB.")
-  		end
-  	end
+  		#if image.size > 3.megabytes
+  	#		errors.add(:image, "Photo must be less than 5MB.")
+  	#	end
+  	true
+    end
 end

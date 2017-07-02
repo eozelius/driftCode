@@ -107,7 +107,7 @@ var DriftMapLeaflet = function(){
 
     if(waypoint.content.friends.length > 0)
       contentIcons += '<li class="friends"   data-request-type="friends"   data-waypoint="'+ id +'"><i class="fa fa-user-circle"></i></li>'
-
+    
     if(waypoint.content.essays.length > 0)
       contentIcons += '<li class="essays"    data-request-type="essays"    data-waypoint="' + id + '"><i class="fa fa-pencil-square-o"></i></li>'
 
@@ -145,7 +145,7 @@ var DriftMapLeaflet = function(){
                         '<div class="carousel-inner" role="listbox">' +
                         slides +
                       '</div>' +
-                      controls
+                      controls +
                     '</div>';
       }
     }
