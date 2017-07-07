@@ -33,3 +33,6 @@ config/database.yml
 
 
 /app/assets/images/blip_images/*
+/public/.DS_Store
+app/assets/images/.DS_Store
+.DS_Store
