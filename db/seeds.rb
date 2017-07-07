@@ -1,9 +1,109 @@
 require 'open-uri'
 
-ethan = User.find_by(email: 'e.ozelius@gmail.com')
+ethan = User.create(
+  first_name: 'ethan',
+  last_name: 'ozelius',
+  email:    'e.ozelius@gmail.com',
+  password: 'asdfasdf',
+  password_confirmation: 'asdfasdf',
+  activated: true,
+  activated_at: Time.zone.now,
+  admin: true,
+  from: 'concord new hampshire',
+  gps: 'queens new york',
+  profile_pic: File.open( "#{Rails.root}/ethans_manifest/profile.JPG" )
+)
 
+ethan.save
+
+# Create driftmap for ethan
+ethans_driftmap = ethan.driftmap = Driftmap.create(
+  title:  "adventures of a Drifting Gonzo Nomad",
+  body:   "just a computer hacker trying to get some more sunshine.",
+  init_x: 0.924206230200376,
+  init_y: -34.2400771379471,
+  init_zoom: 2,
+)
+
+ethans_driftmap.save
+
+
+sa = ethan.driftmap.journeys.create!(
+  title: 'South America',
+  description: 'Buy the ticket, take the ride.',
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/journey_coverphoto.jpg"),
+  x: 4.6077624,
+  y: -74.0745113
+)
+sa.save!
+
+colombia_1 = sa.waypoints.create!(
+  title: 'Colombia',
+  body: 'We arrived late in Bogota.  I wasn\'t sure what to expect.',
+  x: 4.6077624,
+  y: -74.0745113,
+  date: DateTime.new(2014, 5, 27),
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/waypoint_coverphoto.jpg")
+)
+colombia_1.save!
+
+colombia_1_gallery = colombia_1.galleries.create!(
+  title: 'Colombia',
+  description: 'Compilation of photos I took while in Colombia',
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/galleries/gallery_1/gallery_coverphoto.jpg"),
+  x: 4.6077624,
+  y: -74.0745113
+)
+colombia_1_gallery.save!
+
+colombia_1_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/galleries/gallery_1/gallery_1.jpg"))
+colombia_1_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/galleries/gallery_1/gallery_2.jpg"))
+colombia_1_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/galleries/gallery_1/gallery_3.jpg"))
+colombia_1_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/galleries/gallery_1/gallery_4.jpg"))
+colombia_1_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/galleries/gallery_1/gallery_5.jpg"))
+colombia_1_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/galleries/gallery_1/gallery_6.jpeg"))
+colombia_1_gallery.save!
+
+colombia_1_essay_1 = colombia_1.essays.create!(
+  title: 'Buy the ticket, take the ride',
+  body: 'The year was 2013, I was an overeager and intoxicated dweeb and new-comer to new york city.  Trying to piece together an existence at Queens College, flipping coffee at a coffeeshop, and an extremely stunted understanding of the female gender.  <br>  I\'m sure the idea arose one night while Ricardo and I were downing trashy beer, and passing a joint.  The plan was to somehow land in Rio de Janeiro for the upcoming world cup of soccer.  America\'s spectacle of posh men falling for no reason, and the world\'s single united pastime.  In those days, Ricardo and I were living on around $1500 a month, and money was always tight especially since neither of us would consider reducing our beer and marijuana budgets.  So we opted for Bogota Colombia, instead, and would travel around the northwestern region of South America, visiting also Ecuador, Peru and Panama.',
+  x: 4.6077624,
+  y: -74.0745113,
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/essays/essay_1/essay_coverphoto.jpg")
+)
+colombia_1_essay_1.save!
+
+colombia_1_essay_2 = colombia_1.essays.create!(
+  title: 'Learning Spanish in 24 Hours.',
+  body: 'The night before we left, as any intelligent virgin traveler would, I thought it was about time to start picking up Spanish.  I asked Ricardo, who is very decent at Spanish, how to order a few tacos and a jarrito from a truck near sutphin blvd in Jamaica Queens.  That would be close to the extent of my Spanish speaking abilities until I would return to Colombia alone a year later. <br>  We arrived late in Bogota, and took a taxi to our hostel.  From the taxi window, I took it the nighttime Bogota scenery, which is sometimes vibrant, sometimes frightening.  As I listened with intent confusion as Ricardo chatted with the taxi driver, I was nervous, although probably not as much as I should have been, at the scrappy ongoings outside the cab.  It is not uncommon to see stray dogs, and bums rummaging through trash near Candelaria at night.  From the hostel we trekked a few block downhill toward the main street running through la Candelaria, where to the delight of a storeowner and jeering geezers, I ordered some empanadas and water in my stunted Spanish.  On this night and throughout most of the trip, I didn\'t bother with questions of why I was there or what there was to be learned.  At times I felt like a conquistador, invading a country and flashing wealth to people with none, but for the most part I just was away from home for a few weeks and trying to enjoy myself.  La Candelaria is the old town in Bogota, and not a good representation of the lives of normal Colombians.  The streets are made of brick, the buildings are Spanish style adobe painted vibrantly, and large graffiti murals are common.  We would spend almost all our time in Colombia in this neighborhood, while there is plenty of entertainment and happenings in La Candelaria, we stayed mostly to ourselves and our tourist colleagues.',
+  x: 4.6077624,
+  y: -74.0745113,
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/essays/essay_2/essay_coverphoto.jpg")
+)
+colombia_1_essay_2.save!
+
+colombia_1_essay_3 = colombia_1.essays.create!(
+  title: 'Zipaquira',
+  body: 'One day while in Bogota, we took a day trip to a pueblo an hour outside Bogota called Zipaquira, which is a common destination, and time capsule of a slower Spanish pueblo.  A place best spent lazily spending an afternoon, sitting in the shade of a cafe on the main plaza, watching malditos chase birds, or families strutting in their Sunday\'s best.  Zipaquira\'s main attraction is a cathedral that was built many years ago in an underground salt mine.  Elaborately and extravagantly lit, it is surely a pleasure to learn how it was constructed, or how important Catholicism is to the Colombian People.  However, Ricardo and I were ignorant and preferred to spend our pesos on aguardiente, so we balked at a 35,000 peso (10-15 dollar) admittance fee.  We didn\'t waste the whole afternoon fortunately, as we wandered around a quiet town, eating ice cream making friends with stray dogs, and playing in a small maze built for children.  Not my most sensical, or culturally responsible moment.  We had lunch and took photos of the ancient looking buildings and people, inevitably coming to the center plaza where we spent the afternoon watching children harass well-to-do animals, and merchants peddle ice cream and sweets.  On the way back to Bogota we got caught in a terrible rain storm and it\'s frankly a miracle we found our bus.',
+  x: 4.6077624,
+  y: -74.0745113,
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/essays/essay_3/essay_coverphoto.jpg")
+)
+colombia_1_essay_3.save!
+
+colombia_1_friend_1 = colombia_1.friends.create!(
+  first_name: 'Ricardo',
+  last_name: 'Alberto',
+  description: 'I remember vividly sitting with Ricardo at whoever\'s house Ricardo was squatting at, at the time.  World cup 2014 was in Brazil, and we were searching for flights to South America.  We immediately realized that $1500 was well beyond the means of two broke students and part-time baristas.  In the end we settled on Colombia, Bogota as a starting for our South American adventures.  Eventually visiting Ecuador, Peru, Machu Picchu, and Panama.  We were determined to drum up our own world cup.',
+  x: 4.6077624,
+  y: -74.0745113,
+  photo: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/friends/friend_1/friend_coverphoto.jpg")
+)
+colombia_1_friend_1.save!
+
+=begin
 colombia = ethan.driftmap.journeys.create!(
-  title: '[POC]2015 - Colombia',
+  title: '2015 - Colombia',
   description: 'A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.',
   coverphoto: File.open("#{Rails.root}/ethans_photos/2015_colombia/coverphoto.jpg"),
   x: 4.6077624,
@@ -57,7 +157,7 @@ couch_surfing = bogota.essays.create!(
 
 couch_surfing.save
 colombia.save
-
+=end
 
 =begin
 require 'open-uri'
