@@ -65,7 +65,7 @@ colombia_1_gallery.save!
 
 colombia_1_essay_1 = colombia_1.essays.create!(
   title: 'Buy the ticket, take the ride',
-  body: 'The year was 2013, I was an overeager and intoxicated dweeb and new-comer to new york city.  Trying to piece together an existence at Queens College, flipping coffee at a coffeeshop, and an extremely stunted understanding of the female gender.  <br>  I\'m sure the idea arose one night while Ricardo and I were downing trashy beer, and passing a joint.  The plan was to somehow land in Rio de Janeiro for the upcoming world cup of soccer.  America\'s spectacle of posh men falling for no reason, and the world\'s single united pastime.  In those days, Ricardo and I were living on around $1500 a month, and money was always tight especially since neither of us would consider reducing our beer and marijuana budgets.  So we opted for Bogota Colombia, instead, and would travel around the northwestern region of South America, visiting also Ecuador, Peru and Panama.',
+  body: 'I was an overeager, intoxicated dweeb, with an extremely stunted understanding of the female gender.  The year was 2013, and I had just landed in New York City, attempting to piece together an existence studying, flipping coffee and getting myself into whatever trouble I could find. <br/><br/>  A pastime of mine in those days, was sit on my roof with my best friend Ricardo while passing a joint and listen to his stories of adventure abroad.  We covered everything from admiring mountain ranges in Thailand, to hallucinogenic Parisian absinthe, to outsmarting police in Germany.  I suppose it was only a matter of time before I would find myself a cog in one of these journeys. <br/><br/>  The plan was to fly to Rio de Janeiro for the upcoming futbol world cup, our Earth’s united pastime, and the United State’s idea of posh men flailing for no reason.  Our plan was flawless, except for a single point of failure that we were both dead broke.  Just a flight to Rio would have costed us a month’s income, and we wouldn’t dream of cutting back on our fiscal beer and marijuana budgets.  We would not be deterred or sobered by this, as opted to begin our journey in Bogota Colombia for a much more reasonable rate, that left plenty of flexibility for Aguardiente and Agile.  After Colombia, we would backpack around the Northwestern region of South America, visiting Ecuador, Peru and a short stay in Panama.  This is the story of all the majest and debauchery of my first voyage outside my home country.',
   x: 4.6077624,
   y: -74.0745113,
   coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/essays/essay_1/essay_coverphoto.jpg")
@@ -73,22 +73,30 @@ colombia_1_essay_1 = colombia_1.essays.create!(
 colombia_1_essay_1.save!
 
 colombia_1_essay_2 = colombia_1.essays.create!(
-  title: 'Learning Spanish in 24 Hours.',
-  body: 'The night before we left, as any intelligent virgin traveler would, I thought it was about time to start picking up Spanish.  I asked Ricardo, who is very decent at Spanish, how to order a few tacos and a jarrito from a truck near sutphin blvd in Jamaica Queens.  That would be close to the extent of my Spanish speaking abilities until I would return to Colombia alone a year later. <br>  We arrived late in Bogota, and took a taxi to our hostel.  From the taxi window, I took it the nighttime Bogota scenery, which is sometimes vibrant, sometimes frightening.  As I listened with intent confusion as Ricardo chatted with the taxi driver, I was nervous, although probably not as much as I should have been, at the scrappy ongoings outside the cab.  It is not uncommon to see stray dogs, and bums rummaging through trash near Candelaria at night.  From the hostel we trekked a few block downhill toward the main street running through la Candelaria, where to the delight of a storeowner and jeering geezers, I ordered some empanadas and water in my stunted Spanish.  On this night and throughout most of the trip, I didn\'t bother with questions of why I was there or what there was to be learned.  At times I felt like a conquistador, invading a country and flashing wealth to people with none, but for the most part I just was away from home for a few weeks and trying to enjoy myself.  La Candelaria is the old town in Bogota, and not a good representation of the lives of normal Colombians.  The streets are made of brick, the buildings are Spanish style adobe painted vibrantly, and large graffiti murals are common.  We would spend almost all our time in Colombia in this neighborhood, while there is plenty of entertainment and happenings in La Candelaria, we stayed mostly to ourselves and our tourist colleagues.',
+  title: ' Learning Spanish in 20 hours. Or 2 years.',
+  body: ' As any intelligent virgin traveler would, I figured it was about time to start honing my Spanish skills, 20 hours before our flight to Bogota.  My wrestling match with the Spanish language began at a taco truck in Jamaica Queens.  The dialogue went something like as follows: <br/><br/> ETHAN:  Hey Ricardo, how do you ask for a chicken taco in Spanish? <br/><br/>  RICARDO: Tell him: \'Yo quiero un taco de pollo\' <br/><br/> ETHAN: (speaking to taco man) Estoy un de taco de pollo. <br/><br/>  TACOMAN: (in english) Yeah sure man, you want red sauce or green sauce? <br/><br/> ETHAN: Verde!  I mean, green! <br/><br/>  TACOMAN: (switches to Spanish) Algo a tomar? (Translation: anything to drink?) <br/><br/> ETHAN: What, huh? <br/><br/> RICARDO: He asked you if you want anything to drink dude! <br/><br/> ETHAN: Yo quiero un Harrito! <br/><br/>  TACOMAN: (slightly more confused than annoyed) You mean a Jarrito? <br/><br/> ETHAN: Yeah that. <br/><br/> TACOMAN: Alright what kind? <br/><br/> ETHAN: Lime!  I mean, Limon.  Lo siento. <br/><br/> My expertise of the Spanish language would remain more or less at a toddler’s level for the entirety of my trip, and would lead to some hilarious and embarrassing encounters for all parties involved.  I remember asked a lot of people what time it was, in Spanish, and then checking the time for myself since I didn\'t understand a single syllable of the response.  I also remember apologizing a lot in Spanish, not sure how much that speaks to a timid character, or how out of place I was. <br/><br/> After many awkward situations and more than a few unintentional insults, I would drastically improve my Spanish to a conversational level.  The trick that finally improved my Spanish, surprisingly was actually trying to learn the language. ',
   x: 4.6077624,
-  y: -74.0745113,
-  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/essays/essay_2/essay_coverphoto.jpg")
+  y: -74.0745113
+  #coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/essays/essay_2/essay_coverphoto.jpg")
 )
 colombia_1_essay_2.save!
 
 colombia_1_essay_3 = colombia_1.essays.create!(
-  title: 'Zipaquira',
-  body: 'One day while in Bogota, we took a day trip to a pueblo an hour outside Bogota called Zipaquira, which is a common destination, and time capsule of a slower Spanish pueblo.  A place best spent lazily spending an afternoon, sitting in the shade of a cafe on the main plaza, watching malditos chase birds, or families strutting in their Sunday\'s best.  Zipaquira\'s main attraction is a cathedral that was built many years ago in an underground salt mine.  Elaborately and extravagantly lit, it is surely a pleasure to learn how it was constructed, or how important Catholicism is to the Colombian People.  However, Ricardo and I were ignorant and preferred to spend our pesos on aguardiente, so we balked at a 35,000 peso (10-15 dollar) admittance fee.  We didn\'t waste the whole afternoon fortunately, as we wandered around a quiet town, eating ice cream making friends with stray dogs, and playing in a small maze built for children.  Not my most sensical, or culturally responsible moment.  We had lunch and took photos of the ancient looking buildings and people, inevitably coming to the center plaza where we spent the afternoon watching children harass well-to-do animals, and merchants peddle ice cream and sweets.  On the way back to Bogota we got caught in a terrible rain storm and it\'s frankly a miracle we found our bus.',
+  title: 'Landing In Bogota',
+  body: 'The neighborhood La Candelaria in Bogota is where the city of Bogota humbly began.  It sits in the shadow of the towering Andes mountains, and experiences frequent rain as the mountains to the East impede any clouds and dump any moisture upon the city.  La Candelaria is the old town, cobblestone streets wind and bend without much motor vehicle safety for pedestrians on either sidewalk.  Old Architecture style buildings are painted in beautiful pastel, which almost veil the steel bars over all the windows.  La Candelaria is dense with hostels, museums, restaurants and home to a couple of the most prestigious universities in Colombia, and so Candelaria is protected and a safe neighborhood for all.  The barrios, or neighborhoods surrounding La Candelaria on almost all sides are a different story entirely. <br/><br/>  We arrived late in Bogota, and took a taxi to our hostel.  I listened with intense confusion as Ricardo chatted with the taxi driver, probing for hints of the safety of Bogota, as well as the best way to find the nearest wild party.   I Took in the nighttime scenery as we drove through the city, I was impressed by the fantastic murals and graffiti, as well as taken aback by the scrappy ongoings.  It was a bit overwhelming to see stray dogs, and bums rummaging through trash. <br/><br/>  After checking into our hostel, Ricardo and I trekked a few steep blocks toward the main street running through La Candelaria.  We stopped in a small shop and restaurant, where to the delight of the owner and jeering geezers, I attempted to order some empanadas and water, in my fledgling Spanish.  The owner was more than happy to give me plenty of patience and pointers.  The old drunks chuckled only at my pronunciation, and without malice.  I’m sure it helped that we were paying double for the water, and buying stale pastries that would have been rightfully discarded.',
   x: 4.6077624,
   y: -74.0745113,
   coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/essays/essay_3/essay_coverphoto.jpg")
 )
 colombia_1_essay_3.save!
+
+colombia_1_essay_4 = colombia_1.essays.create!(
+  title: 'Bogota in the daylight & Zipaquira',
+  body: 'Our first few expeditions in Bogota were either very positive, or a little harsh, with not much in between.  The restaurants we found were delicious, but ordering in Spanish was a bit of a fiasco, fellow travelers we met were cordial, but others were rude because we were gringos.  Our first day, we wandered the streets and shops in La Candelaria, and admired Bogota from above at Monserate. <br/><br/>  Eventually we decided to take a day trip to a village and common tourist destination outside Bogota called Zipaquira.  Zipaquira is a bit of a time capsule into a previous era of Colombia, a village best enjoyed lazily spending an afternoon, sitting in the shade of a cafe on the main plaza, watching children chase birds, or families strutting in their Sunday\'s best.  Zipaquira\'s main attraction is an cathedral carved into an underground salt mine, many years ago.  Elaborately and extravagantly lit, it is a pleasure to learn how it was constructed, or how important Catholicism is to the Colombian People.  Or at least, I assume it would be, since Ricardo and I ignorantly opted to spend our pesos and braincells on aguardiente, instead of the ten dollar entrance fee. <br/><br/> While it wasn’t my most sensible or culturally responsible moment, we didn\'t waste the whole afternoon fortunately, as we wandered around the quiet town center, eating ice cream, making friends with stray dogs, and playing in a small maze built for children.   We had lunch and took photos, while Ricardo bolstered his Spanish befriending the locals.  We found our way to the village (above ground) Cathedral and main plaza, were we spent the remainder of our short time in Zipaquira, watching children harass well-to-do animals, and merchants peddling ice cream and sweets. <br/><br/> It was in Zipaquira that we experienced our first of many miracles on this trip.  We actually found our bus back to Bogota, and boarded on time.  This is particularly miraculous, given the awful rainstorm that swamped us as we attempted to escape the village. ',
+  x: 4.6077624,
+  y: -74.0745113,
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/essays/essay_4/essay_coverphoto.jpg")
+  )
 
 colombia_1_friend_1 = colombia_1.friends.create!(
   first_name: 'Ricardo',
@@ -107,7 +115,7 @@ ecuador = sa.waypoints.create!(
   body: 'Quito and the Amazon would prove to be a change of pace to the bustle of downtown Bogota Colombia.',
   x: -0.218009422675834,
   y: -78.51190567016602,
-  date: DateTime.new(2014, 5, 27),
+  date: DateTime.new(2014, 6, 3),
   coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/ecuador/waypoint_coverphoto.jpg")
 )
 ecuador.save!
@@ -146,6 +154,65 @@ ecuador_essay_2 = ecuador.essays.create!(
 )
 ecuador_essay_2.save!
 ecuador.save!
+
+peru = sa.waypoints.create!(
+  title: 'Peru',
+  body: 'A Foggy Hike to Machu Picchu',
+  x: -13.520257797795576,
+  y: -71.9710922241211,
+  date: DateTime.new(2014, 6, 9),
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/peru/waypoint_coverphoto.jpg")
+)
+peru.save!
+
+peru_gallery = peru.galleries.create!(
+  title: 'Cusco and Machu Picchu',
+  description: 'Exploring the streets of Cusco & hiking in Aguas Caliente.',
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/peru/galleries/gallery_1/gallery_coverphoto.jpg"),
+  x: -13.520257797795576,
+  y: -71.9710922241211
+)
+
+peru_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/peru/galleries/gallery_1/gallery_1.jpg"))
+peru_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/peru/galleries/gallery_1/gallery_2.jpg"))
+peru_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/peru/galleries/gallery_1/gallery_3.jpg"))
+peru_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/peru/galleries/gallery_1/gallery_4.jpg"))
+peru_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/peru/galleries/gallery_1/gallery_5.jpg"))
+peru_gallery.save!
+peru.save!
+
+panama = sa.waypoints.create!(
+  title: 'Panama',
+  body: 'Hot and Muggy, Highrises and Huts',
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/panama/waypoint_coverphoto.jpg"),
+  x: 8.97359290103662,
+  y: -79.53329086303711
+)
+panama.save!
+
+panama_gallery = panama.galleries.create(
+  title: 'Breaking & Entering at the Hard Rock Cafe',
+  description: 'Wildly Illegal view dozens of floors above panama.',
+  coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/panama/galleries/gallery_1/gallery_coverphoto.jpg"),
+  x: 8.97359290103662,
+  y: -79.53329086303711
+)
+panama_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/panama/galleries/gallery_1/gallery_1.jpg"))
+panama_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/panama/galleries/gallery_1/gallery_coverphoto.jpg"))
+panama_gallery.save
+
+philip = panama.friends.create!(
+  first_name: 'Philip',
+  last_name: '',
+  email: '',
+  x: 4.6077624,
+  y: -74.0745113,
+  member: false,
+  visible: true,
+  description: 'Resilience is imperative for any drifting traveler, whether mental physical or humerous the road winds and can up end you at a moments notice.  Towards the end of my virgin expedition outside of the US and separted from my friends, I felt discouraged and found myself brooding as much as sweating poolside at a hostel.  That\'s where I met a amiable German man named Philip, who immediately lifted me back up, mentally and physically.  We wandered around a sticky downtown panama city, shielding our eyes from decadence, and lowered them from poverty.  Eventually we ventured into the Hard Rock Cafe Hotel, one of the tallest building overlooking the city.  We somehow skirted security and found our way to a floor well above our paygrade, and crept up the final 20 flights of stairs to a vacant rooftop restaurant.  We owned the roof and city, indulging in photos and jokes, taking our time to peruse all the views from the top floor.  We never were captured, much less given a questioning eye.  '.html_safe,
+)
+philip.save
+panama.save!
 sa.save!
 
 colombia_journey = ethan.driftmap.journeys.create!(
@@ -179,21 +246,6 @@ bogota_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_mani
 bogota_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/colombia/waypoints/bogota/galleries/gallery_1/gallery_3.jpg"))
 bogota_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/colombia/waypoints/bogota/galleries/gallery_1/gallery_4.jpg"))
 bogota_gallery.save!
-
-=begin
-philip = bogota.friends.create!(
-  first_name: 'Philip',
-  last_name: '',
-  email: '',
-  # photo: open('https://scontent.fbed1-1.fna.fbcdn.net/v/t31.0-8/13235210_1264222140273340_3589384723710979906_o.jpg?oh=4f4904b6f87a7322d410c80cc63ea1cc&oe=59D7E23C'),
-  x: 4.6077624,
-  y: -74.0745113,
-  member: false,
-  visible: true,
-  description: 'Resilience is imperative for any drifting traveler, whether mental physical or humerous the road winds and can up end you at a moments notice.  Towards the end of my virgin expedition outside of the US and separted from my friends, I felt discouraged and found myself brooding as much as sweating poolside at a hostel.  That\'s where I met a amiable German man named Philip, who immediately lifted me back up, mentally and physically.  We wandered around a sticky downtown panama city, shielding our eyes from decadence, and lowered them from poverty.  Eventually we ventured into the Hard Rock Cafe Hotel, one of the tallest building overlooking the city.  We somehow skirted security and found our way to a floor well above our paygrade, and crept up the final 20 flights of stairs to a vacant rooftop restaurant.  We owned the roof and city, indulging in photos and jokes, taking our time to peruse all the views from the top floor.  We never were captured, much less given a questioning eye.  '.html_safe,
-)
-philip.save
-=end
 
 couch_surfing = bogota.essays.create!(
   title: 'A Couch Surfing life',
