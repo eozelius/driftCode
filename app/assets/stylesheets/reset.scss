@@ -45,7 +45,8 @@ html{
 body {
 	line-height: 1;
 	font-size: 1em;
-	padding-top: 27px;
+	padding-top: 70px;
+
 }
 ol, ul {
 	list-style: none;
@@ -208,6 +209,7 @@ input[type="password"] {
 	width: 80%;
 	display: block;
 	max-width: 215px;
+    height: 30px;
 	background: #fff;
 	border-radius: 0;
 	border: 1px solid #ccc;
@@ -272,16 +274,10 @@ form.new_waypoint,
 form.edit_waypoint,
 #friends > form,
 #journey form {
-	input[type="text"] {
-		height: 2em;
-		margin-top:24px;
-	}
-
 	textarea {
 		margin: 0 0 7% 3%;
 	}
 
-	input[type="text"],
 	textarea {
 		padding: 4px;
 		border-radius: 0;

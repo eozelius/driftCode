@@ -1,5 +1,6 @@
 require 'open-uri'
 
+=begin
 ethan = User.create(
   first_name: 'ethan',
   last_name: 'ozelius',
@@ -15,17 +16,24 @@ ethan = User.create(
 )
 
 ethan.save
+=end
+
+ethan = User.first
 
 # Create driftmap for ethan
+=begin
 ethans_driftmap = ethan.driftmap = Driftmap.create(
-  title:  "adventures of a Drifting Gonzo Nomad",
-  body:   "just a computer hacker trying to get some more sunshine.",
+  title:  'adventures of a Drifting Gonzo Nomad',
+  body: 'just a computer hacker trying to get some more sunshine.',
   init_x: 0.924206230200376,
   init_y: -34.2400771379471,
   init_zoom: 2,
 )
 
 ethans_driftmap.save
+
+=end
+
 
 sa = ethan.driftmap.journeys.create!(
   title: 'South America',
