@@ -108,6 +108,9 @@ var DriftMapLeaflet = function(){
     var coverphoto = waypoint.coverphoto.url == null ? '' : '<img class="waypoint-popup-coverphoto" src="'+ waypoint.coverphoto.url +'" />';
 
     var contentIcons = '';
+
+    contentIcons += '<li class="home-journey" data-request-type="home" data-waypoint="'+ id +'"><i class="fa fa-map-o"></i></li>'
+
     if(waypoint.content.galleries.length > 0)
       contentIcons += '<li class="galleries" data-request-type="galleries" data-waypoint="'+ id +'"><i class="fa fa-camera"></i></li>'
 
@@ -181,7 +184,7 @@ var DriftMapLeaflet = function(){
                           '<div class="content-icons-menu"><ul>' + contentIcons + '</ul></div>' +
                           '<div class="waypoint-content-container">' +
                             '<div class="waypoint-content">' +
-                              '<div class="view-content active">' +
+                              '<div class="view-content home active">' +
                                 coverphoto +
                                 '<h4 class="waypoint-popup-title">'+ title +'</h4>' +
                                 '<p class="waypoint-popup-body">' +
@@ -232,7 +235,7 @@ var DriftMapLeaflet = function(){
     wp.leaflet.popup.openOn(m)
   })
 
-  // Goto Waypoint content
+  // Goto Waypoint content from contentIcons.
   $(document).on('click', '.content-icons-menu li', function(){
     var type  = $(this).data('request-type').toString();
     $('.waypoint-content .view-content').removeClass('active')
