@@ -39,8 +39,8 @@ ethans_driftmap.save
 
 
 sa = ethan.driftmap.journeys.create!(
-  title: 'South America',
-  description: 'Buy the ticket, take the ride.',
+  title: 'Buy the ticket, take the ride',
+  description: 'My premier journey outside my home country, backpacking through the cities and jungles of Northwestern South America.  <br/><br/>I left an ignorant indignant man, uncomfortable with my human existence. <br/><br/>Along the way I breezed through the wonders of travelling and raged through the lows. I learned about myself and how I fit into this strange Earth.  <br/><br/>In the end I returned the same man, only a little calmer and with a taste for travel.',
   coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/journey_coverphoto.jpg"),
   x: 4.6077624,
   y: -74.0745113
@@ -117,6 +117,7 @@ colombia_1_essay_5 = colombia_1.essays.create!(
   y: -74.0745113,
   coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/essays/essay_5/essay_coverphoto.jpg")
 )
+colombia_1_essay_5.save!
 
 colombia_1_friend_1 = colombia_1.friends.create!(
   first_name: 'Ricardo',
@@ -237,8 +238,8 @@ panama.save!
 sa.save!
 
 colombia_journey = ethan.driftmap.journeys.create!(
-  title: 'Returning to Colombia',
-  description: 'A Digital Nomad trek, laced with Gonzo adventure into the heart and cities of Colombia.',
+  title: 'Life and Trials of a Digital Gonzo Nomad',
+  description: 'I returned to the United State after my first South American Journey in 2015, still myself, but with a more upbeat outlook on life.  Long story short, I would drop out of Queen College and get a job as a web developer.  After a year working 9-5 in my home of Queens NY, the road began beckoning me back, as it does many drifters.  <br/><br/>I told my boss one day that I wanted to hit the road, but that I believed I still had a lot to offer the company.  I asked if he would allow me to work remotely from Colombia indefinitely, to my surprise he said\'Of course!  Go for it!\'  <br/><br/>This is the story of my 6 months I spent as A Digital Nomad, trekking all over Colombia.  I became a seasoned couch-surfer, discovered the kindness of the Colombian people, weathered countless lonely nights and danced a little along the way.',
   coverphoto: File.open("#{Rails.root}/ethans_manifest/colombia/journey_coverphoto.jpg"),
   x: 4.6077624,
   y: -74.0745113
