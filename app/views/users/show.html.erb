@@ -64,6 +64,7 @@
         <%= image_tag @user.profile_pic, class: 'pp' %>
 
         <%= link_to '<p>edit my info<p>'.html_safe, edit_user_path(@user) if user_is_home(@user) %>
+        <%= link_to '<p style="padding-top: 5px;">edit my driftmap<p>'.html_safe, edit_driftmap_path(@driftmap) if user_is_home(@user) %>
       </div>
 
       <div class="user-details">

@@ -42,13 +42,12 @@ var DriftMapLeaflet = function(){
   }
 
   function drawMap(driftmap){
-    var mapColor = getColorScheme(driftmap.color)
-
+    var mapColor = getColorScheme(driftmap.color_scheme)
     m = L.map('map').setView([driftmap.init_x, driftmap.init_y], driftmap.init_zoom);
     L.tileLayer(mapColor + '?access_token={accessToken}',
       { attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
-        minZoom: 4,
+        //minZoom: 4,
         id: 'eozelius77.j4hekake',
         accessToken: "<%= ENV['MAPBOX_SECRET_KEY'] %>"
       }).addTo(m);
@@ -60,7 +59,7 @@ var DriftMapLeaflet = function(){
       window.e = e
       console.log(e)
     })*/
-
+    window.m = m;
   }
 
   function constructJourneyPopup(journey, waypoints){
@@ -228,7 +227,7 @@ var DriftMapLeaflet = function(){
   })
 
   // Goto Waypoint from Journey Leaflet Popup or Right Hud
-  $(document).on('click', '.waypoints-preview li, .hud-bottom p', function () {
+  $(document).on('click', '.waypoints-preview li, .hud-bottom .journey p', function () {
     var wp = DriftMapLeaflet.getWayPoint($(this).data('waypoint'))
     wp.leaflet.popup.openOn(m)
   })
