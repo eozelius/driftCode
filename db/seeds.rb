@@ -20,6 +20,7 @@ ethan.save
 
 ethan = User.first
 ethan.driftmap.journeys.each { |j| j.destroy! }
+ethan.driftmap.save!
 ethan.save!
 
 # Create driftmap for ethan
