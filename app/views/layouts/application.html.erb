@@ -65,7 +65,12 @@
           <ul class="nav navbar-nav navbar-right">
             <% if logged_in? %>
               <li>
-                <%= link_to 'profile', user_path(current_user), style: 'font-family: "ubuntu", sans-serif' %>
+                <%= link_to user_path(current_user), style: 'font-family: "ubuntu", sans-serif; padding: 10px 0 0 0' do %>
+                  <%= image_tag current_user.profile_pic, style: 'width: 30px; height: 30px; float: left: display: inline; border-radius: 4px;'  %>
+                <% end -%>
+              </li>
+              <li>
+                <%= link_to 'profile',  user_path(current_user), style: 'font-family: "ubuntu", sans-serif;'%>
               </li>
             <% else %>
               <li>
