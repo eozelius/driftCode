@@ -1,17 +1,43 @@
 .profile-hud-container {
   width: 71%;
   position: absolute;
-  left: 25%;
+  right: 2%;
   top: 2%;
+
+  .feed-toggle-container {
+    width: 40px;
+    height: 29px;
+    display: inline;
+    background-color: #ccc;
+
+    float: right;
+    margin: 0 2% 0 0;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+
+    .bar {
+      width: 55%;
+      height: 2px;
+      margin: 5px auto;
+      display: block;
+      background-color: #111;
+    }
+
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
 
   .profile-hud {
     background-color: #EAEAEA;
-    opacity: .77;
+    opacity: .9;
     padding: 1% 0;
     height: 450px;
 
     .profile-picture-container {
-      width: 30%;
+      width: 25%;
       padding: 0 0 3% 0;
       margin-left: -6%;
       display: inline-block;
@@ -26,7 +52,7 @@
     }
 
     .user-details {
-      width: 60%;
+      width: 58%;
       display: inline-block;
       padding: 1% 0 1% 3%;
       vertical-align: top;
@@ -52,6 +78,17 @@
       }
     }
   }
+}
+
+.profile-hud-container.collapsed {
+  left: 93%;
+
+  .profile-hud.collapsed {
+    height: 50px;
+    width: 50px;
+    background: transparent;
+  }
+
 }
 
 

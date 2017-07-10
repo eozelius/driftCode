@@ -239,6 +239,13 @@ var DriftMapLeaflet = function(){
     $('.waypoint-content .' + type).addClass('active')
   })
 
+  // Toggle Profile Feed block
+  $(document).on('click', '.feed-toggle-container', function () {
+    $('.profile-hud-container, .profile-hud').toggleClass('collapsed')
+
+    $('.profile-hud-container .user-details, .profile-hud-container .profile-picture-container').toggleClass('hidden')
+  })
+
   return {
     // public variables
 
