@@ -19,6 +19,7 @@ ethan.save
 =end
 
 ethan = User.first
+ethan.driftmap.title = 'Just a drifting gonzo hacker, trying to get more sunshine.'
 ethan.driftmap.journeys.each { |j| j.destroy! }
 ethan.driftmap.save!
 ethan.save!

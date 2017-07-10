@@ -4,35 +4,37 @@
 <input id="driftmap_id" type="hidden" value="<%= @driftmap.id %>">
 <input id="user_id" type="hidden" value="<%= @user.id %>" >
 
+<% if false %>
 <div class="container">
-    <div class="profile-picture-container col-lg-4 col-md-4 col-sm-12 col-xs-12">
-      <%= image_tag @user.profile_pic, class: 'pp' %>
-    </div>
+  <div class="profile-picture-container col-lg-4 col-md-4 col-sm-12 col-xs-12">
+    <%= image_tag @user.profile_pic, class: 'pp' %>
+  </div>
 
-    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-      <h4><%= @user.first_name %> - <span style="font-size: .7em; color: #C2D9EB; "><%= @driftmap.body %></span></h4>
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+    <h4><%= @user.first_name %> - <span style="font-size: .7em; color: #C2D9EB; "><%= @driftmap.body %></span></h4>
 
 
-      <div class="pro-part profile">
-        <div class="profile-details-container">
-          <div class="profile-details">
-            <!-- From -->
-            <%= "<p class='user-from'>from: <span style='color: #C2D9EB; float: right'>#{@user.from}</span></p>".html_safe if @user.from %>
+    <div class="pro-part profile">
+      <div class="profile-details-container">
+        <div class="profile-details">
+          &lt;!&ndash; From &ndash;&gt;
+          <%= "<p class='user-from'>from: <span style='color: #C2D9EB; float: right'>#{@user.from}</span></p>".html_safe if @user.from %>
 
-            <!-- Current Location -->
-            <%= "<p class='user-from'>current location: <span style='color: #C2D9EB; float: right;'>#{@user.gps}</span></p>".html_safe if @user.gps %>
+          &lt;!&ndash; Current Location &ndash;&gt;
+          <%= "<p class='user-from'>current location: <span style='color: #C2D9EB; float: right;'>#{@user.gps}</span></p>".html_safe if @user.gps %>
 
-            <div style="margin-top:4%; border-top: 1px solid #ccc; width: 80%; margin: 4% auto 0; padding-top: 1%;">
-              <% if user_is_home(@user) || admin_user %>
-                <p>email: <%= @user.email %></p><div class="clear-fix"></div>
-                <p><a class="edit-user-anchor">edit my info</a></p>
-              <% end %>
-            </div>
+          <div style="margin-top:4%; border-top: 1px solid #ccc; width: 80%; margin: 4% auto 0; padding-top: 1%;">
+            <% if user_is_home(@user) || admin_user %>
+              <p>email: <%= @user.email %></p><div class="clear-fix"></div>
+              <p><a class="edit-user-anchor">edit my info</a></p>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
+<% end %>
 
 <div id="profile-page">
 	<%#= '<input id="user_is_home" type="hidden" value="1">'.html_safe if user_is_home @user %>
@@ -56,77 +58,108 @@
     </div>
   </div>
 
-	<!--<div class="map-details col-lg-8 col-md-8 col-sm-12 col-xs-12">
+  <div class="profile-hud-container">
+    <div class="profile-hud">
+      <div class="profile-picture-container">
+        <%= image_tag @user.profile_pic, class: 'pp' %>
+      </div>
+
+      <div class="user-details">
+        <!-- Name -->
+        <h4><%= @user.first_name %> <%= @user.last_name %></h4>
+
+        <!-- Driftmap title/tagline -->
+        <p><%= @driftmap.title %></p>
+
+        <!-- Email -->
+        <%= "<p>#{@user.email}</p>".html_safe if user_is_home(@user) || admin_user %>
+
+        <!-- From -->
+        <% if @user.from %>
+          <p>from: <span><%= @user.from %></span></p>
+        <% end -%>
+        <!-- Current Location -->
+        <% if @user.gps %>
+          <p>current location: <span><%= @user.gps %></span></p>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+
+  <% if false %>
+	<div class="map-details col-lg-8 col-md-8 col-sm-12 col-xs-12">
 		<h3 class="page-title driftmap-title"><%= @driftmap.title %><%= link_to '<span style="font-size: .48em; font-style:italic"> - edit driftmap</span>'.html_safe, edit_driftmap_path(@driftmap) if user_is_home(@user) %></h3>
 
 		<p class="driftmap-title"><%= @driftmap.body %></p>
-	</div>-->
-
-		<div class="pro-part profile">
-			<div class="profile-details-container">
-				<div class="profile-details">
-					<p><%= @user.first_name %></p>
-					<%= image_tag @user.profile_pic, class: 'pp' if @user.profile_pic.present? %>
-					<div class="user-info">						
-
-						
-						<% if user_is_home(@user) || admin_user %>
-							<p><%= @user.email %></p>
-							<p><a class="edit-user-anchor">edit my info</a></p>
-						<% end %>
-					</div><div class="clear-fix"></div>
-
-					<% if user_is_home(@user) || admin_user %>
-						<div class="alter-user-container" style="display:none;">
-							<%= form_for @user, html: { multipart: true } do |f| %>
-								<p>
-									<%= f.label 'profile picture' %>
-									<%= f.file_field :profile_pic, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
-								</p>
-								<p>
-									<%= f.label :first_name %>
-									<%= f.text_field :first_name %>
-								</p>
-
-                <p>
-                  <%= f.label :last_name %>
-                  <%= f.text_field :last_name %>
-                </p>
-
-								<p>
-									<%= f.label :email %>
-									<%= f.text_field :email %>
-								</p>							
-
-								<p>
-									<%= f.label :from, 'Where are you from?' %>
-									<%= f.text_field :from %>
-								</p>
-
-								<p>
-									<%= f.label :gps, 'Where are you currently?' %>
-									<%= f.text_field :gps %>
-								</p>
-
-								<p>
-									<%= f.label :password %>
-									<%= f.password_field :password %>
-								</p>
-
-								<p>
-									<%= f.label :password_confirmation %>
-									<%= f.password_field :password_confirmation %>
-								</p>
-							
-								<p>
-									<button type="submit" name="commit" value="Create Post" class="normal" style="float:right">submit</button>
-									<span class="cancel-edit-user normal" style="float:right">cancel</span>
-								</p>
-							<% end %>
-						</div>
-					<% end %>
-				</div>
-			</div><!-- end profile info -->
-		</div>
 	</div>
+  <% end %>
+
+  <% if false %>
+  <div class="pro-part profile">
+    <div class="profile-details-container">
+      <div class="profile-details">
+        <p><%= @user.first_name %></p>
+        <%= image_tag @user.profile_pic, class: 'pp' if @user.profile_pic.present? %>
+        <div class="user-info">
+
+
+          <% if user_is_home(@user) || admin_user %>
+            <p><%= @user.email %></p>
+            <p><a class="edit-user-anchor">edit my info</a></p>
+          <% end %>
+        </div><div class="clear-fix"></div>
+
+        <% if user_is_home(@user) || admin_user %>
+          <div class="alter-user-container" style="display:none;">
+            <%= form_for @user, html: { multipart: true } do |f| %>
+              <p>
+                <%= f.label 'profile picture' %>
+                <%= f.file_field :profile_pic, accept: 'image/jpeg, image/gif, image/png, image/jpg' %>
+              </p>
+              <p>
+                <%= f.label :first_name %>
+                <%= f.text_field :first_name %>
+              </p>
+
+              <p>
+                <%= f.label :last_name %>
+                <%= f.text_field :last_name %>
+              </p>
+
+              <p>
+                <%= f.label :email %>
+                <%= f.text_field :email %>
+              </p>
+
+              <p>
+                <%= f.label :from, 'Where are you from?' %>
+                <%= f.text_field :from %>
+              </p>
+
+              <p>
+                <%= f.label :gps, 'Where are you currently?' %>
+                <%= f.text_field :gps %>
+              </p>
+
+              <p>
+                <%= f.label :password %>
+                <%= f.password_field :password %>
+              </p>
+
+              <p>
+                <%= f.label :password_confirmation %>
+                <%= f.password_field :password_confirmation %>
+              </p>
+
+              <p>
+                <button type="submit" name="commit" value="Create Post" class="normal" style="float:right">submit</button>
+                <span class="cancel-edit-user normal" style="float:right">cancel</span>
+              </p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div><!-- end profile info -->
+  </div>
+  <% end %>
 </div>
