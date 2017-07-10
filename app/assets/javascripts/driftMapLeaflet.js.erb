@@ -43,11 +43,12 @@ var DriftMapLeaflet = function(){
 
   function drawMap(driftmap){
     var mapColor = getColorScheme(driftmap.color)
+
     m = L.map('map').setView([driftmap.init_x, driftmap.init_y], driftmap.init_zoom);
     L.tileLayer(mapColor + '?access_token={accessToken}',
       { attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18,
-        minZoom: 3,
+        minZoom: 4,
         id: 'eozelius77.j4hekake',
         accessToken: "<%= ENV['MAPBOX_SECRET_KEY'] %>"
       }).addTo(m);
@@ -262,40 +263,21 @@ var DriftMapLeaflet = function(){
     },
 
     defaultInit: function(){
-      var d = new Date()
-
-      var data = [{
-        journey: {
-          id: 0,
-          description: '',
-          title: '',
-          driftmap_id: 0,
-          coverphoto: false,
-          timeline: false
+      var data = {
+        driftmap: {
+          "id": 0,
+          "title": "",
+          "body":"",
+          "init_x": 0.924206230200376,
+          "init_y": -34.2400771379471,
+          "init_zoom": 1,
+          "user_id": 0,
+          "created_at":"2017-07-10T03:33:32.363Z",
+          "updated_at":"2017-07-10T06:56:32.564Z",
+          "color_scheme":"myDefault"
         },
-
-        waypoints: [{
-          id: 0,
-          title: '',
-          body: '',
-          x: 0,
-          y: 0,
-          driftmap_id: 0,
-          journey_id: 0,
-          date: {
-            year: d.getFullYear(),
-            month: d.getMonth(),
-            day: d.getDay()
-          },
-          images: []
-        }]
-      }]
-
-      /*var myOpts = {
-        init_x: 0.924206230200376,
-        init_y: -40.2400771379471,
-        init_zoom: 2
-      }*/
+        journeys: {}
+      }
 
       DriftMapLeaflet.init(data)
     },

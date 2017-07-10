@@ -2,7 +2,7 @@
 
 <input id="users_show" type="hidden" value="1">
 <input id="driftmap_id" type="hidden" value="<%= @driftmap.id %>">
-<input id="user_id" type="hidden" value="<%= @user.id %>" >
+<!--<input id="user_id" type="hidden" value="<%= @user.id %>" >-->
 
 <% if false %>
 <div class="container">
@@ -62,6 +62,8 @@
     <div class="profile-hud">
       <div class="profile-picture-container">
         <%= image_tag @user.profile_pic, class: 'pp' %>
+
+        <%= link_to '<p>edit my info<p>'.html_safe, edit_user_path(@user) if user_is_home(@user) %>
       </div>
 
       <div class="user-details">

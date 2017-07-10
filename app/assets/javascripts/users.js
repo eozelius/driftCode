@@ -18,6 +18,11 @@ $(function(){
     });
   }
 
+  /* EDIT ACTION */
+  if($('#users_edit').length){
+    DriftMapLeaflet.defaultInit()
+  }
+
 /* CREATE ACTION */
 
 /* UPDATE ACTION */
@@ -34,10 +39,7 @@ $(function(){
       },
       complete: function(response){
         var r = response.responseJSON
-        var home = $('#user_is_home').length ? true : false;
-        // window.r = r
-
-        // init Leaflet
+        // var home = $('#user_is_home').length ? true : false;
         DriftMapLeaflet.init(r);
       }
     });
