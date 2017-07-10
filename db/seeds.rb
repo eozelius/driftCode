@@ -49,7 +49,7 @@ sa.save!
 
 colombia_1 = sa.waypoints.create!(
   title: 'Colombia',
-  body: 'I wasn\'t sure what to expect for my first adventure outside of the US, but I was determined to absorb and enjoy every second of it.',
+  body: ' Colombia was the best launching pad for this journey, and many others in my world drifting.  Colombia is like traveling in general, in that neither are without their flaws, but if you stick with it, you\'ll be rewarded; and then possibly smashed back into submission.  At times the road can kick you while you\'re down, and you\'ll wonder why the hell you didn\'t just go visit a lake near you\'re home upstate.  <br/><br/> But Bogota is real, the city is a window into the normal and prolific lives of regular Colombians, with their faults and feats, danger and dancing, rainy boring days and majestic outbursts of life.  If you stick with it, Bogota will embrace and accept you, and it can become a home away from home if you allow it.',
   x: 4.6077624,
   y: -74.0745113,
   date: DateTime.new(2014, 5, 27),
@@ -239,7 +239,7 @@ sa.save!
 
 colombia_journey = ethan.driftmap.journeys.create!(
   title: 'Life and Trials of a Digital Gonzo Nomad',
-  description: 'I returned to the United State after my first South American Journey in 2015, still myself, but with a more upbeat outlook on life.  Long story short, I would drop out of Queen College and get a job as a web developer.  After a year working 9-5 in my home of Queens NY, the road began beckoning me back, as it does many drifters.  <br/><br/>I told my boss one day that I wanted to hit the road, but that I believed I still had a lot to offer the company.  I asked if he would allow me to work remotely from Colombia indefinitely, to my surprise he said\'Of course!  Go for it!\'  <br/><br/>This is the story of my 6 months I spent as A Digital Nomad, trekking all over Colombia.  I became a seasoned couch-surfer, discovered the kindness of the Colombian people, weathered countless lonely nights and danced a little along the way.',
+  description: 'I returned to the United State after my first South American Journey in 2015, still myself, but with a more upbeat outlook on life.  Long story short, I would drop out of Queen College and get a job as a web developer.  After a year working 9-5 in my home of Queens NY, the road began beckoning me back, as it does many drifters.  <br/><br/>I told my boss one day that I wanted to hit the road, but that I believed I still had a lot to offer the company.  I asked if he would allow me to work remotely from Colombia indefinitely, to my surprise he said \'Of course!  Go for it!\'  <br/><br/>This is the story of my 6 months I spent as A Digital Nomad, trekking all over Colombia.  I became a seasoned couch-surfer, discovered the kindness of the Colombian people, weathered countless lonely nights and danced a little along the way.',
   coverphoto: File.open("#{Rails.root}/ethans_manifest/colombia/journey_coverphoto.jpg"),
   x: 4.6077624,
   y: -74.0745113
