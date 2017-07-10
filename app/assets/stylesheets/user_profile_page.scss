@@ -9,20 +9,12 @@
     height: 29px;
     display: inline;
     background-color: #ccc;
-
     float: right;
     margin: 0 2% 0 0;
     border: 1px solid #333;
     border-radius: 4px;
     cursor: pointer;
-
-    .bar {
-      width: 55%;
-      height: 2px;
-      margin: 5px auto;
-      display: block;
-      background-color: #111;
-    }
+    padding-top: 5px;
 
 
     &:hover {
