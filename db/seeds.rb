@@ -253,7 +253,7 @@ bogota_gallery = bogota.galleries.create!(
 bogota_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/colombia/waypoints/bogota/galleries/gallery_1/gallery_1.jpg"))
 bogota_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/colombia/waypoints/bogota/galleries/gallery_1/gallery_2.jpg"))
 bogota_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/colombia/waypoints/bogota/galleries/gallery_1/gallery_3.jpg"))
-bogota_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/colombia/waypoints/bogota/galleries/gallery_1/gallery_4.jpg"))
+bogota_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_manifest/colombia/waypoints/bogota/galleries/gallery_1/gallery_4.JPG"))
 bogota_gallery.save!
 
 couch_surfing = bogota.essays.create!(
