@@ -19,6 +19,7 @@ ethan.save
 =end
 
 ethan = User.first
+ethan.last_name = 'ozelius'
 ethan.driftmap.journeys.each { |j| j.destroy! }
 ethan.driftmap.save!
 ethan.save!
