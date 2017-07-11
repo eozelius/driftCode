@@ -1,0 +1,912 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: driftmaps; Type: TABLE; Schema: public; Owner: ethan
+--
+
+CREATE TABLE driftmaps (
+    id integer NOT NULL,
+    title character varying,
+    body text,
+    init_x double precision,
+    init_y double precision,
+    init_zoom integer,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    color_scheme character varying DEFAULT 'myDefault'::character varying
+);
+
+
+ALTER TABLE driftmaps OWNER TO ethan;
+
+--
+-- Name: driftmaps_id_seq; Type: SEQUENCE; Schema: public; Owner: ethan
+--
+
+CREATE SEQUENCE driftmaps_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE driftmaps_id_seq OWNER TO ethan;
+
+--
+-- Name: driftmaps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ethan
+--
+
+ALTER SEQUENCE driftmaps_id_seq OWNED BY driftmaps.id;
+
+
+--
+-- Name: essays; Type: TABLE; Schema: public; Owner: ethan
+--
+
+CREATE TABLE essays (
+    id integer NOT NULL,
+    title character varying,
+    body text,
+    coverphoto character varying,
+    x double precision,
+    y double precision,
+    waypoint_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE essays OWNER TO ethan;
+
+--
+-- Name: essays_id_seq; Type: SEQUENCE; Schema: public; Owner: ethan
+--
+
+CREATE SEQUENCE essays_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE essays_id_seq OWNER TO ethan;
+
+--
+-- Name: essays_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ethan
+--
+
+ALTER SEQUENCE essays_id_seq OWNED BY essays.id;
+
+
+--
+-- Name: friends; Type: TABLE; Schema: public; Owner: ethan
+--
+
+CREATE TABLE friends (
+    id integer NOT NULL,
+    first_name character varying,
+    last_name character varying,
+    photo character varying,
+    description text,
+    x double precision,
+    y double precision,
+    member boolean DEFAULT false,
+    visible boolean,
+    waypoint_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    email character varying
+);
+
+
+ALTER TABLE friends OWNER TO ethan;
+
+--
+-- Name: friends_id_seq; Type: SEQUENCE; Schema: public; Owner: ethan
+--
+
+CREATE SEQUENCE friends_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE friends_id_seq OWNER TO ethan;
+
+--
+-- Name: friends_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ethan
+--
+
+ALTER SEQUENCE friends_id_seq OWNED BY friends.id;
+
+
+--
+-- Name: galleries; Type: TABLE; Schema: public; Owner: ethan
+--
+
+CREATE TABLE galleries (
+    id integer NOT NULL,
+    title character varying,
+    description text,
+    coverphoto character varying,
+    x double precision,
+    y double precision,
+    waypoint_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE galleries OWNER TO ethan;
+
+--
+-- Name: galleries_id_seq; Type: SEQUENCE; Schema: public; Owner: ethan
+--
+
+CREATE SEQUENCE galleries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE galleries_id_seq OWNER TO ethan;
+
+--
+-- Name: galleries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ethan
+--
+
+ALTER SEQUENCE galleries_id_seq OWNED BY galleries.id;
+
+
+--
+-- Name: journeys; Type: TABLE; Schema: public; Owner: ethan
+--
+
+CREATE TABLE journeys (
+    id integer NOT NULL,
+    description text,
+    title character varying,
+    coverphoto character varying,
+    driftmap_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    x double precision,
+    y double precision
+);
+
+
+ALTER TABLE journeys OWNER TO ethan;
+
+--
+-- Name: journeys_id_seq; Type: SEQUENCE; Schema: public; Owner: ethan
+--
+
+CREATE SEQUENCE journeys_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE journeys_id_seq OWNER TO ethan;
+
+--
+-- Name: journeys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ethan
+--
+
+ALTER SEQUENCE journeys_id_seq OWNED BY journeys.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: ethan
+--
+
+CREATE TABLE schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE schema_migrations OWNER TO ethan;
+
+--
+-- Name: treks; Type: TABLE; Schema: public; Owner: ethan
+--
+
+CREATE TABLE treks (
+    id integer NOT NULL,
+    title character varying,
+    description text,
+    coverphoto character varying,
+    waypoint_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE treks OWNER TO ethan;
+
+--
+-- Name: treks_id_seq; Type: SEQUENCE; Schema: public; Owner: ethan
+--
+
+CREATE SEQUENCE treks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE treks_id_seq OWNER TO ethan;
+
+--
+-- Name: treks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ethan
+--
+
+ALTER SEQUENCE treks_id_seq OWNED BY treks.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: ethan
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    first_name character varying,
+    email character varying,
+    gps character varying,
+    "from" character varying,
+    password_digest character varying,
+    remember_digest character varying,
+    admin boolean DEFAULT false,
+    activated boolean DEFAULT false,
+    activation_digest character varying,
+    activated_at timestamp without time zone,
+    profile_pic character varying,
+    reset_digest character varying,
+    reset_sent_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    last_name character varying
+);
+
+
+ALTER TABLE users OWNER TO ethan;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: ethan
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO ethan;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ethan
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: waypoint_images; Type: TABLE; Schema: public; Owner: ethan
+--
+
+CREATE TABLE waypoint_images (
+    id integer NOT NULL,
+    image character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    description text,
+    friend_id integer,
+    essay_id integer,
+    trek_id integer,
+    gallery_id integer,
+    friends_id integer,
+    galleries_id integer,
+    essays_id integer,
+    treks_id integer
+);
+
+
+ALTER TABLE waypoint_images OWNER TO ethan;
+
+--
+-- Name: waypoint_images_id_seq; Type: SEQUENCE; Schema: public; Owner: ethan
+--
+
+CREATE SEQUENCE waypoint_images_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE waypoint_images_id_seq OWNER TO ethan;
+
+--
+-- Name: waypoint_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ethan
+--
+
+ALTER SEQUENCE waypoint_images_id_seq OWNED BY waypoint_images.id;
+
+
+--
+-- Name: waypoints; Type: TABLE; Schema: public; Owner: ethan
+--
+
+CREATE TABLE waypoints (
+    id integer NOT NULL,
+    title character varying,
+    body text,
+    x double precision,
+    y double precision,
+    date timestamp without time zone,
+    journey_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    coverphoto character varying
+);
+
+
+ALTER TABLE waypoints OWNER TO ethan;
+
+--
+-- Name: waypoints_id_seq; Type: SEQUENCE; Schema: public; Owner: ethan
+--
+
+CREATE SEQUENCE waypoints_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE waypoints_id_seq OWNER TO ethan;
+
+--
+-- Name: waypoints_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ethan
+--
+
+ALTER SEQUENCE waypoints_id_seq OWNED BY waypoints.id;
+
+
+--
+-- Name: driftmaps id; Type: DEFAULT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY driftmaps ALTER COLUMN id SET DEFAULT nextval('driftmaps_id_seq'::regclass);
+
+
+--
+-- Name: essays id; Type: DEFAULT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY essays ALTER COLUMN id SET DEFAULT nextval('essays_id_seq'::regclass);
+
+
+--
+-- Name: friends id; Type: DEFAULT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY friends ALTER COLUMN id SET DEFAULT nextval('friends_id_seq'::regclass);
+
+
+--
+-- Name: galleries id; Type: DEFAULT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY galleries ALTER COLUMN id SET DEFAULT nextval('galleries_id_seq'::regclass);
+
+
+--
+-- Name: journeys id; Type: DEFAULT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY journeys ALTER COLUMN id SET DEFAULT nextval('journeys_id_seq'::regclass);
+
+
+--
+-- Name: treks id; Type: DEFAULT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY treks ALTER COLUMN id SET DEFAULT nextval('treks_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: waypoint_images id; Type: DEFAULT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY waypoint_images ALTER COLUMN id SET DEFAULT nextval('waypoint_images_id_seq'::regclass);
+
+
+--
+-- Name: waypoints id; Type: DEFAULT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY waypoints ALTER COLUMN id SET DEFAULT nextval('waypoints_id_seq'::regclass);
+
+
+--
+-- Data for Name: driftmaps; Type: TABLE DATA; Schema: public; Owner: ethan
+--
+
+COPY driftmaps (id, title, body, init_x, init_y, init_zoom, user_id, created_at, updated_at, color_scheme) FROM stdin;
+1	Just a drifting gonzo hacker, trying to get more sunshine.	just a computer hacker trying to get some more sunshine.	0.924206230200375956	-34.2400771379470967	1	1	2017-07-10 03:33:32.363617	2017-07-11 04:18:26.458313	normal
+\.
+
+
+--
+-- Name: driftmaps_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ethan
+--
+
+SELECT pg_catalog.setval('driftmaps_id_seq', 1, true);
+
+
+--
+-- Data for Name: essays; Type: TABLE DATA; Schema: public; Owner: ethan
+--
+
+COPY essays (id, title, body, coverphoto, x, y, waypoint_id, created_at, updated_at) FROM stdin;
+115	Hello Quito	After my debacle with the damned Brits, I flew to Quito Ecuador, which is partitioned into an old and new town.  In the hostel, I met an old man from Scandinavia, who had been a sailor in his day. Newly retired, he was now living in Quito.  He was a bit of a creepy old man that made you wish you had opted for a room with a lock on the door at night, but during the day a very welcoming and amiable soul.  I also met a couple from Guatemala and Miami, who had spent time in NY, we would eventually form a squad and go hiking and biking in the amazon.  And finally a wandering and adventurous soul from somewhere in northwestern Europe, who had come to come to South America to volunteer at a animal hospital and rehabilitation center that specialized in taking care of pumas, panthers and other massive jungle cats.  He told stories of working communally with people and animals, and a kung fu Jedi who could playfully wrestle and joust 300 pound cats until one time a panther became too spirited and bit most of his hand off.	essay_coverphoto.jpg	-0.218009422675834008	-78.5119056701660156	72	2017-07-10 05:04:16.403445	2017-07-10 05:04:16.403445
+116	A Ziplining Debacle and Reconciliation with God	A zipline mishap & reconnecting with God It's funny how quickly a brush with your own mortality can make you instantly reconsider your previous conclusions on the afterlife.  In Banos Ricardo and I set out into the mountains on bicycles with the couple from Guatemala and Miami.  We cruised and climbed into the amazon taking in the lush green jungle and mountains, passing 3-4 waterfalls, one that was big enough to hear from a good distance away.  We stopped for directions at one point and were deliberately told incorrect directions despite the fact that 3/4 of us were proficient in Spanish, and had neutral accents.  No matter, we arrived to the destinations we desired eventually.  Finally we reached a point at the top of a mountain range, that looked down upon a valley, and a corresponding range maybe 400-500 meters away, separated by a vast expand and a river.  Since this was Banos after all, the village where Ecuadorian travel agency's shoo white dreadlocked travelers who think they want to tap into their spiritual side, there is a zipline.  A zipline that threads from the larger mountain where we stood, 500 meters across an abyss, with a rushing river that seems only an drop of water running down a window from that high up, across to the other mountain.  It was never really a question of whether we would go or not, it just was.  We donned our harnesses and helmets and received our safety briefing in a language I understood 4% of.  All too soon I found myself supporting myself with my hands, secured onto the wire from my back, in a superman position.  At the time of an adventurous and dangerous event such as this, you think that you are scared, but you have no idea how petrified you are about to become when something with this contraption goes horribly wrong.  I heard the woman holding my harness in place, who would release me across mountains and into oblivion chatting rapidly into a radio to the people on the other end of the zipline, all I caught I was "Rapido!" as it started to rain slightly and the wind picked up.  The ride was monumental, screaming across the sky faster than life, the mountains passing below you like dust in the wind.  Around second 40 or 41, of a maybe 50 second trip I became dreadfully aware that my body and entire existence were going much to fast.  The casa on the other end was becoming larger than life way too rapidly.  I reached the end, and I was catapulted forward with incredible force until I was ricocheted and flung the in the direction I had come, back over the abyss of a valley.  I slowed and stopped maybe 70% of the way across the valley and due to the orientation of the harness, and superman position was forced to look all the way down to the bottom of the valley.  I saw the river a couple hundred meters below, and my intended destination limitlessly in front of me.  All my blasphemy and using the lord's name in vain began to weigh on me tremendously, the rain picked up even more and I was toyed back and forth on the zipline as the wind streamed through the valley and I was picked up with it.  I am not proud to admit, but I made a reconciliation with God, should the worst come to pass, and a deal if I should be set free for a while longer.  While the event was likely commonplace for the Ecuadorians who built the zipline, for me it was existential.  Starring down 250 meters while helplessly strapped into a harness unable to move or do anything other than contemplate myself and mortality.  I had no reminiscing of childhood, no flashbacks or summation of life experiences and what I would amount to.  I suppose that is evidence to the fact that I was not really that close to perishing, but at the time, I would have believed that this might be the end.  My salvation came in the more of a boy, no older than 11 years old.  He strapped himself into his own harness and pulled himself out to meet me.  He told me to hold on to his harness, which I did gratefully and he pulled me to the other side.  I survived my ziplining mishap, my reconciliation with God didn't last much longer than the trip back across the valley.  We hitchhiked back to town in a flatbed truck, already loaded with tired workers headed into town.	essay_coverphoto.jpg	-0.218009422675834008	-78.5119056701660156	72	2017-07-10 05:04:16.424242	2017-07-10 05:04:16.424242
+117	A Couch Surfing life	Couch Surfing and the people I have met via surfing or hosting, will always have a special place in my heart.  Couchsurfing.com embodies the idea of realworld benefits only possible via an online community, on a greater scale than (in my opinion) any other website.  The community is at the same time so vast and far-flung, small and tight-knit, with diversity and common ground.  Some of my greatest friends, and most of my greatest experiences, I owe to couchsurfing.com.  My first experience surfing, came at the home of a Bogotano friend that I had hosted in my own home only a couple months before.  When I arrived at his home, where he lived with his parents, cat and dog, I was greeted (in solely Spanish of course) warmly and given all the amenitites a humble traveler could ask for.  I also arrived with less than 50 spanish words in my vocabulary, and no idea what I was supposed to do next.  Thankfully, my hosts aided me in spanish lessons, advice on the best that Colombia has to offer, and several portions the infamous Aguardiente.  In the mornings, I would have breakfast with the family, where the my friend Harold's mother would explain grammatical oddities of spanish, in spanish.  It was this immersion that quashed any final fears of speaking spanish, if I wanted breakfast, I asked for desayuno, when I needed to go to the embassy, I told informed family \\"Tengo que ir a la embajada\\!"  I am extremely thankful to my Colombian family who guided me in the first few days of my Gonzo adventure, and all the friends I have made from couchsurfing.com will always have a place to crash in my home.	essay_coverphoto.jpg	4.60776240000000037	-74.0745112999999975	75	2017-07-10 05:04:16.704815	2017-07-10 05:04:16.704815
+110	Buy the ticket, take the ride	I was an overeager, intoxicated dweeb, with an extremely stunted understanding of the female gender.  The year was 2013, and I had just landed in New York City, attempting to piece together an existence studying, flipping coffee and getting myself into whatever trouble I could find. <br/><br/>  A pastime of mine in those days, was to sit on my roof with my best friend Ricardo while passing a joint and listen to his stories of adventure abroad.  We covered everything from admiring mountain ranges in Thailand, to hallucinogenic Parisian absinthe, to outsmarting police in Germany.  I suppose it was only a matter of time before I would find myself a cog in one of these journeys. <br/><br/>  The plan was to fly to Rio de Janeiro for the upcoming futbol world cup, our Earth’s united pastime, and the United State’s idea of posh men flailing for no reason.  Our plan was flawless, except for a single point of failure that we were both dead broke.  Just a flight to Rio would have costed us a month’s income, and we wouldn’t dream of cutting back on our fiscal beer and marijuana budgets.  We would not be deterred or sobered by this, as opted to begin our journey in Bogota Colombia for a much more reasonable rate, that left plenty of flexibility for Aguardiente and Agile.  After Colombia, we would backpack around the Northwestern region of South America, visiting Ecuador, Peru and a short stay in Panama.  This is the story of all the majest and debauchery of my first voyage outside my home country.	essay_coverphoto.jpg	4.60776240000000037	-74.0745112999999975	71	2017-07-10 05:04:16.183165	2017-07-10 05:04:16.183165
+111	 Learning Spanish in 20 hours. Or 2 years.	 As any intelligent virgin traveler would, I figured it was about time to start honing my Spanish skills, 20 hours before our flight to Bogota.  My wrestling match with the Spanish language began at a taco truck in Jamaica Queens.  The dialogue went something like as follows: <br/><br/> ETHAN:  Hey Ricardo, how do you ask for a chicken taco in Spanish? <br/><br/>  RICARDO: Tell him: 'Yo quiero un taco de pollo' <br/><br/> ETHAN: (speaking to taco man) Estoy un de taco de pollo. <br/><br/>  TACOMAN: (in english) Yeah sure man, you want red sauce or green sauce? <br/><br/> ETHAN: Verde!  I mean, green! <br/><br/>  TACOMAN: (switches to Spanish) Algo a tomar? (Translation: anything to drink?) <br/><br/> ETHAN: What, huh? <br/><br/> RICARDO: He asked you if you want anything to drink dude! <br/><br/> ETHAN: Yo quiero un Harrito! <br/><br/>  TACOMAN: (slightly more confused than annoyed) You mean a Jarrito? <br/><br/> ETHAN: Yeah that. <br/><br/> TACOMAN: Alright what kind? <br/><br/> ETHAN: Lime!  I mean, Limon.  Lo siento. <br/><br/> My expertise of the Spanish language would remain more or less at a toddler’s level for the entirety of my trip, and would lead to some hilarious and embarrassing encounters for all parties involved.  I remember asked a lot of people what time it was, in Spanish, and then checking the time for myself since I didn't understand a single syllable of the response.  I also remember apologizing a lot in Spanish, not sure how much that speaks to a timid character, or how out of place I was. <br/><br/> After many awkward situations and more than a few unintentional insults, I would drastically improve my Spanish to a conversational level.  The trick that finally improved my Spanish, surprisingly was actually trying to learn the language. 	essay_coverphoto.jpeg	4.60776240000000037	-74.0745112999999975	71	2017-07-10 05:04:16.201471	2017-07-10 05:04:16.201471
+112	Landing In Bogota	The neighborhood La Candelaria in Bogota is where the city of Bogota humbly began.  It sits in the shadow of the towering Andes mountains, and experiences frequent rain as the mountains to the East impede any clouds and dump any moisture upon the city.  La Candelaria is the old town, cobblestone streets wind and bend without much motor vehicle safety for pedestrians on either sidewalk.  Old Architecture style buildings are painted in beautiful pastel, which almost veil the steel bars over all the windows.  La Candelaria is dense with hostels, museums, restaurants and home to a couple of the most prestigious universities in Colombia, and so Candelaria is protected and a safe neighborhood for all.  The barrios, or neighborhoods surrounding La Candelaria on almost all sides are a different story entirely. <br/><br/>  We arrived late in Bogota, and took a taxi to our hostel.  I listened with intense confusion as Ricardo chatted with the taxi driver, probing for hints of the safety of Bogota, as well as the best way to find the nearest wild party.   I Took in the nighttime scenery as we drove through the city, I was impressed by the fantastic murals and graffiti, as well as taken aback by the scrappy ongoings.  It was a bit overwhelming to see stray dogs, and bums rummaging through trash. <br/><br/>  After checking into our hostel, Ricardo and I trekked a few steep blocks toward the main street running through La Candelaria.  We stopped in a small shop and restaurant, where to the delight of the owner and jeering geezers, I attempted to order some empanadas and water, in my fledgling Spanish.  The owner was more than happy to give me plenty of patience and pointers.  The old drunks chuckled only at my pronunciation, and without malice.  I’m sure it helped that we were paying double for the water, and buying stale pastries that would have been rightfully discarded.	essay_coverphoto.jpg	4.60776240000000037	-74.0745112999999975	71	2017-07-10 05:04:16.219091	2017-07-10 05:04:16.219091
+113	Bogota in the daylight & Zipaquira	Our first few expeditions in Bogota were either very positive, or a little harsh, with not much in between.  The restaurants we found were delicious, but ordering in Spanish was a bit of a fiasco, fellow travelers we met were cordial, but others were rude because we were gringos.  Our first day, we wandered the streets and shops in La Candelaria, and admired Bogota from above at Monserate. <br/><br/>  Eventually we decided to take a day trip to a village and common tourist destination outside Bogota called Zipaquira.  Zipaquira is a bit of a time capsule into a previous era of Colombia, a village best enjoyed lazily spending an afternoon, sitting in the shade of a cafe on the main plaza, watching children chase birds, or families strutting in their Sunday's best.  Zipaquira's main attraction is an cathedral carved into an underground salt mine, many years ago.  Elaborately and extravagantly lit, it is a pleasure to learn how it was constructed, or how important Catholicism is to the Colombian People.  Or at least, I assume it would be, since Ricardo and I ignorantly opted to spend our pesos and braincells on aguardiente, instead of the ten dollar entrance fee. <br/><br/> While it wasn’t my most sensible or culturally responsible moment, we didn't waste the whole afternoon fortunately, as we wandered around the quiet town center, eating ice cream, making friends with stray dogs, and playing in a small maze built for children.   We had lunch and took photos, while Ricardo bolstered his Spanish befriending the locals.  We found our way to the village (above ground) Cathedral and main plaza, were we spent the remainder of our short time in Zipaquira, watching children harass well-to-do animals, and merchants peddling ice cream and sweets. <br/><br/> It was in Zipaquira that we experienced our first of many miracles on this trip.  We actually found our bus back to Bogota, and boarded on time.  This is particularly miraculous, given the awful rainstorm that swamped us as we attempted to escape the village. 	essay_coverphoto.jpg	4.60776240000000037	-74.0745112999999975	71	2017-07-10 05:04:16.236626	2017-07-10 05:04:16.236626
+114	Tres Carnes & The Swine Brits.	Before I tell this story, I would like to apologize to my parents, and mentors who taught me better.  I would like to ask for forgiveness from the people of Great Britain, who have wronged me only a few times, yet don’t deserve the disdain I hold for them, based on the acts of a few.  And finally, and most importantly to Natalia and Claudia. <br/><br/> It was my final night in Bogota Colombia, where I developed a slight distaste for the Brits, in their own words I found them to be cheeky bastards.  In my experience, parties and especially dancing is extremely important to the people of Colombia, and greater South America.  A phenomenon that had been surprisingly lacking in my time in South America so far.  A few hours earlier that night, I befriended two stunning women my age at my hostel.  The first named Natalia was from Bogota, slender with rich skin and always smiling face, the second, Claudia was Brazilian with a curvy dancing toned body.  I was ecstasy and my mild was running wild, frankly it’s a wonder I didn’t sabotage the entire ordeal with one of my signature blabber mouth comments.  Natalia and Claudia were long time friends, spoke perfect english and seemed to be halfway interested in passing the time with me. <br/><br/> This is an opportune time to reiterate my ineptitude when it comes to women.  Their minds and the patterns that make them tic, are extraterrestrial to me.  Flirtation is more of a foreign language than Spanish to me.  I can’t seem to grasp what impresses woman, and what deflects them.  My small talk and actions that I believe to be admirable and interesting, are often forgettably drab at best and offensive at worst. <br/><br/> Despite my handicap, the three of us got along amiably, all the while replenishing each other’s glasses of aguardiente, and toasting to whatever seemed admirable and within reach.  A hazy number of drinks later, we ventured into the night, along with a group of 10-12 others from our hostel to an infamous bar called tres cranes, for a long night of sugarcane alcohol flavored fun and hysterical dancing.  Tres Carnes is a Charlie and the Chocolate factory like experience.  Partitioned into several halls, dance floors, concerts and restaurants, it is a wonderland of well-mannered adult fun.  The three of us toured the dance halls and bars stopping for cocktails of rum or when our favorite songs played.  Or more accurately, when one of their favorite songs came on, since I could hardly decipher differences in Spanish sentences, much less songs.  Natalia and Claudia were more than happy to show me the most basis dance steps and very patience when I botched each one.  Perhaps it is bravado or blissfully misremembering, but I recall the three of us having a wonderful time dancing sensually. <br/><br/> The night was going stellar, a perfect blend of laughing and dancing, drinking and kissing.  Although I would have been thrilled and utterly clueless to have gone home with either of my new beautiful friends, the hail-mary play of going home with both Natalia and Claudia had been stampeding in my mind for much of the night.  Chalk it up to the rum if you would like, but I suppose the possibilities were endless when one’s mind is swimming in enough music, rum and lust.  <br/><br/> I suppose I should have seen an impending doom a long way off.  I had managed to blow nearly every other similar opportunity in explosive fashion.  Things started deteriorating fast around two-thirty or three in the morning, the details of which are hazy at best.  Natalia, Claudia and I got separated at some point and since I knew we all would have to catch a long bus back to La Candelaria, I searched for the restroom.  I found them a short time later, but to my heartbreaking dismay they were 3 confirmed douchebag flamboyantly dressed circle-jerk British Bastards. <br/><br/> I remembered meeting the swine Brits earlier that night, they were latecomers to our group, keeping mostly to themselves.  They approached me on a friendly search for healthy cocaine.  Of course I friendlily told them to ‘find their own fucking coke’ in so many words and that I had been raised better than indulge in dangerous drugs.  While we didn’t exactly hit it off at first, the three brits and I continued chatting until they began recounting their sexual escapades while in South America.  We parted ways as soon as we all arrived at tres carnes, and I didn’t think about them again until these skunksucking heretic honkies had reappeared and were idiotically parading around Natalia and Claudia.  Their dancing was more masterbation than anything.  They seemed to ignore the music and other signs of life in the clubs except for each other and Natalia and Claudia.  The hopped like frogs twisting their arms backward and dropping down to a knee.  Now I am much more a lover than a fighter, but every fiber of my being was attempting to summon every kung-fu movie I had ever seen, so that I could release a shit-storm of heroic violence and vengeance on these godless Brits, not seen since the days of the terrible Goddess Medusa. <br/><br/> To my dismay, the Brit’s cheap facade was working much more effectively than my nuclear rage.  Blinded by rum and rage, I waited outside the bar like a poacher for Natalia and Claudia.  However, any plans I had at the time evaporated just like my plan of going home with both Natalia and Claudia.  When they left the club, Natalia was being carried honeymoon style by one of the foulest of the dog brits, and Claudia didn’t even notice me.  Even in delirium I knew I had been bested. <br/><br/> On the way back to La Candelaria, one final bottle of rum was being passed from from person to person.  Until it came to me, I drowned my sorrow and rage.  And then drowned the fuckers a few more times.  Natalia, whom I referred to as Benedict Arnold from then on, was now sitting in the lap of one of the Brits who bared a striking resemblance to a 150 pound diseased rodent.  She tried to make peace or console me.  Bitter, wasted and rude, I wasn’t in the mood for either.  I told her to beat it, in terms that could be understood in any language, and managed to string together a few of my best barrages of insults spanning 3 languages to tell the incestuous Brits exactly what I thought of them and their imperialistic miserable excuse for a country. <br/><br/> One of the last things I remember was walking off the bus in La Candelaria, still with the bottle of rum under my arm.  One of the things I don’t remember from that night, that was recounted to me by Ricardo after the fact was that when I returned to my hostel around 4:30 AM, loud and intoxicated, I refused to hold any conversation in any language other than Spanish.  In an effort to sharpen my Spanish skills of course, which surely seemed extremely important at the time.  I caused a massive commotion in the hostel.  Pacing my room and halls damning Brits everywhere while packing for a flight to Quito Ecuador that was set to take off in 5 hours. <br/><br/>	essay_coverphoto.jpg	4.60776240000000037	-74.0745112999999975	71	2017-07-10 05:04:16.253469	2017-07-10 05:04:16.253469
+\.
+
+
+--
+-- Name: essays_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ethan
+--
+
+SELECT pg_catalog.setval('essays_id_seq', 117, true);
+
+
+--
+-- Data for Name: friends; Type: TABLE DATA; Schema: public; Owner: ethan
+--
+
+COPY friends (id, first_name, last_name, photo, description, x, y, member, visible, waypoint_id, created_at, updated_at, email) FROM stdin;
+29	Ricardo	Alberto	friend_coverphoto.jpg	I remember vividly sitting with Ricardo at whoever's house Ricardo was squatting at, at the time.  World cup 2014 was in Brazil, and we were searching for flights to South America.  We immediately realized that $1500 was well beyond the means of two broke students and part-time baristas.  In the end we settled on Colombia, Bogota as a starting for our South American adventures.  Eventually visiting Ecuador, Peru, Machu Picchu, and Panama.  We were determined to drum up our own world cup.	4.60776240000000037	-74.0745112999999975	f	\N	71	2017-07-10 05:04:16.268529	2017-07-10 05:04:16.268529	\N
+30	Philip		\N	Resilience is imperative for any drifting traveler, whether mental physical or humerous the road winds and can up end you at a moments notice.  Towards the end of my virgin expedition outside of the US and separted from my friends, I felt discouraged and found myself brooding as much as sweating poolside at a hostel.  That's where I met a amiable German man named Philip, who immediately lifted me back up, mentally and physically.  We wandered around a sticky downtown panama city, shielding our eyes from decadence, and lowered them from poverty.  Eventually we ventured into the Hard Rock Cafe Hotel, one of the tallest building overlooking the city.  We somehow skirted security and found our way to a floor well above our paygrade, and crept up the final 20 flights of stairs to a vacant rooftop restaurant.  We owned the roof and city, indulging in photos and jokes, taking our time to peruse all the views from the top floor.  We never were captured, much less given a questioning eye.  	4.60776240000000037	-74.0745112999999975	f	t	74	2017-07-10 05:04:16.604791	2017-07-10 05:04:16.604791	
+\.
+
+
+--
+-- Name: friends_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ethan
+--
+
+SELECT pg_catalog.setval('friends_id_seq', 30, true);
+
+
+--
+-- Data for Name: galleries; Type: TABLE DATA; Schema: public; Owner: ethan
+--
+
+COPY galleries (id, title, description, coverphoto, x, y, waypoint_id, created_at, updated_at) FROM stdin;
+71	Colombia	Compilation of photos I took while in Colombia	gallery_coverphoto.jpg	4.60776240000000037	-74.0745112999999975	71	2017-07-10 05:04:16.081461	2017-07-10 05:04:16.081461
+72	Quito and The Amazon	Compilation of photos I gathered from the city of Quito and the depths of the Amazon forest	gallery_coverphoto.jpg	-0.218009422675834008	-78.5119056701660156	72	2017-07-10 05:04:16.310214	2017-07-10 05:04:16.310214
+73	Cusco and Machu Picchu	Exploring the streets of Cusco & hiking in Aguas Caliente.	gallery_coverphoto.jpg	-13.5202577977955762	-71.9710922241210938	73	2017-07-10 05:04:16.468356	2017-07-10 05:04:16.468356
+74	Breaking & Entering at the Hard Rock Cafe	Wildly Illegal view dozens of floors above panama.	gallery_coverphoto.jpg	8.97359290103661955	-79.5332908630371094	74	2017-07-10 05:04:16.564859	2017-07-10 05:04:16.564859
+75	bogota gallery	bogota gallery	gallery_coverphoto.jpg	4.60776240000000037	-74.0745112999999975	75	2017-07-10 05:04:16.647549	2017-07-10 05:04:16.647549
+\.
+
+
+--
+-- Name: galleries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ethan
+--
+
+SELECT pg_catalog.setval('galleries_id_seq', 75, true);
+
+
+--
+-- Data for Name: journeys; Type: TABLE DATA; Schema: public; Owner: ethan
+--
+
+COPY journeys (id, description, title, coverphoto, driftmap_id, created_at, updated_at, x, y) FROM stdin;
+29	My premier journey outside my home country, backpacking through the cities and jungles of Northwestern South America.  <br/><br/>I left an ignorant indignant man, uncomfortable with my human existence. <br/><br/>Along the way I breezed through the wonders of travelling and raged through the lows. I learned about myself and how I fit into this strange Earth.  <br/><br/>In the end I returned the same man, only a little calmer and with a taste for travel.	Buy the ticket, take the ride	journey_coverphoto.jpg	1	2017-07-10 05:04:16.041484	2017-07-10 05:04:16.041484	4.60776240000000037	-74.0745112999999975
+30	I returned to the United State after my first South American Journey in 2015, still myself, but with a more upbeat outlook on life.  Long story short, I would drop out of Queen College and get a job as a web developer.  After a year working 9-5 in my home of Queens NY, the road began beckoning me back, as it does many drifters.  <br/><br/>I told my boss one day that I wanted to hit the road, but that I believed I still had a lot to offer the company.  I asked if he would allow me to work remotely from Colombia indefinitely, to my surprise he said 'Of course!  Go for it!'  <br/><br/>This is the story of my 6 months I spent as A Digital Nomad, trekking all over Colombia.  I became a seasoned couch-surfer, discovered the kindness of the Colombian people, weathered countless lonely nights and danced a little along the way.	Life and Trials of a Digital Gonzo Nomad	journey_coverphoto.jpg	1	2017-07-10 05:04:16.615132	2017-07-10 05:04:16.615132	4.60776240000000037	-74.0745112999999975
+\.
+
+
+--
+-- Name: journeys_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ethan
+--
+
+SELECT pg_catalog.setval('journeys_id_seq', 30, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: ethan
+--
+
+COPY schema_migrations (version) FROM stdin;
+20150627025623
+20151109004913
+20160713014625
+20160821162014
+20160902125452
+20170308134539
+20170308140416
+20170309163452
+20170309221636
+20170310164110
+20170310170738
+20170310181437
+20170310201547
+20170310205958
+20170310210210
+20170310210425
+20170321111830
+20170628190931
+\.
+
+
+--
+-- Data for Name: treks; Type: TABLE DATA; Schema: public; Owner: ethan
+--
+
+COPY treks (id, title, description, coverphoto, waypoint_id, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: treks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ethan
+--
+
+SELECT pg_catalog.setval('treks_id_seq', 1, false);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: ethan
+--
+
+COPY users (id, first_name, email, gps, "from", password_digest, remember_digest, admin, activated, activation_digest, activated_at, profile_pic, reset_digest, reset_sent_at, created_at, updated_at, last_name) FROM stdin;
+1	ethan	e.ozelius@gmail.com	queens, new york	concord, new hampshire	$2a$10$RDJzno3P0dH3P6ILL3Rjju4cOcRXhRnRuUi2Z9ru8GcU9iIS042vu	\N	t	t	$2a$10$229.uP68zfTqoQmV.RG1fOXl27z4qDH6J9un1ZNUlVge2a9y2k7l2	2017-07-10 03:33:32.063456	profile.JPG	\N	\N	2017-07-10 03:33:32.171734	2017-07-10 08:43:45.806616	ozelius
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ethan
+--
+
+SELECT pg_catalog.setval('users_id_seq', 1, true);
+
+
+--
+-- Data for Name: waypoint_images; Type: TABLE DATA; Schema: public; Owner: ethan
+--
+
+COPY waypoint_images (id, image, created_at, updated_at, description, friend_id, essay_id, trek_id, gallery_id, friends_id, galleries_id, essays_id, treks_id) FROM stdin;
+309	gallery_1.jpg	2017-07-10 05:04:16.129174	2017-07-10 05:04:16.129174	\N	\N	\N	\N	71	\N	\N	\N	\N
+310	gallery_2.jpg	2017-07-10 05:04:16.13638	2017-07-10 05:04:16.13638	\N	\N	\N	\N	71	\N	\N	\N	\N
+311	gallery_3.jpg	2017-07-10 05:04:16.1424	2017-07-10 05:04:16.1424	\N	\N	\N	\N	71	\N	\N	\N	\N
+312	gallery_4.jpg	2017-07-10 05:04:16.148939	2017-07-10 05:04:16.148939	\N	\N	\N	\N	71	\N	\N	\N	\N
+313	gallery_5.jpg	2017-07-10 05:04:16.155721	2017-07-10 05:04:16.155721	\N	\N	\N	\N	71	\N	\N	\N	\N
+314	gallery_6.jpeg	2017-07-10 05:04:16.162407	2017-07-10 05:04:16.162407	\N	\N	\N	\N	71	\N	\N	\N	\N
+315	gallery_1.jpg	2017-07-10 05:04:16.355777	2017-07-10 05:04:16.355777	\N	\N	\N	\N	72	\N	\N	\N	\N
+316	gallery_2.jpg	2017-07-10 05:04:16.363251	2017-07-10 05:04:16.363251	\N	\N	\N	\N	72	\N	\N	\N	\N
+317	gallery_3.jpg	2017-07-10 05:04:16.370167	2017-07-10 05:04:16.370167	\N	\N	\N	\N	72	\N	\N	\N	\N
+318	gallery_4.jpg	2017-07-10 05:04:16.376751	2017-07-10 05:04:16.376751	\N	\N	\N	\N	72	\N	\N	\N	\N
+319	gallery_5.jpg	2017-07-10 05:04:16.383945	2017-07-10 05:04:16.383945	\N	\N	\N	\N	72	\N	\N	\N	\N
+320	gallery_1.jpg	2017-07-10 05:04:16.507943	2017-07-10 05:04:16.507943	\N	\N	\N	\N	73	\N	\N	\N	\N
+321	gallery_2.jpg	2017-07-10 05:04:16.513535	2017-07-10 05:04:16.513535	\N	\N	\N	\N	73	\N	\N	\N	\N
+322	gallery_3.jpg	2017-07-10 05:04:16.518032	2017-07-10 05:04:16.518032	\N	\N	\N	\N	73	\N	\N	\N	\N
+323	gallery_4.jpg	2017-07-10 05:04:16.521479	2017-07-10 05:04:16.521479	\N	\N	\N	\N	73	\N	\N	\N	\N
+324	gallery_5.jpg	2017-07-10 05:04:16.527389	2017-07-10 05:04:16.527389	\N	\N	\N	\N	73	\N	\N	\N	\N
+325	gallery_1.jpg	2017-07-10 05:04:16.587047	2017-07-10 05:04:16.587047	\N	\N	\N	\N	74	\N	\N	\N	\N
+326	gallery_coverphoto.jpg	2017-07-10 05:04:16.590906	2017-07-10 05:04:16.590906	\N	\N	\N	\N	74	\N	\N	\N	\N
+327	gallery_1.jpg	2017-07-10 05:04:16.674684	2017-07-10 05:04:16.674684	\N	\N	\N	\N	75	\N	\N	\N	\N
+328	gallery_2.jpg	2017-07-10 05:04:16.676942	2017-07-10 05:04:16.676942	\N	\N	\N	\N	75	\N	\N	\N	\N
+329	gallery_3.jpg	2017-07-10 05:04:16.680918	2017-07-10 05:04:16.680918	\N	\N	\N	\N	75	\N	\N	\N	\N
+330	gallery_4.JPG	2017-07-10 05:04:16.685298	2017-07-10 05:04:16.685298	\N	\N	\N	\N	75	\N	\N	\N	\N
+\.
+
+
+--
+-- Name: waypoint_images_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ethan
+--
+
+SELECT pg_catalog.setval('waypoint_images_id_seq', 330, true);
+
+
+--
+-- Data for Name: waypoints; Type: TABLE DATA; Schema: public; Owner: ethan
+--
+
+COPY waypoints (id, title, body, x, y, date, journey_id, created_at, updated_at, coverphoto) FROM stdin;
+71	Colombia	 Colombia was the best launching pad for this journey, and many others in my world drifting.  Colombia is like traveling in general, in that neither are without their flaws, but if you stick with it, you'll be rewarded; and then possibly smashed back into submission.  At times the road can kick you while you're down, and you'll wonder why the hell you didn't just go visit a lake near you're home upstate.  <br/><br/> But Bogota is real, the city is a window into the normal and prolific lives of regular Colombians, with their faults and feats, danger and dancing, rainy boring days and majestic outbursts of life.  If you stick with it, Bogota will embrace and accept you, and it can become a home away from home if you allow it.	4.60776240000000037	-74.0745112999999975	2014-05-27 00:00:00	29	2017-07-10 05:04:16.061031	2017-07-10 05:04:16.061031	waypoint_coverphoto.jpg
+72	Ecuador	Quito and the Amazon would prove to be a change of pace to the bustle of downtown Bogota Colombia.	-0.218009422675834008	-78.5119056701660156	2014-06-03 00:00:00	29	2017-07-10 05:04:16.289409	2017-07-10 05:04:16.289409	waypoint_coverphoto.jpg
+74	Panama	Hot and Muggy, Highrises and Huts	8.97359290103661955	-79.5332908630371094	2014-06-20 00:00:00	29	2017-07-10 05:04:16.545327	2017-07-10 05:04:16.545327	waypoint_coverphoto.jpg
+75	bogota	The Capital and largest city in Colombia, Bogota is home to more than 9 million.  The majority of my time I spent in Chapinero, a neighborhood to the north of the old town, tucked in the foot of the massive mountains that overlook the city, and give Bogota it's rainy climate.  My days in Bogota were sometimes energetic, sometimes dreary but always informative.  As the first city I would visit, I dove and stumbled headfirst into the language and culture of Colombians.  Bogota was my introduction into the lives, dance, and struggle everyday Colombians; ground zero for my nomadic travels, where I learned the fundamentals of Spanish and the only logical place to start my journey	4.60776240000000037	-74.0745112999999975	2015-09-07 00:00:00	30	2017-07-10 05:04:16.630058	2017-07-10 05:04:16.630058	waypoint_coverphoto.jpg
+73	Peru	A Foggy Dawn Hike to Machu Picchu	-13.5202577977955762	-71.9710922241210938	2014-06-15 00:00:00	29	2017-07-10 05:04:16.445631	2017-07-11 01:49:05.991504	waypoint_coverphoto.jpg
+\.
+
+
+--
+-- Name: waypoints_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ethan
+--
+
+SELECT pg_catalog.setval('waypoints_id_seq', 75, true);
+
+
+--
+-- Name: driftmaps driftmaps_pkey; Type: CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY driftmaps
+    ADD CONSTRAINT driftmaps_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: essays essays_pkey; Type: CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY essays
+    ADD CONSTRAINT essays_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: friends friends_pkey; Type: CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY friends
+    ADD CONSTRAINT friends_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: galleries galleries_pkey; Type: CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY galleries
+    ADD CONSTRAINT galleries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: journeys journeys_pkey; Type: CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY journeys
+    ADD CONSTRAINT journeys_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: treks treks_pkey; Type: CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY treks
+    ADD CONSTRAINT treks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: waypoint_images waypoint_images_pkey; Type: CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY waypoint_images
+    ADD CONSTRAINT waypoint_images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: waypoints waypoints_pkey; Type: CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY waypoints
+    ADD CONSTRAINT waypoints_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_driftmaps_on_user_id; Type: INDEX; Schema: public; Owner: ethan
+--
+
+CREATE INDEX index_driftmaps_on_user_id ON driftmaps USING btree (user_id);
+
+
+--
+-- Name: index_essays_on_waypoint_id; Type: INDEX; Schema: public; Owner: ethan
+--
+
+CREATE INDEX index_essays_on_waypoint_id ON essays USING btree (waypoint_id);
+
+
+--
+-- Name: index_friends_on_waypoint_id; Type: INDEX; Schema: public; Owner: ethan
+--
+
+CREATE INDEX index_friends_on_waypoint_id ON friends USING btree (waypoint_id);
+
+
+--
+-- Name: index_galleries_on_waypoint_id; Type: INDEX; Schema: public; Owner: ethan
+--
+
+CREATE INDEX index_galleries_on_waypoint_id ON galleries USING btree (waypoint_id);
+
+
+--
+-- Name: index_journeys_on_driftmap_id; Type: INDEX; Schema: public; Owner: ethan
+--
+
+CREATE INDEX index_journeys_on_driftmap_id ON journeys USING btree (driftmap_id);
+
+
+--
+-- Name: index_treks_on_waypoint_id; Type: INDEX; Schema: public; Owner: ethan
+--
+
+CREATE INDEX index_treks_on_waypoint_id ON treks USING btree (waypoint_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: ethan
+--
+
+CREATE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_waypoints_on_journey_id; Type: INDEX; Schema: public; Owner: ethan
+--
+
+CREATE INDEX index_waypoints_on_journey_id ON waypoints USING btree (journey_id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: ethan
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: treks fk_rails_2bfa61d411; Type: FK CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY treks
+    ADD CONSTRAINT fk_rails_2bfa61d411 FOREIGN KEY (waypoint_id) REFERENCES waypoints(id);
+
+
+--
+-- Name: essays fk_rails_4b059ca862; Type: FK CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY essays
+    ADD CONSTRAINT fk_rails_4b059ca862 FOREIGN KEY (waypoint_id) REFERENCES waypoints(id);
+
+
+--
+-- Name: waypoint_images fk_rails_628a1d38d7; Type: FK CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY waypoint_images
+    ADD CONSTRAINT fk_rails_628a1d38d7 FOREIGN KEY (gallery_id) REFERENCES galleries(id);
+
+
+--
+-- Name: galleries fk_rails_90fab5b7b1; Type: FK CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY galleries
+    ADD CONSTRAINT fk_rails_90fab5b7b1 FOREIGN KEY (waypoint_id) REFERENCES waypoints(id);
+
+
+--
+-- Name: journeys fk_rails_9286298947; Type: FK CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY journeys
+    ADD CONSTRAINT fk_rails_9286298947 FOREIGN KEY (driftmap_id) REFERENCES driftmaps(id);
+
+
+--
+-- Name: waypoint_images fk_rails_9af63d62a7; Type: FK CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY waypoint_images
+    ADD CONSTRAINT fk_rails_9af63d62a7 FOREIGN KEY (friend_id) REFERENCES friends(id);
+
+
+--
+-- Name: waypoints fk_rails_9db905120c; Type: FK CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY waypoints
+    ADD CONSTRAINT fk_rails_9db905120c FOREIGN KEY (journey_id) REFERENCES journeys(id);
+
+
+--
+-- Name: friends fk_rails_ae557ea435; Type: FK CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY friends
+    ADD CONSTRAINT fk_rails_ae557ea435 FOREIGN KEY (waypoint_id) REFERENCES waypoints(id);
+
+
+--
+-- Name: waypoint_images fk_rails_cb716166be; Type: FK CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY waypoint_images
+    ADD CONSTRAINT fk_rails_cb716166be FOREIGN KEY (essay_id) REFERENCES essays(id);
+
+
+--
+-- Name: waypoint_images fk_rails_dfefa2870b; Type: FK CONSTRAINT; Schema: public; Owner: ethan
+--
+
+ALTER TABLE ONLY waypoint_images
+    ADD CONSTRAINT fk_rails_dfefa2870b FOREIGN KEY (trek_id) REFERENCES treks(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
