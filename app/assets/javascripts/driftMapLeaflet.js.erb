@@ -159,13 +159,12 @@ var DriftMapLeaflet = function(){
       }
     }
 
-
-
     var friends = ''
     for(var f in waypoint.content.friends){
       var currentFriend = waypoint.content.friends[f]
+      friendPhoto = currentFriend.photo.url == null ? '' : '<img src="'+ currentFriend.photo.url + '" />';
       friends +=  '<h4 class="waypoint-title">' + currentFriend.first_name + ' ' + currentFriend.last_name + '</h4>' +
-                  '<p><img src="'+ currentFriend.photo.url + '" />' + currentFriend.description +'</p>';
+                  '<p>' + friendPhoto + currentFriend.description +'</p>';
     }
 
     var essays = ''
@@ -233,6 +232,9 @@ var DriftMapLeaflet = function(){
   $(document).on('click', '.waypoints-preview li, .hud-bottom .journey p', function () {
     var wp = DriftMapLeaflet.getWayPoint($(this).data('waypoint'))
     wp.leaflet.popup.openOn(m)
+    if($('.feed-toggle-container').hasClass('open')){
+      $('.feed-toggle-container').click();
+    }
   })
 
   // Goto Waypoint content from contentIcons.
@@ -245,10 +247,10 @@ var DriftMapLeaflet = function(){
   // Toggle Profile Feed block
   $(document).on('click', '.feed-toggle-container', function () {
     $('.profile-hud-container, .profile-hud').toggleClass('collapsed')
-    $(this).toggleClass('collapsed');
+    $(this).toggleClass('open');
     $('.profile-hud-container .user-details, .profile-hud-container .profile-picture-container').toggleClass('hidden')
 
-    if($(this).hasClass('collapsed')){
+    if($(this).hasClass('open')){
       m.closePopup()
     }
   })
