@@ -245,8 +245,12 @@ var DriftMapLeaflet = function(){
   // Toggle Profile Feed block
   $(document).on('click', '.feed-toggle-container', function () {
     $('.profile-hud-container, .profile-hud').toggleClass('collapsed')
-
+    $(this).toggleClass('collapsed');
     $('.profile-hud-container .user-details, .profile-hud-container .profile-picture-container').toggleClass('hidden')
+
+    if($(this).hasClass('collapsed')){
+      m.closePopup()
+    }
   })
 
   return {
