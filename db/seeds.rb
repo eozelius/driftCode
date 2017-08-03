@@ -16,15 +16,8 @@ ethan = User.create(
 )
 
 ethan.save
-=end
-
-ethan = User.first
-ethan.driftmap.journeys.each { |j| j.destroy! }
-ethan.driftmap.save!
-ethan.save!
 
 # Create driftmap for ethan
-=begin
 ethans_driftmap = ethan.driftmap = Driftmap.create(
   title:  'adventures of a Drifting Gonzo Nomad',
   body: 'just a computer hacker trying to get some more sunshine.',
@@ -36,6 +29,12 @@ ethans_driftmap = ethan.driftmap = Driftmap.create(
 ethans_driftmap.save
 
 =end
+
+
+ethan = User.first
+ethan.driftmap.journeys.each { |j| j.destroy! }
+ethan.driftmap.save!
+ethan.save!
 
 
 sa = ethan.driftmap.journeys.create!(
@@ -135,8 +134,6 @@ colombia_1_essay_7 = colombia_1.essays.create!(
   coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/colombia/essays/essay_7/essay_coverphoto.jpg")
 )
 
-
-
 colombia_1_friend_1 = colombia_1.friends.create!(
   first_name: 'Ricardo',
   last_name: 'Alberto',
@@ -151,7 +148,7 @@ sa.save!
 
 ecuador = sa.waypoints.create!(
   title: 'Ecuador',
-  body: 'Quito and the Amazon would prove to be a change of pace to the bustle of downtown Bogota Colombia.',
+  body: 'Ecuador is a mural of mountains and forests, all bathing under a thrashing cloudy sky.  Farms and terraces stretch high into the mountains, and the clouds and peaks do battle above.  Wispy clouds are not prepared for the peaks, and they pass over like lambs.  Skies crafted by Zeus however, are torn and thrashed by the rocky peaks until rain washes the green land below.',
   x: -0.218009422675834,
   y: -78.51190567016602,
   date: DateTime.new(2014, 6, 3),
@@ -176,8 +173,8 @@ ecuador_gallery.waypoint_images.build(image: File.open("#{Rails.root}/ethans_man
 ecuador_gallery.save!
 
 ecuador_essay_1 = ecuador.essays.create!(
-  title: 'Hello Quito',
-  body: 'After my debacle with the damned Brits, I flew to Quito Ecuador, which is partitioned into an old and new town.  In the hostel, I met an old man from Scandinavia, who had been a sailor in his day. Newly retired, he was now living in Quito.  He was a bit of a creepy old man that made you wish you had opted for a room with a lock on the door at night, but during the day a very welcoming and amiable soul.  I also met a couple from Guatemala and Miami, who had spent time in NY, we would eventually form a squad and go hiking and biking in the amazon.  And finally a wandering and adventurous soul from somewhere in northwestern Europe, who had come to come to South America to volunteer at a animal hospital and rehabilitation center that specialized in taking care of pumas, panthers and other massive jungle cats.  He told stories of working communally with people and animals, and a kung fu Jedi who could playfully wrestle and joust 300 pound cats until one time a panther became too spirited and bit most of his hand off.',
+  title: 'Sved The Scandinavian Sailer',
+  body: 'My head began to clear as I rode in a taxi toward downtown Quito.  I’ve found taxi drivers to be almost infallibly, completely unintelligible to the untrained ear.  Their entire dialect originates and terminates deep in a the guttural area of the throat.  Beginnings and endings of words completely omitted, everything else degrades to vowels.  Nevertheless, I was in a fresh state of mind, and eager to chat up my taxi driver in his own language.  With some prompting, I told him how I admired the farmland in the distance.  He responded with nothing I am able to repeat.  I asked him, where he was from, and I was made to understand that he was from a small town outside Quito.  Anything further between us was smiles and nods.<br/><br/>I arrived to my hostel in the late afternoon, after unpacking I made my way down to the commons area in search of whatever there was to encounter.  I bought a bottle of Ecuadorian beer, conveniently offered in sizes ranging from the \'completely reasonably\', to \'Gas Tank.\'  Never one to shy away from challenge, I of course opted for the \'diesel\' variant.  The type of bottle you unmistakably see sweating in wrinkled brown paper bags in the park.  Being defiled by old drunks or a pack of wild teenagers in their natural habitat.<br/><br/>I befriended a washed out Scandinavian sailer named Sved, who over the past 4 months, had planted whimsical roots in Quito.  He was the type of old man who reminds you of your grandfather, except he swears, drinks and smokes more than you could ever hope to.  One evening, Sved and I were recuperating from a long afternoon of drinking beer, by shooting pool and downing even more beer.  We were already a few quarts stuck into brown-sack beer, and the cues and pockets had been veering in all directions erratically for some time now.  After it was clear that the responsible members of the hostel staff had gone home for the night, Sved returned from his room with a dangerous looking bong, and a mischievous smile.  <br/><br/>We left the pool table and headed to the front lawn, where over the next few slow hours, we inhaled many weeks worth of crinkly Quito marijuana.  It was one of those bizarre episodes that leave you miraculously twisted, yet with all your cognition intact.  The world donned an electric neon hum, movement all around us infinitely more graceful.  <br/><br/>  It was here when I contemplated for the first time with Sved, the mysteries of motion, electrical impulses and synapses.  What does it truly feel like to stretch a hand across a table?  The journey must begin in a deep valley of my brain.  An electric impulse, arching the gap between a my desire for motion which is without mass or matter, into a measurable wave of energy, shocking my spinal cord to it’s will.  Muscles and tendons pulling and relaxing.  I know I am the originator of the motion, yet my reaching hand is hopelessly alien.  <br/><br/>  The stars marched on above the mountains of Quito, the others wavered or slept.  I was at peace with myself, my new country, and my bizarre new friend.  We watched late night wanderers crawl the streets.  Some hour just before dawn, I felt dreary, but somehow well rested.  I bid Sved the Scandinavian Sailor a good night and retired to my room.  <br/><br/>As far too often is the case when meeting fellow travelers, I would never see Sved again.  Our paths never crossed, and we left for Peru a few days later.  Not often, but I sometimes wonder what became of Sved, the Scandinavian sailer with his alarming facial hair, slight accent and excessive indulgence.  If he is alive to this day, (this is written 4 years after our encounter in Quito) I doubt that he’s still in Ecuador.  You learn to recognize the drifting type after a while.  If I had to guess, I’d say he floated east.  Far East.  Landing first in some tourist trap Thai hostel, where he stayed for enough full-moon festivals to lost track of space and time.  Venturing inland and away from the city.  Now accustomed to the slums and stenches, but still true to his sailer vagabond spirit.  Finally finding a home in on the side of a mountain that has no name in English or any language other than the one spoken in the rice patties below.  Spending the days heroically twisted on all sorts of exotic vices, strolling down the market below where the village merchants know him by name and smile.',
   coverphoto: File.open("#{Rails.root}/ethans_manifest/south_america/waypoints/ecuador/essays/essay_1/essay_coverphoto.jpg"),
   x: -0.218009422675834,
   y: -78.51190567016602
